@@ -1,8 +1,8 @@
-import {css, html, LitElement} from 'lit'
+import {  html, LitElement } from 'lit'
 import {customElement, property} from 'lit/decorators.js'
 import litLogo from './assets/lit.svg'
 import viteLogo from '/vite.svg'
-import {globalStyleSheet} from './styles/global-style-sheet'
+import {globalStyleSheet} from './styles/global-style-sheet.ts';
 
 /**
  * An example element.
@@ -12,9 +12,6 @@ import {globalStyleSheet} from './styles/global-style-sheet'
  */
 @customElement('my-element')
 export class MyElement extends LitElement {
-    static styles = css`
-
-    `
     /**
      * Copy for the read the docs hint.
      */
@@ -28,7 +25,7 @@ export class MyElement extends LitElement {
   firstUpdated() {
     // @ts-ignore
     this.shadowRoot.adoptedStyleSheets = [globalStyleSheet];
-    console.log(globalStyleSheet)
+
   }
 
 
@@ -57,6 +54,7 @@ export class MyElement extends LitElement {
             </div>
         `
     }
+
 
     private _onClick() {
         this.count++
