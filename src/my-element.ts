@@ -3,6 +3,7 @@ import {customElement, property} from 'lit/decorators.js'
 import litLogo from './assets/lit.svg'
 import viteLogo from '/vite.svg'
 import {globalStyleSheet} from './styles/global-style-sheet.ts';
+import {globalStore} from './store/Store.ts';
 
 /**
  * An example element.
@@ -25,6 +26,9 @@ export class MyElement extends LitElement {
   firstUpdated() {
     // @ts-ignore
     this.shadowRoot.adoptedStyleSheets = [globalStyleSheet];
+    globalStore.subscribe((newState) => {
+        this.count = newState.count;
+    })
 
   }
 
@@ -57,7 +61,8 @@ export class MyElement extends LitElement {
 
 
     private _onClick() {
-        this.count++
+        globalStore.setState({count: this.count + 1, children:[]})
+        // this.count++
     }
 }
 
