@@ -1,7 +1,8 @@
-import { LitElement, css, html } from 'lit'
-import { customElement, property } from 'lit/decorators.js'
+import {css, html, LitElement} from 'lit'
+import {customElement, property} from 'lit/decorators.js'
 import litLogo from './assets/lit.svg'
 import viteLogo from '/vite.svg'
+import {globalStyleSheet} from './styles/global-style-sheet'
 
 /**
  * An example element.
@@ -11,53 +12,59 @@ import viteLogo from '/vite.svg'
  */
 @customElement('my-element')
 export class MyElement extends LitElement {
-  /**
-   * Copy for the read the docs hint.
-   */
-  @property()
-  docsHint = 'Click on the Vite and Lit logos to learn more'
+    static styles = css`
 
-  /**
-   * The number of times the button has been clicked.
-   */
-  @property({ type: Number })
-  count = 0;
-
-  createRenderRoot() {
-    return this;
-  }
-  render() {
-    return html`
-      <div class="bg-amber-200">
-    
-        <a href="https://vite.dev" target="_blank">
-          <img src=${viteLogo} class="logo" alt="Vite logo" />
-        </a>
-        <a href="https://lit.dev" target="_blank">
-          <img src=${litLogo} class="logo lit" alt="Lit logo" />
-        </a>
-      </div>
-      <slot></slot>
-      <div class="card">
-        <button @click=${this._onClick} part="button">
-          count is ${this.count}
-        </button>
-      </div>
-      <p class="read-the-docs">${this.docsHint}</p>
     `
+    /**
+     * Copy for the read the docs hint.
+     */
+    @property()
+    docsHint = 'Click on the Vite and Lit logos to learn more'
+    /**
+     * The number of times the button has been clicked.
+     */
+    @property({type: Number})
+    count = 0;
+  firstUpdated() {
+    // @ts-ignore
+    this.shadowRoot.adoptedStyleSheets = [globalStyleSheet];
+    console.log(globalStyleSheet)
   }
 
-  private _onClick() {
-    this.count++
-  }
 
-  static styles = css`
-   
-  `
+    render() {
+        return html`
+            <div class="flex flex-col items-center justify-center bg-amber-100"> 
+              <div class="  ">
+
+                    <a href="https://vite.dev" target="_blank">
+                        <img src=${viteLogo} class="logo" alt="Vite logo"/>
+                    </a>
+                    <a href="https://lit.dev" target="_blank">
+                        <img src=${litLogo} class="logo lit" alt="Lit logo"/>
+                    </a>
+                </div>
+                <div class="bg-amber-200"> 
+                  
+                </div>
+                <div class="card">
+                    <button @click=${this._onClick} part="button">
+                        count is ${this.count}
+                    </button>
+                </div>
+                <p class="read-the-docs">${this.docsHint}</p>
+              <slot></slot>
+            </div>
+        `
+    }
+
+    private _onClick() {
+        this.count++
+    }
 }
 
 declare global {
-  interface HTMLElementTagNameMap {
-    'my-element': MyElement
-  }
+    interface HTMLElementTagNameMap {
+        'my-element': MyElement
+    }
 }
