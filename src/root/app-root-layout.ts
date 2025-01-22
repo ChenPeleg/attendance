@@ -1,9 +1,9 @@
 import {  html, LitElement } from 'lit'
 import {customElement, property} from 'lit/decorators.js'
-import litLogo from './assets/lit.svg'
+import litLogo from '../assets/lit.svg'
 import viteLogo from '/vite.svg'
-import {globalStyleSheet} from './styles/global-style-sheet.ts';
-import {globalStore} from './store/Store.ts';
+import {globalStyleSheet} from '../styles/global-style-sheet.ts';
+import {globalStore} from '../store/Store.ts';
 
 /**
  * An example element.
@@ -11,8 +11,8 @@ import {globalStore} from './store/Store.ts';
  * @slot - This element has a slot
  * @csspart button - The button
  */
-@customElement('my-element')
-export class MyElement extends LitElement {
+@customElement('app-root-layout')
+export class AppRootLayout extends LitElement {
     /**
      * Copy for the read the docs hint.
      */
@@ -49,7 +49,7 @@ export class MyElement extends LitElement {
                   
                 </div>
                 <div class="card">
-                    <button @click=${this._onClick} part="button">
+                    <button @click=${this._onClick}>
                         count is ${this.count}
                     </button>
                 </div>
@@ -68,6 +68,6 @@ export class MyElement extends LitElement {
 
 declare global {
     interface HTMLElementTagNameMap {
-        'my-element': MyElement
+        'app-root-layout': AppRootLayout
     }
 }
