@@ -6,25 +6,26 @@ import {globalStore} from '../store/Store.ts';
 import busIcon from '../assets/svg/bus.svg'
 import childIcon from '../assets/svg/child.svg'
 import dayIcon from '../assets/svg/day.svg'
+import {Txt} from '../translations/translations.ts';
 
 interface CockpitButton {
-    name: string,
+    label: string,
     id: string,
     icon: string
 }
 
 @customElement('app-cockpit')
 export class AppCockpit extends LitElement {
-    buttons:CockpitButton[] = [{
-        name: 'attendance',
+    buttons: CockpitButton[] = [{
+        label: Txt.attendance,
         id: 'attendance',
-        icon:childIcon
+        icon: childIcon
     }, {
-        name: 'schoolBus',
+        label: Txt.schoolBus,
         id: 'schoolBus',
         icon: busIcon
     }, {
-        name: 'daySettings',
+        label: Txt.daySettings,
         id: 'daySettings',
         icon: dayIcon
 
@@ -34,12 +35,12 @@ export class AppCockpit extends LitElement {
     firstUpdated() {
         (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
     }
-    renderButton(button:CockpitButton) {
+
+    renderButton(button: CockpitButton) {
         return html`
-            <button class="h-full flex flex-row px-3 justify-center items-center" style="  border: none"> 
-              
-                    <img src=${button.icon} class=" " alt="menu"/>
-             <span>${button}</span>
+            <button @click=${()=>this._onClick(button.id)} class="h-7 cursor-pointer flex flex-row px-3 justify-center items-center bg-fuchsia-50 rounded shadow gap-2" style="  border: none">
+                <img src=${button.icon} class="w-4 h-4 " alt="menu"/>
+                <span>${button.label}</span>
             </button>
         `
     }
@@ -47,9 +48,8 @@ export class AppCockpit extends LitElement {
 
     render() {
         return html`
-            <div class="flex flex-col items-center justify-center bg-amber-100">
-                <div>
-                   
+            <div class="flex flex-col items-start justify-center pt-4 pr-4">
+                <div class="flex flex-row gap-3">
                     ${this.buttons.map(button => this.renderButton(button))}
                 </div>
                 <div class="card">
@@ -63,7 +63,8 @@ export class AppCockpit extends LitElement {
     }
 
 
-    private _onClick() {
+    private _onClick(buttonId: string) {
+        console.log(buttonId)
         globalStore.setState({
             count: this.count + 1,
             children: []

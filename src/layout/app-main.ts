@@ -17,7 +17,7 @@ export class AppMain extends LitElement {
 
     render() {
         return html`
-            <div class="flex flex-col items-center justify-center bg-amber-100">
+            <div class="flex flex-col items-start justify-center bg-amber-100">
                 <app-cockpit></app-cockpit>
             </div>
         `
