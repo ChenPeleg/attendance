@@ -1,4 +1,4 @@
-import {StoreClass} from './Store.class.ts';
+import {StoreClass} from './factory/Store.class.ts';
 
 export const globalStore = new StoreClass
 ({

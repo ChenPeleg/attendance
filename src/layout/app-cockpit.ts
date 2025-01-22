@@ -1,6 +1,5 @@
 import {html, LitElement} from 'lit'
 import {customElement, property} from 'lit/decorators.js'
-
 import {globalStyleSheet} from '../styles/global-style-sheet.ts';
 import {globalStore} from '../store/Store.ts';
 import busIcon from '../assets/svg/bus.svg'
@@ -51,12 +50,7 @@ export class AppCockpit extends LitElement {
             <div class="flex flex-col items-start justify-center pt-4 pr-4">
                 <div class="flex flex-row gap-3">
                     ${this.buttons.map(button => this.renderButton(button))}
-                </div>
-                <div class="card">
-                    <button @click=${this._onClick}>
-                        count is ${this.count}
-                    </button>
-                </div>
+                </div> 
                 <slot></slot>
             </div>
         `
@@ -69,7 +63,7 @@ export class AppCockpit extends LitElement {
             count: this.count + 1,
             children: []
         })
-        // this.count++
+
     }
 }
 
