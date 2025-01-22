@@ -3,7 +3,7 @@ import {customElement, property} from 'lit/decorators.js'
 
 import {globalStyleSheet} from '../styles/global-style-sheet.ts';
 
-
+import '../layout/app-cockpit.ts'
 @customElement('app-main')
 export class AppMain extends LitElement {
 
