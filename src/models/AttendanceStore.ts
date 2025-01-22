@@ -1,3 +1,4 @@
+import {ChildStatus} from './ChildStatus.ts';
 
 export enum DisplayType {
     Attendance = 'Attendance',
@@ -7,6 +8,6 @@ export enum DisplayType {
 
 export interface AttendanceStore {
     display: DisplayType;
-
-
+    attendance: ChildStatus[];
+    count: number;
 }

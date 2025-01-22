@@ -1,6 +1,6 @@
 import {PresentToday} from './presentToday.ts';
 
-export interface ChildStatus {
+export interface StatusModel {
    presentToday: PresentToday;
    checkedIn: boolean;
 }
