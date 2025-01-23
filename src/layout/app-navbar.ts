@@ -36,8 +36,8 @@ export class AppNavbar extends LitElement {
                     </button>
                     <div class="flex flex-row justify-between items-center w-full">
                         <span>    ${Txt.attendance} ${Txt.pistachio}  </span>
-                        <div class="pl-10">
-                            <span class=" "> ${this.hebrewDay} </span>
+                        <div class="pl-3">
+                            <span class=" "> ${this.hebrewDay.replace(Txt.day,'')} </span>
                           
                         </div>
 

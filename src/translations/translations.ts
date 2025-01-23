@@ -6,6 +6,7 @@ const translations = {
     'pistachio': 'פיסטוק',
     'schoolBus': ' הסעה',
     'daySettings': 'נוכחות ביום',
+    'day': 'יום',
 } as const;
 
 
