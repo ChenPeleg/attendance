@@ -5,23 +5,23 @@ export type StoreState<K extends Record<string, any>> = {
     [key in keyof K]: any
 };
 
-export type StoreReducer<K extends Record<string, any>> = (state: StoreState<K>, action: StoreAction<any>) => StoreState<K>;
+export type StoreReducer<K extends Record<string, any>,ACT> = (state: StoreState<K>, action: StoreAction<ACT>) => StoreState<K>;
 
 
 /**
  * @description
  * Store class to manage the state of the application
  */
-export class StoreFactory<K extends Record<string, any>> {
+export class StoreFactory<ACT,K extends Record<string, any> ,R extends StoreReducer<K,ACT> > {
     subscribers: { cb: (newState: StoreState<K>) => void, id: number }[];
     private state: StoreState<K>;
     private subscriberId = 0;
-    private readonly reducer: (state: StoreState<K>, action: StoreAction<any>) => StoreState<K>;
+    private readonly reducer: R;
 
     constructor({
                     defaultState,
                     reducer
-                }: { defaultState: StoreState<K>; reducer: StoreReducer<K> }) {
+                }: { defaultState: StoreState<K>; reducer: R  }) {
         this.state = defaultState;
         this.reducer = reducer;
         this.subscribers = [];
