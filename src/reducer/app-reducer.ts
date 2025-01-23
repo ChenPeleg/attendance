@@ -4,11 +4,13 @@ import {PresentToday} from '../models/presentToday.ts';
 import {StoreReducer} from '../store/factory/StoreFactory.ts';
 
 export const appReducer:StoreReducer<AttendanceStore, AppAction> = (state: AttendanceStore, action: AppAction): AttendanceStore => {
+
     switch (action.type) {
+
         case ActionType.checkInChild:
             return {
                 ...state,
-                attendance: state.attendance.map(child => child.id === action.payload ? {
+                attendance: state.attendance.map(child => child.id === action.payload.id ? {
                     ...child,
                     checkedIn: true
                 } : child)
@@ -16,7 +18,7 @@ export const appReducer:StoreReducer<AttendanceStore, AppAction> = (state: Atten
         case ActionType.checkOutChild:
             return {
                 ...state,
-                attendance: state.attendance.map(child => child.id === action.payload ? {
+                attendance: state.attendance.map(child => child.id === action.payload.id ? {
                     ...child,
                     checkedIn: false
                 } : child)
@@ -24,7 +26,7 @@ export const appReducer:StoreReducer<AttendanceStore, AppAction> = (state: Atten
         case ActionType.childAbsentFromDay:
             return {
                 ...state,
-                attendance: state.attendance.map(child => child.id === action.payload ? {
+                attendance: state.attendance.map(child => child.id === action.payload.id ? {
                     ...child,
                     presentToday: PresentToday.No
                 } : child)
@@ -32,7 +34,7 @@ export const appReducer:StoreReducer<AttendanceStore, AppAction> = (state: Atten
         case ActionType.childPresentInDay:
             return {
                 ...state,
-                attendance: state.attendance.map(child => child.id === action.payload ? {
+                attendance: state.attendance.map(child => child.id === action.payload.id ? {
                     ...child,
                     presentToday: PresentToday.Yes
                 } : child)
@@ -41,7 +43,7 @@ export const appReducer:StoreReducer<AttendanceStore, AppAction> = (state: Atten
             return {
                 ...state,
                 attendance: [...state.attendance, {
-                    id: action.payload,
+                    id: action.payload.id,
                     name: action.payload,
                     presentToday: PresentToday.No,
                     checkedIn: false,
