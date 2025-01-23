@@ -2,9 +2,9 @@ import {html, LitElement} from 'lit'
 import {customElement, property} from 'lit/decorators.js'
 import {globalStyleSheet} from '../styles/global-style-sheet.ts';
 
-import '../ui/check-mark.ts'
+import '../ui/check-mark/check-mark.ts'
 import {Txt} from '../translations/translations.ts';
-
+import   '../ui/check-mark-with-animation/check-mark-with-animation.ts';
 
 @customElement('children-count')
 export class ChildrenCount extends LitElement {
@@ -17,7 +17,9 @@ export class ChildrenCount extends LitElement {
     render() {
         return html`
             <div class="flex flex-row justify-center items-center min-w-32 gap-2 rounded-full h-12 bg-amber-200 px-10">
-                <span  >   ${this.totalChildren} / ${this.checkedInChildren} </span>
+                <span> ${this.totalChildren} / ${this.checkedInChildren} </span>
+              
+                <check-mark-with-animation> </check-mark-with-animation>
                 <span> ${Txt.pistachio} </span>
             </div>
         `

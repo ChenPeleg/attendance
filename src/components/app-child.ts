@@ -2,7 +2,7 @@ import {html, LitElement} from 'lit'
 import {customElement, property} from 'lit/decorators.js'
 import {globalStyleSheet} from '../styles/global-style-sheet.ts';
 import {ChildStatus} from '../models/ChildStatus.ts';
-import '../ui/check-mark.ts'
+import '../ui/check-mark/check-mark.ts'
 
 
 @customElement('app-child')

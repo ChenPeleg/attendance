@@ -5,7 +5,7 @@ import '../layout/app-cockpit.ts'
 import {AttendanceStore, DisplayType} from '../models/AttendanceStore.ts';
 import {globalStore} from '../store/Store.ts';
 import '../components/app-child.ts'
-import '../ui/check-mark.ts'
+import '../ui/check-mark/check-mark.ts'
 import '../components/children-count.ts'
 import {ActionType} from '../models/AppAction.ts';
 import {ChildStatus} from '../models/ChildStatus.ts';
