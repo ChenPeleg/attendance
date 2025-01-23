@@ -18,6 +18,12 @@ export class AppMain extends LitElement {
 
     @state() storeState: AttendanceStore | null = globalStore.getState();
     private displayType: DisplayType = this.storeState?.display || DisplayType.Attendance;
+    private cockPitClick:  (displayType : DisplayType) => void = (displayType) => {
+        globalStore.dispatch({
+            type: ActionType.changeDisplay,
+            payload: displayType
+        });
+    }
 
 
     firstUpdated() {
@@ -32,10 +38,13 @@ export class AppMain extends LitElement {
     render() {
         return html`
             <div class="flex flex-col items-start justify-center bg-amber-100 gap-3 pr-4">
-                <app-cockpit></app-cockpit>
-                <children-count .totalChildren=${this.storeState?.attendance.length || 0}
-                                .checkedInChildren=${this.storeState?.attendance.filter(child => child.checkedIn).length || 0}>
-                </children-count>
+                <app-cockpit .onClick="${this.cockPitClick}" .displayType="${this.displayType}"></app-cockpit>
+                <div class="${this.displayType === DisplayType.Attendance ? 'contents' : 'hidden'}">
+                    <children-count .totalChildren=${this.storeState?.attendance.length || 0}
+                                    .checkedInChildren=${this.storeState?.attendance.filter(child => child.checkedIn).length || 0}>
+                    </children-count>
+                </div>
+             
                 <div id="children" class="flex-col flex gap-4 min-w-56">
                     ${this.getChildren()}
                 </div>

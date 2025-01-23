@@ -5,10 +5,11 @@ import busIcon from '../assets/svg/bus.svg'
 import childIcon from '../assets/svg/child.svg'
 import dayIcon from '../assets/svg/day.svg'
 import {Txt} from '../translations/translations.ts';
+import {DisplayType} from '../models/AttendanceStore.ts';
 
 interface CockpitButton {
     label: string,
-    id: string,
+    id: DisplayType,
     icon: string
 }
 
@@ -18,27 +19,36 @@ const SHOW_SCHOOL_BUS = false;
 export class AppCockpit extends LitElement {
     buttons: CockpitButton[] = [{
         label: Txt.attendance,
-        id: 'attendance',
+        id: DisplayType.Attendance,
         icon: childIcon
     }, {
         label: Txt.daySettings,
-        id: 'daySettings',
+        id: DisplayType.DaySettings,
         icon: dayIcon
 
     },SHOW_SCHOOL_BUS ? {
         label: Txt.schoolBus,
-        id: 'schoolBus',
+        id: DisplayType.SchoolBus,
         icon: busIcon
     } : null].filter(Boolean) as CockpitButton[];
-    @property({type: Number}) count = 0;
+
+    @property({type: Function}) onClick: (displayType : DisplayType) => void = () => {
+    };
+
+
+    @property({type: DisplayType}) displayType = DisplayType.Attendance;
 
     firstUpdated() {
         (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
     }
 
     renderButton(button: CockpitButton) {
+        const isActive = this.displayType === button.id;
         return html`
-            <button @click=${()=>this._onClick(button.id)} class="h-10 cursor-pointer flex flex-row px-3 justify-center items-center bg-fuchsia-50 rounded shadow gap-2" style="  border: none">
+            <button @click=${()=>this.onClick(button.id)} class="h-10 cursor-pointer flex flex-row px-3 justify-center items-center 
+            transition-all ease-in-out duration-300
+           ${isActive ? 'bg-fuchsia-200' : 'bg-fuchsia-50'}  
+            rounded shadow gap-2" style="  border: none">
                 <img src=${button.icon} class="w-7 h-7 " alt="menu"/>
                 <span>${button.label}</span>
             </button>
@@ -59,9 +69,6 @@ export class AppCockpit extends LitElement {
     }
 
 
-    private _onClick(buttonId: string) {
-        console.log(buttonId)
-    }
 }
 
 declare global {
