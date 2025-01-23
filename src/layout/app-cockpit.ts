@@ -4,6 +4,7 @@ import {globalStyleSheet} from '../styles/global-style-sheet.ts';
 import busIcon from '../assets/svg/bus.svg'
 import childIcon from '../assets/svg/child.svg'
 import dayIcon from '../assets/svg/day.svg'
+import clearIcon from '../assets/svg/clear-broom-icon.svg'
 import {Txt} from '../translations/translations.ts';
 import {DisplayType} from '../models/AttendanceStore.ts';
 
@@ -35,6 +36,9 @@ export class AppCockpit extends LitElement {
     @property({type: Function}) onClick: (displayType : DisplayType) => void = () => {
     };
 
+    @property({type: Function}) onReset: (displayType : DisplayType) => void = () => {
+    };
+
 
     @property({type: DisplayType}) displayType = DisplayType.Attendance;
 
@@ -62,8 +66,13 @@ export class AppCockpit extends LitElement {
             <div class="flex flex-col items-start justify-center pt-4   ">
                 <div class="flex flex-row gap-3 flex-wrap">
                     ${this.buttons.map(button => this.renderButton(button))}
+                    <button style="  border: none" @click=${()=>this.onReset(this.displayType)} class="h-10 cursor-pointer flex flex-row px-3 justify-center items-center ">
+                        <img src=${clearIcon} class="w-7 h-7 " alt="menu"/>
+                    </button>
                 </div> 
                 <slot></slot>
+               
+                
             </div>
         `
     }

@@ -26,7 +26,7 @@ export class AppMain extends LitElement {
         });
     }
     private completeList  ()   {
-        console.log('complete list');
+
        if ( this.getPresentChildren().some(child => !child.checkedIn) ) {
            return;
        }
@@ -34,6 +34,12 @@ export class AppMain extends LitElement {
             type: ActionType.completeList,
             payload: null});
     };
+    clearAllData() {
+        globalStore.dispatch({
+            type: ActionType.clearAllData,
+            payload: null
+        })
+    }
 
 
     firstUpdated() {
@@ -48,7 +54,9 @@ export class AppMain extends LitElement {
     render() {
         return html`
             <div class="flex flex-col items-start justify-center bg-amber-100 gap-3 pr-4">
-                <app-cockpit .onClick="${this.cockPitClick}" .displayType="${this.displayType}"></app-cockpit>
+                <app-cockpit .onClick="${this.cockPitClick}" 
+                             .displayType="${this.displayType}" 
+                              .onReset="${()=>this.clearAllData()}"></app-cockpit>
                 <div class="${this.displayType === DisplayType.Attendance ? 'contents' : 'hidden'}">
                     <past-counts .lastHistory="${this.storeState?.history.slice(-10,10)}"></past-counts>
                     <children-count .onClick="${()=>this.completeList()}" .totalChildren=${this.getPresentChildren().length || 0}

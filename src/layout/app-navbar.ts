@@ -20,7 +20,7 @@ export class AppNavbar extends LitElement {
 
     render() {
         return html`
-            <nav class="w-full h-12 bg-gray-100 shadow  relative">
+            <nav class="w-full h-16 bg-gray-100 shadow  relative">
                 <div class="h-full flex flex-row shadow  gap-3">
                     <button class="h-full flex flex-col justify-center items-center" style="  border: none">
                         <a href="#abc">

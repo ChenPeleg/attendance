@@ -5,6 +5,7 @@ import {StoreReducer} from '../store/factory/StoreFactory.ts';
 import {HistoryModel} from '../models/HistoryModel.ts';
 import {servicesProvider} from '../services/provider/ServicesProvider.ts';
 import {TimeAndDateService} from '../services/TimeAndDate.service.ts';
+import {initialState} from '../store/Store.ts';
 
 export const appReducer:StoreReducer<AttendanceStore, AppAction> = (state: AttendanceStore, action: AppAction): AttendanceStore => {
 
@@ -72,6 +73,10 @@ export const appReducer:StoreReducer<AttendanceStore, AppAction> = (state: Atten
                     ...child,
                     checkedIn: false
                 }))
+            }
+        case ActionType.clearAllData:
+            return {
+                ...initialState
             }
 
 

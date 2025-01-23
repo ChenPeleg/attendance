@@ -9,7 +9,7 @@ import {servicesProvider} from '../services/provider/ServicesProvider.ts';
 import {LocalStorageService} from '../services/LocalStorage.service.ts';
 
 
-const initialState:AttendanceStore = {
+export const initialState:AttendanceStore = {
     display: DisplayType.Attendance,
     attendance: childrenBaseData.map(child => ({...child, presentToday: PresentToday.Yes, checkedIn: true })) as ChildStatus[],
     history: []
