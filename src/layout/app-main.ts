@@ -84,7 +84,7 @@ export class AppMain extends LitElement {
     private getChildren() {
         return this.storeState?.attendance.map(child => {
             return html`
-                <app-child .child=${child} .onClick="${() => this.childClicked(child)}"></app-child>
+                <app-child .child=${child} .onClick="${() => this.childClicked(child)}" .displayType="${this.displayType}"></app-child>
             `
         })
     }

@@ -7,6 +7,8 @@ const translations = {
     'daySettings': 'נמצאים היום',
     'day': 'יום',
     'finishList': 'סיום',
+    'present': 'נמצא/ת',
+    'absent': 'נעדר/ת',
 } as const;
 
 

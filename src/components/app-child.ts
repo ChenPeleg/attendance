@@ -3,10 +3,15 @@ import {customElement, property} from 'lit/decorators.js'
 import {globalStyleSheet} from '../styles/global-style-sheet.ts';
 import {ChildStatus} from '../models/ChildStatus.ts';
 import '../ui/check-mark/check-mark.ts'
+import {DisplayType} from '../models/AttendanceStore.ts';
+import {Txt} from '../translations/translations.ts';
+import {PresentToday} from '../models/presentToday.ts';
 
 
 @customElement('app-child')
 export class AppChild extends LitElement {
+    @property({type: DisplayType}) displayType = DisplayType.Attendance;
+
     @property({type: Object}) child: ChildStatus | null = null;
 
     @property({type: Function}) onClick: () => void = () => {
@@ -19,23 +24,32 @@ export class AppChild extends LitElement {
     render() {
         return html`
             <button @click="${this.onClick}"
-                    class="  flex flex-row justify-start items-center h-14 w-full  shadow  relative gap-8 rounded-md px-4 "
-                    style="  border: none; background-color: white">
-                    <span id="check-mark-container" class="absolute w-8 h-8 relative  mt-1 mr-1">
-                        <span id="check-mark-container-box" 
+                    class="  flex flex-row justify-start items-center h-14 w-full  shadow  relative gap-8 rounded-md px-4  ${this.child?.presentToday === PresentToday.No ? 'bg-grey-400' : 'bg-white'}"
+                    style="  border: none;  ">
+                    <span id="check-mark-container"
+                          class=" w-8 h-8 relative  mt-1 mr-1 ${this.displayType === DisplayType.DaySettings ?  'hidden' : 'absolute'}">
+                          <span id="check-mark-container-box" 
                               class="absolute top-0 rounded-full  transition-all ease-in-out duration-200 h-7 w-7 right-0
                                ${this.child?.checkedIn ? ' shadow-md ' : ' '}
                                " 
                               style="border: 2px solid ${this.child?.checkedIn ? 'white' : 'black'}">
-                        </span>
-                    <span id="check-mark-container" class="absolute -top-4 -right-0.5   " 
+                         </span>
+                      <span id="check-mark-container" class="absolute -top-4 -right-0.5   " 
                           >
                         ${this.getCheckMark()} 
-                    </span>
-                </span>
-                <span class="flex flex-row justify-center items-center">
+                      </span>
+                  </span>
+                  <span class="flex flex-row justify-center items-center">
                     ${this.child?.name}  
-                   </span>
+                 </span>
+                 <span  id="is-here-today" 
+                      class="   ${this.displayType === DisplayType.Attendance ?  'hidden' : 'justify-self-end  '}">
+                         
+                      <span id="check-mark-container" class="  "
+                      >
+                        ${this.child?.presentToday === PresentToday.Yes ? Txt.present : Txt.absent} 
+                      </span>
+                 </span>
             </button>
         `
     }
