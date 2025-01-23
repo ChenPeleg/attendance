@@ -4,7 +4,10 @@ import {globalCustomCss} from './global-custom-css.ts';
 export const tailwindAll = css`
     ${unsafeCSS(globalCustomCss)}
   
-
+    .bg-white {
+        --tw-bg-opacity: 1;
+        background-color: rgb(254 254 254 / var(--tw-bg-opacity, 1))
+    }
     .visible {
         visibility: visible
     }

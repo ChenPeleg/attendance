@@ -1,10 +1,7 @@
 
 const baseCss = `
 
-.circle-container {
-      width: calc(var(--check-height)*1.5);
-      height: calc(var(--check-height)*1.5);
-}
+ 
 .circleLoader {
     background-color: white;
     border: 2px solid rgba(0, 0, 0, 0.6);
@@ -15,8 +12,8 @@ const baseCss = `
     position: relative;
     display: inline-block;
 
-    width: calc(var(--check-height)*1.75);
-    height: calc(var(--check-height)*1.75);
+    width: calc(var(--check-height)*1.7);
+    height: calc(var(--check-height)*1.7);
 }
 
 .checkmark {
@@ -79,10 +76,10 @@ const baseCss = `
 `
 const variableMap = {
 
-    '--check-height': '0.7em',
-    '--check-width': '0.35em',
-    '--check-left': '0.32em',
-    '--check-thickness': '3px',
+    '--check-height': '0.8em',
+    '--check-width': '0.45em',
+    '--check-left': '0.5em',
+    '--check-thickness': '4px',
     '--check-color': '#01660c',
     '--loader-size': '1.0em',
 }

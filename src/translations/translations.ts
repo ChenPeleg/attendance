@@ -6,6 +6,7 @@ const translations = {
     'schoolBus': ' הסעה',
     'daySettings': 'נמצאים היום',
     'day': 'יום',
+    'finishList': 'סיום',
 } as const;
 
 
