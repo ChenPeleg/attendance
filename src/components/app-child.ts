@@ -17,14 +17,14 @@ export class AppChild extends LitElement {
     render() {
         return html`
             <button @click="${this.onClick}"
-                    class=" flex flex-row justify-start items-center h-12 w-full shadow  relative  gap-3 rounded-md   "
+                    class=" flex flex-row justify-start items-center h-10 w-full shadow  relative  gap-3 rounded-md   "
                     style="  border: none">
                     <span id="check-mark-container" class="absolute w-5 h-5 relative bg-green-200">
-                        <span id="check-mark-container-box" class="absolute top-0 rounded w-4 h-4  right-0" 
+                        <span id="check-mark-container-box" class="absolute top-0 rounded-full transition-all ease-in-out duration-100 w-4 h-4  right-0" 
                               style="border: 1px solid ${this.child?.checkedIn ? 'grey' : 'black'}">
                             
                         </span>
-                    <span id="check-mark-container" class="absolute top-0">
+                    <span id="check-mark-container" class="absolute top-0 -mt-1 -mr-1">
                         ${this.getCheckMark()} 
                     </span>
                 </span>

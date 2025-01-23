@@ -8,7 +8,7 @@ import {AppAction} from '../models/AppAction.ts';
 
 const initialState:AttendanceStore = {
     display: DisplayType.Attendance,
-    attendance: childrenBaseData.map(child => ({...child, presentToday: PresentToday.Yes, checkedIn: false })) as ChildStatus[],
+    attendance: childrenBaseData.map(child => ({...child, presentToday: PresentToday.Yes, checkedIn: true })) as ChildStatus[],
     count: 0
 }
 
