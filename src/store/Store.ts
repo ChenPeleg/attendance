@@ -11,7 +11,7 @@ import {LocalStorageService} from '../services/LocalStorage.service.ts';
 
 export const initialState:AttendanceStore = {
     display: DisplayType.Attendance,
-    attendance: childrenBaseData.map(child => ({...child, presentToday: PresentToday.Yes, checkedIn: true })) as ChildStatus[],
+    attendance: childrenBaseData.map(child => ({...child, presentToday: PresentToday.Yes, checkedIn: false })) as ChildStatus[],
     history: []
 }
 

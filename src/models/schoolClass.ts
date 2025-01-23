@@ -2,6 +2,6 @@
 export enum SchoolClass {
     First = 'א',
     Second = 'ב',
-    third = 'ג',
+    Third = 'ג',
     Other = 'אחר'
 }
