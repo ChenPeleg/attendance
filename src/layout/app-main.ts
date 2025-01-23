@@ -32,7 +32,7 @@ export class AppMain extends LitElement {
         return html`
             <div class="flex flex-col items-start justify-center bg-amber-100 gap-3 pr-4">
                 <app-cockpit></app-cockpit>
-                <div id="children" class="flex-col flex gap-4 w-32">
+                <div id="children" class="flex-col flex gap-4 min-w-56">
                     ${this.getChildren()}
                 </div>
             </div>
