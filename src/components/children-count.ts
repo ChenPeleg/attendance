@@ -11,6 +11,8 @@ export class ChildrenCount extends LitElement {
     @property({type: Number}) totalChildren: number = 0;
     @property({type: Number}) checkedInChildren: number = 0;
 
+    @property({type: Function}) onClick: () => void = () => {
+    };
     private get areAllChecked() {
         return this.totalChildren === this.checkedInChildren;
     }
@@ -31,7 +33,7 @@ export class ChildrenCount extends LitElement {
     render() {
 
         return html`
-            <div class="transition-all ease-in-out duration-300 flex flex-row justify-center items-center 
+            <div @click="${this.onClick}" class="transition-all ease-in-out duration-300 flex flex-row justify-center items-center 
                   ${this.areAllChecked ? ' min-w-44 bg-white shadow cursor-pointer ' : ' min-w-32 bg-amber-200'}  gap-4 rounded-full h-16  px-10">
                 <span> ${this.totalChildren} / ${this.checkedInChildren} </span>
                <div class="transition-all ease-in-out duration-300 flex flex-row justify-center items-center w-0   overflow-hidden  

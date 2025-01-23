@@ -2,6 +2,9 @@ import {ActionType, AppAction} from '../models/AppAction.ts';
 import {AttendanceStore} from '../models/AttendanceStore.ts';
 import {PresentToday} from '../models/presentToday.ts';
 import {StoreReducer} from '../store/factory/StoreFactory.ts';
+import {HistoryModel} from '../models/HistoryModel.ts';
+import {servicesProvider} from '../services/provider/ServicesProvider.ts';
+import {TimeAndDateService} from '../services/TimeAndDate.service.ts';
 
 export const appReducer:StoreReducer<AttendanceStore, AppAction> = (state: AttendanceStore, action: AppAction): AttendanceStore => {
 
@@ -56,6 +59,19 @@ export const appReducer:StoreReducer<AttendanceStore, AppAction> = (state: Atten
             return {
                 ...state,
                 display: action.payload
+            }
+        case ActionType.completeList:
+            const newHistory : HistoryModel = {
+                timestamp:  servicesProvider.getService(TimeAndDateService).createTimestamp(),
+                attendance: state.attendance.filter(child => child.checkedIn)
+            }
+            return {
+                ...state,
+                history: [...state.history, newHistory],
+                attendance: state.attendance.map(child => ({
+                    ...child,
+                    checkedIn: false
+                }))
             }
 
 

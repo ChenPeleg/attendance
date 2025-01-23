@@ -5,6 +5,7 @@ export enum ActionType {
     childAbsentFromDay = 'childAbsentFromDay',
     childPresentInDay = 'childPresentInDay',
     changeDisplay = 'changeDisplay',
+    completeList = 'completeList'
 }
 
 export type  AppAction = {
@@ -14,4 +15,7 @@ export type  AppAction = {
                              type: ActionType.addChild; payload: any;
                          } | {
                              type: ActionType.changeDisplay; payload: any;
+                         }
+                         | {
+                             type: ActionType.completeList; payload: any;
                          }

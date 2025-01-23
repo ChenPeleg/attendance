@@ -49,8 +49,8 @@ export class AppExample extends LitElement {
 
 
     private _onClick() {
-        // globalStore.setState({count: this.count + 1, children:[]})
-        // this.count++
+        // globalStore.setState({history: this.history + 1, children:[]})
+        // this.history++
     }
 }
 

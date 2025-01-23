@@ -1,7 +1,7 @@
 import {html, LitElement} from 'lit'
 import {customElement} from 'lit/decorators.js'
 import {globalStyleSheet} from '../styles/global-style-sheet.ts';
-import '../layout/app-main.ts'
+import '../main/app-main.ts'
 import '../layout/app-navbar.ts'
 /**
  * An example element.

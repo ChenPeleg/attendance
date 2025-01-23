@@ -24,6 +24,13 @@ export class AppMain extends LitElement {
             payload: displayType
         });
     }
+    private completeList  ()   {
+       if ( this.getPresentChildren().some(child => !child.checkedIn) )
+           return;
+        globalStore.dispatch({
+            type: ActionType.completeList,
+            payload: null});
+    };
 
 
     firstUpdated() {
@@ -40,8 +47,8 @@ export class AppMain extends LitElement {
             <div class="flex flex-col items-start justify-center bg-amber-100 gap-3 pr-4">
                 <app-cockpit .onClick="${this.cockPitClick}" .displayType="${this.displayType}"></app-cockpit>
                 <div class="${this.displayType === DisplayType.Attendance ? 'contents' : 'hidden'}">
-                    <children-count .totalChildren=${this.storeState?.attendance.length || 0}
-                                    .checkedInChildren=${this.storeState?.attendance.filter(child => child.checkedIn).length || 0}>
+                    <children-count .onClick="${this.completeList}" .totalChildren=${this.getPresentChildren().length || 0}
+                                    .checkedInChildren=${this.getPresentChildren().filter(child => child.checkedIn).length || 0}>
                     </children-count>
                 </div>
              
@@ -81,8 +88,12 @@ export class AppMain extends LitElement {
             payload: child
         })
     }
+    private getPresentChildren() {
+        return this.storeState?.attendance.filter(c=> c.presentToday === PresentToday.Yes) || []
+    }
     private getChildren() {
-        return this.storeState?.attendance.map(child => {
+        const children = this.displayType !== DisplayType.DaySettings ? this.getPresentChildren() : this.storeState?.attendance || [];
+        return children.map(child => {
             return html`
                 <app-child .child=${child} .onClick="${() => this.childClicked(child)}" .displayType="${this.displayType}"></app-child>
             `

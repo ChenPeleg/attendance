@@ -8,10 +8,11 @@ import {AppAction} from '../models/AppAction.ts';
 import {servicesProvider} from '../services/provider/ServicesProvider.ts';
 import {LocalStorageService} from '../services/LocalStorage.service.ts';
 
+
 const initialState:AttendanceStore = {
     display: DisplayType.Attendance,
     attendance: childrenBaseData.map(child => ({...child, presentToday: PresentToday.Yes, checkedIn: true })) as ChildStatus[],
-    count: 0
+    history: []
 }
 
 const stateFromLocalStorage = servicesProvider.
