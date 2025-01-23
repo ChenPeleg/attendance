@@ -1,11 +1,10 @@
 const translations = {
-    'child': 'ילד'
-    ,
+    'child': 'ילד'    ,
     'children': 'ילדים',
     'attendance': 'נוכחות',
     'pistachio': 'פיסטוק',
     'schoolBus': ' הסעה',
-    'daySettings': 'נוכחות ביום',
+    'daySettings': 'נמצאים היום',
     'day': 'יום',
 } as const;
 

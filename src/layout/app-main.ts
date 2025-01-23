@@ -6,6 +6,7 @@ import {AttendanceStore, DisplayType} from '../models/AttendanceStore.ts';
 import {globalStore} from '../store/Store.ts';
 import '../components/app-child.ts'
 import '../ui/check-mark.ts'
+import '../components/children-count.ts'
 import {ActionType} from '../models/AppAction.ts';
 import {ChildStatus} from '../models/ChildStatus.ts';
 import {PresentToday} from '../models/presentToday.ts';
@@ -32,6 +33,9 @@ export class AppMain extends LitElement {
         return html`
             <div class="flex flex-col items-start justify-center bg-amber-100 gap-3 pr-4">
                 <app-cockpit></app-cockpit>
+                <children-count .totalChildren=${this.storeState?.attendance.length || 0}
+                                .checkedInChildren=${this.storeState?.attendance.filter(child => child.checkedIn).length || 0}>
+                </children-count>
                 <div id="children" class="flex-col flex gap-4 min-w-56">
                     ${this.getChildren()}
                 </div>
