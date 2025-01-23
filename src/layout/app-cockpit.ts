@@ -12,6 +12,8 @@ interface CockpitButton {
     icon: string
 }
 
+const SHOW_SCHOOL_BUS = false;
+
 @customElement('app-cockpit')
 export class AppCockpit extends LitElement {
     buttons: CockpitButton[] = [{
@@ -23,11 +25,11 @@ export class AppCockpit extends LitElement {
         id: 'daySettings',
         icon: dayIcon
 
-    }, {
+    },SHOW_SCHOOL_BUS ? {
         label: Txt.schoolBus,
         id: 'schoolBus',
         icon: busIcon
-    }]
+    } : null].filter(Boolean) as CockpitButton[];
     @property({type: Number}) count = 0;
 
     firstUpdated() {
