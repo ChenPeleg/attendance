@@ -5,6 +5,8 @@ import {ChildStatus} from '../models/ChildStatus.ts';
 import {PresentToday} from '../models/presentToday.ts';
 import {appReducer} from '../reducer/app-reducer.ts';
 import {AppAction} from '../models/AppAction.ts';
+import {servicesProvider} from '../services/provider/ServicesProvider.ts';
+import {LocalStorageService} from '../services/LocalStorage.service.ts';
 
 const initialState:AttendanceStore = {
     display: DisplayType.Attendance,
@@ -12,8 +14,16 @@ const initialState:AttendanceStore = {
     count: 0
 }
 
+const stateFromLocalStorage = servicesProvider.
+getService(LocalStorageService).
+getObjectOrNull(LocalStorageService.STORE_SETTINGS) as AttendanceStore | null;
+
 export const globalStore :StoreFactory<AppAction, AttendanceStore, typeof appReducer > = new StoreFactory
 ({
     reducer: appReducer  ,
-    defaultState: initialState
+    defaultState: stateFromLocalStorage || initialState
+})
+
+globalStore.subscribe((state: AttendanceStore) => {
+    servicesProvider.getService(LocalStorageService).setObject(LocalStorageService.STORE_SETTINGS, state);
 })
