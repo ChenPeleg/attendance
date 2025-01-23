@@ -36,7 +36,7 @@ export class AppCockpit extends LitElement {
 
     renderButton(button: CockpitButton) {
         return html`
-            <button @click=${()=>this._onClick(button.id)} class="h-7 cursor-pointer flex flex-row px-3 justify-center items-center bg-fuchsia-50 rounded shadow gap-2" style="  border: none">
+            <button @click=${()=>this._onClick(button.id)} class="h-10 cursor-pointer flex flex-row px-3 justify-center items-center bg-fuchsia-50 rounded shadow gap-2" style="  border: none">
                 <img src=${button.icon} class="w-4 h-4 " alt="menu"/>
                 <span>${button.label}</span>
             </button>
