@@ -66,7 +66,8 @@ export class AppCockpit extends LitElement {
             <div class="flex flex-col items-start justify-center pt-4   ">
                 <div class="flex flex-row gap-3 flex-wrap">
                     ${this.buttons.map(button => this.renderButton(button))}
-                    <button style="  border: none" @click=${()=>this.onReset(this.displayType)} class="h-10 cursor-pointer flex flex-row px-3 justify-center items-center ">
+                    <button style="  border: none" @click=${()=>this.onReset(this.displayType)} 
+                            class="${this.displayType !== DisplayType.DaySettings ? 'hidden' : '' } h-10 cursor-pointer flex flex-row px-3 justify-center items-center ">
                         <img src=${clearIcon} class="w-7 h-7 " alt="menu"/>
                     </button>
                 </div> 
