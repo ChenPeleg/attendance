@@ -10,6 +10,13 @@ export class TimeAndDateService extends AbstractBaseService {
     createTimestamp() {
         return Date.now();
     }
+    hoursAndMinutes(timestamp: number) {
+        const date = new Date(timestamp);
+        return `${date.getHours()}:${this.padZero(date.getMinutes())}`;
+    }
+    padZero(num: number) {
+        return num < 10 ? `0${num}` : num;
+    }
 
 
 }

@@ -13,13 +13,6 @@ export class AppNavbar extends LitElement {
         return hebrewDay;
     }
 
-    get getTodaysDate() {
-
-        const today = new Date();
-        const date = today.getDate();
-        const month = today.getMonth() + 1;
-        return `${date}/${month}`
-    }
 
     firstUpdated() {
         (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];

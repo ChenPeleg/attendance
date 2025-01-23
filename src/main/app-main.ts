@@ -10,6 +10,7 @@ import '../components/children-count.ts'
 import {ActionType} from '../models/AppAction.ts';
 import {ChildStatus} from '../models/ChildStatus.ts';
 import {PresentToday} from '../models/presentToday.ts';
+import '../components/past-counts.ts'
 
 @customElement('app-main')
 export class AppMain extends LitElement {
@@ -25,8 +26,10 @@ export class AppMain extends LitElement {
         });
     }
     private completeList  ()   {
-       if ( this.getPresentChildren().some(child => !child.checkedIn) )
+        console.log('complete list');
+       if ( this.getPresentChildren().some(child => !child.checkedIn) ) {
            return;
+       }
         globalStore.dispatch({
             type: ActionType.completeList,
             payload: null});
@@ -47,7 +50,8 @@ export class AppMain extends LitElement {
             <div class="flex flex-col items-start justify-center bg-amber-100 gap-3 pr-4">
                 <app-cockpit .onClick="${this.cockPitClick}" .displayType="${this.displayType}"></app-cockpit>
                 <div class="${this.displayType === DisplayType.Attendance ? 'contents' : 'hidden'}">
-                    <children-count .onClick="${this.completeList}" .totalChildren=${this.getPresentChildren().length || 0}
+                    <past-counts .lastHistory="${this.storeState?.history.slice(-10,10)}"></past-counts>
+                    <children-count .onClick="${()=>this.completeList()}" .totalChildren=${this.getPresentChildren().length || 0}
                                     .checkedInChildren=${this.getPresentChildren().filter(child => child.checkedIn).length || 0}>
                     </children-count>
                 </div>
