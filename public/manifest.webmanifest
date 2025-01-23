@@ -1,0 +1,18 @@
+{
+  "name": "נוכחות פיסטוק",
+  "short_name": "נוכחות פיסטוק",
+  "description": "Attendance for pistachio",
+  "scope": "/attendance/",
+  "start_url": "/attendance/",
+  "background_color": "#9b6ee8",
+  "theme_color": "#9b6ee8",
+  "display": "standalone",
+
+  "icons": [
+      {
+        "src": "/attendance/splash.png",
+        "type": "image/png",
+        "sizes": "700x700"
+      }
+  ]
+}
