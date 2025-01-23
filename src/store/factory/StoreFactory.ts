@@ -1,18 +1,18 @@
 import {StoreAction} from './Store.model.ts';
 
 
-export type StoreState<K extends string | number | symbol> = {
-    [key in K]: any
+export type StoreState<K extends Record<string, any>> = {
+    [key in keyof K]: any
 };
 
-export type StoreReducer<K extends string | number | symbol> = (state: StoreState<K>, action: StoreAction<any>) => StoreState<K>;
+export type StoreReducer<K extends Record<string, any>> = (state: StoreState<K>, action: StoreAction<any>) => StoreState<K>;
 
 
 /**
  * @description
  * Store class to manage the state of the application
  */
-export class StoreClass<K extends string | number | symbol> {
+export class StoreFactory<K extends Record<string, any>> {
     subscribers: { cb: (newState: StoreState<K>) => void, id: number }[];
     private state: StoreState<K>;
     private subscriberId = 0;
