@@ -5,7 +5,7 @@ const translations = {
     'attendance': 'נוכחות',
     'pistachio': 'פיסטוק',
     'schoolBus': ' הסעה',
-    'daySettings': 'הגדרות יומיות',
+    'daySettings': 'נוכחות ביום',
 } as const;
 
 

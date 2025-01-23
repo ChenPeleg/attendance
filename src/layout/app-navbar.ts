@@ -38,7 +38,7 @@ export class AppNavbar extends LitElement {
                         <span>    ${Txt.attendance} ${Txt.pistachio}  </span>
                         <div class="pl-10">
                             <span class=" "> ${this.hebrewDay} </span>
-                            <span class=" "> ${this.getTodaysDate} </span>
+                          
                         </div>
 
                     </div>

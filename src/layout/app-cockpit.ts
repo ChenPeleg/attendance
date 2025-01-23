@@ -19,14 +19,14 @@ export class AppCockpit extends LitElement {
         id: 'attendance',
         icon: childIcon
     }, {
-        label: Txt.schoolBus,
-        id: 'schoolBus',
-        icon: busIcon
-    }, {
         label: Txt.daySettings,
         id: 'daySettings',
         icon: dayIcon
 
+    }, {
+        label: Txt.schoolBus,
+        id: 'schoolBus',
+        icon: busIcon
     }]
     @property({type: Number}) count = 0;
 
@@ -37,7 +37,7 @@ export class AppCockpit extends LitElement {
     renderButton(button: CockpitButton) {
         return html`
             <button @click=${()=>this._onClick(button.id)} class="h-10 cursor-pointer flex flex-row px-3 justify-center items-center bg-fuchsia-50 rounded shadow gap-2" style="  border: none">
-                <img src=${button.icon} class="w-4 h-4 " alt="menu"/>
+                <img src=${button.icon} class="w-7 h-7 " alt="menu"/>
                 <span>${button.label}</span>
             </button>
         `
@@ -47,8 +47,8 @@ export class AppCockpit extends LitElement {
 
     render() {
         return html`
-            <div class="flex flex-col items-start justify-center pt-4 ">
-                <div class="flex flex-row gap-3">
+            <div class="flex flex-col items-start justify-center pt-4   ">
+                <div class="flex flex-row gap-3 flex-wrap">
                     ${this.buttons.map(button => this.renderButton(button))}
                 </div> 
                 <slot></slot>
