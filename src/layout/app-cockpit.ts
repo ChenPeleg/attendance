@@ -1,7 +1,6 @@
 import {html, LitElement} from 'lit'
 import {customElement, property} from 'lit/decorators.js'
 import {globalStyleSheet} from '../styles/global-style-sheet.ts';
-import {globalStore} from '../store/Store.ts';
 import busIcon from '../assets/svg/bus.svg'
 import childIcon from '../assets/svg/child.svg'
 import dayIcon from '../assets/svg/day.svg'
@@ -47,7 +46,7 @@ export class AppCockpit extends LitElement {
 
     render() {
         return html`
-            <div class="flex flex-col items-start justify-center pt-4 pr-4">
+            <div class="flex flex-col items-start justify-center pt-4 ">
                 <div class="flex flex-row gap-3">
                     ${this.buttons.map(button => this.renderButton(button))}
                 </div> 
@@ -59,11 +58,6 @@ export class AppCockpit extends LitElement {
 
     private _onClick(buttonId: string) {
         console.log(buttonId)
-        globalStore.setState({
-            count: this.count + 1,
-            children: []
-        })
-
     }
 }
 
