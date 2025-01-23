@@ -1,18 +1,23 @@
-import {StoreAction} from './Store.model.ts';
 
 
 export type StoreState<K extends Record<string, any>> = {
     [key in keyof K]: any
 };
 
-export type StoreReducer<K extends Record<string, any>,ACT> = (state: StoreState<K>, action: StoreAction<ACT>) => StoreState<K>;
+export type StoreReducer<K  extends  StoreState<K>,ACT extends {
+    type: any;
+    payload: any;
+}> = (state: StoreState<K>, action:  ACT ) => StoreState<K>;
 
 
 /**
  * @description
  * Store class to manage the state of the application
  */
-export class StoreFactory<ACT,K extends Record<string, any> ,R extends StoreReducer<K,ACT> > {
+export class StoreFactory<ACT  extends {
+    type: string;
+    payload: any;
+},K extends Record<string, any> ,R extends StoreReducer<K,ACT>> {
     subscribers: { cb: (newState: StoreState<K>) => void, id: number }[];
     private state: StoreState<K>;
     private subscriberId = 0;
@@ -31,7 +36,7 @@ export class StoreFactory<ACT,K extends Record<string, any> ,R extends StoreRedu
         return this.state;
     }
 
-    dispatch(action: StoreAction<any>) {
+    dispatch(action: ACT) {
         this.state = this.reducer(this.state, action);
     }
 

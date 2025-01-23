@@ -8,8 +8,8 @@ export enum ActionType {
 
 export type  AppAction = {
     type: ActionType.checkInChild | ActionType.checkOutChild | ActionType.childAbsentFromDay | ActionType.childPresentInDay;
-    childId: string;
+    payload: any;
 }  | {
     type: ActionType.addChild;
-    childName: string;
+    payload: any;
 }

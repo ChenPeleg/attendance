@@ -20,7 +20,7 @@ export class AppChild extends LitElement {
         return html`
             <div id="child-root" class="w-full h-12 w-full shadow  relative bg-red-100 gap-3"> 
                     <button @click="${this.onClick}" class="h-full w-full flex flex-row justify-start items-center" style="  border: none">
-                        ${this.child?.name}
+                        ${this.child?.name} ${this.child?.checkedIn ? '1' : '0'}
                     </button>  
             </div>
         `

@@ -56,15 +56,16 @@ export class AppMain extends LitElement {
     };
 
     private checkInChild(child: ChildStatus) {
+
         globalStore.dispatch({
-            actionType: child.checkedIn ? ActionType.checkOutChild : ActionType.checkInChild,
+            type: child.checkedIn ? ActionType.checkOutChild : ActionType.checkInChild,
             payload: child
         });
     }
 
     private presentTodayChild(child: ChildStatus) {
         globalStore.dispatch({
-            actionType: child.presentToday === PresentToday.Yes ? ActionType.childAbsentFromDay :
+            type: child.presentToday === PresentToday.Yes ? ActionType.childAbsentFromDay :
                 ActionType.childPresentInDay,
             payload: child
         })
