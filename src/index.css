@@ -1,6 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@100..900&display=swap');
 
 :root {
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-family: "Noto Sans Hebrew", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 
     font-weight: 400;
 
@@ -31,7 +32,7 @@
 
 
 body {
-    font-size: xx-large;
+
     margin: 0;
     display: flex;
     place-items: center;

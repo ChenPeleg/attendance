@@ -17,7 +17,7 @@ export class AppChild extends LitElement {
     render() {
         return html`
             <button @click="${this.onClick}"
-                    class="text-2xl flex flex-row justify-start items-center h-10 w-full shadow  relative  gap-3 rounded-md  "
+                    class="  flex flex-row justify-start items-center h-10 w-full shadow  relative  gap-3 rounded-md  "
                     style="  border: none; background-color: white">
                     <span id="check-mark-container" class="absolute w-5 h-5 relative bg-green-200">
                         <span id="check-mark-container-box" class="absolute top-0 rounded-full transition-all ease-in-out duration-100 w-5 h-5  right-0" 

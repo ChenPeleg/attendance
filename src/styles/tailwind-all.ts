@@ -1,6 +1,10 @@
-import {css} from 'lit';
+import {css, unsafeCSS} from 'lit';
+import {globalCustomCss} from './global-custom-css.ts';
 
 export const tailwindAll = css`
+    ${unsafeCSS(globalCustomCss)}
+  
+
     .visible {
         visibility: visible
     }
