@@ -1,7 +1,6 @@
 import {html, LitElement} from 'lit'
 import {customElement, property} from 'lit/decorators.js'
 import {globalStyleSheet} from '../styles/global-style-sheet.ts';
-import {globalStore} from '../store/Store.ts';
 import busIcon from '../assets/svg/bus.svg'
 import childIcon from '../assets/svg/child.svg'
 import dayIcon from '../assets/svg/day.svg'
@@ -59,11 +58,6 @@ export class AppCockpit extends LitElement {
 
     private _onClick(buttonId: string) {
         console.log(buttonId)
-        globalStore.setState({
-            count: this.count + 1,
-            children: []
-        })
-
     }
 }
 
