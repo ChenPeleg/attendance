@@ -15,19 +15,21 @@ export class AppMain extends LitElement {
 
     @state()
     storeState : AttendanceStore | null =  globalStore.getState() ;
+    private childClicked = (child: any) => {
+      console.log(child)
+    };
 
     firstUpdated() {
         (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
         globalStore.subscribe((state:AttendanceStore) => {
             this.storeState = state;
-            console.log(this.storeState)
             this.requestUpdate();
         })
     }
     private getChildren () {
         return this.storeState?.attendance.map(child => {
             return html` 
-                <app-child .child=${child}  ></app-child>
+                <app-child .child=${child} .onClick="${()=>this.childClicked (child)}" ></app-child>
             `
         })
     }

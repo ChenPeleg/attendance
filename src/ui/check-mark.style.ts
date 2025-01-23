@@ -81,7 +81,7 @@ export const checkMarkStyle =  Object.entries(
     return acc.replace(new RegExp(`var\\(${key}\\)`, 'gm'), value)
 }, baseCss)
 
-console.log(checkMarkStyle)
+
 
 
 
