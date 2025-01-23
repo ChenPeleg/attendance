@@ -46,7 +46,7 @@ export class AppCockpit extends LitElement {
 
     render() {
         return html`
-            <div class="flex flex-col items-start justify-center pt-4 pr-4">
+            <div class="flex flex-col items-start justify-center pt-4 ">
                 <div class="flex flex-row gap-3">
                     ${this.buttons.map(button => this.renderButton(button))}
                 </div> 
