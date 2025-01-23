@@ -6,6 +6,21 @@ import menuButton from '../assets/svg/menu-button.svg'
 
 @customElement('app-navbar')
 export class AppNavbar extends LitElement {
+    get hebrewDay() {
+        const date = new Date();
+        const options: Intl.DateTimeFormatOptions = {weekday: 'long'};
+        const hebrewDay = new Intl.DateTimeFormat('he-IL', options).format(date);
+        return hebrewDay;
+    }
+
+    get getTodaysDate() {
+
+        const today = new Date();
+        const date = today.getDate();
+        const month = today.getMonth() + 1;
+        return `${date}/${month}`
+    }
+
     firstUpdated() {
         (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
     }
@@ -19,9 +34,15 @@ export class AppNavbar extends LitElement {
                             <img src=${menuButton} class=" " alt="menu"/>
                         </a>
                     </button>
-                    <div class="flex flex-row justify-center items-center">
-                        ${Txt.attendance} ${Txt.pistachio}
+                    <div class="flex flex-row justify-between items-center w-full">
+                        <span>    ${Txt.attendance} ${Txt.pistachio}  </span>
+                        <div class="pl-10">
+                            <span class=" "> ${this.hebrewDay} </span>
+                            <span class=" "> ${this.getTodaysDate} </span>
+                        </div>
+
                     </div>
+
                 </div>
             </nav>
         `
