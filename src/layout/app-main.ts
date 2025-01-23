@@ -31,8 +31,6 @@ export class AppMain extends LitElement {
     render() {
         return html`
             <div class="flex flex-col items-start justify-center bg-amber-100 gap-3 pr-4">
-                ff
-                <check-mark></check-mark>
                 <app-cockpit></app-cockpit>
                 <div id="children" class="flex-col flex gap-2 w-32">
                     ${this.getChildren()}
