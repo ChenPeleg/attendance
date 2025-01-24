@@ -30,6 +30,12 @@ export class ThemeService extends AbstractBaseService {
             : AppColorTheme.Light;
     }
 
+    themeChangeHandler(e: MediaQueryListEvent) {
+        if (this.currentTheme === AppColorTheme.System) {
+            this.setTheme(e.matches ? AppColorTheme.Dark : AppColorTheme.Light);
+        }
+    }
+
     setTheme(theme: AppColorTheme) {
         this.currentTheme = theme;
         this.applyTheme();
