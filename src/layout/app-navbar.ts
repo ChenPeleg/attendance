@@ -25,6 +25,7 @@ export class AppNavbar extends LitElement {
                         <a href="#abc">
                             <img src=${menuButton} class=" " alt="menu"/>
                         </a>
+                        <theme-button></theme-button>
                     </button>
                     <div class="flex flex-row justify-between items-center w-full primary-text-color">
                         <span>    ${Txt.attendance} ${Txt.pistachio}  </span>
