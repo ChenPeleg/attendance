@@ -6,6 +6,7 @@ import {HistoryModel} from '../models/HistoryModel.ts';
 import {servicesProvider} from '../services/provider/ServicesProvider.ts';
 import {TimeAndDateService} from '../services/TimeAndDate.service.ts';
 import {initialState} from '../store/Store.ts';
+import {SortOrder} from '../models/SortType.ts';
 
 export const appReducer:StoreReducer<AttendanceStore, AppAction> = (state: AttendanceStore, action: AppAction): AttendanceStore => {
 
@@ -83,7 +84,22 @@ export const appReducer:StoreReducer<AttendanceStore, AppAction> = (state: Atten
                 ...initialState
             }
 
+        case ActionType.changeSort:
+            let sortOrder
+            if (state.sortType === action.payload.sortType
+            ) {
+               sortOrder =   state.sortOrder === SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
+                console.log(sortOrder)
+            } else  {
+                sortOrder = SortOrder.Ascending;
+            }
 
+
+            return {
+                ...state,
+                sortType: action.payload.sortType,
+                sortOrder: sortOrder
+            }
         default:
             return state;
     }
