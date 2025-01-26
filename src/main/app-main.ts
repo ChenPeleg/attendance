@@ -45,6 +45,7 @@ export class AppMain extends LitElement {
     }
 
 
+
     firstUpdated() {
         (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
         globalStore.subscribe((state: AttendanceStore) => {

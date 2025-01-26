@@ -5,6 +5,7 @@ import {checkMarkStyleWithAnimation} from './check-mark-with-animation.style.ts'
 
 
 
+
 @customElement('check-mark-with-animation')
 export class CheckMarkWithAnimation extends CheckMark {
     static styles = unsafeCSS(`${checkMarkStyleWithAnimation}`)

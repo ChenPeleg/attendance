@@ -15,6 +15,7 @@ export class ChildrenCount extends LitElement {
     private get areAllChecked() {
         return this.totalChildren === this.checkedInChildren;
     }
+
     renderAllChecked() {
         return html`   
             <div id="all-checked" class="contents overflow-hidden "> 

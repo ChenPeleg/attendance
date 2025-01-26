@@ -14,6 +14,7 @@ interface CockpitButton {
     icon: string
 }
 
+
 const SHOW_SCHOOL_BUS = false;
 
 @customElement('app-cockpit')

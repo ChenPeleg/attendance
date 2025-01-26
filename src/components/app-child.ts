@@ -8,6 +8,7 @@ import {Txt} from '../translations/translations.ts';
 import {PresentToday} from '../models/presentToday.ts';
 
 
+
 @customElement('app-child')
 export class AppChild extends LitElement {
     @property({type: DisplayType}) displayType = DisplayType.Attendance;

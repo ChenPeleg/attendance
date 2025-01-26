@@ -4,6 +4,7 @@ import {checkMarkStyle} from './check-mark.style.ts';
 
 
 
+
 @customElement('check-mark')
 export class CheckMark extends LitElement {
     static styles = unsafeCSS(`${checkMarkStyle}`)

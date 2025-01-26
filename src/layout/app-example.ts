@@ -5,6 +5,7 @@ import viteLogo from '/vite.svg'
 import {globalStyleSheet} from '../styles/global-style-sheet.ts';
 
 
+
 @customElement('app-example')
 export class AppExample extends LitElement {
     /**
