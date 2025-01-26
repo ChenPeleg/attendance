@@ -8,6 +8,7 @@ import {Txt} from '../translations/translations.ts';
 import {PresentToday} from '../models/presentToday.ts';
 
 
+
 @customElement('app-child')
 export class AppChild extends LitElement {
     @property({type: DisplayType}) displayType = DisplayType.Attendance;
@@ -24,7 +25,8 @@ export class AppChild extends LitElement {
     render() {
         return html`
             <button @click="${this.onClick}"
-                    class="  flex flex-row justify-start items-center h-14 w-full  shadow  relative gap-8 rounded-md px-4  ${this.child?.presentToday === PresentToday.No ? 'bg-grey-400' : 'bg-white'}"
+                    class=" bg-secondary text-primary flex flex-row justify-start items-center h-14 w-full  shadow  relative gap-8 rounded-md px-4  
+                    ${this.child?.presentToday === PresentToday.No ? 'bg-grey-400' : 'bg-white'}"
                     style="  border: none;  ">
                     <span id="check-mark-container"
                           class=" w-8 h-8 relative  mt-1 mr-1 ${this.displayType === DisplayType.DaySettings ?  'hidden' : 'absolute'}">

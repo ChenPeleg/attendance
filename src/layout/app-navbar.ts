@@ -4,6 +4,7 @@ import {globalStyleSheet} from '../styles/global-style-sheet.ts';
 import {Txt} from '../translations/translations.ts';
 import menuButton from '../assets/svg/menu-button.svg'
 
+
 @customElement('app-navbar')
 export class AppNavbar extends LitElement {
     get hebrewDay() {
@@ -19,19 +20,26 @@ export class AppNavbar extends LitElement {
 
     render() {
         return html`
-            <nav class="w-full h-16 bg-gray-100 shadow  relative">
+            <nav class="w-full h-16 bg-gray-100 shadow  relative text-primary bg-secondary"  >
                 <div class="h-full flex flex-row shadow  gap-3">
-                    <button class="h-full flex flex-col justify-center items-center" style="  border: none">
-                        <a href="#abc">
-                            <img src=${menuButton} class=" " alt="menu"/>
-                        </a>
-                        <theme-button></theme-button>
-                    </button>
-                    <div class="flex flex-row justify-between items-center w-full primary-text-color">
+                    <div class="h-full flex flex-row">
+                        <button class="h-full flex flex-col justify-center items-center bg-secondary" style="  border: none">
+                            <a href="#abc">
+                                <img src=${menuButton} class=" " alt="menu"/>
+                            </a>
+                        </button>
+                       
+                    </div>
+                    
+                    <div class="flex flex-row justify-between items-center w-full ">
+                        <div class="   flex flex-row items-center gap-3 ">
                         <span>    ${Txt.attendance} ${Txt.pistachio}  </span>
+
+                            <theme-switch></theme-switch>
+                        </div>
                         <div class="pl-3">
-                            <span class=" "> ${this.hebrewDay.replace(Txt.day,'')} </span>
-                          
+                            <span class=" "> ${this.hebrewDay.replace(Txt.day, '')} </span>
+
                         </div>
 
                     </div>

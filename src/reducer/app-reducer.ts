@@ -36,7 +36,7 @@ export const appReducer:StoreReducer<AttendanceStore, AppAction> = (state: Atten
                 } : child)
             }
         case ActionType.childPresentInDay:
-            console.log(action)
+
             return {
                 ...state,
                 attendance: state.attendance.map(child => child.id === action.payload.id ? {

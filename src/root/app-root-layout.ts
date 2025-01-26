@@ -3,6 +3,11 @@ import {customElement} from 'lit/decorators.js'
 import {globalStyleSheet} from '../styles/global-style-sheet.ts';
 import '../main/app-main.ts'
 import '../layout/app-navbar.ts'
+
+
+
+
+
 /**
  * An example element.
  *
@@ -19,7 +24,7 @@ export class AppRootLayout extends LitElement {
 
     render() {
         return html`
-            <div class="h-screen w-screen flex-col items-center justify-center bg-amber-100" style="direction: rtl;">
+            <div class="h-screen w-screen flex-col items-center justify-center " style="direction: rtl;">
                 <app-navbar></app-navbar>
                 <app-main></app-main>
             </div>

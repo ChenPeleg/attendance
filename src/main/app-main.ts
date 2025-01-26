@@ -45,6 +45,7 @@ export class AppMain extends LitElement {
     }
 
 
+
     firstUpdated() {
         (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
         globalStore.subscribe((state: AttendanceStore) => {
@@ -60,7 +61,7 @@ export class AppMain extends LitElement {
 
     render() {
         return html`
-            <div class="flex flex-col items-start justify-center bg-amber-100 gap-3 pr-4">
+            <div class="flex flex-col items-start justify-center bg-amber-100 gap-3 pr-4 bg-primary text-primary">
                 <app-cockpit .onClick="${this.cockPitClick}" 
                              .displayType="${this.displayType}" 
                               .onReset="${()=>this.clearAllData()}"></app-cockpit>

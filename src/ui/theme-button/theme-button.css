@@ -1,6 +1,14 @@
 
 @import "https://unpkg.com/open-props/easings.min.css";
-
+root {
+    --icon-fill: rgba(0, 0, 0, 0.87);
+--ease-elastic-4: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    --icon-fill-hover: rgb(9, 9, 9);
+}
+.theme-toggle {
+    width: 30px;
+    height: 30px;
+}
 .sun-and-moon > :is(.moon, .sun, .sun-beams) {
     transform-origin: center;
 }
@@ -76,4 +84,4 @@
         transition-delay: .25s;
     }
 }
-        
+

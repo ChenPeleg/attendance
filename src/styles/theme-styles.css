@@ -1,0 +1,25 @@
+
+
+:host {
+    .text-primary {
+        color: var(--primary-text-color);
+    }
+    .text-secondary {
+        color: var(--secondary-text-color);
+    }
+    .text-accent {
+        color: var(--accent-text-color);
+    }
+
+
+    .bg-primary {
+        background-color: var(--primary-background-color);
+    }
+    .bg-secondary {
+        background-color: var(--secondary-background-color);
+    }
+    .bg-accent {
+        background-color: var(--accent-background-color);
+    }
+
+}
