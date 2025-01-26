@@ -22,28 +22,7 @@ export class SideMenuContent extends LitElement {
 
     render() {
         return html`
-            <div>
-                <div class="h-14 w-full flex-row flex justify-between gap-5">
-                    <span>
-                    ${Txt.display}
-                        
-                    </span>
-                    <span>
-                           <theme-switch></theme-switch>
-                    </span>
-                </div>
-                <div class="h-14 w-full flex-row flex justify-between gap-5">
-                    <span>
-                    ${Txt.resetData}
-                        
-                    </span>
-                    <span>
-                             <button   @click=${()=>this.onReset()}
-                                     class=" bg-secondary rounded-md  h-10 cursor-pointer flex flex-row px-3 justify-center items-center ">
-                        <img src=${clearIcon} class="w-7 h-7 app-icon" alt="menu"/>
-                    </button>
-                    </span>
-                </div>
+            <div class="flex flex-col gap-4">
                 <div class="h-14 w-full flex-row flex justify-between gap-5">
                     <span>
                     ${Txt.addChild}
@@ -56,6 +35,29 @@ export class SideMenuContent extends LitElement {
                     </button>
                     </span>
                 </div>
+                <div class="h-14 w-full flex-row flex justify-between gap-5">
+                    <span>
+                    ${Txt.resetData}
+                        
+                    </span>
+                    <span>
+                             <button   @click=${()=>this.onReset()}
+                                       class=" bg-secondary rounded-md  h-10 cursor-pointer flex flex-row px-3 justify-center items-center ">
+                        <img src=${clearIcon} class="w-7 h-7 app-icon" alt="menu"/>
+                    </button>
+                    </span>
+                </div>
+                <div class="h-14 w-full flex-row flex justify-between gap-5">
+                    <span>
+                    ${Txt.display}
+                        
+                    </span>
+                    <span>
+                           <theme-switch></theme-switch>
+                    </span>
+                </div>
+             
+            
             </div>
         `;
     }
