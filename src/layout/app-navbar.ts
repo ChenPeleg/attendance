@@ -20,7 +20,7 @@ export class AppNavbar extends LitElement {
 
     render() {
         return html`
-            <nav class="w-full h-16 bg-gray-100 shadow  relative">
+            <nav class="w-full h-16 bg-gray-100 shadow  relative secondary-text-color"  >
                 <div class="h-full flex flex-row shadow  gap-3">
                     <div class="h-full flex flex-row">
                         <button class="h-full flex flex-col justify-center items-center" style="  border: none">
@@ -28,14 +28,15 @@ export class AppNavbar extends LitElement {
                                 <img src=${menuButton} class=" " alt="menu"/>
                             </a>
                         </button>
-                        <div class="w-12 h-12 bg-amber-200">
-                            
+                       
+                    </div>
+                    
+                    <div class="flex flex-row justify-between items-center w-full ">
+                        <div class="   flex flex-row items-center gap-3 ">
+                        <span>    ${Txt.attendance} ${Txt.pistachio}  </span>
+
                             <theme-switch></theme-switch>
                         </div>
-                    </div>
-                 
-                    <div class="flex flex-row justify-between items-center w-full primary-text-color">
-                        <span>    ${Txt.attendance} ${Txt.pistachio}  </span>
                         <div class="pl-3">
                             <span class=" "> ${this.hebrewDay.replace(Txt.day, '')} </span>
 
