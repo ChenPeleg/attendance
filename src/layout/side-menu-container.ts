@@ -42,8 +42,7 @@ export class SideMenuContainer extends LitElement {
     render() {
         return html`
             <div id="menu-container" class="  w-12 h-full flex flex-col justify-center items-center  ">
-
-
+ 
                 <div class="backdrop bg-gray-900 opacity-70 ${this.isOpen ? 'open' : ''}" @click=${this.closeMenu}></div>
                 <div class="side-menu bg-primary ${this.isOpen ? 'open' : ''}">
                     <div class="h-14 w-10"> </div>

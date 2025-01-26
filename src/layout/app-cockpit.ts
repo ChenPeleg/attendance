@@ -4,7 +4,7 @@ import {globalStyleSheet} from '../styles/global-style-sheet.ts';
 import busIcon from '../assets/svg/bus.svg'
 import childIcon from '../assets/svg/child.svg'
 import dayIcon from '../assets/svg/day.svg'
-import clearIcon from '../assets/svg/clear-broom-icon.svg'
+
 import {Txt} from '../translations/translations.ts';
 import {AttendanceStore, DisplayType} from '../models/AttendanceStore.ts';
 import {globalStore} from '../store/Store.ts';
@@ -42,12 +42,7 @@ export class AppCockpit extends LitElement {
             payload: displayType
         });
     }
-    onReset() {
-        globalStore.dispatch({
-            type: ActionType.clearAllData,
-            payload: null
-        })
-    }
+
     private displayType: DisplayType = this.storeState?.display || DisplayType.Attendance;
 
     firstUpdated() {
@@ -79,10 +74,7 @@ export class AppCockpit extends LitElement {
             <div class="flex flex-col items-start justify-center   ">
                 <div class="flex flex-row gap-3 flex-wrap">
                     ${this.buttons.map(button => this.renderButton(button))}
-                    <button style="  border: none"  @click=${()=>this.onReset()} 
-                            class="${this.displayType !== DisplayType.DaySettings ? 'hidden' : 'bg-secondary' } h-10 cursor-pointer flex flex-row px-3 justify-center items-center ">
-                        <img src=${clearIcon} class="w-7 h-7 app-icon" alt="menu"/>
-                    </button>
+                 
                 </div>  
             </div>
         `

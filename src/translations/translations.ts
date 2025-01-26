@@ -10,6 +10,7 @@ const translations = {
     'present': 'נמצא/ת',
     'absent': 'נעדר/ת',
     'display': 'מצב תצוגה',
+    'resetData': 'איפוס נתונים',
 } as const;
 
 

@@ -26,20 +26,14 @@ export class AppNavbar extends LitElement {
                             <side-menu-content></side-menu-content>
                         </side-menu-container>
                     </div>
-                    
                     <div class="flex flex-row justify-between items-center w-full ">
                         <div class="   flex flex-row items-center gap-3 ">
                              <app-cockpit></app-cockpit>
-
-                            <theme-switch></theme-switch>
                         </div>
                         <div class="pl-3">
                             <span class=" ">   </span>
-
                         </div>
-
                     </div>
-
                 </div>
             </nav>
                 <div id="nav-bar-padding" class="block h-16"></div>
