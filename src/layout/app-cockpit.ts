@@ -50,7 +50,7 @@ export class AppCockpit extends LitElement {
     renderButton(button: CockpitButton) {
         const isActive = this.displayType === button.id;
         return html`
-            <button @click=${()=>this.onClick(button.id)} class="h-10 cursor-pointer flex flex-row px-3 justify-center items-center 
+            <button @click=${()=>this.onClick(button.id)} class="h-10 cursor-pointer flex flex-row px-3 justify-center items-center bg-secondary text-primary 
             transition-all ease-in-out duration-300
            ${isActive ? 'bg-fuchsia-200' : 'bg-fuchsia-50'}  
             rounded shadow gap-2" style="  border: none">

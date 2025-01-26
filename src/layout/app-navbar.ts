@@ -20,10 +20,10 @@ export class AppNavbar extends LitElement {
 
     render() {
         return html`
-            <nav class="w-full h-16 bg-gray-100 shadow  relative secondary-text-color"  >
+            <nav class="w-full h-16 bg-gray-100 shadow  relative text-primary bg-secondary"  >
                 <div class="h-full flex flex-row shadow  gap-3">
                     <div class="h-full flex flex-row">
-                        <button class="h-full flex flex-col justify-center items-center" style="  border: none">
+                        <button class="h-full flex flex-col justify-center items-center bg-secondary" style="  border: none">
                             <a href="#abc">
                                 <img src=${menuButton} class=" " alt="menu"/>
                             </a>
