@@ -11,6 +11,8 @@ import {ActionType} from '../models/AppAction.ts';
 import {ChildStatus} from '../models/ChildStatus.ts';
 import {PresentToday} from '../models/presentToday.ts';
 import '../components/past-counts.ts'
+import {servicesProvider} from '../services/provider/ServicesProvider.ts';
+import {HistoryService} from '../services/History.service.ts';
 
 @customElement('app-main')
 export class AppMain extends LitElement {
@@ -34,6 +36,7 @@ export class AppMain extends LitElement {
             type: ActionType.completeList,
             payload: null});
     };
+
     clearAllData() {
         globalStore.dispatch({
             type: ActionType.clearAllData,
@@ -50,6 +53,10 @@ export class AppMain extends LitElement {
             this.requestUpdate();
         })
     }
+    getHistoryHours() {
+        const historyService = servicesProvider.getService(HistoryService)
+        return historyService.lastAttendanceHours(this.storeState?.history || [])
+    }
 
     render() {
         return html`
@@ -58,7 +65,7 @@ export class AppMain extends LitElement {
                              .displayType="${this.displayType}" 
                               .onReset="${()=>this.clearAllData()}"></app-cockpit>
                 <div class="${this.displayType === DisplayType.Attendance ? 'contents' : 'hidden'}">
-                    <past-counts .lastHistory="${this.storeState?.history.slice(-10,10)}"></past-counts>
+                    <past-counts .lastHistory="${ this.getHistoryHours()}"></past-counts>
                     <children-count .onClick="${()=>this.completeList()}" .totalChildren=${this.getPresentChildren().length || 0}
                                     .checkedInChildren=${this.getPresentChildren().filter(child => child.checkedIn).length || 0}>
                     </children-count>

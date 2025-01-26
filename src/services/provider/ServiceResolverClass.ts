@@ -59,7 +59,6 @@ export class ServicesResolver {
                 this._servicesMap.set(service.provide, service.useFactory(this));
                 return;
             } else if (service) {
-                console.log(service.prototype instanceof AbstractBaseService);
                 this._servicesMap.set(service, new service(this));
             } else {
                 throw new Error('[ServicesResolver] Invalid service definition');
