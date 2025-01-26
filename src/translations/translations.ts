@@ -4,11 +4,13 @@ const translations = {
     'attendance': 'נוכחות',
     'pistachio': 'פיסטוק',
     'schoolBus': ' הסעה',
-    'daySettings': 'נמצאים היום',
+    'daySettings': 'נמצאים',
     'day': 'יום',
     'finishList': 'סיום',
     'present': 'נמצא/ת',
     'absent': 'נעדר/ת',
+    'display': 'מצב תצוגה',
+    'resetData': 'איפוס נתונים',
 } as const;
 
 

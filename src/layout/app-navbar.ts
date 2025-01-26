@@ -1,8 +1,6 @@
 import {html, LitElement} from 'lit'
 import {customElement} from 'lit/decorators.js'
 import {globalStyleSheet} from '../styles/global-style-sheet.ts';
-import {Txt} from '../translations/translations.ts';
-import menuButton from '../assets/svg/menu-button.svg'
 
 
 @customElement('app-navbar')
@@ -20,32 +18,26 @@ export class AppNavbar extends LitElement {
 
     render() {
         return html`
-            <nav class="w-full h-16 bg-gray-100 shadow  relative text-primary bg-secondary"  >
+            <div id="nav-bar-container h-16 flex flex-col z-10">
+            <nav class="w-screen h-16 bg-gray-100 shadow  fixed text-primary bg-secondary top-0  z-10"  >
                 <div class="h-full flex flex-row shadow  gap-3">
                     <div class="h-full flex flex-row">
-                        <button class="h-full flex flex-col justify-center items-center bg-secondary" style="  border: none">
-                            <a href="#abc">
-                                <img src=${menuButton} class=" " alt="menu"/>
-                            </a>
-                        </button>
-                       
+                        <side-menu-container>
+                            <side-menu-content></side-menu-content>
+                        </side-menu-container>
                     </div>
-                    
                     <div class="flex flex-row justify-between items-center w-full ">
                         <div class="   flex flex-row items-center gap-3 ">
-                        <span>    ${Txt.attendance} ${Txt.pistachio}  </span>
-
-                            <theme-switch></theme-switch>
+                             <app-cockpit></app-cockpit>
                         </div>
                         <div class="pl-3">
-                            <span class=" "> ${this.hebrewDay.replace(Txt.day, '')} </span>
-
+                            <span class=" ">   </span>
                         </div>
-
                     </div>
-
                 </div>
             </nav>
+                <div id="nav-bar-padding" class="block h-16"></div>
+            </div>
         `
     }
 }
