@@ -13,8 +13,7 @@ export class SideMenuContainer extends LitElement {
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            height: 100%; 
             display: none;
             z-index: 10;
         }
@@ -38,17 +37,20 @@ export class SideMenuContainer extends LitElement {
             transform: translateX(0);
         }
     `];
-    @state() private isOpen = false;
+    @state() private isOpen = true;
 
     render() {
         return html`
-            <div id="menu-container" class="  w-12 h-full flex flex-col justify-center items-center bg-amber-100">
+            <div id="menu-container" class="  w-12 h-full flex flex-col justify-center items-center  ">
 
 
-                <div class="backdrop ${this.isOpen ? 'open' : ''}" @click=${this.closeMenu}></div>
+                <div class="backdrop bg-gray-900 opacity-70 ${this.isOpen ? 'open' : ''}" @click=${this.closeMenu}></div>
                 <div class="side-menu bg-primary ${this.isOpen ? 'open' : ''}">
                     <div class="h-14 w-10"> </div>
+                    <div class="p-4">
                     <slot></slot>
+                        
+                    </div>
                 </div>
                 <div id="button-container" class="absolute z-50">
 
@@ -58,9 +60,7 @@ export class SideMenuContainer extends LitElement {
                         <span class="relative flex-col justify-center items-center flex ">
                                 <img src=${menuButton} class="app-icon absolute transition-opacity ease-in-out duration-200 ${this.isOpen ? 'opacity-0' : 'opacity-100'}"  alt="menu"/>
                                 <img src=${cancelButton} class="app-icon absolute transition-opacity ease-in-out duration-200 ${!this.isOpen ? 'opacity-0' : 'opacity-100'}" alt="close-menu"/>
-                        </span>
-
-
+                        </span> 
                     </button>
                 </div>
             </div>

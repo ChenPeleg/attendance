@@ -9,6 +9,7 @@ const translations = {
     'finishList': 'סיום',
     'present': 'נמצא/ת',
     'absent': 'נעדר/ת',
+    'display': 'מצב תצוגה',
 } as const;
 
 
