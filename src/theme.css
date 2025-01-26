@@ -2,7 +2,7 @@
 html, html[data-theme='light'] {
     --primary-background-color: #ffffff;
     --secondary-background-color: #f2f2f2;
-    --accent-background-color: #ffe3a2;
+    --accent-background-color: #fff0d1;
 
     --primary-text-color: #0c0c0c;
     --secondary-text-color: #584792;
@@ -14,7 +14,7 @@ html, html[data-theme='light'] {
 html[data-theme='dark'] {
     --primary-background-color: #000000;
     --secondary-background-color: #2b2b2b;
-    --accent-background-color: #a99d7b;;
+    --accent-background-color: #4d5060;;
 
     --primary-text-color: #ffffff;
     --secondary-text-color: #bbb5e6;

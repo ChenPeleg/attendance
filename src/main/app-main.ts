@@ -66,7 +66,7 @@ export class AppMain extends LitElement {
                              .displayType="${this.displayType}" 
                               .onReset="${()=>this.clearAllData()}"></app-cockpit>
                 <div class="${this.displayType === DisplayType.Attendance ? 'contents' : 'hidden'}">
-                    <past-counts .lastHistory="${ this.getHistoryHours()}"></past-counts>
+                    <past-counts .lastAttendanceTimes="${ this.getHistoryHours()}"></past-counts>
                     <children-count .onClick="${()=>this.completeList()}" .totalChildren=${this.getPresentChildren().length || 0}
                                     .checkedInChildren=${this.getPresentChildren().filter(child => child.checkedIn).length || 0}>
                     </children-count>

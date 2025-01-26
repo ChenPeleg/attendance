@@ -18,7 +18,7 @@ export class ThemeService extends AbstractBaseService {
 
     getDefaultTheme(): AppColorTheme {
         const themFromLocalStorage = this.servicesResolver.getService(LocalStorageService).getItem(ThemeService.THEME_LS_KEY);
-       console.log(themFromLocalStorage);
+
 
         if (themFromLocalStorage) {
             return themFromLocalStorage as AppColorTheme;

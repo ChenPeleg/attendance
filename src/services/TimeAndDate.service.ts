@@ -7,6 +7,16 @@ export class TimeAndDateService extends AbstractBaseService {
         super(provider);
 
     }
+    private  getDateFromTimestamp(timestamp: number) {
+        const date = new Date(timestamp);
+        return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+    }
+    private  getTodayDate() {
+        return this.getDateFromTimestamp(Date.now());
+    }
+    isFromToday(timestamp: number) {
+        return this.getTodayDate() === this.getDateFromTimestamp(timestamp);
+    }
     createTimestamp() {
         return Date.now();
     }

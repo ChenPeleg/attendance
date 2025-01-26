@@ -52,7 +52,7 @@ export class AppCockpit extends LitElement {
         return html`
             <button @click=${()=>this.onClick(button.id)} class="h-10 cursor-pointer flex flex-row px-3 justify-center items-center bg-secondary text-primary 
             transition-all ease-in-out duration-300
-           ${isActive ? 'bg-fuchsia-200' : 'bg-fuchsia-50'}  
+           ${isActive ? ' bg-accent' : ' bg-secondary'}  
             rounded shadow gap-2" style="  border: none">
                 <img src=${button.icon} class="w-7 h-7 app-icon" alt="menu"/>
                 <span>${button.label}</span>
