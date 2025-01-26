@@ -1,4 +1,4 @@
-import {appendFile} from 'node:fs';
+import {appendFile, promises} from 'node:fs';
 
 
 async function addStringToFile() {
@@ -7,7 +7,7 @@ async function addStringToFile() {
 
 
     try {
-        await appendFile(filePath, content, ()=> {
+        await appendFile(filePath, content, () => {
             console.log('File appended');
         });
         console.log(`Successfully added '${content}' to ${filePath}`);
@@ -15,17 +15,31 @@ async function addStringToFile() {
         console.error(`Error adding '${content}' to ${filePath}:`, error);
     }
 
-}
-
-const runOnFileChange =   ( ) => {
-   console.log('File changed: src/script/run-on-file-changes.ts');
-    addStringToFile();
-   //imported-components.ts
 
 }
- runOnFileChange()
 
+const getFileContent = async (filePath) => {
+    try {
+        const data = await promises.readFile(filePath, () => {
+            console.log('File read');
+        });
 
+        return data.toString('utf8');
+    } catch (error) {
+        console.error(`Error reading file ${filePath}:`, error);
+    }
+};
 
+const runOnFileChange = async () => {
 
- export default {runOnFileChange}
+    const fileChanged = process.argv[2];
+    const result = await getFileContent(fileChanged);
+    if (result.includes('@customElement')) {
+        const relativePath = fileChanged.split('src/')[1];
+
+        console.log(relativePath);
+    }
+
+};
+runOnFileChange().then();
+
