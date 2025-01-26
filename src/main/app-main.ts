@@ -32,10 +32,6 @@ export class AppMain extends LitElement {
             payload: null});
     };
 
-
-
-
-
     firstUpdated() {
         (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
         globalStore.subscribe((state: AttendanceStore) => {
@@ -66,6 +62,9 @@ export class AppMain extends LitElement {
                 </div>
                 <div id="children" class="flex-col flex gap-4 min-w-56">
                     ${this.getChildren()}
+                </div>
+                <div class="w-full h-20" id="bottom-scroll-padding">
+                    
                 </div>
             </div>
         `

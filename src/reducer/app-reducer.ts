@@ -45,12 +45,16 @@ export const appReducer:StoreReducer<AttendanceStore, AppAction> = (state: Atten
                 } : child)
             }
         case ActionType.addChild:
+            let childName = action.payload;
+            if(state.attendance.find(child => child.name === childName)){
+                childName = childName + ' (2)'
+            }
             return {
                 ...state,
                 attendance: [...state.attendance, {
-                    id: action.payload.id,
-                    name: action.payload,
-                    presentToday: PresentToday.No,
+                    id: childName,
+                    name: childName,
+                    presentToday: PresentToday.Yes,
                     checkedIn: false,
                     manuallyAdded: true
                 }]

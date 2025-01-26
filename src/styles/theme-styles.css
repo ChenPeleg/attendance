@@ -11,6 +11,9 @@
     .text-accent {
         color: var(--accent-text-color);
     }
+    .text-faded {
+        color: var(--faded-text-color);
+    }
 
 
     .bg-primary {

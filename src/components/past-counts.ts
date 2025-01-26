@@ -28,7 +28,7 @@ export class PastCounts extends LitElement {
 
     render() {
         return html`
-            <nav class="w-full  flex-row flex gap-3">
+            <nav class="w-full  flex-row flex gap-3 pt-2">
                  ${this.getHistoryHtml() }
             </nav>
         `

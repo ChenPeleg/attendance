@@ -11,6 +11,8 @@ const translations = {
     'absent': 'נעדר/ת',
     'display': 'מצב תצוגה',
     'resetData': 'איפוס נתונים',
+    'addChild': 'הוספת ילדה/ילד',
+    enterChildName: 'הכנס שם'
 } as const;
 
 

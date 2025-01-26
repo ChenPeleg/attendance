@@ -25,8 +25,8 @@ export class AppChild extends LitElement {
     render() {
         return html`
             <button @click="${this.onClick}"
-                    class=" bg-secondary text-primary flex flex-row  items-center h-14 w-full  shadow  relative gap-8 rounded-md px-4  
-                    ${this.child?.presentToday === PresentToday.No ? 'bg-grey-400' : 'bg-white'} ${this.displayType === DisplayType.Attendance ?  ' justify-start ' : ' justify-between  pl-6 '}"
+                    class=" bg-secondary text-primary flex flex-row  items-center h-14 w-full  shadow  relative gap-8 rounded-full px-10  
+                    ${this.child?.presentToday === PresentToday.No ? ' text-faded ' : ' '} ${this.displayType === DisplayType.Attendance ?  ' justify-start ' : ' justify-between   '}"
                     style="  border: none;  ">
                     <span id="check-mark-container"
                           class=" w-8 h-8 relative  mt-1 mr-1 ${this.displayType === DisplayType.DaySettings ?  'hidden' : 'absolute'}">
@@ -41,7 +41,7 @@ export class AppChild extends LitElement {
                         ${this.getCheckMark()} 
                       </span>
                   </span>
-                  <span class="flex flex-row justify-center items-center  ">
+                  <span class="flex flex-row justify-center items-center   ">
                     ${this.child?.name}  
                  </span>
                  <span  id="is-here-today" 

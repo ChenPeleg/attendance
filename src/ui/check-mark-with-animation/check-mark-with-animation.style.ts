@@ -22,12 +22,12 @@ const baseCss = `
     display: block;
 }
 .checkmark.draw:after {
-    animation-duration: 800ms;
+    animation-duration: 1000ms;
     animation-timing-function: ease;
     animation-name: checkmark-animation;
     width: 0;
     height: 0;
-    animation-delay: 1s;
+    animation-delay: 0.5s;
     animation-fill-mode: forwards;
     transform: scaleX(-1) rotate(135deg);
     left: 0.1em;
