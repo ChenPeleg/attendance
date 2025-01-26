@@ -1,7 +1,7 @@
 import {html, LitElement} from 'lit'
 import {customElement} from 'lit/decorators.js'
 import {globalStyleSheet} from '../styles/global-style-sheet.ts';
-import {Txt} from '../translations/translations.ts';
+
 import menuButton from '../assets/svg/menu-button.svg'
 
 
@@ -24,6 +24,7 @@ export class AppNavbar extends LitElement {
             <nav class="w-screen h-16 bg-gray-100 shadow  fixed text-primary bg-secondary top-0  z-10"  >
                 <div class="h-full flex flex-row shadow  gap-3">
                     <div class="h-full flex flex-row">
+                        <side-menu></side-menu>
                         <button class="h-full flex flex-col justify-center items-center bg-secondary" style="  border: none">
                             <a href="#abc">
                                 <img src=${menuButton} class="app-icon " alt="menu"/>
@@ -39,7 +40,7 @@ export class AppNavbar extends LitElement {
                             <theme-switch></theme-switch>
                         </div>
                         <div class="pl-3">
-                            <span class=" "> ${this.hebrewDay.replace(Txt.day, '')} </span>
+                            <span class=" ">   </span>
 
                         </div>
 
