@@ -24,12 +24,18 @@
 /*}*/
 
 :host {
-    .primary-text-color {
-        color: var(--main-text-color);
+    .text-primary {
+        color: var(--primary-text-color);
     }
-    .secondary-text-color {
+    .text-secondary {
         color: var(--secondary-text-color);
 
+    }
+    .bg-primary {
+        background-color: var(--primary-background-color);
+    }
+    .bg-secondary {
+        background-color: var(--secondary-background-color);
     }
 
 }

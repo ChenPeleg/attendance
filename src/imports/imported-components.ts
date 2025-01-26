@@ -1,6 +1,5 @@
 import '../root/app-root-layout.ts';
 import '../layout/app-cockpit.ts';
-import '../layout/app-example.ts';
 import '../layout/app-navbar.ts';
 import '../components/app-child.ts';
 import '../components/children-count.ts';
