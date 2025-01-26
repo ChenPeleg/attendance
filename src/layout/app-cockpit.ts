@@ -76,7 +76,7 @@ export class AppCockpit extends LitElement {
 
     render() {
         return html`
-            <div class="flex flex-col items-start justify-center pt-4   ">
+            <div class="flex flex-col items-start justify-center   ">
                 <div class="flex flex-row gap-3 flex-wrap">
                     ${this.buttons.map(button => this.renderButton(button))}
                     <button style="  border: none"  @click=${()=>this.onReset()} 

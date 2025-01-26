@@ -26,7 +26,7 @@ export class AppNavbar extends LitElement {
                     <div class="h-full flex flex-row">
                         <button class="h-full flex flex-col justify-center items-center bg-secondary" style="  border: none">
                             <a href="#abc">
-                                <img src=${menuButton} class=" " alt="menu"/>
+                                <img src=${menuButton} class="app-icon " alt="menu"/>
                             </a>
                         </button>
                        
@@ -34,7 +34,7 @@ export class AppNavbar extends LitElement {
                     
                     <div class="flex flex-row justify-between items-center w-full ">
                         <div class="   flex flex-row items-center gap-3 ">
-                        <span>    ${Txt.attendance} ${Txt.pistachio}  </span>
+                             <app-cockpit></app-cockpit>
 
                             <theme-switch></theme-switch>
                         </div>
