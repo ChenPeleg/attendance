@@ -27,7 +27,7 @@ export class AppNavbar extends LitElement {
                             <img src=${menuButton} class=" " alt="menu"/>
                         </a>
                     </button>
-                    <div class="flex flex-row justify-between items-center w-full">
+                    <div class="flex flex-row justify-between items-center w-full main-text-color">
                         <span>    ${Txt.attendance} ${Txt.pistachio}  </span>
                         <div class="pl-3">
                             <span class=" "> ${this.hebrewDay.replace(Txt.day,'')} </span>
