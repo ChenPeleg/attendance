@@ -1,12 +1,13 @@
 
-
 :host {
     .text-primary {
         color: var(--primary-text-color);
     }
+
     .text-secondary {
         color: var(--secondary-text-color);
     }
+
     .text-accent {
         color: var(--accent-text-color);
     }
@@ -15,11 +16,29 @@
     .bg-primary {
         background-color: var(--primary-background-color);
     }
+
     .bg-secondary {
         background-color: var(--secondary-background-color);
     }
+
     .bg-accent {
         background-color: var(--accent-background-color);
     }
+
+    .bg-success {
+        background-color: var(--bg-success-color);
+    }
+
+    .app-shadow {
+        --app-shadow: 0 0px 3px 0 color-mix(in srgb, var(--primary-text-color) 50%, transparent);, 0 1 px 2 px - 1 px color-mix(in srgb, var(--primary-text-color) 50 %, transparent);
+        box-shadow: var(--app-shadow);
+    }
+
+
+        .app-icon {
+            filter: invert(var(--invert-icon-color));
+        }
+
+
 
 }

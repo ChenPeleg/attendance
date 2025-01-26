@@ -16,6 +16,7 @@ export class PastCounts extends LitElement {
 
     getHistoryHtml() {
         return this.lastAttendanceTimes.map((time,i) => {
+            console.log(time)
             return html`<span class="flex-row flex gap-3">
                 <span class="flex flex-col justify-center items-center h-full">
                 <span class=" inline-block bg-red-900 rounded-full min-w-2 min-h-2  h-2 w-2 ${i === 0 ? 'hidden' : ''}">  </span>

@@ -18,6 +18,8 @@ export class ThemeService extends AbstractBaseService {
 
     getDefaultTheme(): AppColorTheme {
         const themFromLocalStorage = this.servicesResolver.getService(LocalStorageService).getItem(ThemeService.THEME_LS_KEY);
+
+
         if (themFromLocalStorage) {
             return themFromLocalStorage as AppColorTheme;
         }
@@ -38,6 +40,7 @@ export class ThemeService extends AbstractBaseService {
 
     setTheme(theme: AppColorTheme) {
         this.currentTheme = theme;
+        this.servicesResolver.getService(LocalStorageService).setItem(ThemeService.THEME_LS_KEY, theme);
         this.applyTheme();
     }
 
@@ -51,6 +54,7 @@ export class ThemeService extends AbstractBaseService {
 
     protected init() {
         this.initThemChangeSubscriptions();
+        window && this.applyTheme();
     }
 
     private applyTheme() {

@@ -52,9 +52,9 @@ export class AppCockpit extends LitElement {
         return html`
             <button @click=${()=>this.onClick(button.id)} class="h-10 cursor-pointer flex flex-row px-3 justify-center items-center bg-secondary text-primary 
             transition-all ease-in-out duration-300
-           ${isActive ? 'bg-fuchsia-200' : 'bg-fuchsia-50'}  
+           ${isActive ? ' bg-accent' : ' bg-secondary'}  
             rounded shadow gap-2" style="  border: none">
-                <img src=${button.icon} class="w-7 h-7 " alt="menu"/>
+                <img src=${button.icon} class="w-7 h-7 app-icon" alt="menu"/>
                 <span>${button.label}</span>
             </button>
         `
@@ -67,14 +67,11 @@ export class AppCockpit extends LitElement {
             <div class="flex flex-col items-start justify-center pt-4   ">
                 <div class="flex flex-row gap-3 flex-wrap">
                     ${this.buttons.map(button => this.renderButton(button))}
-                    <button style="  border: none" @click=${()=>this.onReset(this.displayType)} 
-                            class="${this.displayType !== DisplayType.DaySettings ? 'hidden' : '' } h-10 cursor-pointer flex flex-row px-3 justify-center items-center ">
-                        <img src=${clearIcon} class="w-7 h-7 " alt="menu"/>
+                    <button style="  border: none"  @click=${()=>this.onReset(this.displayType)} 
+                            class="${this.displayType !== DisplayType.DaySettings ? 'hidden' : 'bg-secondary' } h-10 cursor-pointer flex flex-row px-3 justify-center items-center ">
+                        <img src=${clearIcon} class="w-7 h-7 app-icon" alt="menu"/>
                     </button>
-                </div> 
-                <slot></slot>
-               
-                
+                </div>  
             </div>
         `
     }
