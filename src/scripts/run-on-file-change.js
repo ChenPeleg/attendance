@@ -3,7 +3,7 @@ import {appendFile} from 'node:fs';
 
 async function addStringToFile() {
     const filePath = 'src/imports/imported-components.ts';
-    const content = 'abc 123';
+    const content = '//abc 123';
 
 
     try {
