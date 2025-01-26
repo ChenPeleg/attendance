@@ -4,6 +4,7 @@ import {globalStyleSheet} from '../styles/global-style-sheet.ts';
 import {Txt} from '../translations/translations.ts';
 import menuButton from '../assets/svg/menu-button.svg'
 
+
 @customElement('app-navbar')
 export class AppNavbar extends LitElement {
     get hebrewDay() {

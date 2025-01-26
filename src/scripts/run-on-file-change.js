@@ -1,45 +1,58 @@
 import {appendFile, promises} from 'node:fs';
 
+export class RunOnFileChange {
+    static importFile = 'src/imports/imported-components.ts';
 
-async function addStringToFile() {
-    const filePath = 'src/imports/imported-components.ts';
-    const content = '//abc 123';
+    async addStringToFile(filePath, content) {
 
-
-    try {
-        await appendFile(filePath, content, () => {
-            console.log('File appended');
-        });
-        console.log(`Successfully added '${content}' to ${filePath}`);
-    } catch (error) {
-        console.error(`Error adding '${content}' to ${filePath}:`, error);
+        try {
+            await appendFile(filePath, content, () => {
+                console.log('File appended');
+            });
+            console.log(`Successfully added '${content}' to ${filePath}`);
+        } catch (error) {
+            console.error(`Error adding '${content}' to ${filePath}:`, error);
+        }
     }
 
+    buildImportStatement = (fileChanged) => {
+        const relativePath = fileChanged.split('src/')[1];
+        return `import '../${relativePath}';`;
 
+    };
+
+    getFileContent = async (filePath) => {
+        try {
+            const data = await promises.readFile(filePath, () => {
+                console.log('File read');
+            });
+
+            return data.toString('utf8');
+        } catch (error) {
+            console.error(`Error reading file ${filePath}:`, error);
+        }
+    };
+
+    runOnFileChange = async () => {
+
+        const fileChanged = process.argv[2];
+        const changedFileResult = await this.getFileContent(fileChanged);
+        if (changedFileResult.includes('run-on-file-change') ||
+            !changedFileResult.includes('@customElement')) {
+            return;
+        }
+        const statement = this.buildImportStatement(fileChanged);
+        const importFilePath = RunOnFileChange.importFile;
+        const importFileContent = await this.getFileContent(importFilePath);
+        if (importFileContent.includes(statement)) {
+            return;
+        }
+        await this.addStringToFile(   importFilePath,`${statement}\n`);
+
+
+
+    };
 }
 
-const getFileContent = async (filePath) => {
-    try {
-        const data = await promises.readFile(filePath, () => {
-            console.log('File read');
-        });
-
-        return data.toString('utf8');
-    } catch (error) {
-        console.error(`Error reading file ${filePath}:`, error);
-    }
-};
-
-const runOnFileChange = async () => {
-
-    const fileChanged = process.argv[2];
-    const result = await getFileContent(fileChanged);
-    if (result.includes('@customElement')) {
-        const relativePath = fileChanged.split('src/')[1];
-
-        console.log(relativePath);
-    }
-
-};
-runOnFileChange().then();
+new RunOnFileChange().runOnFileChange().then();
 
