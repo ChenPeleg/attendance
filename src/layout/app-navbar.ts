@@ -9,8 +9,7 @@ export class AppNavbar extends LitElement {
     get hebrewDay() {
         const date = new Date();
         const options: Intl.DateTimeFormatOptions = {weekday: 'long'};
-        const hebrewDay = new Intl.DateTimeFormat('he-IL', options).format(date);
-        return hebrewDay;
+        return new Intl.DateTimeFormat('he-IL', options).format(date);
     }
 
 
@@ -27,7 +26,7 @@ export class AppNavbar extends LitElement {
                             <img src=${menuButton} class=" " alt="menu"/>
                         </a>
                     </button>
-                    <div class="flex flex-row justify-between items-center w-full main-text-color">
+                    <div class="flex flex-row justify-between items-center w-full primary-text-color">
                         <span>    ${Txt.attendance} ${Txt.pistachio}  </span>
                         <div class="pl-3">
                             <span class=" "> ${this.hebrewDay.replace(Txt.day,'')} </span>
