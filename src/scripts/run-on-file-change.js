@@ -6,7 +6,6 @@ async function addStringToFile() {
     const content = 'abc 123';
 
 
-
     try {
         await appendFile(filePath, content, ()=> {
             console.log('File appended');
