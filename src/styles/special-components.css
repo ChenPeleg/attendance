@@ -2,12 +2,4 @@
     font-size: 26px;
     font-family: "Noto Sans Hebrew", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
-:host {
-    .primary-text-color {
-        color: var(--main-text-color);
-    }
-    .primary-text-color {
-        color: var(--main-text-color);
-    }
 
-}

@@ -1,27 +1,4 @@
 
-/*:root {*/
-/*    --text-color: #000000;*/
-/*    !*--main-text-color: #ff0000;*!*/
-/*}*/
-/*!* Define styles for the light theme *!*/
-/*html[data-theme='light'] {*/
-/*    --background-color: #ffffff;*/
-/*    --text-color: #ffdb00;*/
-/*    --main-text-color: #0600f6;*/
-/*}*/
-
-/*!* Define styles for the dark theme *!*/
-/*html[data-theme='dark'] {*/
-/*    --background-color: #000000;*/
-/*    --text-color: #ffffff;*/
-/*    --main-text-color: #eda6a6;*/
-/*}*/
-
-/*!* Apply the variables *!*/
-/*body {*/
-/*    background-color: var(--background-color);*/
-/*    color: var(--text-color);*/
-/*}*/
 
 :host {
     .text-primary {
@@ -29,13 +6,20 @@
     }
     .text-secondary {
         color: var(--secondary-text-color);
-
     }
+    .text-accent {
+        color: var(--accent-text-color);
+    }
+
+
     .bg-primary {
         background-color: var(--primary-background-color);
     }
     .bg-secondary {
         background-color: var(--secondary-background-color);
+    }
+    .bg-accent {
+        background-color: var(--accent-background-color);
     }
 
 }
