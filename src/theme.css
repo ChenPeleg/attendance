@@ -7,6 +7,7 @@ html, html[data-theme='light'] {
     --primary-text-color: #0c0c0c;
     --secondary-text-color: #584792;
     --accent-text-color: #7e00a4;
+    --bg-success-color: #bfffbf;
 }
 
 html[data-theme='dark'] {
@@ -17,6 +18,7 @@ html[data-theme='dark'] {
     --primary-text-color: #ffffff;
     --secondary-text-color: #bbb5e6;
     --accent-text-color: #e074ff;
+    --bg-success-color: #072e07;
 }
 
 /* Apply the variables */

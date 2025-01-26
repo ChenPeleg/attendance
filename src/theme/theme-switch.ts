@@ -13,15 +13,16 @@ export class ThemeSwitch extends LitElement {
 
     firstUpdated() {
         (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
+        const themService = servicesProvider.getService(ThemeService);
+        this.theme = themService.getTheme();
     }
 
     render() {
         return html`
             <button @click="${this.clickHandler}" class="w-full  flex-row flex gap-3">
                 <img class="${this.theme === AppColorTheme.Light ? '' : 'hidden'}" src="${darkMode}"
-                >
+                 alt="light theme">
                 <img class="${this.theme === AppColorTheme.Light ? 'hidden' : ''}" src="${lightMode}" alt="light-mode">
-
             </button>
         `
     }
