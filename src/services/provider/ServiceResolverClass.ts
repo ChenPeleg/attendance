@@ -1,4 +1,4 @@
-import { AbstractBaseService } from './AbstractBaseService.ts';
+import {AbstractBaseService} from './AbstractBaseService.ts';
 
 /**
  * Type representing a constructor for a service class. The service class must extend `AbstractBaseService`.
@@ -12,8 +12,7 @@ export type ServiceConstructorClass = new (...args: any[]) => AbstractBaseServic
  * @property {ServiceConstructorClass} useClass - The class to use for the service ( must extend `AbstractBaseService`).
  */
 export type ServiceWithSpecificToken = {
-    provide: unknown;
-    useClass: ServiceConstructorClass;
+    provide: unknown; useClass: ServiceConstructorClass;
 }
 
 /**
@@ -23,8 +22,7 @@ export type ServiceWithSpecificToken = {
  * @property {(serviceResolver: ServicesResolver) => AbstractBaseService} useFactory - The factory function to create the service and must contain a serviceResolver as parameter.
  */
 export type ServiceWithFactoryFunction = {
-    provide: unknown;
-    useFactory: (serviceResolver: ServicesResolver) => AbstractBaseService;
+    provide: unknown; useFactory: (serviceResolver: ServicesResolver) => AbstractBaseService;
 }
 
 /**
@@ -42,6 +40,14 @@ export class ServicesResolver {
     constructor(services: Array<ServiceInjectionMethod>) {
         this.addServices(services);
     }
+
+    public initServices() {
+        this._servicesMap.forEach((service) => {
+            if (service.init) {
+                service.init();
+            }
+        })
+    };
 
     public getService<T extends ServiceConstructorClass>(service: T): InstanceType<T> {
         if (!this._servicesMap.has(service)) {

@@ -2,6 +2,7 @@ import { ServicesResolver } from './ServiceResolverClass.ts';
 
 export abstract class AbstractBaseService {
     protected readonly _servicesResolver: ServicesResolver;
+    public init?: ()   =>void ;
     protected get servicesResolver() {
         return this._servicesResolver;
     }

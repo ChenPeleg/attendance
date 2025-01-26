@@ -6,6 +6,10 @@ import {StoreService} from '../Store.service.ts';
 import {HistoryService} from '../History.service.ts';
 
 const ServicesProviderFactory = () => {
-    return new ServicesResolver([LocalStorageService, TimeAndDateService,ThemeService,StoreService,HistoryService]);
+    const provider = new ServicesResolver([LocalStorageService, TimeAndDateService, ThemeService, StoreService, HistoryService]);
+    provider.initServices();
+    return provider;
 }
 export const servicesProvider = ServicesProviderFactory();
+
+

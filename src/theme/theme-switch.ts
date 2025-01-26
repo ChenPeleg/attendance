@@ -18,8 +18,9 @@ export class ThemeSwitch extends LitElement {
     render() {
         return html`
             <button @click="${this.clickHandler}" class="w-full  flex-row flex gap-3">
-                <img class="${this.theme === AppColorTheme.Light ? '' : 'hidden'}" src="${darkMode}">
-                <img class="${this.theme === AppColorTheme.Light ? 'hidden' : ''}" src="${lightMode}">
+                <img class="${this.theme === AppColorTheme.Light ? '' : 'hidden'}" src="${darkMode}"
+                >
+                <img class="${this.theme === AppColorTheme.Light ? 'hidden' : ''}" src="${lightMode}" alt="light-mode">
 
             </button>
         `
