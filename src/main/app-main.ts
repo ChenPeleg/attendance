@@ -13,6 +13,7 @@ import {PresentToday} from '../models/presentToday.ts';
 import '../components/past-counts.ts'
 import {servicesProvider} from '../services/provider/ServicesProvider.ts';
 import {HistoryService} from '../services/History.service.ts';
+import {SortService} from '../services/SortService.service.ts';
 
 @customElement('app-main')
 export class AppMain extends LitElement {
@@ -104,7 +105,9 @@ export class AppMain extends LitElement {
     }
     private getChildren() {
         const children = this.displayType !== DisplayType.DaySettings ? this.getPresentChildren() : this.storeState?.attendance || [];
-        return children.map(child => {
+        const sortedChildren = servicesProvider.getService(SortService).sortChildren(children );
+
+        return sortedChildren.map(child => {
             return html`
                 <app-child .child=${child} .onClick="${() => this.childClicked(child)}" .displayType="${this.displayType}"></app-child>
             `
