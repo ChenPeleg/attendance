@@ -14,7 +14,7 @@ export type StoreReducer<K extends StoreState<K>, ACT extends {
 export class StoreFactory<ACT extends {
     type: string; payload: any;
 }, K extends Record<string, any>, R extends StoreReducer<K, ACT>> {
-    subscribers: { cb: (newState: StoreState<K>) => void, id: number }[];
+    private subscribers: { cb: (newState: StoreState<K>) => void, id: number }[];
     private state: StoreState<K>;
     private subscriberId = 0;
     private readonly reducer: R;

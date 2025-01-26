@@ -37,7 +37,7 @@ export class SideMenuContainer extends LitElement {
             transform: translateX(0);
         }
     `];
-    @state() private isOpen = false;
+    @state() private isOpen = true;
 
     render() {
         return html`

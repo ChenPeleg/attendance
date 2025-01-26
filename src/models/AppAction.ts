@@ -7,6 +7,7 @@ export enum ActionType {
     changeDisplay = 'changeDisplay',
     completeList = 'completeList',
     clearAllData = 'clearAllData',
+    changeSort = 'changeSort'
 }
 
 export type  AppAction = {
@@ -20,5 +21,7 @@ export type  AppAction = {
                              type: ActionType.completeList; payload: any;
                          } | {
                              type: ActionType.clearAllData; payload: any;
+                         } | {
+                                type: ActionType.changeSort; payload: any;
                          }
 

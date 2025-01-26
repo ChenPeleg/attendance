@@ -55,6 +55,9 @@ export class SideMenuContent extends LitElement {
                     <span>
                            <theme-switch></theme-switch>
                     </span>
+                </div>   
+                <div class="  w-full  ">
+                    <sorting-options></sorting-options>
                 </div>
              
             

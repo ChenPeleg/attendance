@@ -12,3 +12,4 @@ import '../theme/theme-switch.ts';
 import '../components/past-counts.ts';
 import '../layout/side-menu-container.ts';
 import '../layout/side-menu-content.ts';
+import '../components/sorting-options.ts';
