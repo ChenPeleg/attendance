@@ -2,8 +2,6 @@ import {html, LitElement} from 'lit'
 import {customElement} from 'lit/decorators.js'
 import {globalStyleSheet} from '../styles/global-style-sheet.ts';
 
-import menuButton from '../assets/svg/menu-button.svg'
-
 
 @customElement('app-navbar')
 export class AppNavbar extends LitElement {
@@ -27,12 +25,6 @@ export class AppNavbar extends LitElement {
                         <side-menu-container>
                             <side-menu-content></side-menu-content>
                         </side-menu-container>
-                        <button class="h-full flex flex-col justify-center items-center bg-secondary" style="  border: none">
-                            <a href="#abc">
-                                <img src=${menuButton} class="app-icon " alt="menu"/>
-                            </a>
-                        </button>
-                       
                     </div>
                     
                     <div class="flex flex-row justify-between items-center w-full ">
