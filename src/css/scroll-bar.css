@@ -1,0 +1,55 @@
+
+:root {
+    --scroll-bar-track-color: rgba(249, 249, 249, 0.2);
+    --scroll-bar-track-shadow: none;
+    --scroll-bar-thumb-color: rgba(91, 91, 91, 0.6);
+}
+
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background-color: var(--scroll-bar-track-color);
+    box-shadow: var(--scroll-bar-track-shadow);
+    padding: 2px;
+    border-radius: 2px;
+}
+
+::-webkit-scrollbar:horizontal {
+    width: 2px;
+}
+
+::-webkit-scrollbar-track:horizontal {
+    height: 2px;
+    width: 4px;
+    max-height: 2px;
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+    height: 4px;
+    width: 2px;
+    max-width: 2px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    width: 7px;
+    max-height: 20px;
+    background: var(--scroll-bar-thumb-color);
+    border: 2px solid transparent;
+    border-radius: 9px;
+    background-clip: content-box;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    width: 12px;
+    max-height: 20px;
+    background: var(--scroll-bar-thumb-color);
+    border: 2px solid transparent;
+    border-radius: 9px;
+    background-clip: content-box;
+}
