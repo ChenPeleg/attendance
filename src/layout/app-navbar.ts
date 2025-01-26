@@ -5,7 +5,6 @@ import {Txt} from '../translations/translations.ts';
 import menuButton from '../assets/svg/menu-button.svg'
 
 
-
 @customElement('app-navbar')
 export class AppNavbar extends LitElement {
     get hebrewDay() {
@@ -23,17 +22,23 @@ export class AppNavbar extends LitElement {
         return html`
             <nav class="w-full h-16 bg-gray-100 shadow  relative">
                 <div class="h-full flex flex-row shadow  gap-3">
-                    <button class="h-full flex flex-col justify-center items-center" style="  border: none">
-                        <a href="#abc">
-                            <img src=${menuButton} class=" " alt="menu"/>
-                        </a>
-                        <theme-button></theme-button>
-                    </button>
+                    <div class="h-full flex flex-row">
+                        <button class="h-full flex flex-col justify-center items-center" style="  border: none">
+                            <a href="#abc">
+                                <img src=${menuButton} class=" " alt="menu"/>
+                            </a>
+                        </button>
+                        <div class="w-12 h-12 bg-amber-200">
+                            
+                            <theme-switch></theme-switch>
+                        </div>
+                    </div>
+                 
                     <div class="flex flex-row justify-between items-center w-full primary-text-color">
                         <span>    ${Txt.attendance} ${Txt.pistachio}  </span>
                         <div class="pl-3">
-                            <span class=" "> ${this.hebrewDay.replace(Txt.day,'')} </span>
-                          
+                            <span class=" "> ${this.hebrewDay.replace(Txt.day, '')} </span>
+
                         </div>
 
                     </div>

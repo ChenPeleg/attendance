@@ -41,7 +41,7 @@ export class ThemeButton extends LitElement {
     }
     private setPreference = () => {
         // @ts-ignore
-        localStorage.setItem(storageKey, theme.value)
+        localStorage.setItem(storageKey, this.theme.value)
         this.reflectPreference()
     }
     init () {
@@ -57,24 +57,24 @@ export class ThemeButton extends LitElement {
         // set early so no page flashes / CSS is made aware
         this.reflectPreference()
 
-        window.onload = () => {
-            // set on load so screen readers can see latest value on the button
-            this.reflectPreference()
-
-            // now this script can find and listen for clicks on the control
-            // @ts-ignore
-            document
-                .querySelector('#theme-toggle')
-                .addEventListener('click', this.onClick)
-        }
+        // window.onload = () => {
+        //     // set on load so screen readers can see latest value on the button
+        //     this.reflectPreference()
+        //
+        //     // now this script can find and listen for clicks on the control
+        //     // @ts-ignore
+        //     document
+        //         .querySelector('#theme-toggle')
+        //         .addEventListener('click', this.onClick)
+        // }
 
         // sync with system changes
-        window
-            .matchMedia('(prefers-color-scheme: dark)')
-            .addEventListener('change', ({matches:isDark}) => {
-                this.theme.value = isDark ? 'dark' : 'light'
-                this.setPreference()
-            })
+        // window
+        //     .matchMedia('(prefers-color-scheme: dark)')
+        //     .addEventListener('change', ({matches:isDark}) => {
+        //         this.theme.value = isDark ? 'dark' : 'light'
+        //         this.setPreference()
+        //     })
     }
 
     protected firstUpdated(_changedProperties: PropertyValues) {
@@ -84,7 +84,7 @@ export class ThemeButton extends LitElement {
 
     render() {
         return html`
-            <button class="theme-toggle" id="theme-toggle" title="Toggles light & dark" aria-label="auto" aria-live="polite">
+            <button @click="${this.onClick}" class="theme-toggle" id="theme-toggle" title="Toggles light & dark" aria-label="auto" aria-live="polite">
                 <svg class="sun-and-moon" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
                     <mask class="moon" id="moon-mask">
                         <rect x="0" y="0" width="100%" height="100%" fill="white" />

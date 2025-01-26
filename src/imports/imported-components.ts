@@ -9,3 +9,4 @@ import '../root/app-root.ts';
 import '../ui/check-mark/check-mark.ts';
 import '../ui/check-mark-with-animation/check-mark-with-animation.ts';
 import '../ui/theme-button/theme-button.ts';
+import '../theme/theme-switch.ts';
