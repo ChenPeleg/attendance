@@ -24,17 +24,21 @@
     .bg-accent {
         background-color: var(--accent-background-color);
     }
+
     .bg-success {
         background-color: var(--bg-success-color);
     }
 
     .app-shadow {
-       --app-shadow: 0 0px 3px 0 color-mix(in srgb, var(--primary-text-color) 50%, transparent);, 0 1px 2px -1px color-mix(in srgb, var(--primary-text-color) 50%, transparent);
-       box-shadow: var(--app-shadow);
+        --app-shadow: 0 0px 3px 0 color-mix(in srgb, var(--primary-text-color) 50%, transparent);, 0 1 px 2 px - 1 px color-mix(in srgb, var(--primary-text-color) 50 %, transparent);
+        box-shadow: var(--app-shadow);
     }
-    .app-icon {
-        color: var(--primary-text-color);
 
-    }
+
+        .app-icon {
+            filter: invert(var(--invert-icon-color));
+        }
+
+
 
 }
