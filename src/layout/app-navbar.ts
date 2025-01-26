@@ -24,7 +24,9 @@ export class AppNavbar extends LitElement {
             <nav class="w-screen h-16 bg-gray-100 shadow  fixed text-primary bg-secondary top-0  z-10"  >
                 <div class="h-full flex flex-row shadow  gap-3">
                     <div class="h-full flex flex-row">
-                        <side-menu></side-menu>
+                        <side-menu-container>
+                            <side-menu-content></side-menu-content>
+                        </side-menu-container>
                         <button class="h-full flex flex-col justify-center items-center bg-secondary" style="  border: none">
                             <a href="#abc">
                                 <img src=${menuButton} class="app-icon " alt="menu"/>

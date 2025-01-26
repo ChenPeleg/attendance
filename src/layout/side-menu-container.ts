@@ -4,8 +4,8 @@ import {globalStyleSheet} from '../styles/global-style-sheet.ts';
 
 import menuButton from '../assets/svg/menu-button.svg';
 
-@customElement('side-menu')
-export class SideMenu extends LitElement {
+@customElement('side-menu-container')
+export class SideMenuContainer extends LitElement {
     @state() private isOpen = false;
 
     static styles = [
@@ -58,7 +58,7 @@ export class SideMenu extends LitElement {
             </button>
             <div class="backdrop ${this.isOpen ? 'open' : ''}" @click=${this.closeMenu}></div>
             <div class="side-menu ${this.isOpen ? 'open' : ''}">
-              
+              <slot></slot>
             </div>
         `;
     }
@@ -66,6 +66,6 @@ export class SideMenu extends LitElement {
 
 declare global {
     interface HTMLElementTagNameMap {
-        'side-menu': SideMenu;
+        'side-menu-container': SideMenuContainer;
     }
 }
