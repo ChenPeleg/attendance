@@ -36,17 +36,25 @@ export type ServiceInjectionMethod = ServiceConstructorClass | ServiceWithSpecif
  */
 export class ServicesResolver {
     private _servicesMap = new Map<unknown, InstanceType<ServiceConstructorClass>>();
+    private identifierSymbol = Symbol.for('ServicesResolverIdentifier');
+    private _wereServicesInitialized = false;
 
     constructor(services: Array<ServiceInjectionMethod>) {
         this.addServices(services);
     }
 
+    public getUniqueIdentifier(): symbol {
+        return this.identifierSymbol
+    }
+
     public initServices() {
+        if (this._wereServicesInitialized) {
+            throw new Error('[ServicesResolver] Services were already initialized');
+        }
         this._servicesMap.forEach((service) => {
-            if (service.init) {
-                service.init();
-            }
+            service.$$serviceInit(this.identifierSymbol);
         })
+        this._wereServicesInitialized = true;
     };
 
     public getService<T extends ServiceConstructorClass>(service: T): InstanceType<T> {
