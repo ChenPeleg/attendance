@@ -10,7 +10,6 @@ import '../ui/check-mark-with-animation/check-mark-with-animation.ts';
 export class ChildrenCount extends LitElement {
     @property({type: Number}) totalChildren: number = 0;
     @property({type: Number}) checkedInChildren: number = 0;
-
     @property({type: Function}) onClick: () => void = () => {
     };
     private get areAllChecked() {
