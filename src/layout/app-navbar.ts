@@ -20,7 +20,8 @@ export class AppNavbar extends LitElement {
 
     render() {
         return html`
-            <nav class="w-full h-16 bg-gray-100 shadow  relative text-primary bg-secondary"  >
+            <div id="nav-bar-container h-16 flex flex-col z-10">
+            <nav class="w-screen h-16 bg-gray-100 shadow  fixed text-primary bg-secondary top-0  z-10"  >
                 <div class="h-full flex flex-row shadow  gap-3">
                     <div class="h-full flex flex-row">
                         <button class="h-full flex flex-col justify-center items-center bg-secondary" style="  border: none">
@@ -46,6 +47,8 @@ export class AppNavbar extends LitElement {
 
                 </div>
             </nav>
+                <div id="nav-bar-padding" class="block h-16"></div>
+            </div>
         `
     }
 }

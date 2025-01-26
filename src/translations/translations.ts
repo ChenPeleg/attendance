@@ -4,7 +4,7 @@ const translations = {
     'attendance': 'נוכחות',
     'pistachio': 'פיסטוק',
     'schoolBus': ' הסעה',
-    'daySettings': 'נמצאים היום',
+    'daySettings': 'נמצאים',
     'day': 'יום',
     'finishList': 'סיום',
     'present': 'נמצא/ת',

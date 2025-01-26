@@ -21,12 +21,7 @@ export class AppMain extends LitElement {
 
     @state() storeState: AttendanceStore | null = globalStore.getState();
     private displayType: DisplayType = this.storeState?.display || DisplayType.Attendance;
-    private cockPitClick:  (displayType : DisplayType) => void = (displayType) => {
-        globalStore.dispatch({
-            type: ActionType.changeDisplay,
-            payload: displayType
-        });
-    }
+
     private completeList  ()   {
 
        if ( this.getPresentChildren().some(child => !child.checkedIn) ) {
@@ -37,12 +32,7 @@ export class AppMain extends LitElement {
             payload: null});
     };
 
-    clearAllData() {
-        globalStore.dispatch({
-            type: ActionType.clearAllData,
-            payload: null
-        })
-    }
+
 
 
 
@@ -62,9 +52,9 @@ export class AppMain extends LitElement {
     render() {
         return html`
             <div class="flex flex-col items-start justify-center bg-amber-100 gap-3 pr-4 bg-primary text-primary">
-                <app-cockpit .onClick="${this.cockPitClick}" 
+                <app-cockpit   
                              .displayType="${this.displayType}" 
-                              .onReset="${()=>this.clearAllData()}"></app-cockpit>
+                             ></app-cockpit>
                 <div class="${this.displayType === DisplayType.Attendance ? 'contents' : 'hidden'}">
                     <past-counts .lastAttendanceTimes="${ this.getHistoryHours()}"></past-counts>
                     <children-count .onClick="${()=>this.completeList()}" .totalChildren=${this.getPresentChildren().length || 0}
