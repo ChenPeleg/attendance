@@ -89,7 +89,7 @@ export const appReducer:StoreReducer<AttendanceStore, AppAction> = (state: Atten
             if (state.sortType === action.payload.sortType
             ) {
                sortOrder =   state.sortOrder === SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
-                console.log(sortOrder)
+
             } else  {
                 sortOrder = SortOrder.Ascending;
             }
