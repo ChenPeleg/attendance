@@ -12,9 +12,12 @@ export class BgImage extends LitElement {
 
     render() {
         return html`
-            <div id="bg-image" class=" w-full h-full fixed flex flex-col z-10 bg-red-100   z-0">
-           
+            <div class="fixed" style="z-index: -1">
+                <div id="bg-image" class=" w-full h-full fixed flex flex-col z-10 bg-red-100   z-0">
+
+                </div>
             </div>
+          
         `
     }
 }

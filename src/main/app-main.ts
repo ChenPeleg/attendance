@@ -39,8 +39,7 @@ export class AppMain extends LitElement {
 
     render() {
         return html`
-            <div class="flex flex-col items-start justify-center   gap-3 pr-4 bg-primary text-primary">
-             
+            <div class="flex flex-col items-start justify-center   gap-3 pr-4 text-primary"> 
                 <div class="${this.displayType === DisplayType.Attendance ? 'contents' : 'hidden'}">
                     <past-counts .lastAttendanceTimes="${ this.getHistoryHours()}"></past-counts>
                     <children-count .onClick="${()=>this.completeList()}" .totalChildren=${this.getPresentChildren().length || 0}

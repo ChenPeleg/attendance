@@ -24,7 +24,8 @@ export class AppRootLayout extends LitElement {
 
     render() {
         return html`
-            <div class="h-screen w-screen flex-col items-center justify-center overflow-x-hidden " style="direction: rtl;">
+            <div class="h-screen w-screen flex-col items-center justify-center overflow-x-hidden " style="direction: rtl;"> 
+                <bg-image></bg-image> 
                 <app-navbar></app-navbar>
                 <app-main></app-main>
             </div>
