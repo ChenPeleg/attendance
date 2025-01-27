@@ -9,7 +9,7 @@ export class BackgroundImageService extends AbstractBaseService {
     }
     getImageUrl() {
         const imageNumber = 1 || this.getRandomImageNumber();
-        return `url(./images/img (${imageNumber}).jpg)`
+        return `/images/img (${imageNumber}).jpg`
     }
 
 
