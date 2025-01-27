@@ -10,7 +10,7 @@ export default defineConfig({
 
       name: 'run-script-on-change',
       handleHotUpdate({ file }) {
-        // console.log(`File changed: ${file}`);
+
 
 
         // Add your script execution logic here

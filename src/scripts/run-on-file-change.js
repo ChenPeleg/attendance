@@ -7,9 +7,8 @@ export class RunOnFileChange {
 
         try {
             await appendFile(filePath, content, () => {
-                console.log('File appended');
+
             });
-            console.log(`Successfully added '${content}' to ${filePath}`);
         } catch (error) {
             console.error(`Error adding '${content}' to ${filePath}:`, error);
         }
@@ -24,7 +23,7 @@ export class RunOnFileChange {
     getFileContent = async (filePath) => {
         try {
             const data = await promises.readFile(filePath, () => {
-                console.log('File read');
+
             });
 
             return data.toString('utf8');
@@ -47,8 +46,7 @@ export class RunOnFileChange {
         if (importFileContent.includes(statement)) {
             return;
         }
-        await this.addStringToFile(   importFilePath,`${statement}\n`);
-
+        await this.addStringToFile(importFilePath, `${statement}\n`);
 
 
     };

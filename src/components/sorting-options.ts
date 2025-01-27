@@ -61,7 +61,7 @@ export class SortingOptions extends LitElement {
             const shownOption = sortOptions[option];
 
             const order  = isChosen ? this.sortOrder : SortOrder.Ascending;
-            console.log( this.sortOrder)
+
             //@ts-ignore
             return html`
                 <button @click="${()=>this.clickOption(option )}" class="h-10 relative flex flex-row justify-center w-full bg-secondary text-primary rounded-md cursor-pointer">
