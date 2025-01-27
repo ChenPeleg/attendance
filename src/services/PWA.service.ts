@@ -50,6 +50,7 @@ export class PWAService extends AbstractBaseService {
     }
     promiseCreatePWA():Promise<Event> {
      return new Promise((resolve, _reject) => {
+         console.log('promiseCreatePWA fired');
          window.addEventListener('beforeinstallprompt', (event) => {
              console.log('beforeinstallprompt fired');
              resolve((event));
