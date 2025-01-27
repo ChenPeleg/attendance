@@ -15,3 +15,4 @@ import '../layout/side-menu-content.ts';
 import '../components/sorting-options.ts';
 import '../image/bg-image.ts';
 import '../dialog/app-dialog.ts';
+import '../components/install-pwa-button.ts';

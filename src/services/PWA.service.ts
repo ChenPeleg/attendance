@@ -1,6 +1,10 @@
 import {ServicesResolver} from './provider/ServiceResolverClass.ts';
 import {AbstractBaseService} from './provider/AbstractBaseService.ts';
 
+export enum PWAStatus {
+    NotInstalled = 'NotInstalled', Installed = 'Installed', NotSupported = 'NotSupported'
+}
+
 export class PWAService extends AbstractBaseService {
 
     constructor(provider: ServicesResolver) {
@@ -8,10 +12,7 @@ export class PWAService extends AbstractBaseService {
 
     }
 
-    protected init() {
-
-    }
-    initPwaButton(buttonElement : HTMLElement ) {
+    initPwaButton(buttonElement: HTMLElement) {
         if (window.matchMedia('(display-mode: standalone)').matches) {
             return;
         }
@@ -45,6 +46,27 @@ export class PWAService extends AbstractBaseService {
             // Update UI notify the user they can add to home screen
             document.body.appendChild(installButton);
         });
+
+    }
+      isPwaSupported(): boolean {
+        return 'serviceWorker' in navigator && window.matchMedia('(display-mode: standalone)').matches;
+    }
+
+    promisifiedCheckForPWA() :Promise<PWAStatus> {
+        return new Promise((resolve, _reject) => {
+            if (!this.isPwaSupported()) {
+                resolve(PWAStatus.NotSupported);
+            }
+            if (window.matchMedia('(display-mode: standalone)').matches) {
+                resolve(PWAStatus.Installed);
+            }
+            window.addEventListener('beforeinstallprompt', () => {
+                resolve((PWAStatus.Installed));
+            });
+        });
+    }
+
+    protected init() {
 
     }
 

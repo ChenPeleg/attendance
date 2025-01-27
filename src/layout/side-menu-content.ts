@@ -4,11 +4,9 @@ import {globalStyleSheet} from '../styles/global-style-sheet.ts';
 import {Txt} from '../translations/translations.ts';
 import clearIcon from '../assets/svg/clear-broom-icon.svg'
 import addChild from '../assets/svg/addchild.svg'
-import installMobile from '../assets/svg/install-mobile.svg'
+
 import {globalStore} from '../store/Store.ts';
 import {ActionType} from '../models/AppAction.ts';
-import {servicesProvider} from '../services/provider/ServicesProvider.ts';
-import {PWAService} from '../services/PWA.service.ts';
 
 @customElement('side-menu-content')
 export class SideMenuContent extends LitElement {
@@ -20,9 +18,7 @@ export class SideMenuContent extends LitElement {
             return;
         }
         (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
-       const pwaService = servicesProvider.getService(PWAService);
-       const button =  this.shadowRoot.getElementById(SideMenuContent.INSTALL_APP_BUTTON_ID) as HTMLElement
-       pwaService.initPwaButton(button);
+
     }
 
 
@@ -73,15 +69,7 @@ export class SideMenuContent extends LitElement {
                     <sorting-options></sorting-options>
                 </div>
                 <div class="  w-full  ">
-                    <button  id="${SideMenuContent.INSTALL_APP_BUTTON_ID}"
-                            class="h-11 relative flex flex-row justify-center w-full bg-secondary text-primary rounded-md cursor-pointer">
-                 <span class="absolute right-0 px-3 w-8 h-9 flex-row flex justify-center items-center ">
-                    <img class="app-icon w-7 h-7   " src="${installMobile}" alt="checked sort">
-                 </span>
-                        <span>
-                        ${Txt.installApp}
-                  </span>
-                    </button>
+                    <install-pwa-button></install-pwa-button>
                 </div>
                 <div class="  w-full  ">
                     <p class="text-sm">🛈 ${Txt.appInfo}</p>
