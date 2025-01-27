@@ -13,3 +13,4 @@ import '../components/past-counts.ts';
 import '../layout/side-menu-container.ts';
 import '../layout/side-menu-content.ts';
 import '../components/sorting-options.ts';
+import '../image/bg-image.ts';

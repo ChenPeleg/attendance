@@ -5,12 +5,6 @@ import {globalStyleSheet} from '../styles/global-style-sheet.ts';
 
 @customElement('app-navbar')
 export class AppNavbar extends LitElement {
-    get hebrewDay() {
-        const date = new Date();
-        const options: Intl.DateTimeFormatOptions = {weekday: 'long'};
-        return new Intl.DateTimeFormat('he-IL', options).format(date);
-    }
-
 
     firstUpdated() {
         (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
