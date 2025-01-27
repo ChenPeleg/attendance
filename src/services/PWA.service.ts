@@ -50,15 +50,23 @@ export class PWAService extends AbstractBaseService {
     }
     promiseCreatePWA():Promise<Event> {
      return new Promise((resolve, _reject) => {
-         console.log('promiseCreatePWA fired');
          window.addEventListener('beforeinstallprompt', (event) => {
-             console.log('beforeinstallprompt fired');
              resolve((event));
          });
      })
-
     }
+    checkIfCanInstallPWA():Promise<boolean> {
+        return new Promise((resolve, _reject) => {
+            const timeout = setTimeout(() => {
+                resolve(false);
+            }, 1000);
 
+            window.addEventListener('beforeinstallprompt', (_event) => {
+                clearTimeout(timeout);
+                resolve(true);
+            }, {once: true});
+        })
+    }
     promisifiedCheckForPWA(): Promise<PWAStatus> {
         return new Promise((resolve, _reject) => {
             if (this.isPwaSupported()) {
@@ -69,9 +77,6 @@ export class PWAService extends AbstractBaseService {
             }
 
             resolve(PWAStatus.NotInstalled);
-
-
-
         });
     }
 

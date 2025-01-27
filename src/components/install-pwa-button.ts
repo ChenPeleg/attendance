@@ -12,6 +12,8 @@ export class InstallPwaButton extends LitElement {
     static INSTALL_APP_BUTTON_ID = 'install-app-button';
     initPwa = async () => {
         const pwaService = servicesProvider.getService(PWAService);
+        const canInstallPWA = await pwaService.checkIfCanInstallPWA();
+        console.log(canInstallPWA)
         const result = await pwaService.promisifiedCheckForPWA();
         if (result === PWAStatus.NotInstalled) {
             const preInstallEvent = await pwaService.promiseCreatePWA();
