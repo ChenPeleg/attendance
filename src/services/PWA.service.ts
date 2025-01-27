@@ -48,27 +48,41 @@ export class PWAService extends AbstractBaseService {
         });
 
     }
-      isPwaSupported(): boolean {
-        return 'serviceWorker' in navigator && window.matchMedia('(display-mode: standalone)').matches;
+    promiseCreatePWA():Promise<Event> {
+     return new Promise((resolve, _reject) => {
+         window.addEventListener('beforeinstallprompt', (event) => {
+             console.log('beforeinstallprompt fired');
+             resolve((event));
+         });
+     })
+
     }
 
-    promisifiedCheckForPWA() :Promise<PWAStatus> {
+    promisifiedCheckForPWA(): Promise<PWAStatus> {
         return new Promise((resolve, _reject) => {
-            if (!this.isPwaSupported()) {
-                resolve(PWAStatus.NotSupported);
+            if (this.isPwaSupported()) {
+                resolve(PWAStatus.NotInstalled);
             }
-            window.addEventListener("appinstalled", () => {
-               resolve(PWAStatus.Installed);
-            });
-            window.addEventListener('beforeinstallprompt', () => {
-                resolve((PWAStatus.NotInstalled));
-            });
+            if (this.isInStandaloneMode()) {
+                resolve(PWAStatus.Installed);
+            }
+
+            resolve(PWAStatus.NotInstalled);
+
+
+
         });
     }
 
     protected init() {
 
     }
+
+    private isPwaSupported(): boolean {
+        return 'beforeinstallprompt' in window;
+    }
+
+    private isInStandaloneMode = () => (window.matchMedia('(display-mode: standalone)').matches)   || document.referrer.includes('android-app://');
 
 
 }

@@ -1,6 +1,6 @@
 import {html, LitElement} from 'lit';
 import {customElement} from 'lit/decorators.js';
-import {PWAService} from '../services/PWA.service.ts';
+import {PWAService, PWAStatus} from '../services/PWA.service.ts';
 import {servicesProvider} from '../services/provider/ServicesProvider.ts';
 import {Txt} from '../translations/translations.ts';
 import installMobile from '../assets/svg/install-mobile.svg'
@@ -13,7 +13,11 @@ export class InstallPwaButton extends LitElement {
     initPwa = async () => {
         const pwaService = servicesProvider.getService(PWAService);
         const result = await pwaService.promisifiedCheckForPWA();
-        console.log(result);
+        if (result === PWAStatus.NotInstalled) {
+            const preInstallEvent = await pwaService.promiseCreatePWA();
+            console.log('preInstallEvent', preInstallEvent);
+        }
+
     }
 
     firstUpdated() {
