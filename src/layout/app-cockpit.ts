@@ -57,13 +57,15 @@ export class AppCockpit extends LitElement {
     renderButton(button: CockpitButton) {
         const isActive = this.displayType === button.id;
         return html`
-            <button @click=${()=>this.cockPitClick(button.id)} class="h-12   cursor-pointer flex flex-row px-7 justify-center items-center bg-secondary text-primary 
-            transition-all ease-in-out duration-300
-           ${isActive ? ' bg-accent' : ' bg-secondary'}  
-            rounded shadow gap-2" style="  border: none">
-                <img src=${button.icon} class="w-7 h-7 app-icon" alt="menu"/>
+            <div class="  " style="border-bottom: 2px ${isActive ? ' solid' : '' } var(--accent-text-color)  ">
+            <button @click=${()=>this.cockPitClick(button.id)} class="h-12  cursor-pointer flex flex-row 
+              ${isActive ? ' text-accent ' : 'text-primary ' }
+             justify-center items-center   
+            transition-all ease-in-out duration-300 
+            rounded bg-secondary  " style="  border: none"> 
                 <span>${button.label}</span>
             </button>
+            </div>
         `
     }
 
@@ -72,9 +74,8 @@ export class AppCockpit extends LitElement {
     render() {
         return html`
             <div class="flex flex-col items-start justify-center   ">
-                <div class="flex flex-row gap-3 flex-wrap">
+                <div class="grid grid-cols-2 gap-3 flex-wrap">
                     ${this.buttons.map(button => this.renderButton(button))}
-                 
                 </div>  
             </div>
         `
