@@ -23,16 +23,6 @@ export class AppMain extends LitElement {
     @state() storeState: AttendanceStore | null = globalStore.getState();
     private displayType: DisplayType = this.storeState?.display || DisplayType.Attendance;
 
-    private completeList  ()   {
-
-       if ( this.getPresentChildren().some(child => !child.checkedIn) ) {
-           return;
-       }
-        globalStore.dispatch({
-            type: ActionType.completeList,
-            payload: null});
-    };
-
     firstUpdated() {
         (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
         globalStore.subscribe((state: AttendanceStore) => {
@@ -41,6 +31,7 @@ export class AppMain extends LitElement {
             this.requestUpdate();
         })
     }
+
     getHistoryHours() {
         const historyService = servicesProvider.getService(HistoryService)
         return historyService.lastAttendanceHours(this.storeState?.history || [])
@@ -71,6 +62,17 @@ export class AppMain extends LitElement {
         `
     }
 
+    private completeList() {
+
+        if (this.getPresentChildren().some(child => !child.checkedIn)) {
+            return;
+        }
+        globalStore.dispatch({
+            type: ActionType.completeList,
+            payload: null
+        });
+    };
+
     private childClicked = (child: ChildStatus) => {
         switch (this.displayType) {
             case DisplayType.Attendance:
@@ -95,17 +97,18 @@ export class AppMain extends LitElement {
 
     private presentTodayChild(child: ChildStatus) {
         globalStore.dispatch({
-            type: child.presentToday === PresentToday.Yes ? ActionType.childAbsentFromDay :
-                ActionType.childPresentInDay,
+            type: child.presentToday === PresentToday.Yes ? ActionType.childAbsentFromDay : ActionType.childPresentInDay,
             payload: child
         })
     }
+
     private getPresentChildren() {
-        return this.storeState?.attendance.filter(c=> c.presentToday === PresentToday.Yes) || []
+        return this.storeState?.attendance.filter(c => c.presentToday === PresentToday.Yes) || []
     }
+
     private getChildren() {
         const children = this.displayType !== DisplayType.DaySettings ? this.getPresentChildren() : this.storeState?.attendance || [];
-        const sortedChildren = servicesProvider.getService(SortService).sortChildren(children );
+        const sortedChildren = servicesProvider.getService(SortService).sortChildren(children);
 
         return sortedChildren.map(child => {
             return html`

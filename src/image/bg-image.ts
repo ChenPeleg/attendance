@@ -12,7 +12,7 @@ export class BgImage extends LitElement {
 
     render() {
         return html`
-            <div id="bg-image" class=" h-16 flex flex-col z-10 bg-red-100">
+            <div id="bg-image" class=" w-full h-full fixed flex flex-col z-10 bg-red-100   z-0">
            
             </div>
         `
