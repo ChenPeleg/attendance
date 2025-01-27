@@ -57,11 +57,11 @@ export class PWAService extends AbstractBaseService {
             if (!this.isPwaSupported()) {
                 resolve(PWAStatus.NotSupported);
             }
-            if (window.matchMedia('(display-mode: standalone)').matches) {
-                resolve(PWAStatus.Installed);
-            }
+            window.addEventListener("appinstalled", () => {
+               resolve(PWAStatus.Installed);
+            });
             window.addEventListener('beforeinstallprompt', () => {
-                resolve((PWAStatus.Installed));
+                resolve((PWAStatus.NotInstalled));
             });
         });
     }
