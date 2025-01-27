@@ -36,7 +36,7 @@ export class InstallPwaButton extends LitElement {
     render() {
         return html`
             <button id="${InstallPwaButton.INSTALL_APP_BUTTON_ID}" @click="${this.installPWA}"
-                    class="h-11 relative flex flex-row justify-center w-full bg-secondary text-primary rounded-md cursor-pointer">
+                    class="h-11  ${this.canInstall ? 'relative' : 'hidden'} flex flex-row justify-center w-full bg-secondary text-primary rounded-md cursor-pointer">
                  <span class="absolute right-0 px-3 w-8 h-9 flex-row flex justify-center items-center ">
                     <img class="app-icon w-7 h-7   " src="${installMobile}" alt="checked sort">
                  </span>
