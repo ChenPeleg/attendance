@@ -42,7 +42,8 @@ const sortOptions = {
 export class SortingOptions extends LitElement {
     @state() private sortType: SortType = globalStore.getState().sortType;
     @state() private sortOrder: SortOrder = globalStore.getState().sortOrder;
-    clickOption(sortType: SortType ): void {
+
+    clickOption(sortType: SortType): void {
 
         globalStore.dispatch({
             type: ActionType.changeSort,
@@ -52,25 +53,27 @@ export class SortingOptions extends LitElement {
         })
 
     }
+
     buildSortOptionsButton() {
-        return Object.keys(sortOptions ).map((option:   any  ) => {
+        return Object.keys(sortOptions).map((option: any) => {
             //@ts-ignore
             const isChosen = this.sortType === option;
 
             //@ts-ignore
             const shownOption = sortOptions[option];
 
-            const order  = isChosen ? this.sortOrder : SortOrder.Ascending;
+            const order = isChosen ? this.sortOrder : SortOrder.Ascending;
 
             //@ts-ignore
             return html`
-                <button @click="${()=>this.clickOption(option )}" class="h-10 relative flex flex-row justify-center w-full bg-secondary text-primary rounded-md cursor-pointer">
+                <button @click="${() => this.clickOption(option)}"
+                        class="h-10 relative flex flex-row justify-center w-full bg-secondary text-primary rounded-md cursor-pointer">
                  <span class="absolute right-0 px-3 w-8 h-9 flex-row flex justify-center items-center ">
-                    <img class="app-icon w-8 h-8  ${isChosen    ? ' ' : ' hidden '}" src="${checkMark}" alt="checked sort">
+                    <img class="app-icon w-8 h-8  ${isChosen ? ' ' : ' hidden '}" src="${checkMark}" alt="checked sort">
                  </span>
-                  <span>
+                    <span>
                     ${shownOption[order].label}
-                  </span>  
+                  </span>
                 </button>
             `
         })

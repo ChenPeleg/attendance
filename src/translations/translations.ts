@@ -20,6 +20,8 @@ const translations = {
     'nameDescending': 'שם (ת-א)',
     'genderBoysGirls': 'בנים בנות',
     'genderGirlBoys': 'בנות בנים',
+    'appInfo': 'המידע נשמר על מכשיר זה בלבד, ולא נשלח לשירותים חיצוניים',
+    installApp: 'התקנה',
 } as const;
 
 

@@ -37,7 +37,7 @@ export class SideMenuContainer extends LitElement {
             transform: translateX(0);
         }
     `];
-    @state() private isOpen = false;
+    @state() private isOpen = true;
 
     render() {
         return html`
@@ -46,9 +46,10 @@ export class SideMenuContainer extends LitElement {
                 <div class="backdrop bg-gray-900 opacity-70 ${this.isOpen ? 'open' : ''}" @click=${this.closeMenu}></div>
                 <div class="side-menu bg-primary ${this.isOpen ? 'open' : ''}">
                     <div class="h-14 w-10"> </div>
-                    <div class="p-4">
+                    <div class="max-h-screen overflow-x-hidden  ">
+                    <div class="p-4 min-h-screen">
                     <slot></slot>
-                        
+                    </div>
                     </div>
                 </div>
                 <div id="button-container" class="absolute z-50">
