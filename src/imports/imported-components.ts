@@ -14,3 +14,4 @@ import '../layout/side-menu-container.ts';
 import '../layout/side-menu-content.ts';
 import '../components/sorting-options.ts';
 import '../image/bg-image.ts';
+import '../dialog/app-dialog.ts';

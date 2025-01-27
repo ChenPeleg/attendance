@@ -6,9 +6,10 @@ import {StoreService} from '../Store.service.ts';
 import {HistoryService} from '../History.service.ts';
 import {SortService} from '../SortService.service.ts';
 import {BackgroundImageService} from '../BackgroundImage.service.ts';
+import {ConfigurationService} from '../Configuration.service.ts';
 
 const ServicesProviderFactory = () => {
-    const provider = new ServicesResolver([BackgroundImageService,SortService,LocalStorageService, TimeAndDateService, ThemeService, StoreService, HistoryService]);
+    const provider = new ServicesResolver([ConfigurationService, BackgroundImageService, SortService, LocalStorageService, TimeAndDateService, ThemeService, StoreService, HistoryService]);
     provider.initServices();
     return provider;
 }

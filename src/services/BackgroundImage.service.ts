@@ -1,5 +1,6 @@
 import {ServicesResolver} from './provider/ServiceResolverClass.ts';
 import {AbstractBaseService} from './provider/AbstractBaseService.ts';
+import {ConfigurationService} from './Configuration.service.ts';
 
 export class BackgroundImageService extends AbstractBaseService {
     static numberOfImages = 7;
@@ -7,9 +8,15 @@ export class BackgroundImageService extends AbstractBaseService {
     constructor(provider: ServicesResolver) {
         super(provider);
     }
+
+    getBaseAssetUrl() {
+        const isDevMode = this.servicesResolver.getService(ConfigurationService).isDevMode()
+        return isDevMode ? '' : '/attendance'
+    }
+
     getImageUrl() {
         const imageNumber = this.getRandomImageNumber();
-        return `/images/img (${imageNumber}).jpg`
+        return `${this.getBaseAssetUrl()}/images/img (${imageNumber}).jpg`
     }
 
 
