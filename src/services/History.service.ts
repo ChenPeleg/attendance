@@ -17,13 +17,10 @@ export class HistoryService extends AbstractBaseService {
 
     lastAttendanceHours(historyRecord: HistoryModel[]) {
         const timeAndDateService = servicesProvider.getService(TimeAndDateService);
-
         const allRecords = historyRecord.filter(this.isFromToday).map(history => {
             return timeAndDateService.hoursAndMinutes(history.timestamp);
         })
-        return [...new Set(allRecords)];
-
-
+        return [...new Set(allRecords)].reverse().slice(0, 4);
     }
 
 

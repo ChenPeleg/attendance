@@ -21,8 +21,12 @@ export class BgImage extends LitElement {
                 <div id="bg-image" class=" w-full h-full fixed flex flex-col z-10 bg-red-100 overflow-hidden  z-0">
                     <div class="contents" style=""> 
                     <img src="${this.getImageUrl()}"  
-                         style="height: 100vh; object-fit: cover; filter: blur(3px) opacity(60%)" alt="bg-image">
+                         style="height: 100vh; object-fit: cover; filter: blur(3px)  " alt="bg-image">
                     </div>
+                    <div  id="overlay" class="w-full h-full fixed flex flex-col z-10 bg-primary  opacity-60 ">
+                        
+                    </div>
+                </div>
                 </div>
             </div>
 
