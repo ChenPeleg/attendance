@@ -58,7 +58,7 @@ export class SideMenuContent extends LitElement {
                 </div>
                 <div class="h-14 w-full flex-row flex justify-between gap-5">
                     <span>
-                    ${Txt.display}
+                    ${Txt.displayTheme}
                         
                     </span>
                     <span>
