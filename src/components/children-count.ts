@@ -18,7 +18,7 @@ export class ChildrenCount extends LitElement {
 
     renderAllChecked() {
         return html`   
-            <div id="all-checked" class="contents overflow-hidden "> 
+            <div id="all-checked" data-testid="all-children-checked" class="contents overflow-hidden "> 
                 <span id="check-mark-aligner" class="flex flex-col justify-center h-full pt-2">
                    <check-mark-with-animation> </check-mark-with-animation> 
                  </span>
@@ -34,6 +34,7 @@ export class ChildrenCount extends LitElement {
 
         return html`
             <div @click="${this.onClick}"  
+                 data-testid="children-count"
                  class="transition-colors ease-in-out duration-300 flex flex-row justify-center items-center  
                   ${this.areAllChecked ? ' min-w-44 bg-success  app-shadow cursor-pointer ' : ' min-w-32 app-shadow bg-secondary'}  gap-4 rounded-full h-16  px-10">
                 <span> ${this.totalChildren} / ${this.checkedInChildren} </span>

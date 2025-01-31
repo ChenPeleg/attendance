@@ -18,6 +18,11 @@ export class AppChild extends LitElement {
     @property({type: Function}) onClick: () => void = () => {
     };
 
+    private getTestId() {
+        const displayType = this.displayType === DisplayType.Attendance ? 'attend' : 'day-set';
+        return `child_${this.child?.id}_${displayType}`
+    }
+
     firstUpdated() {
         (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
     }
@@ -25,6 +30,7 @@ export class AppChild extends LitElement {
     render() {
         return html`
             <button @click="${this.onClick}"
+                    data-testid="${this.getTestId()}"
                     class=" bg-secondary text-primary flex flex-row  items-center h-14 w-full  shadow  relative gap-8 rounded-full px-10  
                     ${this.child?.presentToday === PresentToday.No ? ' text-faded ' : ' '} ${this.displayType === DisplayType.Attendance ?  ' justify-start ' : ' justify-between   '}"
                     style="  border: none;  ">
