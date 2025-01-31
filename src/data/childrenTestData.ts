@@ -3,10 +3,10 @@ import {SchoolType} from '../models/schoolType.ts';
 import {SchoolClass} from '../models/schoolClass.ts';
 import {Gender} from '../models/Gender.ts';
 
-export const childrenBaseData  :ChildModel [] = [
+export const childrenTestData  :ChildModel [] = [
     {
         id: '1',
-        name: 'עמרי ',
+        name: 'עמרי',
         school: SchoolType.Nitzanim,
         schoolClass: SchoolClass.First,
         boyOrGirl: Gender.Boy,

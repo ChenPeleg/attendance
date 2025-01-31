@@ -9,6 +9,9 @@ import {SortOrder, SortType} from '../models/SortType.ts';
 import {childrenBaseData} from '../data/childrenPistachioData.ts';
 import {PresentToday} from '../models/presentToday.ts';
 import {ChildStatus} from '../models/ChildStatus.ts';
+import {Environment} from '../models/Environment.ts';
+import {ConfigurationService} from './Configuration.service.ts';
+import {childrenTestData} from '../data/childrenTestData.ts';
 
 
 export class StoreService extends AbstractBaseService {
@@ -65,7 +68,15 @@ export class StoreService extends AbstractBaseService {
     }
 
     private getChildrenBaseData() {
-        return childrenBaseData;
+        switch (this.servicesResolver.getService(ConfigurationService).environment) {
+            case Environment.Test:
+                return childrenTestData;
+            case Environment.Production:
+            case Environment.Development:
+            default:
+                return childrenBaseData
+        }
+
     }
 
 }
