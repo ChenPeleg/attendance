@@ -1,14 +1,14 @@
 {
   "name": "attendance",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite --mode development",
     "build": "tsc && vite build",
     "e2e": "playwright test ",
     "build:pages": "tsc && vite build --mode production",
-    "preview": "vite preview"
+    "preview": "vite preview --mode test"
   },
   "dependencies": {
     "lit": "^3.2.1"
