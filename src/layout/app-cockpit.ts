@@ -58,7 +58,7 @@ export class AppCockpit extends LitElement {
         const isActive = this.displayType === button.id;
         return html`
             <div class="  " style="border-bottom: 2px ${isActive ? ' solid' : '' } var(--accent-text-color)  ">
-            <button @click=${()=>this.cockPitClick(button.id)} class="h-12  cursor-pointer flex flex-row 
+            <button @click=${()=>this.cockPitClick(button.id)} data-testid="nav_${button.id}" class="h-12  cursor-pointer flex flex-row 
               ${isActive ? ' text-accent ' : 'text-primary ' }
              justify-center items-center   
             transition-all ease-in-out duration-300 
