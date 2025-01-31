@@ -1,14 +1,29 @@
-import { test, expect } from 'playwright/test';
+import {expect, test} from 'playwright/test';
+import {describe} from 'node:test';
+describe('Marking children', () => {
+    test('marking all the children create a button with check sign', async ({page}) => {
+        await page.goto('http://localhost:4173/');
+        await page.getByTestId('child_1_attend').click();
+        await page.getByTestId('child_2_attend').click();
+        await page.getByTestId('child_3_attend').click();
+        await page.getByTestId('child_4_attend').click();
+        await page.getByTestId('child_5_attend').click();
+        expect(await page.getByTestId('all-children-checked').isVisible()).toBe(false);
+        await page.getByTestId('child_6_attend').click();
+        expect(await page.getByTestId('all-children-checked').isVisible()).toBe(true);
+    });
+    test('clicking finish after marking all the children clears children', async ({page}) => {
+        await page.goto('http://localhost:4173/');
+        await page.getByTestId('child_1_attend').click();
+        await page.getByTestId('child_2_attend').click();
+        await page.getByTestId('child_3_attend').click();
+        await page.getByTestId('child_4_attend').click();
+        await page.getByTestId('child_5_attend').click();
+        expect(await page.getByTestId('all-children-checked').isVisible()).toBe(false);
+        await page.getByTestId('child_6_attend').click();
+        expect(await page.getByTestId('all-children-checked').isVisible()).toBe(true);
+    });
 
-test('test', async ({ page }) => {
-
-    await page.getByRole('button', { name: 'יונתן' }).click();
-    await page.getByRole('button', { name: 'אסף' }).click();
-    await page.getByRole('button', { name: 'עפרי' }).click();
-    await page.getByRole('button', { name: 'אביב' }).click();
-    await page.getByRole('button', { name: 'נעמי' }).click();
-    await page.getByRole('button', { name: 'נמרוד' }).click();
-    await page.getByRole('button', { name: 'אשכר' }).click();
-    await page.getByRole('button', { name: 'רוני' }).click();
-    expect(await page.title()).toBe('Example Domain');
 });
+
+

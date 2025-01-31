@@ -18,7 +18,7 @@ export class ChildrenCount extends LitElement {
 
     renderAllChecked() {
         return html`   
-            <div id="all-checked" class="contents overflow-hidden "> 
+            <div id="all-checked" data-testid="all-children-checked" class="contents overflow-hidden "> 
                 <span id="check-mark-aligner" class="flex flex-col justify-center h-full pt-2">
                    <check-mark-with-animation> </check-mark-with-animation> 
                  </span>
