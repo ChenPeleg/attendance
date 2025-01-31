@@ -8,7 +8,7 @@
     "build": "tsc && vite build",
     "e2e": "playwright test ",
     "build:pages": "tsc && vite build --mode production",
-    "preview": "vite preview --mode test"
+    "preview": "vite build --mode test && vite preview "
   },
   "dependencies": {
     "lit": "^3.2.1"
