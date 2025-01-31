@@ -6,20 +6,20 @@ import {StoreFactory, StoreReducer} from '../store/factory/StoreFactory.ts';
 import {AppAction} from '../models/AppAction.ts';
 import {appReducer} from '../reducer/app-reducer.ts';
 import {SortOrder, SortType} from '../models/SortType.ts';
-import {childrenBaseData} from '../data/childrenData.ts';
+import {childrenBaseData} from '../data/childrenPistachioData.ts';
 import {PresentToday} from '../models/presentToday.ts';
 import {ChildStatus} from '../models/ChildStatus.ts';
 
 
 export class StoreService extends AbstractBaseService {
-    private readonly _initialState: AttendanceStore  ;
-    private _store: StoreFactory<AppAction, AttendanceStore, typeof appReducer> | null = null;
+    private readonly _initialState: AttendanceStore;
 
     constructor(provider: ServicesResolver) {
         super(provider);
         this._initialState = this.createInitialStoreState();
     }
 
+    private _store: StoreFactory<AppAction, AttendanceStore, typeof appReducer> | null = null;
 
     get store(): StoreFactory<AppAction, AttendanceStore, StoreReducer<AttendanceStore, AppAction>> {
         if (!this._store) {
@@ -44,15 +44,28 @@ export class StoreService extends AbstractBaseService {
         })
         return this._store = globalStore;
     }
+
     private createInitialStoreState() {
-       const initialState:AttendanceStore = {
+        const initialState: AttendanceStore = {
             sortType: SortType.Class,
-            sortOrder:SortOrder.Ascending,
+            sortOrder: SortOrder.Ascending,
             display: DisplayType.Attendance,
-            attendance: childrenBaseData.map(child => ({...child, presentToday: PresentToday.Yes, checkedIn: false })) as ChildStatus[],
+            attendance: this.getChildrenData(),
             history: []
         }
         return initialState;
+    }
+
+    private getChildrenData() {
+        return this.getChildrenBaseData().map(child => ({
+            ...child,
+            presentToday: PresentToday.Yes,
+            checkedIn: false
+        })) as ChildStatus[];
+    }
+
+    private getChildrenBaseData() {
+        return childrenBaseData;
     }
 
 }
