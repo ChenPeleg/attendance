@@ -34,6 +34,7 @@ export class ChildrenCount extends LitElement {
 
         return html`
             <div @click="${this.onClick}"  
+                 data-testid="children-count"
                  class="transition-colors ease-in-out duration-300 flex flex-row justify-center items-center  
                   ${this.areAllChecked ? ' min-w-44 bg-success  app-shadow cursor-pointer ' : ' min-w-32 app-shadow bg-secondary'}  gap-4 rounded-full h-16  px-10">
                 <span> ${this.totalChildren} / ${this.checkedInChildren} </span>
