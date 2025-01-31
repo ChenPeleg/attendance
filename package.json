@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite --mode development",
     "build": "tsc && vite build",
+    "e2e": "playwright test ",
     "build:pages": "tsc && vite build --mode production",
     "preview": "vite preview"
   },
