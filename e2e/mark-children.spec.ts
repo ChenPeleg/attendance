@@ -1,6 +1,13 @@
 import {expect, test} from 'playwright/test';
 import {describe} from 'node:test';
 describe('Marking children', () => {
+    test('clicking on a child marks it', async ({page}) => {
+        await page.goto('http://localhost:4173/');
+        expect(await page.getByTestId('child_1_attend').getByTestId('check-mark').isVisible()).toBe(false);
+        await page.getByTestId('child_1_attend').click();
+        expect(await page.getByTestId('child_1_attend').getByTestId('check-mark').isVisible()).toBe(true);
+
+    });
     test('marking all the children create a button with check sign', async ({page}) => {
         await page.goto('http://localhost:4173/');
         await page.getByTestId('child_1_attend').click();

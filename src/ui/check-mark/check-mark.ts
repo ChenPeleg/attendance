@@ -1,17 +1,16 @@
-import {  html, LitElement, unsafeCSS} from 'lit'
-import {customElement } from 'lit/decorators.js'
+import {html, LitElement, unsafeCSS} from 'lit'
+import {customElement} from 'lit/decorators.js'
 import {checkMarkStyle} from './check-mark.style.ts';
-
-
 
 
 @customElement('check-mark')
 export class CheckMark extends LitElement {
     static styles = unsafeCSS(`${checkMarkStyle}`)
+
     render() {
         return html`
-            <div class= "circleLoader"> 
-                <div class= "checkmark draw"></div>
+            <div data-testid="check-mark" class="circleLoader">
+                <div role="img" aria-label="check-mark" class="checkmark draw"></div>
             </div>
         `
     }
