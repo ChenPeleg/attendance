@@ -11,6 +11,7 @@ export default defineConfig({
         ignoreHTTPSErrors: true,
         trace: 'on-first-retry',
     },
+    outputDir: './playwright/test-results',
 
     projects: [
         {
