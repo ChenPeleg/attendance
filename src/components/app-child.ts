@@ -29,9 +29,9 @@ export class AppChild extends LitElement {
 
    private getButtonStyle() {
         return `bg-secondary text-primary flex flex-row  
-        ${this.childrenGridOrList === ChildrenDisplayType.Grid ? ' px-4' : '  px-10 '}
+        ${this.childrenGridOrList === ChildrenDisplayType.Grid ? ' px-4 gap-5' : '  px-10 gap-8'}
         items-center h-14 w-full  shadow  
-        relative gap-8 rounded-full 
+        relative  rounded-full 
         ${this.child?.presentToday === PresentToday.No ? ' text-faded ' : ' '} ${this.displayType === DisplayType.Attendance ?  ' justify-start ' : ' justify-between   '}`
     }
 
