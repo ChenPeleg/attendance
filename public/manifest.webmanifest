@@ -12,7 +12,7 @@
       {
         "src": "/attendance/splash.png",
         "type": "image/png",
-        "sizes": "192x192"
+        "sizes": "512x512"
       }
   ]
 }
