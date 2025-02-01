@@ -12,7 +12,6 @@ import {PresentToday} from '../models/presentToday.ts';
 @customElement('app-child')
 export class AppChild extends LitElement {
     @property({type: DisplayType}) displayType = DisplayType.Attendance;
-
     @property({type: Object}) child: ChildStatus | null = null;
     @property({type: Object}) childrenGridOrList: ChildrenDisplayType  = ChildrenDisplayType.List;
     @property({type: Function}) onClick: () => void = () => {

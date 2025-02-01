@@ -55,6 +55,7 @@ export class StoreService extends AbstractBaseService {
             display: DisplayType.Attendance,
             attendance: this.getChildrenData(),
             childrenDisplayType: ChildrenDisplayType.List,
+            lastUpdated: 0,
             history: []
         }
         return initialState;

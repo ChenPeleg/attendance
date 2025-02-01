@@ -20,5 +20,5 @@ export interface AttendanceStore {
     sortType: SortType;
     sortOrder: SortOrder;
     childrenDisplayType: ChildrenDisplayType;
-
+    lastUpdated: number;
 }
