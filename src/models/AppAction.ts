@@ -7,11 +7,12 @@ export enum ActionType {
     changeDisplay = 'changeDisplay',
     completeList = 'completeList',
     clearAllData = 'clearAllData',
-    changeSort = 'changeSort'
+    changeSort = 'changeSort',
+    changeListOrGrid = 'changeListOrGrid'
 }
 
 export type  AppAction = {
-                             type: ActionType.checkInChild | ActionType.checkOutChild | ActionType.childAbsentFromDay | ActionType.childPresentInDay;
+                             type: ActionType.checkInChild | ActionType.changeListOrGrid | ActionType.checkOutChild | ActionType.childAbsentFromDay | ActionType.childPresentInDay;
                              payload: any;
                          } | {
                              type: ActionType.addChild; payload: any;

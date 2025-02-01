@@ -66,6 +66,9 @@ export class SideMenuContent extends LitElement {
                     </span>
                 </div>
                 <div class="  w-full  ">
+                    <children-display-button></children-display-button>
+                </div>
+                <div class="  w-full  ">
                     <sorting-options></sorting-options>
                 </div>
                 <div class="  w-full  ">

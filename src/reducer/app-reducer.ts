@@ -102,6 +102,11 @@ export const appReducer:StoreReducer<AttendanceStore, AppAction> = (state: Atten
                 sortType: action.payload.sortType,
                 sortOrder: sortOrder
             }
+        case ActionType.changeListOrGrid:
+            return {
+                ...state,
+                childrenDisplayType: action.payload
+            }
         default:
             return state;
     }

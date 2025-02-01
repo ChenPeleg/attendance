@@ -8,10 +8,17 @@ export enum DisplayType {
     DaySettings = 'DaySettings'
 }
 
+export enum ChildrenDisplayType {
+    List = 'List',
+    Grid = 'Grid'
+}
+
 export interface AttendanceStore {
     display: DisplayType;
     attendance: ChildStatus[];
     history: HistoryModel[];
     sortType: SortType;
     sortOrder: SortOrder;
+    childrenDisplayType: ChildrenDisplayType;
+
 }

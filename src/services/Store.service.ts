@@ -1,7 +1,7 @@
 import {ServicesResolver} from './provider/ServiceResolverClass.ts';
 import {AbstractBaseService} from './provider/AbstractBaseService.ts';
 import {LocalStorageService} from './LocalStorage.service.ts';
-import {AttendanceStore, DisplayType} from '../models/AttendanceStore.ts';
+import {AttendanceStore, ChildrenDisplayType, DisplayType} from '../models/AttendanceStore.ts';
 import {StoreFactory, StoreReducer} from '../store/factory/StoreFactory.ts';
 import {AppAction} from '../models/AppAction.ts';
 import {appReducer} from '../reducer/app-reducer.ts';
@@ -54,6 +54,7 @@ export class StoreService extends AbstractBaseService {
             sortOrder: SortOrder.Ascending,
             display: DisplayType.Attendance,
             attendance: this.getChildrenData(),
+            childrenDisplayType: ChildrenDisplayType.List,
             history: []
         }
         return initialState;

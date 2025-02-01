@@ -26,7 +26,7 @@ export class SideMenuContainer extends LitElement {
             position: fixed;
             top: 0;
             right: 0;
-            width: 250px;
+            width: 310px;
             height: 100%;
             transform: translateX(100%);
             transition: transform 0.3s ease;
