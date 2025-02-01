@@ -2,7 +2,7 @@ import {html, LitElement} from 'lit'
 import {customElement, property, state} from 'lit/decorators.js'
 import {globalStyleSheet} from '../styles/global-style-sheet.ts';
 import '../layout/app-cockpit.ts'
-import {AttendanceStore, DisplayType} from '../models/AttendanceStore.ts';
+import {AttendanceStore, ChildrenDisplayType, DisplayType} from '../models/AttendanceStore.ts';
 import {globalStore} from '../store/Store.ts';
 import '../components/app-child.ts'
 import '../ui/check-mark/check-mark.ts'
@@ -39,26 +39,34 @@ export class AppMain extends LitElement {
 
     render() {
         return html`
-            <div class="flex flex-col items-start justify-center   gap-3 pr-4 text-primary"> 
+            <div class="flex flex-col items-start justify-center   gap-3 pr-4 text-primary">
                 <div class="${this.displayType === DisplayType.Attendance ? 'contents' : 'hidden'}">
-                    <past-counts .lastAttendanceTimes="${ this.getHistoryHours()}"></past-counts>
-                    <children-count .onClick="${()=>this.completeList()}" .totalChildren=${this.getPresentChildren().length || 0}
+                    <past-counts .lastAttendanceTimes="${this.getHistoryHours()}"></past-counts>
+                    <children-count .onClick="${() => this.completeList()}" .totalChildren=${this.getPresentChildren().length || 0}
                                     .checkedInChildren=${this.getPresentChildren().filter(child => child.checkedIn).length || 0}>
                     </children-count>
                 </div>
-               <div class="${this.displayType === DisplayType.Attendance ? 'hidden' : ' contents'}">
-                     <div class="h-2 w-full">
-                       
-                     </div>
+                <div class="${this.displayType === DisplayType.Attendance ? 'hidden' : ' contents'}">
+                    <div class="h-2 w-full">
+
+                    </div>
                 </div>
-                <div id="children" class="flex-col flex gap-4 min-w-56">
+                <div id="children" class=" ${this.getChildrenDisplayClass()}">
                     ${this.getChildren()}
                 </div>
                 <div class="w-full h-20" id="bottom-scroll-padding">
-                    
+
                 </div>
             </div>
         `
+    }
+
+    private getChildrenDisplayClass() {
+        if (this.displayType === DisplayType.Attendance && this.storeState?.childrenDisplayType ===  ChildrenDisplayType.Grid) {
+            return `grid grid-cols-2 gap-4`
+
+        }
+        return `flex-col flex gap-4 min-w-56`
     }
 
     private completeList() {
