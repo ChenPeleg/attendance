@@ -10,7 +10,7 @@ import {ConfigurationService} from '../Configuration.service.ts';
 import {PWAService} from '../PWA.service.ts';
 
 const ServicesProviderFactory = () => {
-    const provider = new ServicesResolver([PWAService,ConfigurationService, BackgroundImageService, SortService, LocalStorageService, TimeAndDateService, ThemeService, StoreService, HistoryService]);
+    const provider = new ServicesResolver([PWAService, ConfigurationService, BackgroundImageService, SortService, LocalStorageService, TimeAndDateService, ThemeService, StoreService, HistoryService]);
     provider.initServices();
     return provider;
 }
