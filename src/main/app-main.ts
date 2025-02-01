@@ -63,8 +63,7 @@ export class AppMain extends LitElement {
 
     private getChildrenDisplayClass() {
         if (this.displayType === DisplayType.Attendance && this.storeState?.childrenDisplayType ===  ChildrenDisplayType.Grid) {
-            return `grid grid-cols-2 gap-4`
-
+            return `grid grid-cols-2 gap-2 pl-3`
         }
         return `flex-col flex gap-4 min-w-56`
     }
@@ -119,7 +118,7 @@ export class AppMain extends LitElement {
 
         return sortedChildren.map(child => {
             return html`
-                <app-child .child=${child} .onClick="${() => this.childClicked(child)}" .displayType="${this.displayType}"></app-child>
+                <app-child .childrenGridOrList="${this.storeState?.childrenDisplayType}" .child=${child} .onClick="${() => this.childClicked(child)}" .displayType="${this.displayType}"></app-child>
             `
         })
     }

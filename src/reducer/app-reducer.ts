@@ -10,9 +10,11 @@ import {SortOrder} from '../models/SortType.ts';
 import {StoreService} from '../services/Store.service.ts';
 
 export const appReducer:StoreReducer<AttendanceStore, AppAction> = (state: AttendanceStore, action: AppAction): AttendanceStore => {
+    const getLastUpdateTimeStamp = () => {
+       return  servicesProvider.getService(TimeAndDateService).createTimestamp();
+    };
 
     switch (action.type) {
-
         case ActionType.checkInChild:
             return {
                 ...state,
@@ -35,7 +37,8 @@ export const appReducer:StoreReducer<AttendanceStore, AppAction> = (state: Atten
                 attendance: state.attendance.map(child => child.id === action.payload.id ? {
                     ...child,
                     presentToday: PresentToday.No
-                } : child)
+                } : child),
+                lastUpdated: getLastUpdateTimeStamp()
             }
         case ActionType.childPresentInDay:
 
@@ -44,7 +47,8 @@ export const appReducer:StoreReducer<AttendanceStore, AppAction> = (state: Atten
                 attendance: state.attendance.map(child => child.id === action.payload.id ? {
                     ...child,
                     presentToday: PresentToday.Yes
-                } : child)
+                } : child),
+                lastUpdated: getLastUpdateTimeStamp()
             }
         case ActionType.addChild:
             let childName = action.payload;

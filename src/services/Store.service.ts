@@ -12,6 +12,7 @@ import {ChildStatus} from '../models/ChildStatus.ts';
 import {Environment} from '../models/Environment.ts';
 import {ConfigurationService} from './Configuration.service.ts';
 import {childrenTestData} from '../data/childrenTestData.ts';
+import {TimeAndDateService} from './TimeAndDate.service.ts';
 
 
 export class StoreService extends AbstractBaseService {
@@ -36,7 +37,7 @@ export class StoreService extends AbstractBaseService {
     }
 
     private createStore() {
-        const stateFromLocalStorage = this.servicesResolver.getService(LocalStorageService).getObjectOrNull(LocalStorageService.STORE_SETTINGS) as AttendanceStore | null;
+        const stateFromLocalStorage = this.storeFromLocalStorage()
 
         const globalStore: StoreFactory<AppAction, AttendanceStore, typeof appReducer> = new StoreFactory({
             reducer: appReducer,
@@ -48,6 +49,32 @@ export class StoreService extends AbstractBaseService {
         return this._store = globalStore;
     }
 
+    private storeFromLocalStorage() {
+        const stateFromLocalStorage = this.servicesResolver.getService(LocalStorageService).getObjectOrNull(LocalStorageService.STORE_SETTINGS) as AttendanceStore | null;
+        if (!stateFromLocalStorage) {
+            return null;
+        }
+        return this.resetChildrenStateIfADayHasPassed(stateFromLocalStorage);
+    }
+
+    private resetChildrenStateIfADayHasPassed(state: AttendanceStore) {
+        const lastUpdated = state.lastUpdated;
+        const currentTime = this.servicesResolver.getService(TimeAndDateService).createTimestamp();
+        const hasDateChanged = this.servicesResolver.getService(TimeAndDateService).hasDateChangedBetweenTimestamps(lastUpdated, currentTime);
+        if (hasDateChanged) {
+            return {
+                ...state,
+                attendance: state.attendance.map(child => ({
+                    ...child,
+                    presentToday: PresentToday.Yes,
+                    checkedIn: false
+                })),
+                lastUpdated: currentTime
+            }
+        }
+        return state;
+    }
+
     private createInitialStoreState() {
         const initialState: AttendanceStore = {
             sortType: SortType.Class,
@@ -55,6 +82,7 @@ export class StoreService extends AbstractBaseService {
             display: DisplayType.Attendance,
             attendance: this.getChildrenData(),
             childrenDisplayType: ChildrenDisplayType.List,
+            lastUpdated: 0,
             history: []
         }
         return initialState;

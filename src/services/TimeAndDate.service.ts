@@ -27,6 +27,9 @@ export class TimeAndDateService extends AbstractBaseService {
     padZero(num: number) {
         return num < 10 ? `0${num}` : num;
     }
+    hasDateChangedBetweenTimestamps(timestamp1: number, timestamp2: number) {
+        return this.getDateFromTimestamp(timestamp1) !== this.getDateFromTimestamp(timestamp2);
+    }
 
 
 }

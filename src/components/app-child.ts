@@ -3,7 +3,7 @@ import {customElement, property} from 'lit/decorators.js'
 import {globalStyleSheet} from '../styles/global-style-sheet.ts';
 import {ChildStatus} from '../models/ChildStatus.ts';
 import '../ui/check-mark/check-mark.ts'
-import {DisplayType} from '../models/AttendanceStore.ts';
+import {ChildrenDisplayType, DisplayType} from '../models/AttendanceStore.ts';
 import {Txt} from '../translations/translations.ts';
 import {PresentToday} from '../models/presentToday.ts';
 
@@ -12,9 +12,8 @@ import {PresentToday} from '../models/presentToday.ts';
 @customElement('app-child')
 export class AppChild extends LitElement {
     @property({type: DisplayType}) displayType = DisplayType.Attendance;
-
     @property({type: Object}) child: ChildStatus | null = null;
-
+    @property({type: Object}) childrenGridOrList: ChildrenDisplayType  = ChildrenDisplayType.List;
     @property({type: Function}) onClick: () => void = () => {
     };
 
@@ -27,12 +26,19 @@ export class AppChild extends LitElement {
         (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
     }
 
+   private getButtonStyle() {
+        return `bg-secondary text-primary flex flex-row  
+        ${this.childrenGridOrList === ChildrenDisplayType.Grid ? ' px-4 gap-5' : '  px-10 gap-8'}
+        items-center h-14 w-full  shadow  
+        relative  rounded-full 
+        ${this.child?.presentToday === PresentToday.No ? ' text-faded ' : ' '} ${this.displayType === DisplayType.Attendance ?  ' justify-start ' : ' justify-between   '}`
+    }
+
     render() {
         return html`
             <button @click="${this.onClick}"
                     data-testid="${this.getTestId()}"
-                    class=" bg-secondary text-primary flex flex-row  items-center h-14 w-full  shadow  relative gap-8 rounded-full px-10  
-                    ${this.child?.presentToday === PresentToday.No ? ' text-faded ' : ' '} ${this.displayType === DisplayType.Attendance ?  ' justify-start ' : ' justify-between   '}"
+                    class=" ${this.getButtonStyle()} "
                     style="  border: none;  ">
                     <span id="check-mark-container"
                           class=" w-8 h-8 relative  mt-1 mr-1 ${this.displayType === DisplayType.DaySettings ?  'hidden' : 'absolute'}">
