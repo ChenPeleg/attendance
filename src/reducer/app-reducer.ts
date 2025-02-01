@@ -62,7 +62,7 @@ export const appReducer:StoreReducer<AttendanceStore, AppAction> = (state: Atten
                 }]
             }
 
-        case ActionType.changeDisplay:
+        case ActionType.changeDisplayedTab:
             return {
                 ...state,
                 display: action.payload

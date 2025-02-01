@@ -6,6 +6,7 @@ import {globalStore} from '../store/Store.ts';
 import {ChildrenDisplayType} from '../models/AttendanceStore.ts';
 import gridImage from '../assets/svg/grid.svg'
 import listImage from '../assets/svg/list.svg'
+import {ActionType} from '../models/AppAction.ts';
 
 
 @customElement('children-display-button')
@@ -15,12 +16,10 @@ export class ChildrenDisplayButton extends LitElement {
 
     clickOption(): void {
 
-        // globalStore.dispatch({
-        //     type: ActionType.changeSort,
-        //     payload: {
-        //         sortType: sortType,
-        //     }
-        // })
+        globalStore.dispatch({
+            type: ActionType.changeListOrGrid,
+            payload:  this.displayType === ChildrenDisplayType.List ? ChildrenDisplayType.Grid : ChildrenDisplayType.List
+        })
 
     }
 

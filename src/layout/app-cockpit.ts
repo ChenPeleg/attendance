@@ -38,7 +38,7 @@ export class AppCockpit extends LitElement {
     @state() storeState: AttendanceStore | null = globalStore.getState();
     private cockPitClick:  (displayType : DisplayType) => void = (displayType) => {
         globalStore.dispatch({
-            type: ActionType.changeDisplay,
+            type: ActionType.changeDisplayedTab,
             payload: displayType
         });
     }

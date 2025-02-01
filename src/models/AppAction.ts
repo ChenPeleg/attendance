@@ -4,7 +4,7 @@ export enum ActionType {
     checkOutChild = 'checkOutChild',
     childAbsentFromDay = 'childAbsentFromDay',
     childPresentInDay = 'childPresentInDay',
-    changeDisplay = 'changeDisplay',
+    changeDisplayedTab = 'changeDisplayedTab',
     completeList = 'completeList',
     clearAllData = 'clearAllData',
     changeSort = 'changeSort',
@@ -17,7 +17,7 @@ export type  AppAction = {
                          } | {
                              type: ActionType.addChild; payload: any;
                          } | {
-                             type: ActionType.changeDisplay; payload: any;
+                             type: ActionType.changeDisplayedTab; payload: any;
                          } | {
                              type: ActionType.completeList; payload: any;
                          } | {
