@@ -6,6 +6,7 @@ import darkMode from '../assets/svg/dark-mode.svg'
 import {AppColorTheme, ThemeService} from '../services/Theme.service.ts';
 import {servicesProvider} from '../services/provider/ServicesProvider.ts';
 
+
 @customElement('theme-switch')
 export class ThemeSwitch extends LitElement {
 
