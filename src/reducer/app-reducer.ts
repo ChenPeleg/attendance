@@ -8,6 +8,7 @@ import {TimeAndDateService} from '../services/TimeAndDate.service.ts';
 
 import {SortOrder} from '../models/SortType.ts';
 import {StoreService} from '../services/Store.service.ts';
+import {SupersizeAnimationService} from '../services/SupersizeAnimationService.ts';
 
 export const appReducer:StoreReducer<AttendanceStore, AppAction> = (state: AttendanceStore, action: AppAction): AttendanceStore => {
     const getLastUpdateTimeStamp = () => {
@@ -76,6 +77,8 @@ export const appReducer:StoreReducer<AttendanceStore, AppAction> = (state: Atten
                 timestamp:  servicesProvider.getService(TimeAndDateService).createTimestamp(),
                 attendance: state.attendance.filter(child => child.checkedIn)
             }
+            const supersizeAnimationService = servicesProvider.getService(SupersizeAnimationService);
+            supersizeAnimationService.showConfetti();
             return {
                 ...state,
                 history: [...state.history, newHistory],
