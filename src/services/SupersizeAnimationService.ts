@@ -9,7 +9,7 @@ export class SupersizeAnimationService extends AbstractBaseService {
     }
 
     showConfetti() {
-
+        this.showEmojiJumping();
         confetti.start();
         setTimeout(() => {
 
@@ -41,11 +41,8 @@ export class SupersizeAnimationService extends AbstractBaseService {
     }
 
     private randomAmazingHebrewWord() {
-
-        const amazingWords = ['כל הכבוד', 'נהדר', 'מדהים', 'מופלא', 'נפלא', 'מרהיב', 'מרשים', 'מעולה', 'יופי', 'הצלחת', 'איזה כיף', 'אליפות', 'אין עליך'];
+        const amazingWords = ['כל הכבוד', 'נהדר', 'מדהים', 'מופלא', 'נפלא', 'מרהיב', 'מרשים', 'מעולה', 'יופי', 'הצלחת', 'איזה כיף', 'אליפות', 'אין עליך', 'מצויין'];
         return `${amazingWords[Math.floor(Math.random() * amazingWords.length)]} !`;
-
-
     }
 
     private randomCuteEmoji() {
