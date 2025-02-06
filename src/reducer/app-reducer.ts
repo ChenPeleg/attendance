@@ -1,12 +1,12 @@
 import {ActionType, AppAction} from '../models/AppAction.ts';
-import {AttendanceStore} from '../models/AttendanceStore.ts';
+import {AttendanceStore } from '../models/AttendanceStore.ts';
 import {PresentToday} from '../models/presentToday.ts';
 import {StoreReducer} from '../store/factory/StoreFactory.ts';
 import {HistoryModel} from '../models/HistoryModel.ts';
 import {servicesProvider} from '../services/provider/ServicesProvider.ts';
 import {TimeAndDateService} from '../services/TimeAndDate.service.ts';
 
-import {SortOrder} from '../models/SortType.ts';
+import {SortOrder } from '../models/SortType.ts';
 import {StoreService} from '../services/Store.service.ts';
 import {SupersizeAnimationService} from '../services/SupersizeAnimationService.ts';
 
@@ -89,8 +89,16 @@ export const appReducer:StoreReducer<AttendanceStore, AppAction> = (state: Atten
             }
         case ActionType.clearAllData:
             const initialStoreState = servicesProvider.getService(StoreService).initialState;
+            const keepState = {
+                sortType:  state.sortType,
+                sortOrder: state.sortOrder,
+                childrenDisplayType: state.childrenDisplayType
+            }
+
             return {
                 ...initialStoreState
+                , ...keepState
+
             }
 
         case ActionType.changeSort:
