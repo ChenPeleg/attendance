@@ -54,13 +54,19 @@ body {
     align-items: center;
 
     .emoji-and-text {
+        background: rgb(0, 0, 0, 0.08);
+        border-radius: 40px;
+        /*filter: drop-shadow(0 0 0.5rem var(--primary-background-color)) drop-shadow(0 0 1rem var(--primary-background-color)) drop-shadow(0 0 2rem var(--primary-background-color)) drop-shadow(0 0 4rem var(--primary-background-color))  drop-shadow(0 0 10rem var(--primary-text-color ));*/
+        filter: drop-shadow(0 0 1rem var(--primary-background-color));
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        padding-top: 10%;
-        animation: jump-in 1s infinite;
+        margin-top: 10%;
+        padding-bottom: 1rem;
+        animation: jump-in 1s  ;
         animation-iteration-count: 1
+
     }
 
     .emoji-surprise {
@@ -70,13 +76,17 @@ body {
     }
 
     .text {
+
+        /*filter: drop-shadow(0 0 0.5rem var(--primary-background-color))   drop-shadow(0 0 1rem var(--secondary-background-color))   drop-shadow(0 0 10rem var(--primary-text-color ));*/
+
         direction: rtl;
-        background: -webkit-linear-gradient( var(--accent-text-color),var(--secondary-text-color),var(--primary-text-color),
+
+        background: -webkit-linear-gradient(var(--accent-text-color), var(--secondary-text-color), var(--primary-text-color),
         var(--secondary-text-color),
         var(--accent-text-color));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        filter: drop-shadow(0 0 0.02rem var(--accent-text-color));
+
         font-size: 4rem;
         font-weight: 700;
     }

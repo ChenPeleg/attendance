@@ -44,6 +44,7 @@ export class SupersizeAnimationService extends AbstractBaseService {
 
     showEmojiJumping() {
 
+
         const emojiContainer = document.createElement('div');
         emojiContainer.classList.add('emoji-container');
         emojiContainer.innerHTML = `<div class="emoji-and-text">
@@ -52,11 +53,14 @@ export class SupersizeAnimationService extends AbstractBaseService {
                                         <div class="text">${this.randomAmazingHebrewWord()}</div>
                                      </div>`;
         document.body.appendChild(emojiContainer);
+        const removeEmoji = () => {
+            emojiContainer.remove()
+        }
 
         if (emojiContainer) {
             emojiContainer.classList.add('jumping');
             setTimeout(() => {
-                emojiContainer.remove()
+                removeEmoji()
             }, 5000)
         }
     }
