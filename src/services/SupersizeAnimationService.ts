@@ -16,7 +16,7 @@ export class SupersizeAnimationService extends AbstractBaseService {
             confetti.stop();
         }, 3000)
     }
-    private randomAmaingHebrewWord() {
+    private randomAmazingHebrewWord() {
 
        const amazingWords = [
            'כל הכבוד',
@@ -49,7 +49,7 @@ export class SupersizeAnimationService extends AbstractBaseService {
         emojiContainer.innerHTML = `<div class="emoji-and-text">
                                         <div class="emoji-surprise"> ${this.randomCuteEmoji()}
                                         </div>
-                                        <div class="text">${this.randomAmaingHebrewWord()}</div>
+                                        <div class="text">${this.randomAmazingHebrewWord()}</div>
                                      </div>`;
         document.body.appendChild(emojiContainer);
 
