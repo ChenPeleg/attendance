@@ -11,9 +11,7 @@ export class AppNavbar extends LitElement {
 
     firstUpdated() {
         (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
-        setTimeout(() => {
-            this.devAction()
-        },500)
+
     }
 
 
@@ -46,7 +44,7 @@ export class AppNavbar extends LitElement {
     private getDevButton() {
         const configService = servicesProvider.getService(ConfigurationService);
         if (!configService.isDevMode()) {
-            return ''
+           // return ''
         }
         return html`
             <button .onclick="${()=>this.devAction()}" class="bg-secondary text-primary rounded-full cursor-pointer h-11 w-11 flex flex-row justify-center items-center">

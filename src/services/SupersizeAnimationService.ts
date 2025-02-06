@@ -56,8 +56,8 @@ export class SupersizeAnimationService extends AbstractBaseService {
         if (emojiContainer) {
             emojiContainer.classList.add('jumping');
             setTimeout(() => {
-                // emojiContainer.remove()
-            }, 3000)
+                emojiContainer.remove()
+            }, 5000)
         }
     }
 
