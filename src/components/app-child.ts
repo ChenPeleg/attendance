@@ -6,6 +6,8 @@ import deleteImage from '../assets/svg/delete.svg'
 import {ChildrenDisplayType, DisplayType} from '../models/AttendanceStore.ts';
 import {Txt} from '../translations/translations.ts';
 import {PresentToday} from '../models/presentToday.ts';
+import {globalStore} from '../store/Store.ts';
+import {ActionType} from '../models/AppAction.ts';
 
 
 @customElement('app-child')
@@ -17,7 +19,10 @@ export class AppChild extends LitElement {
     };
 
     deleteChild() {
-        console.log('delete child')
+        globalStore.dispatch({
+            type: ActionType.removerAddedChild,
+            payload: this.child?.id
+        })
     }
 
     firstUpdated() {
@@ -64,7 +69,7 @@ export class AppChild extends LitElement {
 
     private getDeleteButton() {
         if (!this.child?.manuallyAdded) {
-            return ''
+           return ''
         }
         return html`
             <button @click="${this.deleteChild}"

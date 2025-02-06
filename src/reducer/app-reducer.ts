@@ -122,6 +122,16 @@ export const appReducer:StoreReducer<AttendanceStore, AppAction> = (state: Atten
                 ...state,
                 childrenDisplayType: action.payload
             }
+        case ActionType.removerAddedChild:
+            const childId = action.payload;
+            const child = state.attendance.find(child => child.id === childId);
+            if (!child || !child.manuallyAdded) {
+                return state;
+            }
+            return {
+                ...state,
+                attendance: state.attendance.filter(child => !child.id === childId)
+            }
         default:
             return state;
     }
