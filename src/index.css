@@ -42,18 +42,58 @@ body {
 }
 
 .emoji-container {
+
+    z-index: 1000;
     display: flex;
+    flex-direction: column;
     position: fixed;
-    height: 90vh;
-    width: 99vw;
+    height: 98svh;
+    width: 99svw;
     overflow: hidden;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
+
+    .emoji-and-text {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-top: 10%;
+        animation: jump-in 1s infinite;
+        animation-iteration-count: 1
+    }
 
     .emoji-surprise {
         display: flex;
-        font-size: 20rem;
-        animation: jump 1s infinite;
+        font-size: 12rem;
+
+    }
+
+    .text {
+        background: -webkit-linear-gradient( var(--accent-text-color),var(--secondary-text-color),var(--primary-text-color),
+        var(--secondary-text-color),
+        var(--accent-text-color));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        filter: drop-shadow(0 0 0.02rem var(--accent-text-color));
+        font-size: 4rem;
+        font-weight: 700;
     }
 }
 
+@keyframes jump-in {
+
+    0% {
+        transform: scale(0.1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+
+
+}
