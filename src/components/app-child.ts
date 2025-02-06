@@ -94,7 +94,6 @@ export class AppChild extends LitElement {
     }
 
     private getCheckMark() {
-
         return this.child?.checkedIn ? html`
             <check-mark></check-mark>` : html``
     }

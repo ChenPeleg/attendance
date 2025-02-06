@@ -17,7 +17,7 @@ interface CockpitButton {
 }
 
 
-const SHOW_SCHOOL_BUS = false;
+const SHOW_SCHOOL_BUS = true;
 
 @customElement('app-cockpit')
 export class AppCockpit extends LitElement {
@@ -74,7 +74,7 @@ export class AppCockpit extends LitElement {
     render() {
         return html`
             <div class="flex flex-col items-start justify-center   ">
-                <div class="grid grid-cols-2 gap-3 flex-wrap">
+                <div class="grid grid-cols-3 gap-3 flex-wrap">
                     ${this.buttons.map(button => this.renderButton(button))}
                 </div>  
             </div>

@@ -14,6 +14,7 @@ import '../components/past-counts.ts'
 import {servicesProvider} from '../services/provider/ServicesProvider.ts';
 import {HistoryService} from '../services/History.service.ts';
 import {SortService} from '../services/SortService.service.ts';
+import {SchoolClass} from '../models/schoolClass.ts';
 
 @customElement('app-main')
 export class AppMain extends LitElement {
@@ -40,13 +41,13 @@ export class AppMain extends LitElement {
     render() {
         return html`
             <div class="flex flex-col items-start justify-center   gap-3 pr-4 text-primary">
-                <div class="${this.displayType === DisplayType.Attendance ? 'contents' : 'hidden'}">
+                <div class="${this.displayType !== DisplayType.DaySettings ? 'contents' : 'hidden'}">
                     <past-counts .lastAttendanceTimes="${this.getHistoryHours()}"></past-counts>
                     <children-count .onClick="${() => this.completeList()}" .totalChildren=${this.getPresentChildren().length || 0}
                                     .checkedInChildren=${this.getPresentChildren().filter(child => child.checkedIn).length || 0}>
                     </children-count>
                 </div>
-                <div class="${this.displayType === DisplayType.Attendance ? 'hidden' : ' contents'}">
+                <div class="${this.displayType !== DisplayType.DaySettings ? 'hidden' : ' contents'}">
                     <div class="h-2 w-full">
 
                     </div>
@@ -62,7 +63,7 @@ export class AppMain extends LitElement {
     }
 
     private getChildrenDisplayClass() {
-        if (this.displayType === DisplayType.Attendance && this.storeState?.childrenDisplayType ===  ChildrenDisplayType.Grid) {
+        if (this.displayType === DisplayType.Attendance && this.storeState?.childrenDisplayType === ChildrenDisplayType.Grid) {
             return `grid grid-cols-2 gap-2 pl-3`
         }
         return `flex-col flex gap-4 min-w-56`
@@ -82,6 +83,7 @@ export class AppMain extends LitElement {
     private childClicked = (child: ChildStatus) => {
         switch (this.displayType) {
             case DisplayType.Attendance:
+            case DisplayType.SchoolBus:
                 this.checkInChild(child);
                 break;
             case DisplayType.DaySettings:
@@ -94,7 +96,6 @@ export class AppMain extends LitElement {
     };
 
     private checkInChild(child: ChildStatus) {
-
         globalStore.dispatch({
             type: child.checkedIn ? ActionType.checkOutChild : ActionType.checkInChild,
             payload: child
@@ -109,7 +110,12 @@ export class AppMain extends LitElement {
     }
 
     private getPresentChildren() {
-        return this.storeState?.attendance.filter(c => c.presentToday === PresentToday.Yes) || []
+        const children = this.storeState?.attendance.filter(c => c.presentToday === PresentToday.Yes) || []
+        if (this.displayType === DisplayType.SchoolBus) {
+            const isOnSchoolBus = (c: ChildStatus) => c.manuallyAdded || c.schoolClass === SchoolClass.First || c.schoolClass === SchoolClass.Second;
+            return children.filter(isOnSchoolBus)
+        }
+        return children
     }
 
     private getChildren() {
@@ -118,7 +124,8 @@ export class AppMain extends LitElement {
 
         return sortedChildren.map(child => {
             return html`
-                <app-child .childrenGridOrList="${this.storeState?.childrenDisplayType}" .child=${child} .onClick="${() => this.childClicked(child)}" .displayType="${this.displayType}"></app-child>
+                <app-child .childrenGridOrList="${this.storeState?.childrenDisplayType}" .child=${child}
+                           .onClick="${() => this.childClicked(child)}" .displayType="${this.displayType}"></app-child>
             `
         })
     }
