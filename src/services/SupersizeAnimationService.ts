@@ -16,6 +16,26 @@ export class SupersizeAnimationService extends AbstractBaseService {
             confetti.stop();
         }, 3000)
     }
+    private randomAmaingHebrewWord() {
+
+       const amazingWords = [
+           'כל הכבוד',
+           'נהדר',
+           'מדהים'
+           , 'מופלא',
+           'נפלא',
+           'מרהיב',
+           'מרשים',
+           'מעולה',
+           'יופי',
+           'הצלחת',
+           'איזה כיף',
+           'אליפות', 'אין עליך'
+       ];
+         return `${amazingWords[Math.floor(Math.random() * amazingWords.length)]} !`;
+
+
+    }
     private randomCuteEmoji() {
         const cuteEmojis = ['🐶', '🐱', '🐭', '🐹', '🐰', '🦊', '🐻', '🐼', '🐨', '🐯', '🦁', '🐮', '🐷', '🐸', '🐵', '🐔', '🐧', '🐦', '🐤', '🐥', '🦆', '🦅', '🦉', '🦇', '🐺', '🐗', '🐴', '🦄', '🐝', '🐛', '🦋', '🐌', '🐞', '🐜', '🦗', '🕷', '🦂', '🦟', '🦠', '🐢', '🐍', '🦎', '🦖', '🦕', '🐙', '🦑', '🦐', '🦞', '🦀', '🐡', '🐠', '🐟', '🐬', '🐳', '🐋', '🦈', '🐊', '🐅', '🐆', '🦓', '🦍', '🦧', '🦣', '🐘', '🦛', '🦏', '🐪', '🐫', '🦒', '🦘', '🦙', '🦌', '🦍', '🦝', '🦨', '🦡', '🦦', '🦥', '🦮', '🐕', '🦮', '🐕‍🦺', '🦤', '🦩']
         return cuteEmojis[Math.floor(Math.random() * cuteEmojis.length)];
@@ -29,7 +49,7 @@ export class SupersizeAnimationService extends AbstractBaseService {
         emojiContainer.innerHTML = `<div class="emoji-and-text">
                                         <div class="emoji-surprise"> ${this.randomCuteEmoji()}
                                         </div>
-                                        <div class="text">Great!</div>
+                                        <div class="text">${this.randomAmaingHebrewWord()}</div>
                                      </div>`;
         document.body.appendChild(emojiContainer);
 

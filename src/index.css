@@ -70,6 +70,7 @@ body {
     }
 
     .text {
+        direction: rtl;
         background: -webkit-linear-gradient( var(--accent-text-color),var(--secondary-text-color),var(--primary-text-color),
         var(--secondary-text-color),
         var(--accent-text-color));
