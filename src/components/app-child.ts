@@ -32,7 +32,7 @@ export class AppChild extends LitElement {
 
     render() {
         return html`
-            <div class="flex flex-row items-center justify-center gap-3">
+            <div class="flex flex-row items-center justify-center  ">
                 <button @click="${this.onClick}"
                         data-testid="${this.getTestId()}"
                         class=" ${this.getButtonStyle()} "
@@ -68,14 +68,15 @@ export class AppChild extends LitElement {
     }
 
     private getDeleteButton() {
-        if (!this.child?.manuallyAdded) {
+        if (!this.child?.manuallyAdded || this.displayType !== DisplayType.DaySettings) {
            return ''
         }
-        return html`
-            <button @click="${this.deleteChild}"
-                    class="bg-primary text-secondary rounded-full h-10 w-10 flex flex-row justify-center items-center">
+        return html`<div class="relative ">
+            <button @click="${this.deleteChild}" 
+                    class="bg-primary absolute -left-12 -top-5 mt-0.5 text-secondary rounded-full h-10 w-10 flex flex-row justify-center items-center">
                 <img src="${deleteImage}" alt="delete" class="app-icon w-6 h-6"> </img>
             </button>
+        </div>
         `
     }
 

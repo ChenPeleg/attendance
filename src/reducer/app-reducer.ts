@@ -130,7 +130,7 @@ export const appReducer:StoreReducer<AttendanceStore, AppAction> = (state: Atten
             }
             return {
                 ...state,
-                attendance: state.attendance.filter(child => !child.id === childId)
+                attendance: state.attendance.filter(child => child.id !== childId)
             }
         default:
             return state;
