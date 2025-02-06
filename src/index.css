@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@100..900&display=swap');
- @import "css/scroll-bar.css";
+@import "css/scroll-bar.css";
+
 :root {
     font-family: "Noto Sans Hebrew", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 
@@ -38,5 +39,21 @@ body {
     place-items: center;
     min-width: 320px;
     min-height: 90vh;
+}
+
+.emoji-container {
+    display: flex;
+    position: fixed;
+    height: 90vh;
+    width: 99vw;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+
+    .emoji-surprise {
+        display: flex;
+        font-size: 20rem;
+        animation: jump 1s infinite;
+    }
 }
 
