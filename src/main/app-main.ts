@@ -112,10 +112,10 @@ export class AppMain extends LitElement {
     private getPresentChildren() {
         const children = this.storeState?.attendance.filter(c => c.presentToday === PresentToday.Yes) || []
         if (this.displayType === DisplayType.SchoolBus) {
-            const isOnSchoolBus = (c: ChildStatus) => c.manuallyAdded || c.schoolClass === SchoolClass.First || c.schoolClass === SchoolClass.Second;
+            const isOnSchoolBus = (c: ChildStatus) => c.manuallyAdded || c.schoolClass === SchoolClass.First || c.schoolClass === SchoolClass.Second ||  c.onlySchoolBus === true;
             return children.filter(isOnSchoolBus)
         }
-        return children
+        return children.filter(c=> !(!c.manuallyAdded &&  c.onlySchoolBus === true))
     }
 
     private getChildren() {
