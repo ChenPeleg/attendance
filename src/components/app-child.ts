@@ -3,6 +3,7 @@ import {customElement, property} from 'lit/decorators.js'
 import {globalStyleSheet} from '../styles/global-style-sheet.ts';
 import {ChildStatus} from '../models/ChildStatus.ts';
 import deleteImage from '../assets/svg/delete.svg'
+import busIcon from '../assets/svg/bus.svg'
 import {ChildrenDisplayType, DisplayType} from '../models/AttendanceStore.ts';
 import {Txt} from '../translations/translations.ts';
 import {PresentToday} from '../models/presentToday.ts';
@@ -51,12 +52,12 @@ export class AppChild extends LitElement {
                       </span>
                   </span>
                     <span class="flex flex-row justify-center items-center   ">
-                    ${this.child?.name}  
+                    ${this.child?.name} ${this.getChildBusIcon()} 
                  </span>
                     <span id="is-here-today"
                           class="   ${this.displayType === DisplayType.Attendance ? 'hidden' : 'justify-self-end  '}">
                          
-                      <span id="check-mark-container" class="  "
+                      <span id="check-mark-container"
                       >
                         ${this.child?.presentToday === PresentToday.Yes ? Txt.present : Txt.absent} 
                       </span>
@@ -67,16 +68,30 @@ export class AppChild extends LitElement {
         `
     }
 
+    private getChildBusIcon() {
+        if (this.displayType !== DisplayType.DaySettings) {
+            return ''
+        }
+        if (!this.child?.manuallyAdded && this.child?.onlySchoolBus) {
+            const presentToday = this.child?.presentToday === PresentToday.Yes
+            return html`
+                <div class="${presentToday ? '' : 'opacity-20'} h-full flex flex-col justify-center items-center px-2 pt-1">
+                    <img src="${busIcon}" alt="bus" class="app-icon w-6 h-6"/></div>`
+        }
+        return ''
+    }
+
     private getDeleteButton() {
         if (!this.child?.manuallyAdded || this.displayType !== DisplayType.DaySettings) {
-           return ''
+            return ''
         }
-        return html`<div class="relative ">
-            <button @click="${this.deleteChild}" 
-                    class="bg-primary absolute -left-12 -top-5 mt-0.5 text-secondary rounded-full h-10 w-10 flex flex-row justify-center items-center">
-                <img src="${deleteImage}" alt="delete" class="app-icon w-6 h-6"> </img>
-            </button>
-        </div>
+        return html`
+            <div class="relative ">
+                <button @click="${this.deleteChild}"
+                        class="bg-primary absolute -left-12 -top-5 mt-0.5 text-secondary rounded-full h-10 w-10 flex flex-row justify-center items-center">
+                    <img src="${deleteImage}" alt="delete" class="app-icon w-6 h-6"> </img>
+                </button>
+            </div>
         `
     }
 

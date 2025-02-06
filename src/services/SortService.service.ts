@@ -13,7 +13,7 @@ export class SortService extends AbstractBaseService {
         super(provider);
     }
 
-    sortChildren(children: ChildStatus[]) : ChildStatus[] {
+    sortChildren(children: ChildStatus[]): ChildStatus[] {
         const sort = this.getSortOrder();
         const sortType = sort.sortType;
         const sortOrder = sort.sortOrder;
@@ -30,8 +30,8 @@ export class SortService extends AbstractBaseService {
                 school,
                 boyOrGirl,
                 schoolClass: schoolClass,
-                onlySchoolBus:   false,
-                manuallyAdded : child.manuallyAdded || false
+                onlySchoolBus: !child.manuallyAdded ? !!child.onlySchoolBus : false,
+                manuallyAdded: child.manuallyAdded || false
             }
         });
 
@@ -39,8 +39,7 @@ export class SortService extends AbstractBaseService {
         // @ts-ignore
         return childrenFullData.sort((a, b) => {
             if (sortType === SortType.Class) {
-                return sortOrder === SortOrder.Ascending ? (a.schoolClass || '').localeCompare(b.schoolClass) :
-                    b.schoolClass.localeCompare(a.schoolClass);
+                return sortOrder === SortOrder.Ascending ? (a.schoolClass || '').localeCompare(b.schoolClass) : b.schoolClass.localeCompare(a.schoolClass);
             }
             if (sortType === SortType.Name) {
                 return sortOrder === SortOrder.Ascending ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
