@@ -84,6 +84,9 @@ export class SideMenuContent extends LitElement {
 
     private addChild() {
         const childName = prompt(Txt.enterChildName);
+        if (!childName) {
+            return;
+        }
         globalStore.dispatch({
             type: ActionType.addChild,
             payload: childName

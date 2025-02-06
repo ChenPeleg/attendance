@@ -43,8 +43,8 @@ export class AppNavbar extends LitElement {
 
     private getDevButton() {
         const configService = servicesProvider.getService(ConfigurationService);
-        if (!configService.isDevMode()) {
-           // return ''
+        if (!configService.isDevMode() || this.shadowRoot) {
+           return ''
         }
         return html`
             <button .onclick="${()=>this.devAction()}" class="bg-secondary text-primary rounded-full cursor-pointer h-11 w-11 flex flex-row justify-center items-center">
