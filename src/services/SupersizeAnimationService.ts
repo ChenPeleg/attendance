@@ -30,7 +30,7 @@ export class SupersizeAnimationService extends AbstractBaseService {
         emojiContainer.addEventListener('click', () => {
             clickCount++;
             // make the image larger
-            emojiContainer.style.transform =  `scale(${1.1 + clickCount * 0.3})`
+            emojiContainer.style.transform =  `scale(${1.1 + clickCount * 0.8})`
             if (clickCount >= 3) {
                 emojiContainer.remove()
             }
