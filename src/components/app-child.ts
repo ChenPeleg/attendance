@@ -55,8 +55,7 @@ export class AppChild extends LitElement {
                     ${this.child?.name} ${this.getChildBusIcon()} 
                  </span>
                     <span id="is-here-today"
-                          class="   ${this.displayType === DisplayType.Attendance ? 'hidden' : 'justify-self-end  '}">
-                         
+                          class="   ${this.displayType !== DisplayType.DaySettings ? 'hidden' : 'justify-self-end  '}">
                       <span id="check-mark-container"
                       >
                         ${this.child?.presentToday === PresentToday.Yes ? Txt.present : Txt.absent} 

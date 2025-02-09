@@ -63,7 +63,7 @@ export class AppMain extends LitElement {
     }
 
     private getChildrenDisplayClass() {
-        if (this.displayType === DisplayType.Attendance && this.storeState?.childrenDisplayType === ChildrenDisplayType.Grid) {
+        if (this.displayType !== DisplayType.DaySettings && this.storeState?.childrenDisplayType === ChildrenDisplayType.Grid) {
             return `grid grid-cols-2 gap-2 pl-3`
         }
         return `flex-col flex gap-4 min-w-56`
