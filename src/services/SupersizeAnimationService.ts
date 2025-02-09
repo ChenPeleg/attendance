@@ -18,15 +18,24 @@ export class SupersizeAnimationService extends AbstractBaseService {
     }
 
     showEmojiJumping() {
-
+        let clickCount = 0;
 
         const emojiContainer = document.createElement('div');
         emojiContainer.classList.add('emoji-container');
-        emojiContainer.innerHTML = `<div class="emoji-and-text">
+        emojiContainer.innerHTML = `<div class="emoji-and-text"  >
                                         <div class="emoji-surprise"> ${this.randomCuteEmoji()}
                                         </div>
                                         <div class="text">${this.randomAmazingHebrewWord()}</div>
                                      </div>`;
+        emojiContainer.addEventListener('click', () => {
+            clickCount++;
+            // make the image larger
+            emojiContainer.style.transform =  `scale(${1.1 + clickCount * 0.3})`
+            if (clickCount >= 3) {
+                emojiContainer.remove()
+            }
+
+        })
         document.body.appendChild(emojiContainer);
         const removeEmoji = () => {
             emojiContainer.remove()
