@@ -2,7 +2,7 @@ import {ServicesResolver} from './provider/ServiceResolverClass.ts';
 import {AbstractBaseService} from './provider/AbstractBaseService.ts';
 
 export class LocalStorageService extends AbstractBaseService {
-    public static readonly STORE_SETTINGS = 'attendance_Store_Settings';
+    public static readonly STORE_SETTINGS = 'attendance_Store_Settings_25';
     protected _localStorage: Storage;
     constructor(provider: ServicesResolver) {
         super(provider);
