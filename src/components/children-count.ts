@@ -44,7 +44,6 @@ export class ChildrenCount extends LitElement {
         `
     }
 
-
 }
 
 declare global {

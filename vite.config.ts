@@ -10,9 +10,6 @@ export default defineConfig({
 
       name: 'run-script-on-change',
       handleHotUpdate({ file }) {
-
-
-
         // Add your script execution logic here
         exec(`node src/scripts/run-on-file-change.js "${file}" arg1 arg2`  , (err, _stdout, stderr) => {
           if (err) {
