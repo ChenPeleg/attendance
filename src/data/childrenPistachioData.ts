@@ -87,38 +87,45 @@ export const childrenBaseData: ChildModel [] = [
     school: SchoolType.Nitzanim,
     schoolClass: SchoolClass.Second,
     boyOrGirl: Gender.Girl,
+
 }, {
-    id: '16',
+        id: '17',
+        name: 'נור ',
+        school: SchoolType.Nitzanim,
+        schoolClass: SchoolClass.Second,
+        boyOrGirl: Gender.Boy
+    },  {
+    id: '18',
     name: 'יונתן',
     school: SchoolType.Nitzanim,
     schoolClass: SchoolClass.Third,
     boyOrGirl: Gender.Boy,
 }, {
-    id: '17',
+    id: '19',
     name: 'אסף ',
     school: SchoolType.Nitzanim,
     schoolClass: SchoolClass.Third,
     boyOrGirl: Gender.Boy,
 }, {
-    id: '18',
+    id: '20',
     name: 'עפרי ',
     school: SchoolType.Nitzanim,
     schoolClass: SchoolClass.Third,
     boyOrGirl: Gender.Girl,
 }, {
-    id: '19',
+    id: '21',
     name: 'נעמי',
     school: SchoolType.Nitzanim,
     schoolClass: SchoolClass.Third,
     boyOrGirl: Gender.Girl,
 }, {
-    id: '110',
+    id: '22',
     name: 'אביב ',
     school: SchoolType.Nitzanim,
     schoolClass: SchoolClass.Third,
     boyOrGirl: Gender.Girl,
 },  {
-    id: '114',
+    id: '23',
     name: 'אורי',
     school: SchoolType.Nitzanim,
     schoolClass: SchoolClass.Other,
