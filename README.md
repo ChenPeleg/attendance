@@ -1,6 +1,6 @@
 # נוחכות פיסטוק (Pistachio Attendance)
 
-A modern, Hebrew-language Progressive Web App (PWA) for tracking student attendance in educational settings.
+A modern, Hebrew-language Progressive Web App (PWA) for tracking student attendance in after school activity.
 
 ![Attendance App Screenshot](https://github.com/user-attachments/assets/2a03b1b3-3510-40b3-bfea-88d021830ec0)
 
@@ -9,7 +9,7 @@ A modern, Hebrew-language Progressive Web App (PWA) for tracking student attenda
 ### Core Functionality
 - **📊 Student Attendance Tracking** - Track which students are present, absent, or taking the school bus
 - **👥 Student Management** - Add, remove, and manage student information
-- **🚌 School Bus Tracking** - Special mode for tracking students who take the bus
+- **🚌 School Bus Tracking** - Special mode for tracking students who take the bus when a grown up guide is accompanying the bus
 - **📱 Progressive Web App** - Install on mobile devices for native app-like experience
 
 ### User Experience
