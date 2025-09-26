@@ -2,7 +2,29 @@
   "name": "attendance",
   "private": true,
   "version": "1.0.0",
+  "description": "נוחכות פיסטוק - A modern Hebrew-language Progressive Web App for tracking student attendance in educational settings",
   "type": "module",
+  "keywords": [
+    "attendance",
+    "education",
+    "pwa",
+    "hebrew",
+    "students",
+    "school",
+    "lit",
+    "typescript",
+    "vite"
+  ],
+  "author": "Chen Peleg <24780916+ChenPeleg@users.noreply.github.com>",
+  "license": "MIT",
+  "homepage": "https://chenpeleg.github.io/attendance/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ChenPeleg/attendance.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ChenPeleg/attendance/issues"
+  },
   "scripts": {
     "dev": "vite --mode development",
     "build": "tsc && vite build",
