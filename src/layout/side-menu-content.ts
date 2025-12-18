@@ -25,7 +25,9 @@ export class SideMenuContent extends LitElement {
     }
 
     openAdvanced() {
-       servicesProvider.getService(SearchParamsService).getParams()
+       servicesProvider.getService(SearchParamsService).patchParams({
+           dialog: 'lists'
+       })
     }
     onReset() {
         globalStore.dispatch({
