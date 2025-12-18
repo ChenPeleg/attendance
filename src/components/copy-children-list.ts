@@ -18,7 +18,7 @@ enum CopyFormat {
 export class CopyChildrenList extends LitElement {
     @state() private _presentChildren: ChildStatus[] = [];
     @state() private _showCheckMark: boolean = false;
-    @state() private _selectedFormat: CopyFormat = CopyFormat.Groups;
+    @state() private _selectedFormat: CopyFormat = CopyFormat.Numbers;
     private _unsubscribe: (() => void) | null = null;
 
     connectedCallback() {
@@ -52,7 +52,7 @@ export class CopyChildrenList extends LitElement {
 
     render() {
         return html`
-            <div class="flex flex-col gap-4 p-4 items-center justify-center">
+            <div class="flex flex-col gap-4 p-4 items-start  justify-center">
                 <div class="flex flex-row items-center gap-2 relative">
                     <div class="flex flex-col gap-2">
                         <button @click="${this.copyToClipboard}"
@@ -69,26 +69,25 @@ export class CopyChildrenList extends LitElement {
                                     style="border: none; appearance: none;  "
                                     @change="${(e: Event) => this._selectedFormat = (e.target as HTMLSelectElement).value as CopyFormat}"
                             >
+                                <option value="${CopyFormat.Numbers}" ?selected="${this._selectedFormat === CopyFormat.Numbers}">מספרים
+                                </option>
                                 <option value="${CopyFormat.Groups}" ?selected="${this._selectedFormat === CopyFormat.Groups}">כיתות
                                 </option>
                                 <option value="${CopyFormat.Commas}" ?selected="${this._selectedFormat === CopyFormat.Commas}">פסיקים
                                 </option>
-                                <option value="${CopyFormat.Numbers}" ?selected="${this._selectedFormat === CopyFormat.Numbers}">מספרים
-                                </option>
+                            
 
 
                             </select>
                             <div class="pointer-events-none absolute inset-y-0 left-2.5 top-1/3 flex items-center pr-2 text-gray-700">
-                                <!-- Heroicon name: solid/chevron-down (or your own SVG) -->
+                             
                                 <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd"
                                           d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
                                           clip-rule="evenodd"/>
                                 </svg>
                             </div>
-                        </div>
-
-
+                        </div> 
                     </div>
                     <div class="absolute -left-16 top-1">
                         ${this._showCheckMark ? html`
