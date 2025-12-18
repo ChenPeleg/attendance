@@ -9,12 +9,12 @@ import {BackgroundImageService} from '../BackgroundImage.service.ts';
 import {ConfigurationService} from '../Configuration.service.ts';
 import {PWAService} from '../PWA.service.ts';
 import {SupersizeAnimationService} from '../SupersizeAnimationService.ts';
+import {SearchParamsService} from '../SearchParams.service.ts';
 
 const ServicesProviderFactory = () => {
-    const provider = new ServicesResolver([PWAService, ConfigurationService, BackgroundImageService, SortService, LocalStorageService, TimeAndDateService, ThemeService, StoreService, HistoryService,SupersizeAnimationService]);
+    const provider = new ServicesResolver([PWAService, ConfigurationService, BackgroundImageService, SortService, LocalStorageService, TimeAndDateService, ThemeService, StoreService, HistoryService,SupersizeAnimationService, SearchParamsService]);
     provider.initServices();
     return provider;
 }
 export const servicesProvider = ServicesProviderFactory();
-
 
