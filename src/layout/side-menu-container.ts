@@ -52,6 +52,7 @@ export class SideMenuContainer extends LitElement {
                     </div>
                     </div>
                 </div>
+             
                 <div id="button-container" class="absolute z-50">
 
                     <button @click=${this.toggleMenu}

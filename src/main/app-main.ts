@@ -11,6 +11,7 @@ import {ActionType} from '../models/AppAction.ts';
 import {ChildStatus} from '../models/ChildStatus.ts';
 import {PresentToday} from '../models/presentToday.ts';
 import '../components/past-counts.ts'
+import '../components/copy-children-list.ts'
 import {servicesProvider} from '../services/provider/ServicesProvider.ts';
 import {HistoryService} from '../services/History.service.ts';
 import {SortService} from '../services/SortService.service.ts';

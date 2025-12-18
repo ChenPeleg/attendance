@@ -37,8 +37,7 @@ export class ChildrenDisplayButton extends LitElement {
         return html`
             <div class="h-14 w-full flex-row flex justify-between gap-5">
                     <span>
-                    ${Txt.displayLayout}
-                        
+                    ${Txt.displayLayout} 
                     </span>
                     <span>
                              <button @click=${() => this.clickOption()}
