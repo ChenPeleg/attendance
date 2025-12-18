@@ -10,6 +10,7 @@ import {SearchParamsService} from '../services/SearchParams.service.ts';
 @customElement('app-root-layout-dialog')
 export class AppRootLayoutDialog extends LitElement {
     @state() private _isDialogOpen = false;
+    @state() private _dialogType : '' | 'lists'=  '';
 
     private _searchParamsService: SearchParamsService = servicesProvider.getService(SearchParamsService);
 
@@ -23,6 +24,8 @@ export class AppRootLayoutDialog extends LitElement {
 
     private _checkDialogState(params: URLSearchParams) {
         this._isDialogOpen = params.has('dialog');
+        this._dialogType = params.get('dialog') as '' | 'lists' || '';
+
     }
 
     private _handleDialogClose() {
@@ -39,7 +42,9 @@ export class AppRootLayoutDialog extends LitElement {
 
     render() {
         return html` 
-                <app-dialog ?open="${this._isDialogOpen}" @close="${this._handleDialogClose}"></app-dialog> 
+                <app-dialog ?open="${this._isDialogOpen}" @close="${this._handleDialogClose}">
+                    ${this._dialogType === 'lists' ? html`<children-display-button></children-display-button>` : html``}
+                </app-dialog> 
 
         `
     }

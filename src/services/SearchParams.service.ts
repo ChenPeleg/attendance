@@ -32,6 +32,19 @@ export class SearchParamsService extends AbstractBaseService {
         this.subscriptions.push(callback);
     }
 
+    public patchParams(updates: Record<string, string | null>) {
+        const params = this.getParams();
+        Object.entries(updates).forEach(([key, value]) => {
+            if (value === null) {
+                params.delete(key);
+            } else {
+                params.set(key, value);
+            }
+        });
+        const newUrl = `${window.location.pathname}?${params.toString()}`;
+        history.pushState({}, '', newUrl);
+    }
+
     public getParams(): URLSearchParams {
         return new URLSearchParams(window.location.search);
     }
@@ -41,4 +54,3 @@ export class SearchParamsService extends AbstractBaseService {
         this.subscriptions.forEach(callback => callback(params));
     }
 }
-
