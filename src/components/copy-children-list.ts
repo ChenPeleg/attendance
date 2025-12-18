@@ -7,11 +7,13 @@ import {ChildStatus} from '../models/ChildStatus.ts';
 import {globalStore} from '../store/Store.ts';
 import {AttendanceStore} from '../models/AttendanceStore.ts';
 import {PresentToday} from '../models/presentToday.ts';
+import '../ui/check-mark-with-animation/check-mark-with-animation.ts';
 
 
 @customElement('copy-children-list')
 export class CopyChildrenList extends LitElement {
     @state() private _presentChildren: ChildStatus[] = [];
+    @state() private _showCheckMark: boolean = false;
     private _unsubscribe: (() => void) | null = null;
 
     connectedCallback() {
@@ -36,7 +38,10 @@ export class CopyChildrenList extends LitElement {
     copyToClipboard = () => {
         const text = this._presentChildren.map(c => c.name).join(', ');
         navigator.clipboard.writeText(text).then(() => {
-             // Optional: Visual feedback
+            this._showCheckMark = true;
+            setTimeout(() => {
+                this._showCheckMark = false;
+            }, 2000);
         });
     }
 
@@ -47,10 +52,14 @@ export class CopyChildrenList extends LitElement {
     render() {
         return html`
             <div class="flex flex-col gap-4 p-4 items-center justify-center">
+                ${this._showCheckMark ? html`
+                    <check-mark-with-animation></check-mark-with-animation>
+                ` : html`
                 <button @click="${this.copyToClipboard}" class="flex flex-row items-center gap-2 p-2 bg-secondary rounded-lg app-shadow cursor-pointer" style="border: none">
                     <img src="${copyIcon}" class="w-6 h-6" alt="copy" />
                     <span>${Txt.copyContent}</span>
                 </button>
+                `}
                  <div class="text-primary text-center" style="direction: rtl">
                     ${this._presentChildren.map(c => c.name).join(', ')}
                 </div>
