@@ -43,7 +43,7 @@ export class AppRootLayoutDialog extends LitElement {
     render() {
         return html` 
                 <app-dialog ?open="${this._isDialogOpen}" @close="${this._handleDialogClose}">
-                    ${this._dialogType === 'lists' ? html`<children-display-button></children-display-button>` : html``}
+                    ${this._dialogType === 'lists' ? html`<copy-children-list></copy-children-list> ` : html``}
                 </app-dialog> 
 
         `
