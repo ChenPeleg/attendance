@@ -8,27 +8,20 @@ export class AppDialog extends LitElement {
 
     static styles = [globalStyleSheet, css`
         .backdrop {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%; 
-            z-index: 10;
+            background-color: rgba(0, 0, 0, 0.5);
         }
-
-
     `];
 
     render() {
         return html` 
-        
-            <dialog open  class="backdrop   opacity-70 fixed h-screen top-0 w-screen bg-amber-400" ?hidden="${!this.open}">
-                <div class="dialog-content bg-amber-400">
+            <div class="backdrop fixed top-0 left-0 w-full h-full z-50 flex items-center justify-center" ?hidden="${!this.open}">
+                <div class="bg-primary text-primary rounded-lg shadow-xl p-6 w-full max-w-md mx-4 relative z-50">
                     <slot></slot>
-                    <button @click="${this._closeDialog}">Close</button>
+                    <div class="mt-4 flex justify-end">
+                        <button @click="${this._closeDialog}" class="bg-secondary text-primary px-4 py-2 rounded">Close</button>
+                    </div>
                 </div>
-            </dialog>
-           
+            </div>
         `;
     }
 
