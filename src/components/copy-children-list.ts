@@ -12,7 +12,7 @@ import {SchoolClass} from '../models/schoolClass.ts';
 import retry from '../assets/svg/retry.svg';
 
 enum CopyFormat {
-    Groups = 'groups', Commas = 'commas', Numbers = 'numbers'
+    Groups = 'groups', Commas = 'commas', Numbers = 'numbers', TwoGroups = 'two-groups', ThreeGroups = 'three-groups'
 }
 
 @customElement('copy-children-list')
@@ -103,6 +103,10 @@ export class CopyChildrenList extends LitElement {
                                 </option>
                                 <option value="${CopyFormat.Groups}" ?selected="${this._selectedFormat === CopyFormat.Groups}">כיתות
                                 </option>
+                                <option value="${CopyFormat.TwoGroups}" ?selected="${this._selectedFormat === CopyFormat.TwoGroups}">2 קבוצות
+                                </option>
+                                <option value="${CopyFormat.ThreeGroups}" ?selected="${this._selectedFormat === CopyFormat.ThreeGroups}">3 קבוצות
+                                </option>
                                 <option value="${CopyFormat.Commas}" ?selected="${this._selectedFormat === CopyFormat.Commas}">פסיקים
                                 </option>
 
@@ -132,7 +136,7 @@ export class CopyChildrenList extends LitElement {
                 </div>
 
                 <div class="w-full max-w-md    overflow-ellipsis " style="height: 30vh; max-height: 30vh; overflow-y: auto;">
-                    <div class="text-primary text-center" data-mixchildren="${this.randomSeed}" style="font-size: 22px; white-space: pre-wrap;">${this._updateFormatedText(this.randomSeed)}
+                    <div class="text-primary text-center" id="children-list-to-copy" data-mixchildren="${this.randomSeed}" style="font-size: 22px; white-space: pre-wrap;">${this._updateFormatedText(this.randomSeed)}
                     </div> 
                 </div>
             </div>
@@ -189,6 +193,27 @@ export class CopyChildrenList extends LitElement {
 
             case CopyFormat.Groups:
                 return this._formatGroups({children : shuffled});
+            case CopyFormat.TwoGroups:
+                return this._formatSplitGroups(shuffled, 2);
+            case CopyFormat.ThreeGroups:
+                return this._formatSplitGroups(shuffled, 3);
         }
+    }
+
+    private _formatSplitGroups(children: ChildStatus[], numberOfGroups: number): string {
+        const result: string[] = [];
+        const chunkSize = Math.ceil(children.length / numberOfGroups);
+
+        for (let i = 0; i < numberOfGroups; i++) {
+            const chunk = children.slice(i * chunkSize, (i + 1) * chunkSize);
+            if (chunk.length === 0) continue;
+
+            result.push(`--- קבוצה ${i + 1} ---`);
+            result.push(chunk.map((c, idx) => `${idx + 1}. ${c.name}`).join('\n'));
+            if (i < numberOfGroups - 1) {
+                result.push('');
+            }
+        }
+        return result.join('\n');
     }
 }
