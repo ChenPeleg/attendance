@@ -9,6 +9,7 @@ import {AttendanceStore} from '../models/AttendanceStore.ts';
 import {PresentToday} from '../models/presentToday.ts';
 import '../ui/check-mark-with-animation/check-mark-with-animation.ts';
 import {SchoolClass} from '../models/schoolClass.ts';
+import retry from   '../assets/svg/retry.svg';
 
 enum CopyFormat {
     Groups = 'groups', Commas = 'commas', Numbers = 'numbers'
@@ -36,6 +37,14 @@ export class CopyChildrenList extends LitElement {
         }
     }
 
+    remixTheList = () => {
+        const shuffled = this._presentChildren
+            .map(value => ({value, sort: Math.random()}))
+            .sort((a, b) => a.sort - b.sort)
+            .map(({value}) => value);
+        this._presentChildren = shuffled;
+    }
+
     copyToClipboard = () => {
         const text = this._getFormattedText();
         navigator.clipboard.writeText(text).then(() => {
@@ -61,6 +70,7 @@ export class CopyChildrenList extends LitElement {
                             <img src="${copyIcon}" class="w-6 h-6" alt="copy"/>
                             <span>${Txt.copyContent}</span>
                         </button>
+                       
                         <div class="relative inline-flex flex-row w-max ">
 
 
@@ -87,6 +97,15 @@ export class CopyChildrenList extends LitElement {
                                           clip-rule="evenodd"/>
                                 </svg>
                             </div>
+                            <div class="absolute right-0 top-0">
+                                
+                            <button @click="${this.copyToClipboard}"
+                                    class="flex flex-row items-center gap-2 py-2 px-4 bg-secondary rounded-lg app-shadow cursor-pointer"
+                                    style="border: none">
+                                <img src=${retry} class="w-5 h-5 absolute right-2 top-3 cursor-pointer" alt="retry"> 
+                            </button>
+                            </div>
+                          
                         </div> 
                     </div>
                     <div class="absolute -left-16 top-1">
