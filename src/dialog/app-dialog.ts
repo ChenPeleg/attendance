@@ -27,6 +27,7 @@ export class AppDialog extends LitElement {
 
     private _closeDialog() {
         this.open = false;
+        this.dispatchEvent(new CustomEvent('close', {bubbles: true, composed: true}));
     }
 
 }
