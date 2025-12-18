@@ -25,6 +25,7 @@ const translations = {
     'appInfo': 'המידע נשמר על מכשיר זה בלבד, ולא נשלח לשירותים חיצוניים',
     installApp: 'התקנה',
     copyContent: 'העתק רשימה',
+    close: 'סגור',
 } as const;
 
 
