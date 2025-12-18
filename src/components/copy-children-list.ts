@@ -51,14 +51,13 @@ export class CopyChildrenList extends LitElement {
             return ((t ^ t >>> 14) >>> 0) / 4294967296;
         };
 
-        const shuffled = children
+        return children
             .map(value => ({
                 value,
                 sort: random()
             }))
             .sort((a, b) => a.sort - b.sort)
             .map(({value}) => value);
-        return shuffled;
     }
 
     remixTheList = () => {
