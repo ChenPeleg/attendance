@@ -42,11 +42,12 @@ export class StoreFactory<ACT extends {
     }
 
     subscribe(fn: (newState: StoreState<K>) => void) {
+        const id = this.subscriberId++;
         this.subscribers.push({
             cb: fn,
-            id: this.subscriberId
+            id: id
         });
-        return () => this.unsubscribe(this.subscriberId++);
+        return () => this.unsubscribe(id);
     }
 
     unsubscribe(id: number) {
