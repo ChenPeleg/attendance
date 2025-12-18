@@ -13,28 +13,10 @@ export class AppDialog extends LitElement {
             left: 0;
             width: 100%;
             height: 100%; 
-            display: none;
             z-index: 10;
         }
 
-        .backdrop.open {
-            display: block;
-        }
 
-        .side-menu {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 310px;
-            height: 100%;
-            transform: translateX(100%);
-            transition: transform 0.3s ease;
-            z-index: 20;
-        }
-
-        .side-menu.open {
-            transform: translateX(0);
-        }
     `];
 
     render() {

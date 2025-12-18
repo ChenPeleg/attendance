@@ -16,10 +16,6 @@ export class AppRootLayoutDialog extends LitElement {
 
 
     render() {
-        const env = servicesProvider.getService(ConfigurationService).environment
-        if (env !== 'development') {
-            return html``
-        }
         return html` 
                 <app-dialog></app-dialog> 
 
