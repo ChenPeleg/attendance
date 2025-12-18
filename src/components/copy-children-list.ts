@@ -133,8 +133,7 @@ export class CopyChildrenList extends LitElement {
 
                 <div class="w-full max-w-md    overflow-ellipsis " style="height: 30vh; max-height: 30vh; overflow-y: auto;">
                     <div class="text-primary text-center" data-mixchildren="${this.randomSeed}" style="font-size: 22px; white-space: pre-wrap;">${this._updateFormatedText(this.randomSeed)}
-                    </div>
-                    ${this.randomSeed}
+                    </div> 
                 </div>
             </div>
         `
