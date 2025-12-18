@@ -38,6 +38,9 @@ export class CopyChildrenList extends LitElement {
         }
     }
     shuffled = ({seed , children}: {seed: number ,children: ChildStatus[]  } ) => {
+        if (seed === 0) {
+            return children;
+        }
         const shuffled = children
             .map(value => ({
                 value,
@@ -118,7 +121,7 @@ export class CopyChildrenList extends LitElement {
                         </div>
                         <div class=" bg-black h-full">
 
-                            <button @click="${this.remixTheList()}"
+                            <button @click="${()=>this.remixTheList()}"
                                     class="flex flex-row h-full items-center gap-2 py-2 px-4 bg-secondary rounded-lg app-shadow cursor-pointer"
                                     style="border: none">
                                 <img src=${retry} class="w-5 h-5   cursor-pointer" alt="retry">
