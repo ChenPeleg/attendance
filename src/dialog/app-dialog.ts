@@ -22,7 +22,7 @@ export class AppDialog extends LitElement {
                 <div class="bg-primary text-primary rounded-lg shadow-xl p-6 w-full max-w-md mx-4 relative z-50">
                     <slot></slot>
                     <div class="mt-4 flex justify-end">
-                        <button @click="${this._closeDialog}" class="bg-secondary rounded text-primary px-4 py-2 rounded-lg app-shadow cursor-pointer">${Txt.close}</button>
+                        <button @click="${this._closeDialog}" class="bg-secondary rounded-full text-primary px-6 py-2   app-shadow cursor-pointer">${Txt.close}</button>
                     </div>
                 </div>
             </div>
