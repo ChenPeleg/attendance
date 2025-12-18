@@ -4,6 +4,9 @@
   "version": "1.0.0",
   "description": "נוחכות פיסטוק - A modern Hebrew-language Progressive Web App for tracking student attendance in educational settings",
   "type": "module",
+  "engines": {
+    "node": "24.x"
+  },
   "keywords": [
     "attendance",
     "education",
