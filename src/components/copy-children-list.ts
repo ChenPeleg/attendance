@@ -37,18 +37,28 @@ export class CopyChildrenList extends LitElement {
             this._unsubscribe();
         }
     }
-    shuffled = ({seed , children}: {seed: number ,children: ChildStatus[]  } ) => {
+    shuffled = ({seed, children}: { seed: number, children: ChildStatus[] }) => {
         if (seed === 0) {
             return children;
         }
+
+        // Simple seeded random number generator (Mulberry32)
+        let currentSeed = seed;
+        const random = () => {
+            let t = currentSeed += 0x6D2B79F5;
+            t = Math.imul(t ^ t >>> 15, t | 1);
+            t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+            return ((t ^ t >>> 14) >>> 0) / 4294967296;
+        };
+
         const shuffled = children
             .map(value => ({
                 value,
-                sort: seed % 2 === 0 ? Math.random() : Math.random()
+                sort: random()
             }))
             .sort((a, b) => a.sort - b.sort)
             .map(({value}) => value);
-       return  shuffled;
+        return shuffled;
     }
 
     remixTheList = () => {
