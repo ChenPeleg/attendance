@@ -18,7 +18,7 @@ export class AppDialog extends LitElement {
             return html``;
         }
         return html` 
-            <div class="backdrop fixed top-0 left-0 w-full h-full z-50 flex items-center justify-center">
+            <div @click="${this._handleBackdropClick}" class="backdrop fixed top-0 left-0 w-full h-full z-50 flex items-center justify-center">
                 <div class="bg-primary text-primary rounded-lg shadow-xl p-6 w-full max-w-md mx-4 relative z-50">
                     <slot></slot>
                     <div class="mt-4 flex justify-end">
@@ -27,6 +27,12 @@ export class AppDialog extends LitElement {
                 </div>
             </div>
         `;
+    }
+
+    private _handleBackdropClick(e: Event) {
+        if (e.target === e.currentTarget) {
+            this._closeDialog();
+        }
     }
 
     private _closeDialog() {
