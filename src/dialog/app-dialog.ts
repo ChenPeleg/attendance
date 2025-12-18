@@ -4,7 +4,7 @@ import {globalStyleSheet} from '../styles/global-style-sheet.ts';
 
 @customElement('app-dialog')
 export class AppDialog extends LitElement {
-    @property({type: Boolean}) open = true;
+    @property({type: Boolean}) open = false;
 
     static styles = [globalStyleSheet, css`
         .backdrop {
