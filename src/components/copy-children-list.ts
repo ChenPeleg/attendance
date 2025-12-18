@@ -1,5 +1,5 @@
 import {html, LitElement} from 'lit'
-import {customElement, property, state} from 'lit/decorators.js'
+import {customElement, state} from 'lit/decorators.js'
 import {globalStyleSheet} from '../styles/global-style-sheet.ts';
 import copyIcon from '../assets/svg/copy-content.svg'
 import {Txt} from '../translations/translations.ts';
@@ -11,16 +11,15 @@ import {PresentToday} from '../models/presentToday.ts';
 // force update
 @customElement('copy-children-list')
 export class CopyChildrenList extends LitElement {
-    @property({type: Array}) listToCopy: ChildStatus[] = [];
     @state() private _presentChildren: ChildStatus[] = [];
     private _unsubscribe: (() => void) | null = null;
 
     connectedCallback() {
         super.connectedCallback();
         this._unsubscribe = globalStore.subscribe((state: AttendanceStore) => {
-             this._updateChildren(state.children);
+             this._updateList(state.attendance);
         });
-        this._updateChildren(globalStore.getState().children);
+        this._updateList(globalStore.getState().attendance);
     }
 
     disconnectedCallback() {
@@ -30,11 +29,11 @@ export class CopyChildrenList extends LitElement {
         }
     }
 
-    private _updateChildren(children: ChildStatus[]) {
-        this._presentChildren = children.filter(c => c.presentToday === PresentToday.Yes);
+    private _updateList(list: ChildStatus[]) {
+        this._presentChildren = list.filter(c => c.presentToday === PresentToday.Yes);
     }
 
-    copyToClipboard() {
+    copyToClipboard = () => {
         const text = this._presentChildren.map(c => c.name).join(', ');
         navigator.clipboard.writeText(text).then(() => {
              // Optional: Visual feedback
@@ -42,6 +41,7 @@ export class CopyChildrenList extends LitElement {
     }
 
     firstUpdated() {
+        console.log('firstUpdated copy-children-list');
         (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
     }
 
