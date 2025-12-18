@@ -4,7 +4,7 @@ import {globalStyleSheet} from '../styles/global-style-sheet.ts';
 
 @customElement('app-dialog')
 export class AppDialog extends LitElement {
-    @property({type: Boolean}) open = false;
+    @property({type: Boolean}) open = true;
 
     static styles = [globalStyleSheet, css`
         .backdrop {
@@ -38,29 +38,22 @@ export class AppDialog extends LitElement {
     `];
 
     render() {
-        return html`
-            <button @click="${this._openDialog}">
-                Open Dialog
-            </button>
-            <div   class="backdrop bg-gray-900 opacity-70" ?hidden="${!this.open}" @click="${this._closeDialog}"></div>
-                
-         
-            <div class="dialog-overlay" ?hidden="${!this.open}">
+        return html` 
+        
+            <dialog open  class="backdrop   opacity-70 fixed h-screen top-0 w-screen bg-amber-400" ?hidden="${!this.open}">
                 <div class="dialog-content bg-amber-400">
                     <slot></slot>
                     <button @click="${this._closeDialog}">Close</button>
                 </div>
-            </div>
-            </div>
+            </dialog>
+           
         `;
     }
 
     private _closeDialog() {
         this.open = false;
     }
-    private _openDialog() {
-        this.open = true;
-    }
+
 }
 
 declare global {

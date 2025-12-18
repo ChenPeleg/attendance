@@ -20,11 +20,8 @@ export class AppRootLayoutDialog extends LitElement {
         if (env !== 'development') {
             return html``
         }
-        return html`
-            <div class="h-screen w-screen flex-col items-center justify-center  overflow-x-hidden"
-                 style="direction: rtl; max-width: 100svw; max-height: 100svh;">
-                <app-dialog></app-dialog>
-            </div>
+        return html` 
+                <app-dialog></app-dialog> 
 
         `
     }
