@@ -7,6 +7,8 @@ import addChild from '../assets/svg/addchild.svg'
 
 import {globalStore} from '../store/Store.ts';
 import {ActionType} from '../models/AppAction.ts';
+import {ConfigurationService} from '../services/Configuration.service.ts';
+import {servicesProvider} from '../services/provider/ServicesProvider.ts';
 
 @customElement('side-menu-content')
 export class SideMenuContent extends LitElement {
@@ -30,11 +32,11 @@ export class SideMenuContent extends LitElement {
     }
 
     render() {
+        const env = servicesProvider.getService(ConfigurationService).environment
         return html`
             <div class="flex flex-col gap-4 ">
                 <div class="h-14 w-full flex-row flex justify-between gap-5">
-                    <div>
-                        dialog
+                    <div class="${env === 'production' ? 'hidden' : 'contents'}"> 
                         <app-dialog></app-dialog>
                     </div>
                
