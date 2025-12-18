@@ -52,14 +52,16 @@ export class CopyChildrenList extends LitElement {
     render() {
         return html`
             <div class="flex flex-col gap-4 p-4 items-center justify-center">
-                <div class="flex flex-row items-center gap-2">
+                <div class="flex flex-row items-center gap-2 relative">
                     <button @click="${this.copyToClipboard}" class="flex flex-row items-center gap-2 p-2 bg-secondary rounded-lg app-shadow cursor-pointer" style="border: none">
                         <img src="${copyIcon}" class="w-6 h-6" alt="copy" />
                         <span>${Txt.copyContent}</span>
                     </button>
-                    ${this._showCheckMark ? html`
-                        <check-mark-with-animation></check-mark-with-animation>
-                    ` : ''}
+                    <div class="absolute -left-16 top-1">
+                    ${this._showCheckMark ? html`<div class="ml-2"><check-mark-with-animation></check-mark-with-animation></div>` : null}
+                    </div>
+                   
+                   
                 </div>
                  <div class="text-primary text-center" style="direction: rtl">
                     ${this._presentChildren.map(c => c.name).join(', ')}
