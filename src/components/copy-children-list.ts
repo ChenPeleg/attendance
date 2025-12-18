@@ -8,7 +8,7 @@ import {globalStore} from '../store/Store.ts';
 import {AttendanceStore} from '../models/AttendanceStore.ts';
 import {PresentToday} from '../models/presentToday.ts';
 
-// force update
+
 @customElement('copy-children-list')
 export class CopyChildrenList extends LitElement {
     @state() private _presentChildren: ChildStatus[] = [];
@@ -41,7 +41,6 @@ export class CopyChildrenList extends LitElement {
     }
 
     firstUpdated() {
-        console.log('firstUpdated copy-children-list');
         (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
     }
 
