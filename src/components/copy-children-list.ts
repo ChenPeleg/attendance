@@ -56,23 +56,39 @@ export class CopyChildrenList extends LitElement {
                 <div class="flex flex-row items-center gap-2 relative">
                     <div class="flex flex-col gap-2">
                         <button @click="${this.copyToClipboard}"
-                                class="flex flex-row items-center gap-2 p-2 bg-secondary rounded-lg app-shadow cursor-pointer"
+                                class="flex flex-row items-center gap-2 py-2 px-4 bg-secondary rounded-lg app-shadow cursor-pointer"
                                 style="border: none">
                             <img src="${copyIcon}" class="w-6 h-6" alt="copy"/>
                             <span>${Txt.copyContent}</span>
                         </button>
+                        <div class="relative inline-flex flex-row w-max ">
 
-                        <select
-                                class="p-2 pt-3 bg-secondary rounded-lg app-shadow cursor-pointer outline-none text-primary font-bold text-sm"
-                                style="border: none"
-                                @change="${(e: Event) => this._selectedFormat = (e.target as HTMLSelectElement).value as CopyFormat}"
-                        >
-                            <option value="${CopyFormat.Groups}" ?selected="${this._selectedFormat === CopyFormat.Groups}">קבוצות</option>
-                            <option value="${CopyFormat.Commas}" ?selected="${this._selectedFormat === CopyFormat.Commas}">פסיקים</option>
-                            <option value="${CopyFormat.Numbers}" ?selected="${this._selectedFormat === CopyFormat.Numbers}">מספרים</option>
-                        </select>
 
-                     
+                            <select
+                                    class=" px-4 py-3 w-44 bg-secondary rounded-lg app-shadow cursor-pointer outline-none text-primary font-bold text-sm"
+                                    style="border: none; appearance: none;  "
+                                    @change="${(e: Event) => this._selectedFormat = (e.target as HTMLSelectElement).value as CopyFormat}"
+                            >
+                                <option value="${CopyFormat.Groups}" ?selected="${this._selectedFormat === CopyFormat.Groups}">כיתות
+                                </option>
+                                <option value="${CopyFormat.Commas}" ?selected="${this._selectedFormat === CopyFormat.Commas}">פסיקים
+                                </option>
+                                <option value="${CopyFormat.Numbers}" ?selected="${this._selectedFormat === CopyFormat.Numbers}">מספרים
+                                </option>
+
+
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 left-2.5 top-1/3 flex items-center pr-2 text-gray-700">
+                                <!-- Heroicon name: solid/chevron-down (or your own SVG) -->
+                                <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                          d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                          clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                        </div>
+
+
                     </div>
                     <div class="absolute -left-16 top-1">
                         ${this._showCheckMark ? html`
@@ -83,7 +99,7 @@ export class CopyChildrenList extends LitElement {
 
 
                 </div>
-                <div class="w-full max-w-md  max-h-[50vh] overflow-ellipsis " style="max-height: 50vh; overflow-y: auto;">
+                <div class="w-full max-w-md    overflow-ellipsis " style="height: 30vh; max-height: 30vh; overflow-y: auto;">
                     <div class="text-primary text-center " style="font-size: 22px; white-space: pre-wrap;">${this._getFormattedText()}</div>
                 </div>
             </div>
