@@ -17,6 +17,7 @@ enum CopyFormat {
 
 @customElement('copy-children-list')
 export class CopyChildrenList extends LitElement {
+    @state() private randomSeed: number =  0;
     @state() private _presentChildren: ChildStatus[] = [];
     @state() private _showCheckMark: boolean = false;
     @state() private _selectedFormat: CopyFormat = CopyFormat.Numbers;
@@ -36,16 +37,21 @@ export class CopyChildrenList extends LitElement {
             this._unsubscribe();
         }
     }
-
-    remixTheList = () => {
-        const shuffled = this._presentChildren
+    shuffled = ({seed , children}: {seed: number ,children: ChildStatus[]  } ) => {
+        const shuffled = children
             .map(value => ({
                 value,
-                sort: Math.random()
+                sort: seed % 2 === 0 ? Math.random() : Math.random()
             }))
             .sort((a, b) => a.sort - b.sort)
             .map(({value}) => value);
-        this._presentChildren = shuffled;
+        this.randomSeed += 1;
+       return  shuffled;
+    }
+
+    remixTheList = () => {
+
+        this.randomSeed += 1;
     }
 
     copyToClipboard = () => {
@@ -65,14 +71,7 @@ export class CopyChildrenList extends LitElement {
     render() {
         return html`
             <div class="flex flex-col gap-4 p-4 items-start  justify-center">
-                <div class="absolute right-0 top-0">
 
-                    <button @click="${this.remixTheList()}"
-                            class="flex flex-row items-center gap-2 py-2 px-4 bg-secondary rounded-lg app-shadow cursor-pointer"
-                            style="border: none">
-                        <img src=${retry} class="w-5 h-5 absolute right-2 top-3 cursor-pointer" alt="retry">
-                    </button>
-                </div>
                 <div class="flex flex-col gap-2">
                     <div class="flex flex-row">
                         <button @click="${this.copyToClipboard}"
@@ -89,37 +88,44 @@ export class CopyChildrenList extends LitElement {
                                         <check-mark-with-animation></check-mark-with-animation>
                                     </div>` : null}
                             </div>
-
-
                         </div>
                     </div>
+                    <div class=" flex flex-row  items-center gap-4 ">
+
+                        <div class="relative inline-flex flex-row w-max ">
+                            <select
+                                    class=" px-4 py-3 w-44 bg-secondary rounded-lg app-shadow cursor-pointer outline-none text-primary font-bold text-sm"
+                                    style="border: none; appearance: none;  "
+                                    @change="${(e: Event) => this._selectedFormat = (e.target as HTMLSelectElement).value as CopyFormat}"
+                            >
+                                <option value="${CopyFormat.Numbers}" ?selected="${this._selectedFormat === CopyFormat.Numbers}">מספרים
+                                </option>
+                                <option value="${CopyFormat.Groups}" ?selected="${this._selectedFormat === CopyFormat.Groups}">כיתות
+                                </option>
+                                <option value="${CopyFormat.Commas}" ?selected="${this._selectedFormat === CopyFormat.Commas}">פסיקים
+                                </option>
 
 
-                    <div class="relative inline-flex flex-row w-max ">
-                        <select
-                                class=" px-4 py-3 w-44 bg-secondary rounded-lg app-shadow cursor-pointer outline-none text-primary font-bold text-sm"
-                                style="border: none; appearance: none;  "
-                                @change="${(e: Event) => this._selectedFormat = (e.target as HTMLSelectElement).value as CopyFormat}"
-                        >
-                            <option value="${CopyFormat.Numbers}" ?selected="${this._selectedFormat === CopyFormat.Numbers}">מספרים
-                            </option>
-                            <option value="${CopyFormat.Groups}" ?selected="${this._selectedFormat === CopyFormat.Groups}">כיתות
-                            </option>
-                            <option value="${CopyFormat.Commas}" ?selected="${this._selectedFormat === CopyFormat.Commas}">פסיקים
-                            </option>
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 left-2.5 top-1/3 flex items-center pr-2 text-gray-700">
+
+                                <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                          d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                          clip-rule="evenodd"/>
+                                </svg>
+                            </div>
 
 
-                        </select>
-                        <div class="pointer-events-none absolute inset-y-0 left-2.5 top-1/3 flex items-center pr-2 text-gray-700">
-
-                            <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd"
-                                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                      clip-rule="evenodd"/>
-                            </svg>
                         </div>
+                        <div class=" bg-black h-full">
 
-
+                            <button @click="${this.remixTheList()}"
+                                    class="flex flex-row h-full items-center gap-2 py-2 px-4 bg-secondary rounded-lg app-shadow cursor-pointer"
+                                    style="border: none">
+                                <img src=${retry} class="w-5 h-5   cursor-pointer" alt="retry">
+                            </button>
+                        </div>
                     </div>
 
                 </div>
@@ -136,9 +142,14 @@ export class CopyChildrenList extends LitElement {
         this._presentChildren = list.filter(c => c.presentToday === PresentToday.Yes);
     }
 
-    private _formatGroups(): string {
+    private _formatGroups({
+        children
+                          } :
+                          {
+                                children: ChildStatus[]
+                          }): string {
         const groups: Record<string, string[]> = {};
-        this._presentChildren.forEach(c => {
+       children.forEach(c => {
             let groupName = SchoolClass.Other;
             if ('schoolClass' in c) {
                 groupName = c.schoolClass;
@@ -163,16 +174,21 @@ export class CopyChildrenList extends LitElement {
 
     private _updateFormatedText() {
         const children = this._presentChildren.map((c => c))
+        const shuffled = this.shuffled({
+            seed :
+            this
+            .randomSeed, children
+        })
 
         switch (this._selectedFormat) {
             case CopyFormat.Commas:
-                return children.map(c => c.name).join(', ');
+                return shuffled.map(c => c.name).join(', ');
 
             case CopyFormat.Numbers:
-                return children.map((c, i) => `${i + 1}. ${c.name}`).join('\n');
+                return shuffled.map((c, i) => `${i + 1}. ${c.name}`).join('\n');
 
             case CopyFormat.Groups:
-                return this._formatGroups();
+                return this._formatGroups({children : shuffled});
         }
     }
 }
