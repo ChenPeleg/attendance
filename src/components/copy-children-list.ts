@@ -49,7 +49,7 @@ export class CopyChildrenList extends LitElement {
     }
 
     copyToClipboard = () => {
-        const text = this._getFormattedText();
+        const text = this._updateFormatedText();
         navigator.clipboard.writeText(text).then(() => {
             this._showCheckMark = true;
             setTimeout(() => {
@@ -85,15 +85,15 @@ export class CopyChildrenList extends LitElement {
 
                             <div class="absolute -left-16 top-1">
                                 ${this._showCheckMark ? html`
-                            <div class="ml-2">
-                                <check-mark-with-animation></check-mark-with-animation>
-                            </div>` : null}
+                                    <div class="ml-2">
+                                        <check-mark-with-animation></check-mark-with-animation>
+                                    </div>` : null}
                             </div>
 
 
                         </div>
                     </div>
-                
+
 
                     <div class="relative inline-flex flex-row w-max ">
                         <select
@@ -123,9 +123,10 @@ export class CopyChildrenList extends LitElement {
                     </div>
 
                 </div>
-            
+
                 <div class="w-full max-w-md    overflow-ellipsis " style="height: 30vh; max-height: 30vh; overflow-y: auto;">
-                    <div class="text-primary text-center " style="font-size: 22px; white-space: pre-wrap;">${this._getFormattedText()}</div>
+                    <div class="text-primary text-center " style="font-size: 22px; white-space: pre-wrap;">${this._updateFormatedText()}
+                    </div>
                 </div>
             </div>
         `
@@ -160,12 +161,16 @@ export class CopyChildrenList extends LitElement {
         return result.join('\n');
     }
 
-    private _getFormattedText() {
+    private _updateFormatedText() {
+        const children = this._presentChildren.map((c => c))
+
         switch (this._selectedFormat) {
             case CopyFormat.Commas:
-                return this._presentChildren.map(c => c.name).join(', ');
+                return children.map(c => c.name).join(', ');
+
             case CopyFormat.Numbers:
-                return this._presentChildren.map((c, i) => `${i + 1}. ${c.name}`).join('\n');
+                return children.map((c, i) => `${i + 1}. ${c.name}`).join('\n');
+
             case CopyFormat.Groups:
                 return this._formatGroups();
         }
