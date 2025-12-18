@@ -63,7 +63,7 @@ export class CopyChildrenList extends LitElement {
                    
                    
                 </div>
-                 <div class="text-primary text-center" style="direction: rtl">
+                 <div class="text-primary text-center " style="font-size: 22px;">
                     ${this._presentChildren.map(c => c.name).join(', ')}
                 </div>
             </div>
