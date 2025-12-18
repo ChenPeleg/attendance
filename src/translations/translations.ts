@@ -24,6 +24,7 @@ const translations = {
     'genderGirlBoys': 'בנות בנים',
     'appInfo': 'המידע נשמר על מכשיר זה בלבד, ולא נשלח לשירותים חיצוניים',
     installApp: 'התקנה',
+    copyContent: 'העתק רשימה',
 } as const;
 
 
