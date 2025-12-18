@@ -45,17 +45,15 @@ export class CopyChildrenList extends LitElement {
             }))
             .sort((a, b) => a.sort - b.sort)
             .map(({value}) => value);
-        this.randomSeed += 1;
        return  shuffled;
     }
 
     remixTheList = () => {
-
         this.randomSeed += 1;
     }
 
     copyToClipboard = () => {
-        const text = this._updateFormatedText();
+        const text = this._updateFormatedText(this.randomSeed);
         navigator.clipboard.writeText(text).then(() => {
             this._showCheckMark = true;
             setTimeout(() => {
@@ -131,8 +129,9 @@ export class CopyChildrenList extends LitElement {
                 </div>
 
                 <div class="w-full max-w-md    overflow-ellipsis " style="height: 30vh; max-height: 30vh; overflow-y: auto;">
-                    <div class="text-primary text-center " style="font-size: 22px; white-space: pre-wrap;">${this._updateFormatedText()}
+                    <div class="text-primary text-center" data-mixchildren="${this.randomSeed}" style="font-size: 22px; white-space: pre-wrap;">${this._updateFormatedText(this.randomSeed)}
                     </div>
+                    ${this.randomSeed}
                 </div>
             </div>
         `
@@ -172,12 +171,11 @@ export class CopyChildrenList extends LitElement {
         return result.join('\n');
     }
 
-    private _updateFormatedText() {
+    private _updateFormatedText(seed :number) {
         const children = this._presentChildren.map((c => c))
         const shuffled = this.shuffled({
             seed :
-            this
-            .randomSeed, children
+            seed, children
         })
 
         switch (this._selectedFormat) {
