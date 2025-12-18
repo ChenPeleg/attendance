@@ -54,7 +54,7 @@ export class CopyChildrenList extends LitElement {
         return html`
             <div class="flex flex-col gap-4 p-4 items-center justify-center">
                 <div class="flex flex-row items-center gap-2 relative">
-                    <div>
+                    <div class="flex flex-col gap-2">
                         <button @click="${this.copyToClipboard}"
                                 class="flex flex-row items-center gap-2 p-2 bg-secondary rounded-lg app-shadow cursor-pointer"
                                 style="border: none">
@@ -63,7 +63,7 @@ export class CopyChildrenList extends LitElement {
                         </button>
 
                         <select
-                                class="p-2 bg-secondary rounded-lg app-shadow cursor-pointer outline-none text-primary font-bold"
+                                class="p-2 pt-3 bg-secondary rounded-lg app-shadow cursor-pointer outline-none text-primary font-bold text-sm"
                                 style="border: none"
                                 @change="${(e: Event) => this._selectedFormat = (e.target as HTMLSelectElement).value as CopyFormat}"
                         >
@@ -72,14 +72,14 @@ export class CopyChildrenList extends LitElement {
                             <option value="${CopyFormat.Numbers}" ?selected="${this._selectedFormat === CopyFormat.Numbers}">מספרים</option>
                         </select>
 
-                        <div class="absolute -left-16 top-1">
-                            ${this._showCheckMark ? html`
+                     
+                    </div>
+                    <div class="absolute -left-16 top-1">
+                        ${this._showCheckMark ? html`
                             <div class="ml-2">
                                 <check-mark-with-animation></check-mark-with-animation>
                             </div>` : null}
-                        </div>
                     </div>
-               
 
 
                 </div>
