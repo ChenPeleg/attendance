@@ -33,6 +33,11 @@ export class SideMenuContent extends LitElement {
         return html`
             <div class="flex flex-col gap-4 ">
                 <div class="h-14 w-full flex-row flex justify-between gap-5">
+                    <div>
+                        dialog
+                        <app-dialog></app-dialog>
+                    </div>
+               
                     <span>
                     ${Txt.addChild}
                         
