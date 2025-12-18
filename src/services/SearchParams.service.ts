@@ -41,7 +41,8 @@ export class SearchParamsService extends AbstractBaseService {
                 params.set(key, value);
             }
         });
-        const newUrl = `${window.location.pathname}?${params.toString()}`;
+        const queryString = params.toString();
+        const newUrl = queryString ? `${window.location.pathname}?${queryString}` : window.location.pathname;
         history.pushState({}, '', newUrl);
     }
 

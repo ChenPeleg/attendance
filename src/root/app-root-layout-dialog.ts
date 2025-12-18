@@ -29,10 +29,7 @@ export class AppRootLayoutDialog extends LitElement {
     }
 
     private _handleDialogClose() {
-        const params = this._searchParamsService.getParams();
-        params.delete('dialog');
-        const newUrl = `${window.location.pathname}?${params.toString()}`;
-        history.pushState({}, '', newUrl);
+        this._searchParamsService.patchParams({dialog: null});
     }
 
     firstUpdated() {
