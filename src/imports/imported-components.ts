@@ -18,3 +18,4 @@ import '../dialog/app-dialog.ts';
 import '../components/install-pwa-button.ts';
 import '../components/children-display-button.ts';
 import '../root/app-root-layout-dialog.ts';
+import '../dialog/app-dialog-lists.ts';
