@@ -44,12 +44,9 @@ export class AppMain extends LitElement {
             <div class="flex flex-col items-start justify-center   gap-3 pr-4 text-primary">
                 <div class="${this.displayType !== DisplayType.DaySettings ? 'contents' : 'hidden'}">
                     <past-counts .lastAttendanceTimes="${this.getHistoryHours()}"></past-counts>
-                    <div class="flex flex-row gap-2 items-center">
-                        <children-count .onClick="${() => this.completeList()}" .totalChildren=${this.getPresentChildren().length || 0}
-                                        .checkedInChildren=${this.getPresentChildren().filter(child => child.checkedIn).length || 0}>
-                        </children-count>
-                        <copy-children-list .listToCopy="${this.getDisplayedChildren()}"></copy-children-list>
-                    </div>
+                    <children-count .onClick="${() => this.completeList()}" .totalChildren=${this.getPresentChildren().length || 0}
+                                    .checkedInChildren=${this.getPresentChildren().filter(child => child.checkedIn).length || 0}>
+                    </children-count>
                 </div>
                 <div class="${this.displayType !== DisplayType.DaySettings ? 'hidden' : ' contents'}">
                     <div class="h-2 w-full">
@@ -122,13 +119,9 @@ export class AppMain extends LitElement {
         return children.filter(c=> !(!c.manuallyAdded &&  c.onlySchoolBus === true))
     }
 
-    private getDisplayedChildren() {
-        const children = this.displayType !== DisplayType.DaySettings ? this.getPresentChildren() : this.storeState?.attendance || [];
-        return servicesProvider.getService(SortService).sortChildren(children);
-    }
-
     private getChildren() {
-        const sortedChildren = this.getDisplayedChildren();
+        const children = this.displayType !== DisplayType.DaySettings ? this.getPresentChildren() : this.storeState?.attendance || [];
+        const sortedChildren = servicesProvider.getService(SortService).sortChildren(children);
 
         return sortedChildren.map(child => {
             return html`
