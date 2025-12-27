@@ -10,7 +10,7 @@ const translations = {
     'present': 'נמצא/ת',
     'absent': 'נעדר/ת',
     'displayLayout': 'פריסת תצוגה',
-    'advanced': 'מתקדם',
+    'advanced': 'רשימות',
     'displayTheme': 'עיצוב',
     'resetData': 'איפוס נתונים',
     'addChild': 'הוספת ילדה/ילד',
