@@ -88,7 +88,7 @@ export class CopyChildrenList extends LitElement {
                                 class="flex flex-row items-center gap-2 py-2 px-4 bg-secondary rounded-lg app-shadow cursor-pointer"
                                 style="border: none">
                             <img src="${copyIcon}" class="w-6 h-6" alt="copy"/>
-                            <span>${Txt.copyContent}</span>
+                            <span class="text-primary">${Txt.copyContent}</span>
                         </button>
                         <div class="flex flex-row items-center gap-2 relative">
 
