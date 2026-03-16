@@ -10,10 +10,13 @@ import {globalStore} from '../store/Store.ts';
 import {ActionType} from '../models/AppAction.ts';
 import {servicesProvider} from '../services/provider/ServicesProvider.ts';
 import {SearchParamsService} from '../services/SearchParams.service.ts';
+import {LocalStorageService} from '../services/LocalStorage.service.ts';
 
 @customElement('side-menu-content')
 export class SideMenuContent extends LitElement {
     static INSTALL_APP_BUTTON_ID = 'install-app-button';
+    static DEV_MODE_KEY = 'devMode';
+    private _appInfoClickTimes: number[] = [];
 
 
     firstUpdated() {
@@ -98,7 +101,7 @@ export class SideMenuContent extends LitElement {
                     <install-pwa-button></install-pwa-button>
                 </div>
                 <div class="  w-full  ">
-                    <p class="text-sm">🛈 ${Txt.appInfo}</p>
+                    <p class="text-sm" @click=${() => this.onAppInfoClick()}>🛈 ${Txt.appInfo}</p>
                 </div>
             </div>
         `;
@@ -114,6 +117,17 @@ export class SideMenuContent extends LitElement {
             type: ActionType.addChild,
             payload: childName
         })
+    }
+
+    private onAppInfoClick() {
+        const now = Date.now();
+        this._appInfoClickTimes = this._appInfoClickTimes.filter(t => now - t < 1000);
+        this._appInfoClickTimes.push(now);
+        if (this._appInfoClickTimes.length >= 3) {
+            this._appInfoClickTimes = [];
+            alert(Txt.devMode);
+            servicesProvider.getService(LocalStorageService).setItem(SideMenuContent.DEV_MODE_KEY, 'true');
+        }
     }
 
 }
