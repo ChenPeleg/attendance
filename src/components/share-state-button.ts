@@ -4,15 +4,38 @@ import {globalStyleSheet} from '../styles/global-style-sheet.ts';
 import {Txt} from '../translations/translations.ts';
 import {globalStore} from '../store/Store.ts';
 import copyImage from '../assets/svg/copy-content.svg'
+import {servicesProvider} from '../services/provider/ServicesProvider.ts';
+import {DataShareService} from '../services/DataShare.service.ts';
 
 
 @customElement('share-state-button')
 export class ShareStateButton extends LitElement {
 
 
-    clickOption(): void {
-        const state = globalStore.getState()
-        console.log('state', state)
+    async clickOption(): Promise<void> {
+        const state = globalStore.getState();
+        const dataShareService = servicesProvider.getService(DataShareService);
+        const url = dataShareService.getShareUrl(state);
+
+        if (navigator.share) {
+            try {
+                await navigator.share({
+                    title: Txt.shareList,
+                    text: 'Attendance Data',
+                    url: url
+                });
+            } catch (error) {
+                console.error('Error sharing:', error);
+            }
+        } else {
+            console.log('Web Share API not supported', url);
+            try {
+                await navigator.clipboard.writeText(url);
+                alert(Txt.copyContent);
+            } catch (err) {
+                console.error('Failed to copy: ', err);
+            }
+        }
 
     }
 
@@ -47,4 +70,3 @@ declare global {
         'share-state-button': ShareStateButton
     }
 }
-
