@@ -23,4 +23,4 @@ export interface AttendanceStore {
     lastUpdated: number;
 }
 
-
+export interface AttendanceStoreShare extends  Pick<AttendanceStore, 'attendance' | 'history'> {}

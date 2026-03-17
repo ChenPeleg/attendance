@@ -132,6 +132,11 @@ export const appReducer:StoreReducer<AttendanceStore, AppAction> = (state: Atten
                 ...state,
                 attendance: state.attendance.filter(child => child.id !== childId)
             }
+        case ActionType.loadStateFromUrl:
+            return {
+                ...state,
+                ...action.payload
+            }
         default:
             return state;
     }
