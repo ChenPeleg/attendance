@@ -13,7 +13,7 @@ import {Txt} from '../translations/translations.ts';
 @customElement('app-root-layout-dialog')
 export class AppRootLayoutDialog extends LitElement {
     @state() private _isDialogOpen = false;
-    @state() private _dialogType : '' | 'lists' | 'shared-data'=  '';
+    @state() private _dialogType : '' | 'lists' | 'shared-data' =  '';
     @state() private _sharedData: AttendanceStoreShare | null = null;
     
     private _shareUrlService: ShareUrlService = servicesProvider.getService(ShareUrlService);
@@ -44,7 +44,6 @@ export class AppRootLayoutDialog extends LitElement {
     private _handleDialogClose() {
         if (this._dialogType === 'shared-data') {
              this._isDialogOpen = false;
-             // Optional: clear data param if cancelled?
              return;
         }
         this._searchParamsService.patchParams({dialog: null});

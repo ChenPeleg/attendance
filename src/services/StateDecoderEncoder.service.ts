@@ -24,7 +24,7 @@ export class StateDecoderEncoderService extends AbstractBaseService {
             };
         } catch (e) {
             console.error('Failed to decode state', e);
-            throw e; // Rethrow to be caught by getStoreFromUrl
+            throw e;
         }
     }
 }
