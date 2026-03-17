@@ -9,18 +9,21 @@ export class StateDecoderEncoderService extends AbstractBaseService {
 
     public encode(state: AttendanceStoreShare): string {
         const jsonState = JSON.stringify(state);
-        // encodeURIComponent to handle unicode characters, then btoa to base64
         return btoa(encodeURIComponent(jsonState));
     }
 
     public decode(encodedState: string): AttendanceStoreShare {
-        const jsonState = decodeURIComponent(atob(encodedState));
-        const parsed: any = JSON.parse(jsonState);
+        try {
+            const jsonState = decodeURIComponent(atob(encodedState));
+            const parsed: any = JSON.parse(jsonState);
 
-
-        return {
-            attendance: Array.isArray(parsed.attendance) ? parsed.attendance : [],
-            history: Array.isArray(parsed.history) ? parsed.history : []
-        };
+            return {
+                attendance: Array.isArray(parsed?.attendance) ? parsed.attendance : [],
+                history: Array.isArray(parsed?.history) ? parsed.history : []
+            };
+        } catch (e) {
+            console.error('Failed to decode state', e);
+            throw e; // Rethrow to be caught by getStoreFromUrl
+        }
     }
 }
