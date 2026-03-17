@@ -29,6 +29,8 @@ const translations = {
     copyContent: 'העתק רשימה',
     close: 'סגור',
     loadDataFromUrl: 'האם לטעון נתונים מהקישור?',
+    yes: 'כן',
+    no: 'לא',
 } as const;
 
 

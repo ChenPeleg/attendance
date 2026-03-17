@@ -3,8 +3,6 @@ import {customElement} from 'lit/decorators.js'
 import {globalStyleSheet} from '../styles/global-style-sheet.ts';
 import '../main/app-main.ts'
 import '../layout/app-navbar.ts'
-import {servicesProvider} from '../services/provider/ServicesProvider.ts';
-import {ShareUrlService} from '../services/ShareUrl.service.ts';
 
 
 /**
@@ -18,8 +16,6 @@ export class AppRootLayout extends LitElement {
 
     firstUpdated() {
         (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
-        // Check for shared data in URL
-        servicesProvider.getService(ShareUrlService).checkForSharedData();
     }
 
 

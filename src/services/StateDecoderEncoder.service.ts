@@ -7,6 +7,7 @@ export class StateDecoderEncoderService extends AbstractBaseService {
         super(provider);
     }
 
+
     public encode(state: AttendanceStoreShare): string {
         const jsonState = JSON.stringify(state);
         return btoa(encodeURIComponent(jsonState));
