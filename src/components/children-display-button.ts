@@ -18,7 +18,7 @@ export class ChildrenDisplayButton extends LitElement {
 
         globalStore.dispatch({
             type: ActionType.changeListOrGrid,
-            payload:  this.displayType === ChildrenDisplayType.List ? ChildrenDisplayType.Grid : ChildrenDisplayType.List
+            payload: this.displayType === ChildrenDisplayType.List ? ChildrenDisplayType.Grid : ChildrenDisplayType.List
         })
 
     }
@@ -39,7 +39,7 @@ export class ChildrenDisplayButton extends LitElement {
                     <span>
                     ${Txt.displayLayout} 
                     </span>
-                    <span>
+                <span>
                              <button @click=${() => this.clickOption()}
                                      class=" bg-secondary rounded-md  h-10 cursor-pointer flex flex-row px-3 justify-center items-center ">
                         <img src="${this.displayType === ChildrenDisplayType.List ? listImage : gridImage}" class="w-7 h-7 app-icon"
