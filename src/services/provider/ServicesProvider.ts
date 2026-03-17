@@ -11,11 +11,11 @@ import {PWAService} from '../PWA.service.ts';
 import {SupersizeAnimationService} from '../SupersizeAnimationService.ts';
 import {SearchParamsService} from '../SearchParams.service.ts';
 import {DataShareService} from '../DataShare.service.ts';
+import {ShareUrlService} from '../ShareUrl.service.ts';
 
 const ServicesProviderFactory = () => {
-    const provider = new ServicesResolver([PWAService, ConfigurationService, BackgroundImageService, SortService, LocalStorageService, TimeAndDateService, ThemeService, StoreService, HistoryService,SupersizeAnimationService, SearchParamsService, DataShareService]);
+    const provider = new ServicesResolver([PWAService, ConfigurationService, BackgroundImageService, SortService, LocalStorageService, TimeAndDateService, ThemeService, StoreService, HistoryService,SupersizeAnimationService, SearchParamsService, DataShareService, ShareUrlService]);
     provider.initServices();
     return provider;
 }
 export const servicesProvider = ServicesProviderFactory();
-
