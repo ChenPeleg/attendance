@@ -3,6 +3,8 @@ import {customElement} from 'lit/decorators.js'
 import {globalStyleSheet} from '../styles/global-style-sheet.ts';
 import '../main/app-main.ts'
 import '../layout/app-navbar.ts'
+import '../components/shared-data-dialog.ts';
+import '../components/copy-list-dialog.ts';
 
 
 /**
@@ -26,7 +28,8 @@ export class AppRootLayout extends LitElement {
                 <bg-image></bg-image>
                 <app-navbar></app-navbar>
                 <app-main></app-main>
-                <app-root-layout-dialog></app-root-layout-dialog>
+                <shared-data-dialog></shared-data-dialog>
+                <copy-list-dialog></copy-list-dialog>
             </div>
 
         `
