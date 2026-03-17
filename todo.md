@@ -1,0 +1,3 @@
+- add a modal compoenet/ or use an existing one
+- after data is loaded from url, the user should see the modal and decide whether to use the data or not
+- if the user clicks "yes", then the data should be used to populate in the state

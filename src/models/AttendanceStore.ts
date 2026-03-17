@@ -22,3 +22,5 @@ export interface AttendanceStore {
     childrenDisplayType: ChildrenDisplayType;
     lastUpdated: number;
 }
+
+
