@@ -82,7 +82,7 @@ export class SideMenuContent extends LitElement {
                     <children-display-button></children-display-button>
                 </div>
                 <div class="  w-full  ">
-                    <children-display-button></children-display-button>
+                    <share-state-button></share-state-button>
                 </div>
                 <div class="h-14 w-full flex-row flex justify-between gap-5">
                     <span>
