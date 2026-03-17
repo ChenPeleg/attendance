@@ -23,7 +23,7 @@ const translations = {
     'genderBoysGirls': 'בנים בנות',
     'genderGirlBoys': 'בנות בנים',
     'appInfo': 'המידע נשמר על מכשיר זה בלבד, ולא נשלח לשירותים חיצוניים',
-    'devMode': 'כלפי מפתחים פעיל',
+    'devMode': 'כלי מפתחים פעיל',
     installApp: 'התקנה',
     copyContent: 'העתק רשימה',
     close: 'סגור',
