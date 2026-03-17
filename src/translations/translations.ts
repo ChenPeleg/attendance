@@ -28,6 +28,7 @@ const translations = {
     installApp: 'התקנה',
     copyContent: 'העתק רשימה',
     close: 'סגור',
+    loadDataFromUrl: 'האם לטעון נתונים מהקישור?',
 } as const;
 
 

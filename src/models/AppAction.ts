@@ -9,7 +9,8 @@ export enum ActionType {
     clearAllData = 'clearAllData',
     changeSort = 'changeSort',
     changeListOrGrid = 'changeListOrGrid',
-    removerAddedChild = 'removerAddedChild'
+    removerAddedChild = 'removerAddedChild',
+    loadStateFromUrl = 'loadStateFromUrl'
 }
 
 export type  AppAction = {
@@ -25,5 +26,6 @@ export type  AppAction = {
                              type: ActionType.clearAllData; payload: any;
                          } | {
                                 type: ActionType.changeSort; payload: any;
+                         } | {
+                                type: ActionType.loadStateFromUrl; payload: any;
                          }
-
