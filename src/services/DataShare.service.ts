@@ -7,11 +7,20 @@ export class DataShareService extends AbstractBaseService {
         super(provider);
     }
 
+    public encode(state: AttendanceStore): string {
+        const jsonState = JSON.stringify(state);
+        // encodeURIComponent to handle unicode characters, then btoa to base64
+        return btoa(encodeURIComponent(jsonState));
+    }
+
+    public decode(encodedState: string): AttendanceStore {
+        const jsonState = decodeURIComponent(atob(encodedState));
+        return JSON.parse(jsonState);
+    }
+
     public getShareUrl(state: AttendanceStore): string {
         try {
-            const jsonState = JSON.stringify(state);
-            // encodeURIComponent to handle unicode characters, then btoa to base64
-            const encodedState = btoa(encodeURIComponent(jsonState));
+            const encodedState = this.encode(state);
             const url = new URL(window.location.href);
             url.searchParams.set('data', encodedState);
             return url.toString();
@@ -26,8 +35,7 @@ export class DataShareService extends AbstractBaseService {
             const url = new URL(window.location.href);
             const encodedState = url.searchParams.get('data');
             if (encodedState) {
-                const jsonState = decodeURIComponent(atob(encodedState));
-                return JSON.parse(jsonState);
+                return this.decode(encodedState);
             }
             return null;
         } catch (e) {
