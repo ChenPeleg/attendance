@@ -1,5 +1,5 @@
 import {AbstractBaseService} from './provider/AbstractBaseService.ts';
-import {AttendanceStore} from '../models/AttendanceStore.ts';
+import {AttendanceStore, AttendanceStoreShare} from '../models/AttendanceStore.ts';
 import {ServicesResolver} from './provider/ServiceResolverClass.ts';
 
 export class DataShareService extends AbstractBaseService {
@@ -7,20 +7,34 @@ export class DataShareService extends AbstractBaseService {
         super(provider);
     }
 
-    public encode(state: AttendanceStore): string {
+    public encode(state: AttendanceStoreShare): string {
         const jsonState = JSON.stringify(state);
         // encodeURIComponent to handle unicode characters, then btoa to base64
         return btoa(encodeURIComponent(jsonState));
     }
 
-    public decode(encodedState: string): AttendanceStore {
-        const jsonState = decodeURIComponent(atob(encodedState));
-        return JSON.parse(jsonState);
+    public decode(encodedState: string): AttendanceStoreShare {
+        try {
+            const jsonState = decodeURIComponent(atob(encodedState));
+            const parsed: any = JSON.parse(jsonState);
+
+            return {
+                attendance: Array.isArray(parsed?.attendance) ? parsed.attendance : [],
+                history: Array.isArray(parsed?.history) ? parsed.history : []
+            };
+        } catch (e) {
+            console.error('Failed to decode state', e);
+            throw e; // Rethrow to be caught by getStoreFromUrl
+        }
     }
 
     public getShareUrl(state: AttendanceStore): string {
         try {
-            const encodedState = this.encode(state);
+            const shareableState: AttendanceStoreShare = {
+                attendance: state.attendance,
+                history: state.history
+            };
+            const encodedState = this.encode(shareableState);
             const url = new URL(window.location.href);
             url.searchParams.set('data', encodedState);
             return url.toString();
@@ -30,7 +44,7 @@ export class DataShareService extends AbstractBaseService {
         }
     }
 
-    public getStoreFromUrl(): AttendanceStore | null {
+    public getStoreFromUrl(): AttendanceStoreShare | null {
         try {
             const url = new URL(window.location.href);
             const encodedState = url.searchParams.get('data');
