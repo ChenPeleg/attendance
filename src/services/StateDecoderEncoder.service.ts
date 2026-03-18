@@ -13,10 +13,15 @@ export class StateDecoderEncoderService extends AbstractBaseService {
     constructor(provider: ServicesResolver) {
         super(provider);
     }
-
-    childThinToByteEncode( id : number, status : 1 | 2 |3 |4): number {
-
-    }
+    // type Ran<T extends number> = number extends T ? number :_Range<T, []>;
+    // type _Range<T extends number, R extends unknown[]> = R['length'] extends T ? R[number] : _Range<T, [R['length'], ...R]>;
+    //
+    // type R5 = Ran<998>
+    // const a: R5 = 3 // correct
+    // const b: R5 = 999 // wrong
+    // childThinToByteEncode( id : number, status : 0 | 1 |2 |3): number {
+    //
+    // }
 
     byteCodeEncode(state: AttendanceStoreShare): string {
         const allChildren = this.getChildrenList();
@@ -24,7 +29,7 @@ export class StateDecoderEncoderService extends AbstractBaseService {
         for (const child of allChildren) {
             const childFromState = state.attendance.find(c => c.id === child.id);
             childrenByte.push({
-                id: parseInt(child.id),
+                id: child.id,
                 childByteStatus: childFromState ? this.getChildByteStatus(childFromState) : ChildByteStatus.PresentAndNotChecked
             })
         }

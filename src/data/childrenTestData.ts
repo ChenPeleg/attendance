@@ -5,14 +5,14 @@ import {Gender} from '../models/Gender.ts';
 
 export const childrenTestData  :ChildModel [] = [
     {
-        id: '1',
+        id: 1,
         name: 'עמרי',
         school: SchoolType.Nitzanim,
         schoolClass: SchoolClass.First,
         boyOrGirl: Gender.Boy,
     },
     {
-        id: '2',
+        id: 2,
         name: 'מיתר ',
         school: SchoolType.Nitzanim,
         schoolClass: SchoolClass.First,
@@ -20,28 +20,28 @@ export const childrenTestData  :ChildModel [] = [
     },
 
     {
-        id: '3',
+        id: 3,
         name: 'אסף ',
         school: SchoolType.Nitzanim,
         schoolClass: SchoolClass.Second,
         boyOrGirl: Gender.Boy,
     },
     {
-        id: '4',
+        id: 4,
         name: 'אביב ',
         school: SchoolType.Nitzanim,
         schoolClass: SchoolClass.Second,
         boyOrGirl: Gender.Girl,
     },
     {
-        id: '5',
+        id: 5,
         name: 'נמרוד ',
         school: SchoolType.Nitzanim,
         schoolClass: SchoolClass.Third,
         boyOrGirl: Gender.Boy,
     },
     {
-        id: '6',
+        id: 6,
         name: 'אשכר ',
         school: SchoolType.Nitzanim,
         schoolClass: SchoolClass.Third,
