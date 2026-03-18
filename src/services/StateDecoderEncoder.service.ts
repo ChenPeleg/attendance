@@ -19,17 +19,10 @@ export class StateDecoderEncoderService extends AbstractBaseService {
         const childrenByte: { id: number, childByteStatus: ChildByteStatus }[] = []
         for (const child of allChildren) {
             const childFromState = state.attendance.find(c => c.id === child.id);
-            if (childFromState) {
-                childrenByte.push({
-                    id: parseInt(child.id),
-                    childByteStatus: this.getChildByteStatus(childFromState)
-                })
-            } else {
-                childrenByte.push({
-                    id: parseInt(child.id),
-                    childByteStatus: ChildByteStatus.PresentAndNotChecked
-                })
-            }
+            childrenByte.push({
+                id: parseInt(child.id),
+                childByteStatus: childFromState ? this.getChildByteStatus(childFromState) : ChildByteStatus.PresentAndNotChecked
+            })
         }
 
 
