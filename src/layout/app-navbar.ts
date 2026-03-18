@@ -4,6 +4,8 @@ import {globalStyleSheet} from '../styles/global-style-sheet.ts';
 import {servicesProvider} from '../services/provider/ServicesProvider.ts';
 import {ConfigurationService} from '../services/Configuration.service.ts';
 import {SupersizeAnimationService} from '../services/SupersizeAnimationService.ts';
+import {ShareUrlService} from '../services/ShareUrl.service.ts';
+import copyImage from '../assets/svg/copy-content.svg';
 
 
 @customElement('app-navbar')
@@ -29,6 +31,7 @@ export class AppNavbar extends LitElement {
                             <div class="   flex flex-row items-center gap-3 ">
                                 <app-cockpit></app-cockpit>
                                 ${this.getDevButton()}
+                                ${this.getShareButton()}
                             </div>
                             <div class="pl-3">
                                 <span class=" ">   </span>
@@ -52,10 +55,22 @@ export class AppNavbar extends LitElement {
             </button>`
     }
 
+    private getShareButton() {
+        return html`
+            <button @click="${() => this.shareAction()}" class="bg-secondary rounded-md h-10 cursor-pointer flex flex-row px-3 justify-center items-center">
+                <img src="${copyImage}" class="w-7 h-7 app-icon" alt="share"/>
+            </button>`
+    }
+
     private devAction() {
         const animationService = servicesProvider.getService(SupersizeAnimationService);
         animationService.showEmojiJumping()
 
+    }
+
+    private async shareAction() {
+        const shareUrlService = servicesProvider.getService(ShareUrlService);
+        await shareUrlService.shareStateUrl();
     }
 }
 
