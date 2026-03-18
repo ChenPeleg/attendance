@@ -19,7 +19,6 @@ export class StateDecoderEncoderService extends AbstractBaseService {
             return  '10'
         }
         return  `${state.attendance.length}`
-
     }
 
 
