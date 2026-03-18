@@ -90,6 +90,44 @@ export class StateDecoderEncoderService extends AbstractBaseService {
         }
     }
 
+    public encodeTime(current: number, history: number[]): string {
+        const timestamps = [current, ...history].map(ts => Math.floor(ts / 1000));
+        const buffer = new ArrayBuffer(timestamps.length * 4);
+        const view = new DataView(buffer);
+        timestamps.forEach((ts, index) => {
+            view.setUint32(index * 4, ts, true);
+        });
+        const byteArray = new Uint8Array(buffer);
+        return btoa(String.fromCharCode(...byteArray));
+    }
+
+    public decodeTime(encodedState: string): { current: number, history: number[] } {
+        try {
+            const binaryString = atob(encodedState);
+            const byteArray = new Uint8Array(binaryString.length);
+            for (let i = 0; i < binaryString.length; i++) {
+                byteArray[i] = binaryString.charCodeAt(i);
+            }
+            const view = new DataView(byteArray.buffer);
+            const timestamps: number[] = [];
+            for (let i = 0; i < byteArray.length / 4; i++) {
+                timestamps.push(view.getUint32(i * 4, true) * 1000);
+            }
+
+            if (timestamps.length === 0) {
+                return { current: 0, history: [] };
+            }
+
+            return {
+                current: timestamps[0],
+                history: timestamps.slice(1)
+            };
+        } catch (e) {
+            console.error('Failed to decode time', e);
+            throw e;
+        }
+    }
+
     private getChildrenList() {
         const initialState = this.servicesResolver.getService(StoreService).initialState
         return initialState.attendance;
