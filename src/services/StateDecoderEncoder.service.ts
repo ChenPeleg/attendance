@@ -16,7 +16,7 @@ const ENUM_MASK = (1 << ENUM_BITS) - 1; // 0b11 (3 בדצימלית)
 
 
 function encodeData(id: number, enumVal: number): number {
-    // ולידציה בסיסית
+
     if (id < 0 || id >= (1 << ID_BITS)) {
         throw new Error(`ID must be between 0 and ${(1 << ID_BITS) - 1}`);
     }

@@ -2,6 +2,7 @@ import {ServicesResolver} from './provider/ServiceResolverClass.ts';
 import {AbstractBaseService} from './provider/AbstractBaseService.ts';
 
 export class SearchParamsService extends AbstractBaseService {
+    public static readonly DATA_QUERY_PARAM = 'data';
     private subscriptions: Array<(params: URLSearchParams) => void> = [];
 
     constructor(provider: ServicesResolver) {

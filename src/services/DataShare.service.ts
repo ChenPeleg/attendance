@@ -27,7 +27,7 @@ export class DataShareService extends AbstractBaseService {
             
             const searchParamsService = this.servicesResolver.getService(SearchParamsService);
             const params = searchParamsService.getParams();
-            params.set('data', encodedState);
+            params.set(SearchParamsService.DATA_QUERY_PARAM, encodedState);
             
             return searchParamsService.constructUrl(params);
         } catch (e) {
@@ -40,7 +40,7 @@ export class DataShareService extends AbstractBaseService {
     public getStoreFromUrl(): AttendanceStoreShare | null {
         try {
             const searchParamsService = this.servicesResolver.getService(SearchParamsService);
-            const encodedState = searchParamsService.getParams().get('data');
+            const encodedState = searchParamsService.getParams().get(SearchParamsService.DATA_QUERY_PARAM);
             if (encodedState) {
                 return this.decode(encodedState);
             }
