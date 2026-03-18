@@ -9,6 +9,7 @@ import {TimeAndDateService} from '../services/TimeAndDate.service.ts';
 import {SortOrder } from '../models/SortType.ts';
 import {StoreService} from '../services/Store.service.ts';
 import {SupersizeAnimationService} from '../services/SupersizeAnimationService.ts';
+import {RangedId} from '../models/RangedId.ts';
 
 export const appReducer:StoreReducer<AttendanceStore, AppAction> = (state: AttendanceStore, action: AppAction): AttendanceStore => {
     const getLastUpdateTimeStamp = () => {
@@ -56,10 +57,13 @@ export const appReducer:StoreReducer<AttendanceStore, AppAction> = (state: Atten
             if(state.attendance.find(child => child.name === childName)){
                 childName = childName + ' (2)'
             }
+            const maxId = state.attendance.reduce((max, child) => Math.max(max, child.id as number), 0);
+            const newId = (maxId + 1) as RangedId;
+            
             return {
                 ...state,
                 attendance: [...state.attendance, {
-                    id: childName,
+                    id: newId,
                     name: childName,
                     presentToday: PresentToday.Yes,
                     checkedIn: false,
