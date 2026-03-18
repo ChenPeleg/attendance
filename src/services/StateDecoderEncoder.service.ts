@@ -27,7 +27,7 @@ export class StateDecoderEncoderService extends AbstractBaseService {
             } else {
                 childrenByte.push({
                     id: parseInt(child.id),
-                    childByteStatus: ChildByteStatus.NotPresent
+                    childByteStatus: ChildByteStatus.PresentAndNotChecked
                 })
             }
         }
