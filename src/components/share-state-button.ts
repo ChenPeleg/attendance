@@ -5,6 +5,8 @@ import {Txt} from '../translations/translations.ts';
 import copyImage from '../assets/svg/copy-content.svg'
 import {servicesProvider} from '../services/provider/ServicesProvider.ts';
 import {ShareUrlService} from '../services/ShareUrl.service.ts';
+import {StateDecoderEncoderService} from '../services/StateDecoderEncoder.service.ts';
+import {StoreService} from '../services/Store.service.ts';
 
 
 @customElement('share-state-button')
@@ -13,6 +15,16 @@ export class ShareStateButton extends LitElement {
 
     async clickOption(): Promise<void> {
         const shareUrlService = servicesProvider.getService(ShareUrlService);
+        const decoder = servicesProvider.getService(StateDecoderEncoderService)
+      const state = servicesProvider.getService(StoreService).store.getState()
+        const result = decoder.encode({
+            attendance :
+            state
+            .attendance,
+            history : []
+        })
+        console.log('result', result)
+
         await shareUrlService.shareStateUrl();
     }
 

@@ -33,7 +33,7 @@
     }
 
     .app-shadow {
-        --app-shadow: 0 0px 3px 0 color-mix(in srgb, var(--primary-text-color) 50%, transparent);, 0 1 px 2 px - 1 px color-mix(in srgb, var(--primary-text-color) 50 %, transparent);
+        --app-shadow: 0 0px 3px 0 color-mix(in srgb, var(--primary-text-color) 50%, transparent), 0 1 px 2 px - 1 px color-mix(in srgb, var(--primary-text-color), 50%, transparent);
         box-shadow: var(--app-shadow);
     }
 

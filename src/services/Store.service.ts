@@ -13,6 +13,7 @@ import {Environment} from '../models/Environment.ts';
 import {ConfigurationService} from './Configuration.service.ts';
 import {childrenTestData} from '../data/childrenTestData.ts';
 import {TimeAndDateService} from './TimeAndDate.service.ts';
+import {RangedId} from '../models/RangedId.ts';
 
 
 export class StoreService extends AbstractBaseService {
@@ -54,6 +55,27 @@ export class StoreService extends AbstractBaseService {
         if (!stateFromLocalStorage) {
             return null;
         }
+        
+        // Ensure IDs are numbers (migration from string IDs)
+        if (stateFromLocalStorage.attendance) {
+            let maxId = 0;
+            stateFromLocalStorage.attendance.forEach(child => {
+                const id = parseInt(child.id as any);
+                if (!isNaN(id)) {
+                    maxId = Math.max(maxId, id);
+                }
+            });
+
+            stateFromLocalStorage.attendance = stateFromLocalStorage.attendance.map(child => {
+                const id = parseInt(child.id as any);
+                if (!isNaN(id)) {
+                    return { ...child, id: id as RangedId };
+                }
+                maxId++;
+                return { ...child, id: maxId as RangedId };
+            });
+        }
+
         return this.resetChildrenStateIfADayHasPassed(stateFromLocalStorage);
     }
 
