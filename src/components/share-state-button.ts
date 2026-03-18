@@ -17,7 +17,7 @@ export class ShareStateButton extends LitElement {
         const shareUrlService = servicesProvider.getService(ShareUrlService);
         const decoder = servicesProvider.getService(StateDecoderEncoderService)
       const state = servicesProvider.getService(StoreService).store.getState()
-        const result = decoder.byteCodeEncode({
+        const result = decoder.encode({
             attendance :
             state
             .attendance,
