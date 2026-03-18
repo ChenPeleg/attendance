@@ -9,11 +9,11 @@ export class DataShareService extends AbstractBaseService {
         super(provider);
     }
 
-    public encode(state: AttendanceStoreShare): string {
+    public encodeChildrenData(state: AttendanceStoreShare): string {
         return this.servicesResolver.getService(StateDecoderEncoderService).encode(state);
     }
 
-    public decode(encodedState: string): AttendanceStoreShare {
+    public decodeChildrenData(encodedState: string): AttendanceStoreShare {
         return this.servicesResolver.getService(StateDecoderEncoderService).decode(encodedState);
     }
 
@@ -23,7 +23,7 @@ export class DataShareService extends AbstractBaseService {
                 attendance: state.attendance,
                 history: state.history
             };
-            const encodedState = this.encode(shareableState);
+            const encodedState = this.encodeChildrenData(shareableState);
             
             const searchParamsService = this.servicesResolver.getService(SearchParamsService);
             const params = searchParamsService.getParams();
@@ -42,7 +42,7 @@ export class DataShareService extends AbstractBaseService {
             const searchParamsService = this.servicesResolver.getService(SearchParamsService);
             const encodedState = searchParamsService.getParams().get(SearchParamsService.DATA_QUERY_PARAM);
             if (encodedState) {
-                return this.decode(encodedState);
+                return this.decodeChildrenData(encodedState);
             }
             return null;
         } catch (e) {
