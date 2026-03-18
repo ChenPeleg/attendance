@@ -33,19 +33,18 @@ export class SharedDataDialog extends LitElement {
                 return;
             }
         }
-        // If data param is missing, we don't necessarily close it here if we want to keep it open?
-        // But the original code only opened based on shared-data.
+        this._isDialogOpen = false;
     }
 
     private _handleClose() {
          this._isDialogOpen = false;
-         // Original code didn't clear the data param
+         this._searchParamsService.patchParams({data: null});
     }
 
     private _handleLoadData() {
         if (this._sharedData) {
             this._shareUrlService.loadSharedData(this._sharedData);
-            this._isDialogOpen = false;
+            this._handleClose();
         }
     }
 
@@ -63,7 +62,7 @@ export class SharedDataDialog extends LitElement {
                             <button @click="${this._handleLoadData}" class="bg-success text-primary rounded-full px-6 py-2 app-shadow cursor-pointer pointer-events-auto">
                                 ${Txt.yes}
                             </button>       
-                            <button @click="${() => this._isDialogOpen = false}" class="bg-secondary text-primary rounded-full px-6 py-2 app-shadow cursor-pointer pointer-events-auto">
+                            <button @click="${this._handleClose}" class="bg-secondary text-primary rounded-full px-6 py-2 app-shadow cursor-pointer pointer-events-auto">
                                 ${Txt.no}
                             </button>
                     </div>
@@ -71,4 +70,3 @@ export class SharedDataDialog extends LitElement {
         `
     }
 }
-
