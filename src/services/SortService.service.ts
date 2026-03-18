@@ -6,6 +6,7 @@ import {SortOrder, SortType} from '../models/SortType.ts';
 import {SchoolType} from '../models/schoolType.ts';
 import {SchoolClass} from '../models/schoolClass.ts';
 import {Gender} from '../models/Gender.ts';
+import {RangedId} from '../models/RangedId.ts';
 
 
 export class SortService extends AbstractBaseService {
@@ -18,7 +19,7 @@ export class SortService extends AbstractBaseService {
         const sortType = sort.sortType;
         const sortOrder = sort.sortOrder;
         const childrenFullData: {
-            id: string; name: string; school: SchoolType; schoolClass: SchoolClass; boyOrGirl: Gender
+            id: RangedId; name: string; school: SchoolType; schoolClass: SchoolClass; boyOrGirl: Gender
             manuallyAdded: boolean; onlySchoolBus: boolean;
         }[] = children.map(child => {
             const schoolClass = 'schoolClass' in child ? child.schoolClass : SchoolClass.Other;

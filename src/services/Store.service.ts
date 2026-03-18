@@ -13,6 +13,7 @@ import {Environment} from '../models/Environment.ts';
 import {ConfigurationService} from './Configuration.service.ts';
 import {childrenTestData} from '../data/childrenTestData.ts';
 import {TimeAndDateService} from './TimeAndDate.service.ts';
+import {RangedId} from '../models/RangedId.ts';
 
 
 export class StoreService extends AbstractBaseService {
@@ -54,6 +55,15 @@ export class StoreService extends AbstractBaseService {
         if (!stateFromLocalStorage) {
             return null;
         }
+        
+        // Ensure IDs are numbers (migration from string IDs)
+        if (stateFromLocalStorage.attendance) {
+            stateFromLocalStorage.attendance = stateFromLocalStorage.attendance.map(child => ({
+                ...child,
+                id: Number(child.id) as RangedId
+            }));
+        }
+
         return this.resetChildrenStateIfADayHasPassed(stateFromLocalStorage);
     }
 
