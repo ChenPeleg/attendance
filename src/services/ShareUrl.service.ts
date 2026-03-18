@@ -27,6 +27,12 @@ export class ShareUrlService extends AbstractBaseService {
                 });
             } catch (error) {
                 console.error('Error sharing:', error);
+                try {
+                    await navigator.clipboard.writeText(url);
+                    alert(Txt.copyContent);
+                } catch (err) {
+                    console.error('Failed to copy: ', err);
+                }
             }
         } else {
             console.log('Web Share API not supported', url);

@@ -9,38 +9,36 @@ import {RangedId} from '../models/RangedId.ts';
 export enum ChildByteStatus {
     PresentAndNotChecked = 0, PresentAndChecked = 1, PresentAndUnchecked = 2, NotPresent = 3,
 }
-// הגדרת המגבלות (Constants)
-const ID_BITS = 5;       // מקסימום 31
-const ENUM_BITS = 2;     // מקסימום 3
-const ENUM_MASK = (1 << ENUM_BITS) - 1; // 0b11 (3 בדצימלית)
-
-
-function encodeData(id: number, enumVal: number): number {
-    // ולידציה בסיסית
-    if (id < 0 || id >= (1 << ID_BITS)) {
-        throw new Error(`ID must be between 0 and ${(1 << ID_BITS) - 1}`);
-    }
-    if (enumVal < 0 || enumVal >= (1 << ENUM_BITS)) {
-        throw new Error(`Enum must be between 0 and ${(1 << ENUM_BITS) - 1}`);
-    }
-
-    return (id << ENUM_BITS) | enumVal;
-}
-
-
-function decodeData(packedByte: number) {
-    return {
-        enumVal: packedByte & ENUM_MASK,
-        id: packedByte >> ENUM_BITS
-    };
-}
-
-
-
 
 export class StateDecoderEncoderService extends AbstractBaseService {
+    // Constants definition
+    private static readonly ID_BITS = 5;       // Max 31
+    private static readonly ENUM_BITS = 2;     // Max 3
+    private static readonly ENUM_MASK = (1 << StateDecoderEncoderService.ENUM_BITS) - 1; // 0b11 (3 in decimal)
+
     constructor(provider: ServicesResolver) {
         super(provider);
+    }
+
+    private encodeData(id: RangedId, enumVal: number): number {
+        const ID_BITS = StateDecoderEncoderService.ID_BITS;
+        const ENUM_BITS = StateDecoderEncoderService.ENUM_BITS;
+
+        if (id < 0 || id >= (1 << ID_BITS)) {
+            throw new Error(`ID must be between 0 and ${(1 << ID_BITS) - 1}`);
+        }
+        if (enumVal < 0 || enumVal >= (1 << ENUM_BITS)) {
+            throw new Error(`Enum must be between 0 and ${(1 << ENUM_BITS) - 1}`);
+        }
+
+        return (id << ENUM_BITS) | enumVal;
+    }
+
+    private decodeData(packedByte: number) {
+        return {
+            enumVal: packedByte & StateDecoderEncoderService.ENUM_MASK,
+            id: (packedByte >> StateDecoderEncoderService.ENUM_BITS) as RangedId
+        };
     }
 
     public encode(state: AttendanceStoreShare): string {
@@ -55,7 +53,7 @@ export class StateDecoderEncoderService extends AbstractBaseService {
         }
         const byteArray = new Uint8Array(allChildren.length);
         for (let i = 0; i < childrenByte.length; i++) {
-            byteArray[i] = encodeData(childrenByte[i].id, childrenByte[i].childByteStatus);
+            byteArray[i] = this.encodeData(childrenByte[i].id, childrenByte[i].childByteStatus);
         }
         
         return btoa(String.fromCharCode(...byteArray));
@@ -73,7 +71,7 @@ export class StateDecoderEncoderService extends AbstractBaseService {
             const attendanceMap = new Map(allChildren.map(c => [c.id, { ...c }]));
 
             for (let i = 0; i < byteArray.length; i++) {
-                const { id, enumVal } = decodeData(byteArray[i]);
+                const { id, enumVal } = this.decodeData(byteArray[i]);
                 const child = attendanceMap.get(id as RangedId);
                 if (child) {
                     const status = this.getChildStatusFromByteStatus(enumVal);

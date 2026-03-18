@@ -25,7 +25,7 @@ export class SharedDataDialog extends LitElement {
     }
 
     private _checkParams(params: URLSearchParams) {
-        if (params.has('data')) {
+        if (params.has(SearchParamsService.DATA_QUERY_PARAM)) {
             const data = this._shareUrlService.getSharedDataFromUrl();
             if (data) {
                 this._sharedData = data;
