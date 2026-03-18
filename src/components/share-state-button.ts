@@ -42,7 +42,7 @@ export class ShareStateButton extends LitElement {
                     ${Txt.shareList} 
                     </span>
                 <span>
-                             <button @click=${() => this.clickOption()}
+                             <button data-testid="share-state-button" @click=${() => this.clickOption()}
                                      class=" bg-secondary rounded-md  h-10 cursor-pointer flex flex-row px-3 justify-center items-center ">
                         <img src="${copyImage}" class="w-7 h-7 app-icon"
                              alt="menu"/>
