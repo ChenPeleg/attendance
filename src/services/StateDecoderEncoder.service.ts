@@ -24,9 +24,16 @@ export class StateDecoderEncoderService extends AbstractBaseService {
                 childByteStatus: childFromState ? this.getChildByteStatus(childFromState) : ChildByteStatus.PresentAndNotChecked
             })
         }
+        const byteArray = new Int8Array(allChildren.length * 2)
+        for (let i = 0; i < childrenByte.length; i++) {
+            byteArray[i * 2] = childrenByte[i].id;
+            byteArray[i * 2 + 1] = childrenByte[i].childByteStatus;
+        }
+        const base64FromByteArray = btoa(String.fromCharCode(...byteArray));
 
 
-        return `${state.attendance.length}`
+
+        return `${base64FromByteArray}`
     }
 
     public encode(state: AttendanceStoreShare): string {
