@@ -14,6 +14,10 @@ export class StateDecoderEncoderService extends AbstractBaseService {
         super(provider);
     }
 
+    childThinToByteEncode( id : number, status : 1 | 2 |3 |4): number {
+
+    }
+
     byteCodeEncode(state: AttendanceStoreShare): string {
         const allChildren = this.getChildrenList();
         const childrenByte: { id: number, childByteStatus: ChildByteStatus }[] = []
