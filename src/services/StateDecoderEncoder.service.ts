@@ -43,8 +43,7 @@ export class StateDecoderEncoderService extends AbstractBaseService {
         super(provider);
     }
 
-
-    byteCodeEncode(state: AttendanceStoreShare): string {
+    public encode(state: AttendanceStoreShare): string {
         const allChildren = this.getChildrenList();
         const childrenByte: { id: RangedId, childByteStatus: ChildByteStatus }[] = []
         for (const child of allChildren) {
@@ -54,30 +53,38 @@ export class StateDecoderEncoderService extends AbstractBaseService {
                 childByteStatus: childFromState ? this.getChildByteStatus(childFromState) : ChildByteStatus.PresentAndNotChecked
             })
         }
-        const byteArray = new Int8Array(allChildren.length )
+        const byteArray = new Uint8Array(allChildren.length);
         for (let i = 0; i < childrenByte.length; i++) {
-            byteArray[i ] = encodeData(childrenByte[i].id, childrenByte[i].childByteStatus);
+            byteArray[i] = encodeData(childrenByte[i].id, childrenByte[i].childByteStatus);
         }
-        const base64FromByteArray = btoa(String.fromCharCode(...byteArray));
-
-
-
-        return `${base64FromByteArray}`
-    }
-
-    public encode(state: AttendanceStoreShare): string {
-        const jsonState = JSON.stringify(state);
-        return btoa(encodeURIComponent(jsonState));
+        
+        return btoa(String.fromCharCode(...byteArray));
     }
 
     public decode(encodedState: string): AttendanceStoreShare {
         try {
-            const jsonState = decodeURIComponent(atob(encodedState));
-            const parsed: any = JSON.parse(jsonState);
+            const binaryString = atob(encodedState);
+            const byteArray = new Uint8Array(binaryString.length);
+            for (let i = 0; i < binaryString.length; i++) {
+                byteArray[i] = binaryString.charCodeAt(i);
+            }
+
+            const allChildren = this.getChildrenList();
+            const attendanceMap = new Map(allChildren.map(c => [c.id, { ...c }]));
+
+            for (let i = 0; i < byteArray.length; i++) {
+                const { id, enumVal } = decodeData(byteArray[i]);
+                const child = attendanceMap.get(id as RangedId);
+                if (child) {
+                    const status = this.getChildStatusFromByteStatus(enumVal);
+                    child.presentToday = status.presentToday;
+                    child.checkedIn = status.checkedIn;
+                }
+            }
 
             return {
-                attendance: Array.isArray(parsed?.attendance) ? parsed.attendance : [],
-                history: Array.isArray(parsed?.history) ? parsed.history : []
+                attendance: Array.from(attendanceMap.values()),
+                history: []
             };
         } catch (e) {
             console.error('Failed to decode state', e);
@@ -88,6 +95,20 @@ export class StateDecoderEncoderService extends AbstractBaseService {
     private getChildrenList() {
         const initialState = this.servicesResolver.getService(StoreService).initialState
         return initialState.attendance;
+    }
+
+    private getChildStatusFromByteStatus(status: ChildByteStatus): { presentToday: PresentToday, checkedIn: boolean } {
+        switch (status) {
+            case ChildByteStatus.PresentAndChecked:
+                return {presentToday: PresentToday.Yes, checkedIn: true};
+            case ChildByteStatus.PresentAndUnchecked:
+                return {presentToday: PresentToday.Yes, checkedIn: false};
+            case ChildByteStatus.NotPresent:
+            case ChildByteStatus.PresentAndNotChecked:
+            default:
+                return {presentToday: PresentToday.No, checkedIn: false};
+        }
+
     }
 
     private getChildByteStatus(childStatus: ChildStatus): ChildByteStatus {
