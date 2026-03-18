@@ -2,6 +2,7 @@ import {AbstractBaseService} from './provider/AbstractBaseService.ts';
 import {AttendanceStore, AttendanceStoreShare} from '../models/AttendanceStore.ts';
 import {ServicesResolver} from './provider/ServiceResolverClass.ts';
 import {StateDecoderEncoderService} from './StateDecoderEncoder.service.ts';
+import {SearchParamsService} from './SearchParams.service.ts';
 
 export class DataShareService extends AbstractBaseService {
     constructor(provider: ServicesResolver) {
@@ -23,19 +24,23 @@ export class DataShareService extends AbstractBaseService {
                 history: state.history
             };
             const encodedState = this.encode(shareableState);
-            const url = new URL(window.location.href);
-            url.searchParams.set('data', encodedState);
-            return url.toString();
+            
+            const searchParamsService = this.servicesResolver.getService(SearchParamsService);
+            const params = searchParamsService.getParams();
+            params.set('data', encodedState);
+            
+            return searchParamsService.constructUrl(params);
         } catch (e) {
             console.error('Failed to encode state', e);
-            return window.location.href;
+            const searchParamsService = this.servicesResolver.getService(SearchParamsService);
+            return searchParamsService.constructUrl(searchParamsService.getParams());
         }
     }
 
     public getStoreFromUrl(): AttendanceStoreShare | null {
         try {
-            const url = new URL(window.location.href);
-            const encodedState = url.searchParams.get('data');
+            const searchParamsService = this.servicesResolver.getService(SearchParamsService);
+            const encodedState = searchParamsService.getParams().get('data');
             if (encodedState) {
                 return this.decode(encodedState);
             }

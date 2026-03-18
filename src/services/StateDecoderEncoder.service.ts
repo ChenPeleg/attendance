@@ -7,6 +7,7 @@ export class StateDecoderEncoderService extends AbstractBaseService {
         super(provider);
     }
 
+
     public encode(state: AttendanceStoreShare): string {
         const jsonState = JSON.stringify(state);
         return btoa(encodeURIComponent(jsonState));
@@ -23,7 +24,7 @@ export class StateDecoderEncoderService extends AbstractBaseService {
             };
         } catch (e) {
             console.error('Failed to decode state', e);
-            throw e; // Rethrow to be caught by getStoreFromUrl
+            throw e;
         }
     }
 }

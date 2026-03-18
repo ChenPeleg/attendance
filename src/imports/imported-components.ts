@@ -17,6 +17,7 @@ import '../image/bg-image.ts';
 import '../dialog/app-dialog.ts';
 import '../components/install-pwa-button.ts';
 import '../components/children-display-button.ts';
-import '../root/app-root-layout-dialog.ts';
 import '../components/copy-children-list.ts';
 import '../components/share-state-button.ts';
+import '../components/shared-data-dialog.ts';
+import '../components/copy-list-dialog.ts';

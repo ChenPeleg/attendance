@@ -32,7 +32,7 @@ export class SearchParamsService extends AbstractBaseService {
         this.subscriptions.push(callback);
     }
 
-    public patchParams(updates: Record<string, string | null>) {
+    public patchParams(updates: Record<string, string | null>, replace: boolean = false) {
         const params = this.getParams();
         Object.entries(updates).forEach(([key, value]) => {
             if (value === null) {
@@ -42,12 +42,23 @@ export class SearchParamsService extends AbstractBaseService {
             }
         });
         const queryString = params.toString();
-        const newUrl = queryString ? `${window.location.pathname}?${queryString}` : window.location.pathname;
-        history.pushState({}, '', newUrl);
+        const hash = window.location.hash;
+        const newUrl = (queryString ? `${window.location.pathname}?${queryString}` : window.location.pathname) + hash;
+        if (replace) {
+            history.replaceState({}, '', newUrl);
+        } else {
+            history.pushState({}, '', newUrl);
+        }
     }
 
     public getParams(): URLSearchParams {
         return new URLSearchParams(window.location.search);
+    }
+
+    public constructUrl(params: URLSearchParams): string {
+        const queryString = params.toString();
+        const hash = window.location.hash;
+        return `${window.location.origin}${window.location.pathname}${queryString ? '?' + queryString : ''}${hash}`;
     }
 
     private notifySubscribers() {

@@ -5,6 +5,8 @@ import {globalStore} from '../store/Store.ts';
 import {Txt} from '../translations/translations.ts';
 import {StoreService} from './Store.service.ts';
 import {ActionType} from '../models/AppAction.ts';
+import {AttendanceStoreShare} from '../models/AttendanceStore.ts';
+import {SearchParamsService} from './SearchParams.service.ts';
 
 export class ShareUrlService extends AbstractBaseService {
     constructor(provider: ServicesResolver) {
@@ -37,25 +39,19 @@ export class ShareUrlService extends AbstractBaseService {
         }
     }
 
-    public checkForSharedData(): void {
+    public getSharedDataFromUrl(): AttendanceStoreShare | null {
         const dataShareService = this.servicesResolver.getService(DataShareService);
-        const sharedState = dataShareService.getStoreFromUrl();
+        return dataShareService.getStoreFromUrl();
+    }
 
-        if (sharedState) {
-            setTimeout(() => {
-                if (confirm(Txt.loadDataFromUrl)) {
-                    const storeService = this.servicesResolver.getService(StoreService);
-                    storeService.store.dispatch({
-                        type: ActionType.loadStateFromUrl,
-                        payload: sharedState
-                    });
+    public loadSharedData(sharedState: AttendanceStoreShare) {
+        const storeService = this.servicesResolver.getService(StoreService);
+        storeService.store.dispatch({
+            type: ActionType.loadStateFromUrl,
+            payload: sharedState
+        });
 
-                    // Remove data param from URL
-                    const url = new URL(window.location.href);
-                    url.searchParams.delete('data');
-                    window.history.replaceState({}, '', url.toString());
-                }
-            }, 500);
-        }
+        const searchParamsService = this.servicesResolver.getService(SearchParamsService);
+        searchParamsService.patchParams({ data: null }, true);
     }
 }
