@@ -6,6 +6,7 @@ import {Txt} from '../translations/translations.ts';
 import {StoreService} from './Store.service.ts';
 import {ActionType} from '../models/AppAction.ts';
 import {AttendanceStoreShare} from '../models/AttendanceStore.ts';
+import {SearchParamsService} from './SearchParams.service.ts';
 
 export class ShareUrlService extends AbstractBaseService {
     constructor(provider: ServicesResolver) {
@@ -50,9 +51,7 @@ export class ShareUrlService extends AbstractBaseService {
             payload: sharedState
         });
 
-        // Remove data param from URL
-        const url = new URL(window.location.href);
-        url.searchParams.delete('data');
-        window.history.replaceState({}, '', url.toString());
+        const searchParamsService = this.servicesResolver.getService(SearchParamsService);
+        searchParamsService.patchParams({ data: null }, true);
     }
 }
