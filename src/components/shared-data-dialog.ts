@@ -36,12 +36,12 @@ export class SharedDataDialog extends LitElement {
         this._isDialogOpen = false;
     }
 
-    private _handleClose() {
+    private _handleClose = () => {
          this._isDialogOpen = false;
          this._searchParamsService.patchParams({data: null});
     }
 
-    private _handleLoadData() {
+    private _handleLoadData = () => {
         if (this._sharedData) {
             this._shareUrlService.loadSharedData(this._sharedData);
             this._handleClose();
