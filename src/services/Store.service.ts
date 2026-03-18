@@ -58,10 +58,22 @@ export class StoreService extends AbstractBaseService {
         
         // Ensure IDs are numbers (migration from string IDs)
         if (stateFromLocalStorage.attendance) {
-            stateFromLocalStorage.attendance = stateFromLocalStorage.attendance.map(child => ({
-                ...child,
-                id: Number(child.id) as RangedId
-            }));
+            let maxId = 0;
+            stateFromLocalStorage.attendance.forEach(child => {
+                const id = parseInt(child.id as any);
+                if (!isNaN(id)) {
+                    maxId = Math.max(maxId, id);
+                }
+            });
+
+            stateFromLocalStorage.attendance = stateFromLocalStorage.attendance.map(child => {
+                const id = parseInt(child.id as any);
+                if (!isNaN(id)) {
+                    return { ...child, id: id as RangedId };
+                }
+                maxId++;
+                return { ...child, id: maxId as RangedId };
+            });
         }
 
         return this.resetChildrenStateIfADayHasPassed(stateFromLocalStorage);
