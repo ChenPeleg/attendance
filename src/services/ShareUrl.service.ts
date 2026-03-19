@@ -58,6 +58,10 @@ export class ShareUrlService extends AbstractBaseService {
         });
 
         const searchParamsService = this.servicesResolver.getService(SearchParamsService);
-        searchParamsService.patchParams({ data: null }, true);
+        searchParamsService.patchParams({
+            [SearchParamsService.DATA_QUERY_PARAM]: null,
+            [SearchParamsService.TIME_QUERY_PARAM]: null,
+            [SearchParamsService.MANUAL_CHILDREN_QUERY_PARAM]: null
+        }, true);
     }
 }

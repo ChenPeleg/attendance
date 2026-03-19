@@ -41,8 +41,8 @@ export class StateDecoderEncoderService extends AbstractBaseService {
         };
     }
 
-    public encode(state: AttendanceStoreShare): string {
-        const allChildren = this.getChildrenList();
+    public encode(state: AttendanceStoreShare, extraChildren: {id: RangedId, name: string, manuallyAdded: true}[] = []): string {
+        const allChildren = [...this.getChildrenList(), ...extraChildren];
         const childrenByte: { id: RangedId, childByteStatus: ChildByteStatus }[] = []
         for (const child of allChildren) {
             const childFromState = state.attendance.find(c => c.id === child.id);
@@ -59,7 +59,7 @@ export class StateDecoderEncoderService extends AbstractBaseService {
         return btoa(String.fromCharCode(...byteArray));
     }
 
-    public decode(encodedState: string): AttendanceStoreShare {
+    public decode(encodedState: string, extraChildren: {id: RangedId, name: string, manuallyAdded: true}[] = []): AttendanceStoreShare {
         try {
             const binaryString = atob(encodedState);
             const byteArray = new Uint8Array(binaryString.length);
@@ -67,8 +67,8 @@ export class StateDecoderEncoderService extends AbstractBaseService {
                 byteArray[i] = binaryString.charCodeAt(i);
             }
 
-            const allChildren = this.getChildrenList();
-            const attendanceMap = new Map(allChildren.map(c => [c.id, { ...c }]));
+            const allChildren = [...this.getChildrenList(), ...extraChildren];
+            const attendanceMap = new Map(allChildren.map(c => [c.id, { ...c } as ChildStatus]));
 
             for (let i = 0; i < byteArray.length; i++) {
                 const { id, enumVal } = this.decodeData(byteArray[i]);
@@ -86,6 +86,65 @@ export class StateDecoderEncoderService extends AbstractBaseService {
             };
         } catch (e) {
             console.error('Failed to decode state', e);
+            throw e;
+        }
+    }
+
+    public encodeTime(current: number, history: number[]): string {
+        const FIVE_MINUTES = 5 * 60 * 1000;
+        const timestamps = [current, ...history].map(ts => Math.round(ts / FIVE_MINUTES));
+        const buffer = new ArrayBuffer(timestamps.length * 2);
+        const view = new DataView(buffer);
+        timestamps.forEach((ts, index) => {
+            view.setUint16(index * 2, ts & 0xFFFF, true);
+        });
+        const byteArray = new Uint8Array(buffer);
+        return btoa(String.fromCharCode(...byteArray));
+    }
+
+    public decodeTime(encodedState: string): { current: number, history: number[] } {
+        try {
+            const binaryString = atob(encodedState);
+            const byteArray = new Uint8Array(binaryString.length);
+            for (let i = 0; i < binaryString.length; i++) {
+                byteArray[i] = binaryString.charCodeAt(i);
+            }
+            const view = new DataView(byteArray.buffer);
+            const timestamps: number[] = [];
+
+            const FIVE_MINUTES = 5 * 60 * 1000;
+            const now = Date.now();
+            const currentIntervals = Math.round(now / FIVE_MINUTES);
+            const highBits = currentIntervals & ~0xFFFF;
+            // Buffer to handle clock skew (sender slightly in future relative to receiver)
+            // or if the timestamp is legitimately slightly in the future.
+            // 288 * 5 mins = 24 hours.
+            const FUTURE_BUFFER = 288;
+
+            for (let i = 0; i < byteArray.length / 2; i++) {
+                const lowBits = view.getUint16(i * 2, true);
+                let reconstructed = highBits | lowBits;
+
+                // If reconstructed is significantly in the future relative to now,
+                // it implies the lowBits correspond to the previous cycle of highBits.
+                // (e.g. now is just past a 65536 boundary, but timestamp is from just before it)
+                if (reconstructed > currentIntervals + FUTURE_BUFFER) {
+                    reconstructed -= 0x10000;
+                }
+
+                timestamps.push(reconstructed * FIVE_MINUTES);
+            }
+
+            if (timestamps.length === 0) {
+                return { current: 0, history: [] };
+            }
+
+            return {
+                current: timestamps[0],
+                history: timestamps.slice(1)
+            };
+        } catch (e) {
+            console.error('Failed to decode time', e);
             throw e;
         }
     }
