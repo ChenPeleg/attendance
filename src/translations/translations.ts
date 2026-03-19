@@ -28,10 +28,11 @@ const translations = {
     installApp: 'התקנה',
     copyContent: 'העתק רשימה',
     close: 'סגור',
-    loadDataFromUrl: 'האם לטעון נתונים מהקישור?',
-    yes: 'כן',
-    no: 'לא',
-} as const;
+    'loadDataFromUrl': 'האם לטעון רשימה שנשלחה?',
+    'yes': 'כן',
+    'no': 'לא',
+    'manualChildrenIncluded': 'הרשימה כוללת את ',
+    'addedManually': ' שנוספו ידנית',
+};
 
-
-export const Txt = translations
+export const Txt: Record<keyof typeof translations, string> = translations;

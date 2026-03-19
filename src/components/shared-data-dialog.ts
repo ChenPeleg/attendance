@@ -59,6 +59,7 @@ export class SharedDataDialog extends LitElement {
     render() {
         const presentCount = this._sharedData?.attendance.filter((c : ChildStatus) => !((c as any)?.onlySchoolBus  ) && c.presentToday === PresentToday.Yes).length || 0;
         const time = this._sharedData?.lastUpdated ? this._timeAndDateService.hoursAndMinutes(this._sharedData.lastUpdated) : '';
+        const manualChildren = this._sharedData?.attendance.filter(c => c.manuallyAdded).map(c => c.name) || [];
 
         return html` 
                 <app-dialog ?open="${this._isDialogOpen}" @close="${this._handleClose}">
@@ -69,6 +70,13 @@ export class SharedDataDialog extends LitElement {
                                 <div class="text-lg">נוכחות של ${presentCount} ילדים</div>
                                 ${time ? html`<div class="text-sm text-gray-500">נשלח בשעה ${time}</div>` : ''}
                             </div>
+                            ${manualChildren.length > 0 ? html`
+                                <div class="mt-4 p-3 bg-yellow-50 rounded-lg border border-yellow-100">
+                                    <div class="text-sm font-medium text-gray-700 mb-1">${Txt.manualChildrenIncluded}</div>
+                                    <div class="text-base font-bold text-primary mb-1 break-words px-2">${manualChildren.join(', ')}</div>
+                                    <div class="text-sm font-medium text-gray-700">${Txt.addedManually}</div>
+                                </div>
+                            ` : ''}
                         ` : ''}
                     </div>
                     <div slot="footer" class="w-full flex justify-center gap-4 mt-6">
