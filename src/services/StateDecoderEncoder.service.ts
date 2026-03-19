@@ -41,8 +41,8 @@ export class StateDecoderEncoderService extends AbstractBaseService {
         };
     }
 
-    public encode(state: AttendanceStoreShare): string {
-        const allChildren = this.getChildrenList();
+    public encode(state: AttendanceStoreShare, extraChildren: {id: RangedId, name: string, manuallyAdded: true}[] = []): string {
+        const allChildren = [...this.getChildrenList(), ...extraChildren];
         const childrenByte: { id: RangedId, childByteStatus: ChildByteStatus }[] = []
         for (const child of allChildren) {
             const childFromState = state.attendance.find(c => c.id === child.id);
@@ -59,7 +59,7 @@ export class StateDecoderEncoderService extends AbstractBaseService {
         return btoa(String.fromCharCode(...byteArray));
     }
 
-    public decode(encodedState: string): AttendanceStoreShare {
+    public decode(encodedState: string, extraChildren: {id: RangedId, name: string, manuallyAdded: true}[] = []): AttendanceStoreShare {
         try {
             const binaryString = atob(encodedState);
             const byteArray = new Uint8Array(binaryString.length);
@@ -67,8 +67,8 @@ export class StateDecoderEncoderService extends AbstractBaseService {
                 byteArray[i] = binaryString.charCodeAt(i);
             }
 
-            const allChildren = this.getChildrenList();
-            const attendanceMap = new Map(allChildren.map(c => [c.id, { ...c }]));
+            const allChildren = [...this.getChildrenList(), ...extraChildren];
+            const attendanceMap = new Map(allChildren.map(c => [c.id, { ...c } as ChildStatus]));
 
             for (let i = 0; i < byteArray.length; i++) {
                 const { id, enumVal } = this.decodeData(byteArray[i]);

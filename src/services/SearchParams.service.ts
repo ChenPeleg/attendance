@@ -4,6 +4,7 @@ import {AbstractBaseService} from './provider/AbstractBaseService.ts';
 export class SearchParamsService extends AbstractBaseService {
     public static readonly DATA_QUERY_PARAM = 'data';
     public static readonly TIME_QUERY_PARAM = 'time';
+    public static readonly MANUAL_CHILDREN_QUERY_PARAM = 'manual';
     private subscriptions: Array<(params: URLSearchParams) => void> = [];
 
     constructor(provider: ServicesResolver) {
