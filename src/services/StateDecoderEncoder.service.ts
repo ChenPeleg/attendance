@@ -91,11 +91,12 @@ export class StateDecoderEncoderService extends AbstractBaseService {
     }
 
     public encodeTime(current: number, history: number[]): string {
-        const timestamps = [current, ...history].map(ts => Math.floor(ts / 1000));
-        const buffer = new ArrayBuffer(timestamps.length * 4);
+        const FIVE_MINUTES = 5 * 60 * 1000;
+        const timestamps = [current, ...history].map(ts => Math.round(ts / FIVE_MINUTES));
+        const buffer = new ArrayBuffer(timestamps.length * 2);
         const view = new DataView(buffer);
         timestamps.forEach((ts, index) => {
-            view.setUint32(index * 4, ts, true);
+            view.setUint16(index * 2, ts & 0xFFFF, true);
         });
         const byteArray = new Uint8Array(buffer);
         return btoa(String.fromCharCode(...byteArray));
@@ -110,8 +111,28 @@ export class StateDecoderEncoderService extends AbstractBaseService {
             }
             const view = new DataView(byteArray.buffer);
             const timestamps: number[] = [];
-            for (let i = 0; i < byteArray.length / 4; i++) {
-                timestamps.push(view.getUint32(i * 4, true) * 1000);
+
+            const FIVE_MINUTES = 5 * 60 * 1000;
+            const now = Date.now();
+            const currentIntervals = Math.round(now / FIVE_MINUTES);
+            const highBits = currentIntervals & ~0xFFFF;
+            // Buffer to handle clock skew (sender slightly in future relative to receiver)
+            // or if the timestamp is legitimately slightly in the future.
+            // 288 * 5 mins = 24 hours.
+            const FUTURE_BUFFER = 288;
+
+            for (let i = 0; i < byteArray.length / 2; i++) {
+                const lowBits = view.getUint16(i * 2, true);
+                let reconstructed = highBits | lowBits;
+
+                // If reconstructed is significantly in the future relative to now,
+                // it implies the lowBits correspond to the previous cycle of highBits.
+                // (e.g. now is just past a 65536 boundary, but timestamp is from just before it)
+                if (reconstructed > currentIntervals + FUTURE_BUFFER) {
+                    reconstructed -= 0x10000;
+                }
+
+                timestamps.push(reconstructed * FIVE_MINUTES);
             }
 
             if (timestamps.length === 0) {
