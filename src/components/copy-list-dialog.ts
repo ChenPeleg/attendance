@@ -4,10 +4,10 @@ import {servicesProvider} from '../services/provider/ServicesProvider.ts';
 import {SearchParamsService} from '../services/SearchParams.service.ts';
 import '../dialog/app-dialog.ts';
 import './copy-children-list.ts';
-import {WithGlobalStylesheet} from '../mixins/GlobalStylesheetMixin.ts';
+import {AppBaseComponent} from '../mixins/GlobalStylesheetMixin.ts';
 
 @customElement('copy-list-dialog')
-export class CopyListDialog extends WithGlobalStylesheet(LitElement) {
+export class CopyListDialog extends AppBaseComponent(LitElement) {
     @state() private _isDialogOpen = false;
     
     private _searchParamsService: SearchParamsService = servicesProvider.getService(SearchParamsService);

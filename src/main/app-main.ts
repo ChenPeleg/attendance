@@ -15,10 +15,10 @@ import {servicesProvider} from '../services/provider/ServicesProvider.ts';
 import {HistoryService} from '../services/History.service.ts';
 import {SortService} from '../services/SortService.service.ts';
 import {SchoolClass} from '../models/schoolClass.ts';
-import {WithGlobalStylesheet} from '../mixins/GlobalStylesheetMixin.ts';
+import {AppBaseComponent} from '../mixins/GlobalStylesheetMixin.ts';
 
 @customElement('app-main')
-export class AppMain extends WithGlobalStylesheet(LitElement) {
+export class AppMain extends AppBaseComponent(LitElement) {
 
     @property({type: String}) childItemType: 'checkIn' | 'presentToday' = 'checkIn';
 

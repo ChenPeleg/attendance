@@ -4,11 +4,11 @@ import {PWAService, PWAStatus} from '../services/PWA.service.ts';
 import {servicesProvider} from '../services/provider/ServicesProvider.ts';
 import {Txt} from '../translations/translations.ts';
 import installMobile from '../assets/svg/install-mobile.svg'
-import {WithGlobalStylesheet} from '../mixins/GlobalStylesheetMixin.ts';
+import {AppBaseComponent} from '../mixins/GlobalStylesheetMixin.ts';
 
 
 @customElement('install-pwa-button')
-export class InstallPwaButton extends WithGlobalStylesheet(LitElement) {
+export class InstallPwaButton extends AppBaseComponent(LitElement) {
     static INSTALL_APP_BUTTON_ID = 'install-app-button';
     @state() canInstall = false;
     @state() preInstallEvent: Event | null = null;

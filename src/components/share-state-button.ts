@@ -6,11 +6,11 @@ import {servicesProvider} from '../services/provider/ServicesProvider.ts';
 import {ShareUrlService} from '../services/ShareUrl.service.ts';
 import {StateDecoderEncoderService} from '../services/StateDecoderEncoder.service.ts';
 import {StoreService} from '../services/Store.service.ts';
-import {WithGlobalStylesheet} from '../mixins/GlobalStylesheetMixin.ts';
+import {AppBaseComponent} from '../mixins/GlobalStylesheetMixin.ts';
 
 
 @customElement('share-state-button')
-export class ShareStateButton extends WithGlobalStylesheet(LitElement) {
+export class ShareStateButton extends AppBaseComponent(LitElement) {
 
 
     async clickOption(): Promise<void> {

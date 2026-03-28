@@ -5,7 +5,7 @@ import { SortOrder, SortType } from "../models/SortType.ts";
 import { globalStore } from "../store/Store.ts";
 import { ActionType } from "../models/AppAction.ts";
 import checkMark from "../assets/svg/check.svg";
-import { WithGlobalStylesheet } from "../mixins/GlobalStylesheetMixin.ts";
+import { AppBaseComponent } from "../mixins/GlobalStylesheetMixin.ts";
 
 const sortOptions = {
   [SortType.Class]: {
@@ -36,7 +36,7 @@ const sortOptions = {
 };
 
 @customElement("sorting-options")
-export class SortingOptions extends WithGlobalStylesheet(LitElement) {
+export class SortingOptions extends AppBaseComponent(LitElement) {
   @state() private sortType: SortType = globalStore.getState().sortType;
   @state() private sortOrder: SortOrder = globalStore.getState().sortOrder;
 

@@ -70,7 +70,7 @@ This plan addresses code clarity, file size, naming consistency, and architectur
 
 ---
 
-### 1.2 Create `StylesheetMixin` to Eliminate Duplicate Code
+### 1.2 Create Base Component to Eliminate Duplicate Code
 
 **Issue**: 17 components contain identical `firstUpdated()` lifecycle methods.
 
@@ -96,16 +96,16 @@ firstUpdated() {
 // New file: src/mixins/GlobalStylesheetMixin.ts
 import { LitElement, Constructor } from 'lit';
 
-export const WithGlobalStylesheet = <T extends Constructor<LitElement>>(
+export const AppBaseComponent = <T extends Constructor<LitElement>>(
   superClass: T
 ) => {
-  class GlobalStylesheetMixinClass extends superClass {
+  class AppBaseComponentClass extends superClass {
     firstUpdated() {
       super.firstUpdated?.();
       (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
     }
   }
-  return GlobalStylesheetMixinClass;
+  return AppBaseComponentClass;
 };
 ```
 
@@ -121,8 +121,8 @@ export class MyComponent extends LitElement {
 
 With:
 ```typescript
-export class MyComponent extends WithGlobalStylesheet(LitElement) {
-    // firstUpdated() removed - handled by mixin
+export class MyComponent extends AppBaseComponent(LitElement) {
+    // firstUpdated() removed - handled by base component
 }
 ```
 
@@ -131,6 +131,7 @@ export class MyComponent extends WithGlobalStylesheet(LitElement) {
 - Centralizes stylesheet initialization logic
 - Easier to maintain and modify in the future
 - Follows DRY (Don't Repeat Yourself) principle
+- Provides a clear extension point for future shared logic
 
 ---
 
@@ -673,7 +674,7 @@ render() {
 
 ### Sprint 1 (Immediate Impact)
 - **Week 1**: Phase 1.1 - Extract `copy-children-list.ts` logic
-- **Week 1**: Phase 1.2 - Create `StylesheetMixin`
+- **Week 1**: Phase 1.2 - Create `AppBaseComponent`
 - **Week 1**: Phase 1.3 - Fix service naming
 
 **Estimated Impact**:
@@ -733,7 +734,7 @@ render() {
 ## Risk Assessment
 
 ### Low Risk (Safe to Proceed)
-- Phase 1.2: Mixin creation (additive change)
+- Phase 1.2: AppBaseComponent creation (additive change)
 - Phase 1.3: File renaming (simple refactor)
 - Phase 3.1: Constants extraction (no logic change)
 - Phase 3.3: JSDoc addition (documentation only)
@@ -786,4 +787,4 @@ The plan is structured in phases with clear priorities, allowing incremental imp
 
 **Priority Order**: Phase 1 → Phase 2 → Phase 3 → Phase 4
 
-**Recommended Start**: Begin with Phase 1.2 (StylesheetMixin) for quick wins and confidence building.
+**Recommended Start**: Begin with Phase 1.2 (AppBaseComponent) for quick wins and confidence building.
