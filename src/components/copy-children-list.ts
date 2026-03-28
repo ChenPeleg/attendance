@@ -1,6 +1,5 @@
 import {html, LitElement} from 'lit'
 import {customElement, state} from 'lit/decorators.js'
-import {globalStyleSheet} from '../styles/global-style-sheet.ts';
 import copyIcon from '../assets/svg/copy-content.svg'
 import {Txt} from '../translations/translations.ts';
 import {ChildStatus} from '../models/ChildStatus.ts';
@@ -10,13 +9,14 @@ import {PresentToday} from '../models/presentToday.ts';
 import '../ui/check-mark-with-animation/check-mark-with-animation.ts';
 import {SchoolClass} from '../models/schoolClass.ts';
 import retry from '../assets/svg/retry.svg';
+import {WithGlobalStylesheet} from '../mixins/GlobalStylesheetMixin.ts';
 
 enum CopyFormat {
     Groups = 'groups', Commas = 'commas', Numbers = 'numbers', TwoGroups = 'two-groups', ThreeGroups = 'three-groups'
 }
 
 @customElement('copy-children-list')
-export class CopyChildrenList extends LitElement {
+export class CopyChildrenList extends WithGlobalStylesheet(LitElement) {
     @state() private randomSeed: number =  0;
     @state() private _presentChildren: ChildStatus[] = [];
     @state() private _showCheckMark: boolean = false;
@@ -72,10 +72,6 @@ export class CopyChildrenList extends LitElement {
                 this._showCheckMark = false;
             }, 2000);
         });
-    }
-
-    firstUpdated() {
-        (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
     }
 
     render() {

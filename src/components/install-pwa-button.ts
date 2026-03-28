@@ -4,11 +4,11 @@ import {PWAService, PWAStatus} from '../services/PWA.service.ts';
 import {servicesProvider} from '../services/provider/ServicesProvider.ts';
 import {Txt} from '../translations/translations.ts';
 import installMobile from '../assets/svg/install-mobile.svg'
-import {globalStyleSheet} from '../styles/global-style-sheet.ts';
+import {WithGlobalStylesheet} from '../mixins/GlobalStylesheetMixin.ts';
 
 
 @customElement('install-pwa-button')
-export class InstallPwaButton extends LitElement {
+export class InstallPwaButton extends WithGlobalStylesheet(LitElement) {
     static INSTALL_APP_BUTTON_ID = 'install-app-button';
     @state() canInstall = false;
     @state() preInstallEvent: Event | null = null;
@@ -26,11 +26,9 @@ export class InstallPwaButton extends LitElement {
         }
     }
 
-    firstUpdated() {
-
-        (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
+    firstUpdated(changedProperties: Map<PropertyKey, unknown>) {
+        super.firstUpdated(changedProperties);
         this.initPwa().then();
-
     }
 
     render() {

@@ -1,16 +1,16 @@
 import {html, LitElement} from 'lit'
 import {customElement, state} from 'lit/decorators.js'
-import {globalStyleSheet} from '../styles/global-style-sheet.ts';
 import {Txt} from '../translations/translations.ts';
 import {globalStore} from '../store/Store.ts';
 import {ChildrenDisplayType} from '../models/AttendanceStore.ts';
 import gridImage from '../assets/svg/grid.svg'
 import listImage from '../assets/svg/list.svg'
 import {ActionType} from '../models/AppAction.ts';
+import {WithGlobalStylesheet} from '../mixins/GlobalStylesheetMixin.ts';
 
 
 @customElement('children-display-button')
-export class ChildrenDisplayButton extends LitElement {
+export class ChildrenDisplayButton extends WithGlobalStylesheet(LitElement) {
     @state() private displayType: ChildrenDisplayType = globalStore.getState().childrenDisplayType;
 
 
@@ -24,8 +24,8 @@ export class ChildrenDisplayButton extends LitElement {
     }
 
 
-    firstUpdated() {
-        (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
+    firstUpdated(changedProperties: Map<PropertyKey, unknown>) {
+        super.firstUpdated(changedProperties);
         globalStore.subscribe((value) => {
             this.displayType = value.childrenDisplayType;
             this.requestUpdate();
