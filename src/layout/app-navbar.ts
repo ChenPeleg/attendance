@@ -3,7 +3,7 @@ import {customElement} from 'lit/decorators.js'
 import {globalStyleSheet} from '../styles/global-style-sheet.ts';
 import {servicesProvider} from '../services/provider/ServicesProvider.ts';
 import {ConfigurationService} from '../services/Configuration.service.ts';
-import {SupersizeAnimationService} from '../services/SupersizeAnimationService.ts';
+import {SupersizeAnimationService} from '../services/SupersizeAnimation.service.ts';
 
 
 @customElement('app-navbar')

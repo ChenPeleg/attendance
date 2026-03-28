@@ -8,7 +8,7 @@ import {SortService} from '../SortService.service.ts';
 import {BackgroundImageService} from '../BackgroundImage.service.ts';
 import {ConfigurationService} from '../Configuration.service.ts';
 import {PWAService} from '../PWA.service.ts';
-import {SupersizeAnimationService} from '../SupersizeAnimationService.ts';
+import {SupersizeAnimationService} from '../SupersizeAnimation.service.ts';
 import {SearchParamsService} from '../SearchParams.service.ts';
 import {DataShareService} from '../DataShare.service.ts';
 import {ShareUrlService} from '../ShareUrl.service.ts';
