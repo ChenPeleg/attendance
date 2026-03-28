@@ -1,6 +1,5 @@
 import {html, LitElement} from 'lit'
 import {customElement, property, state} from 'lit/decorators.js'
-import {globalStyleSheet} from '../styles/global-style-sheet.ts';
 import '../layout/app-cockpit.ts'
 import {AttendanceStore, ChildrenDisplayType, DisplayType} from '../models/AttendanceStore.ts';
 import {globalStore} from '../store/Store.ts';
@@ -16,17 +15,18 @@ import {servicesProvider} from '../services/provider/ServicesProvider.ts';
 import {HistoryService} from '../services/History.service.ts';
 import {SortService} from '../services/SortService.service.ts';
 import {SchoolClass} from '../models/schoolClass.ts';
+import {WithGlobalStylesheet} from '../mixins/GlobalStylesheetMixin.ts';
 
 @customElement('app-main')
-export class AppMain extends LitElement {
+export class AppMain extends WithGlobalStylesheet(LitElement) {
 
     @property({type: String}) childItemType: 'checkIn' | 'presentToday' = 'checkIn';
 
     @state() storeState: AttendanceStore | null = globalStore.getState();
     private displayType: DisplayType = this.storeState?.display || DisplayType.Attendance;
 
-    firstUpdated() {
-        (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
+    firstUpdated(changedProperties: Map<PropertyKey, unknown>) {
+        super.firstUpdated(changedProperties);
         globalStore.subscribe((state: AttendanceStore) => {
             this.storeState = state;
             this.displayType = state.display;

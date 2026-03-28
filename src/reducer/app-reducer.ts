@@ -8,7 +8,7 @@ import {TimeAndDateService} from '../services/TimeAndDate.service.ts';
 
 import {SortOrder } from '../models/SortType.ts';
 import {StoreService} from '../services/Store.service.ts';
-import {SupersizeAnimationService} from '../services/SupersizeAnimationService.ts';
+import {SupersizeAnimationService} from '../services/SupersizeAnimation.service.ts';
 import {RangedId} from '../models/RangedId.ts';
 
 export const appReducer:StoreReducer<AttendanceStore, AppAction> = (state: AttendanceStore, action: AppAction): AttendanceStore => {

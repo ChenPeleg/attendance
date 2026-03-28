@@ -8,14 +8,15 @@ import {SortService} from '../SortService.service.ts';
 import {BackgroundImageService} from '../BackgroundImage.service.ts';
 import {ConfigurationService} from '../Configuration.service.ts';
 import {PWAService} from '../PWA.service.ts';
-import {SupersizeAnimationService} from '../SupersizeAnimationService.ts';
+import {SupersizeAnimationService} from '../SupersizeAnimation.service.ts';
 import {SearchParamsService} from '../SearchParams.service.ts';
 import {DataShareService} from '../DataShare.service.ts';
 import {ShareUrlService} from '../ShareUrl.service.ts';
 import {StateDecoderEncoderService} from '../StateDecoderEncoder.service.ts';
+import {ChildrenListFormatterService} from '../ChildrenListFormatter.service.ts';
 
 const ServicesProviderFactory = () => {
-    const provider = new ServicesResolver([PWAService, ConfigurationService,StateDecoderEncoderService, BackgroundImageService, SortService, LocalStorageService, TimeAndDateService, ThemeService, StoreService, HistoryService,SupersizeAnimationService, SearchParamsService, DataShareService, ShareUrlService]);
+    const provider = new ServicesResolver([PWAService, ConfigurationService,StateDecoderEncoderService, BackgroundImageService, SortService, LocalStorageService, TimeAndDateService, ThemeService, StoreService, HistoryService,SupersizeAnimationService, SearchParamsService, DataShareService, ShareUrlService, ChildrenListFormatterService]);
     provider.initServices();
     return provider;
 }

@@ -1,18 +1,13 @@
 import {html, LitElement} from 'lit'
 import {customElement} from 'lit/decorators.js'
-import {globalStyleSheet} from '../styles/global-style-sheet.ts';
 import {servicesProvider} from '../services/provider/ServicesProvider.ts';
 import {ConfigurationService} from '../services/Configuration.service.ts';
-import {SupersizeAnimationService} from '../services/SupersizeAnimationService.ts';
+import {SupersizeAnimationService} from '../services/SupersizeAnimation.service.ts';
+import {WithGlobalStylesheet} from '../mixins/GlobalStylesheetMixin.ts';
 
 
 @customElement('app-navbar')
-export class AppNavbar extends LitElement {
-
-    firstUpdated() {
-        (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
-
-    }
+export class AppNavbar extends WithGlobalStylesheet(LitElement) {
 
 
     render() {

@@ -1,17 +1,12 @@
 import {html, LitElement} from 'lit'
 import {customElement, property} from 'lit/decorators.js'
-import {globalStyleSheet} from '../styles/global-style-sheet.ts';
+import {WithGlobalStylesheet} from '../mixins/GlobalStylesheetMixin.ts';
 
 
 @customElement('past-counts')
-export class PastCounts extends LitElement {
+export class PastCounts extends WithGlobalStylesheet(LitElement) {
 
     @property({type: String}) lastAttendanceTimes: string[] = [];
-
-    firstUpdated() {
-        (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
-    }
-
 
 
     getHistoryHtml() {

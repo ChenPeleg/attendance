@@ -1,6 +1,5 @@
 import {html, LitElement} from 'lit';
 import {customElement, state} from 'lit/decorators.js';
-import {globalStyleSheet} from '../styles/global-style-sheet.ts';
 import {servicesProvider} from '../services/provider/ServicesProvider.ts';
 import {SearchParamsService} from '../services/SearchParams.service.ts';
 import {ShareUrlService} from '../services/ShareUrl.service.ts';
@@ -10,9 +9,10 @@ import {PresentToday} from '../models/presentToday.ts';
 import {TimeAndDateService} from '../services/TimeAndDate.service.ts';
 import '../dialog/app-dialog.ts';
 import {ChildStatus} from '../models/ChildStatus.ts';
+import {WithGlobalStylesheet} from '../mixins/GlobalStylesheetMixin.ts';
 
 @customElement('shared-data-dialog')
-export class SharedDataDialog extends LitElement {
+export class SharedDataDialog extends WithGlobalStylesheet(LitElement) {
     @state() private _isDialogOpen = false;
     @state() private _sharedData: AttendanceStoreShare | null = null;
     
@@ -50,10 +50,6 @@ export class SharedDataDialog extends LitElement {
             this._shareUrlService.loadSharedData(this._sharedData);
             this._handleClose();
         }
-    }
-
-    firstUpdated() {
-        (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
     }
 
     render() {

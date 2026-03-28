@@ -1,6 +1,5 @@
 import {html, LitElement} from 'lit'
 import {customElement, state} from 'lit/decorators.js'
-import {globalStyleSheet} from '../styles/global-style-sheet.ts';
 import copyIcon from '../assets/svg/copy-content.svg'
 import {Txt} from '../translations/translations.ts';
 import {ChildStatus} from '../models/ChildStatus.ts';
@@ -8,20 +7,24 @@ import {globalStore} from '../store/Store.ts';
 import {AttendanceStore} from '../models/AttendanceStore.ts';
 import {PresentToday} from '../models/presentToday.ts';
 import '../ui/check-mark-with-animation/check-mark-with-animation.ts';
-import {SchoolClass} from '../models/schoolClass.ts';
 import retry from '../assets/svg/retry.svg';
+import {WithGlobalStylesheet} from '../mixins/GlobalStylesheetMixin.ts';
+import {shuffleWithSeed} from '../utils/RandomShuffler.ts';
+import {servicesProvider} from '../services/provider/ServicesProvider.ts';
+import {ChildrenListFormatterService, ChildrenListFormat} from '../services/ChildrenListFormatter.service.ts';
 
 enum CopyFormat {
     Groups = 'groups', Commas = 'commas', Numbers = 'numbers', TwoGroups = 'two-groups', ThreeGroups = 'three-groups'
 }
 
 @customElement('copy-children-list')
-export class CopyChildrenList extends LitElement {
+export class CopyChildrenList extends WithGlobalStylesheet(LitElement) {
     @state() private randomSeed: number =  0;
     @state() private _presentChildren: ChildStatus[] = [];
     @state() private _showCheckMark: boolean = false;
     @state() private _selectedFormat: CopyFormat = CopyFormat.Numbers;
     private _unsubscribe: (() => void) | null = null;
+    private _formatterService: ChildrenListFormatterService = servicesProvider.getService(ChildrenListFormatterService);
 
     connectedCallback() {
         super.connectedCallback();
@@ -37,28 +40,6 @@ export class CopyChildrenList extends LitElement {
             this._unsubscribe();
         }
     }
-    shuffled = ({seed, children}: { seed: number, children: ChildStatus[] }) => {
-        if (seed === 0) {
-            return children;
-        }
-
-        // Simple seeded random number generator (Mulberry32)
-        let currentSeed = seed;
-        const random = () => {
-            let t = currentSeed += 0x6D2B79F5;
-            t = Math.imul(t ^ t >>> 15, t | 1);
-            t ^= t + Math.imul(t ^ t >>> 7, t | 61);
-            return ((t ^ t >>> 14) >>> 0) / 4294967296;
-        };
-
-        return children
-            .map(value => ({
-                value,
-                sort: random()
-            }))
-            .sort((a, b) => a.sort - b.sort)
-            .map(({value}) => value);
-    }
 
     remixTheList = () => {
         this.randomSeed += 1;
@@ -72,10 +53,6 @@ export class CopyChildrenList extends LitElement {
                 this._showCheckMark = false;
             }, 2000);
         });
-    }
-
-    firstUpdated() {
-        (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
     }
 
     render() {
@@ -156,73 +133,19 @@ export class CopyChildrenList extends LitElement {
         this._presentChildren = list.filter(c => c.presentToday === PresentToday.Yes);
     }
 
-    private _formatGroups({
-        children
-                          } :
-                          {
-                                children: ChildStatus[]
-                          }): string {
-        const groups: Record<string, string[]> = {};
-       children.forEach(c => {
-            let groupName = SchoolClass.Other;
-            if ('schoolClass' in c) {
-                groupName = c.schoolClass;
-            }
-            if (!groups[groupName]) {
-                groups[groupName] = [];
-            }
-            groups[groupName].push(c.name);
-        });
+    private _updateFormatedText(seed: number): string {
+        const children = this._presentChildren.map(c => c);
+        const shuffled = shuffleWithSeed(children, seed);
 
-        const order = [SchoolClass.First, SchoolClass.Second, SchoolClass.Third, SchoolClass.Other];
-        const result: string[] = [];
+        // Map component format to service format
+        const formatMap: Record<CopyFormat, ChildrenListFormat> = {
+            [CopyFormat.Commas]: ChildrenListFormat.Commas,
+            [CopyFormat.Numbers]: ChildrenListFormat.Numbers,
+            [CopyFormat.Groups]: ChildrenListFormat.Groups,
+            [CopyFormat.TwoGroups]: ChildrenListFormat.TwoGroups,
+            [CopyFormat.ThreeGroups]: ChildrenListFormat.ThreeGroups
+        };
 
-        order.forEach(groupName => {
-            if (groups[groupName] && groups[groupName].length > 0) {
-                result.push(`${groupName}: ${groups[groupName].join(', ')}`);
-            }
-        });
-
-        return result.join('\n');
-    }
-
-    private _updateFormatedText(seed :number) {
-        const children = this._presentChildren.map((c => c))
-        const shuffled = this.shuffled({
-            seed :
-            seed, children
-        })
-
-        switch (this._selectedFormat) {
-            case CopyFormat.Commas:
-                return shuffled.map(c => c.name).join(', ');
-
-            case CopyFormat.Numbers:
-                return shuffled.map((c, i) => `${i + 1}. ${c.name}`).join('\n');
-
-            case CopyFormat.Groups:
-                return this._formatGroups({children : shuffled});
-            case CopyFormat.TwoGroups:
-                return this._formatSplitGroups(shuffled, 2);
-            case CopyFormat.ThreeGroups:
-                return this._formatSplitGroups(shuffled, 3);
-        }
-    }
-
-    private _formatSplitGroups(children: ChildStatus[], numberOfGroups: number): string {
-        const result: string[] = [];
-        const chunkSize = Math.ceil(children.length / numberOfGroups);
-
-        for (let i = 0; i < numberOfGroups; i++) {
-            const chunk = children.slice(i * chunkSize, (i + 1) * chunkSize);
-            if (chunk.length === 0) continue;
-
-            result.push(`--- קבוצה ${i + 1} ---`);
-            result.push(chunk.map((c, idx) => `${idx + 1}. ${c.name}`).join('\n'));
-            if (i < numberOfGroups - 1) {
-                result.push('');
-            }
-        }
-        return result.join('\n');
+        return this._formatterService.format(shuffled, formatMap[this._selectedFormat]);
     }
 }

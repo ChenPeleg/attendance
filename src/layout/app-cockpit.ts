@@ -1,6 +1,5 @@
 import {html, LitElement} from 'lit'
 import {customElement,   state} from 'lit/decorators.js'
-import {globalStyleSheet} from '../styles/global-style-sheet.ts';
 import busIcon from '../assets/svg/bus.svg'
 import childIcon from '../assets/svg/child.svg'
 import dayIcon from '../assets/svg/day.svg'
@@ -9,6 +8,7 @@ import {Txt} from '../translations/translations.ts';
 import {AttendanceStore, DisplayType} from '../models/AttendanceStore.ts';
 import {globalStore} from '../store/Store.ts';
 import {ActionType} from '../models/AppAction.ts';
+import {WithGlobalStylesheet} from '../mixins/GlobalStylesheetMixin.ts';
 
 interface CockpitButton {
     label: string,
@@ -20,7 +20,7 @@ interface CockpitButton {
 const SHOW_SCHOOL_BUS = true;
 
 @customElement('app-cockpit')
-export class AppCockpit extends LitElement {
+export class AppCockpit extends WithGlobalStylesheet(LitElement) {
     buttons: CockpitButton[] = [{
         label: Txt.attendance,
         id: DisplayType.Attendance,
@@ -45,8 +45,8 @@ export class AppCockpit extends LitElement {
 
     private displayType: DisplayType = this.storeState?.display || DisplayType.Attendance;
 
-    firstUpdated() {
-        (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
+    firstUpdated(changedProperties: Map<PropertyKey, unknown>) {
+        super.firstUpdated(changedProperties);
         globalStore.subscribe((state: AttendanceStore) => {
             this.storeState = state;
             this.displayType = state.display;

@@ -1,16 +1,16 @@
 import {html, LitElement} from 'lit'
 import {customElement} from 'lit/decorators.js'
-import {globalStyleSheet} from '../styles/global-style-sheet.ts';
 import {Txt} from '../translations/translations.ts';
 import copyImage from '../assets/svg/copy-content.svg'
 import {servicesProvider} from '../services/provider/ServicesProvider.ts';
 import {ShareUrlService} from '../services/ShareUrl.service.ts';
 import {StateDecoderEncoderService} from '../services/StateDecoderEncoder.service.ts';
 import {StoreService} from '../services/Store.service.ts';
+import {WithGlobalStylesheet} from '../mixins/GlobalStylesheetMixin.ts';
 
 
 @customElement('share-state-button')
-export class ShareStateButton extends LitElement {
+export class ShareStateButton extends WithGlobalStylesheet(LitElement) {
 
 
     async clickOption(): Promise<void> {
@@ -26,12 +26,6 @@ export class ShareStateButton extends LitElement {
         console.log('result', result)
 
         await shareUrlService.shareStateUrl();
-    }
-
-
-    firstUpdated() {
-        (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
-
     }
 
 

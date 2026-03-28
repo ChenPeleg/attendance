@@ -1,11 +1,11 @@
 import { html, LitElement } from "lit";
 import { customElement, state } from "lit/decorators.js";
-import { globalStyleSheet } from "../styles/global-style-sheet.ts";
 import { Txt } from "../translations/translations.ts";
 import { SortOrder, SortType } from "../models/SortType.ts";
 import { globalStore } from "../store/Store.ts";
 import { ActionType } from "../models/AppAction.ts";
 import checkMark from "../assets/svg/check.svg";
+import { WithGlobalStylesheet } from "../mixins/GlobalStylesheetMixin.ts";
 
 const sortOptions = {
   [SortType.Class]: {
@@ -36,7 +36,7 @@ const sortOptions = {
 };
 
 @customElement("sorting-options")
-export class SortingOptions extends LitElement {
+export class SortingOptions extends WithGlobalStylesheet(LitElement) {
   @state() private sortType: SortType = globalStore.getState().sortType;
   @state() private sortOrder: SortOrder = globalStore.getState().sortOrder;
 
@@ -81,8 +81,8 @@ export class SortingOptions extends LitElement {
     });
   }
 
-  firstUpdated() {
-    (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
+  firstUpdated(changedProperties: Map<PropertyKey, unknown>) {
+    super.firstUpdated(changedProperties);
     globalStore.subscribe((value) => {
       this.sortType = value.sortType;
       this.sortOrder = value.sortOrder;
