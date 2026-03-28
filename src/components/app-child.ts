@@ -1,6 +1,5 @@
 import {html, LitElement} from 'lit'
 import {customElement, property} from 'lit/decorators.js'
-import {globalStyleSheet} from '../styles/global-style-sheet.ts';
 import {ChildStatus} from '../models/ChildStatus.ts';
 import deleteImage from '../assets/svg/delete.svg'
 import busIcon from '../assets/svg/bus.svg'
@@ -9,10 +8,11 @@ import {Txt} from '../translations/translations.ts';
 import {PresentToday} from '../models/presentToday.ts';
 import {globalStore} from '../store/Store.ts';
 import {ActionType} from '../models/AppAction.ts';
+import {WithGlobalStylesheet} from '../mixins/GlobalStylesheetMixin.ts';
 
 
 @customElement('app-child')
-export class AppChild extends LitElement {
+export class AppChild extends WithGlobalStylesheet(LitElement) {
     @property({type: DisplayType}) displayType = DisplayType.Attendance;
     @property({type: Object}) child: ChildStatus | null = null;
     @property({type: Object}) childrenGridOrList: ChildrenDisplayType = ChildrenDisplayType.List;
@@ -24,11 +24,6 @@ export class AppChild extends LitElement {
             type: ActionType.removerAddedChild,
             payload: this.child?.id
         })
-    }
-
-    firstUpdated() {
-        (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
-
     }
 
     render() {

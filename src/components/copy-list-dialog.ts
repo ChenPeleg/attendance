@@ -1,13 +1,13 @@
 import {html, LitElement} from 'lit';
 import {customElement, state} from 'lit/decorators.js';
-import {globalStyleSheet} from '../styles/global-style-sheet.ts';
 import {servicesProvider} from '../services/provider/ServicesProvider.ts';
 import {SearchParamsService} from '../services/SearchParams.service.ts';
 import '../dialog/app-dialog.ts';
 import './copy-children-list.ts';
+import {WithGlobalStylesheet} from '../mixins/GlobalStylesheetMixin.ts';
 
 @customElement('copy-list-dialog')
-export class CopyListDialog extends LitElement {
+export class CopyListDialog extends WithGlobalStylesheet(LitElement) {
     @state() private _isDialogOpen = false;
     
     private _searchParamsService: SearchParamsService = servicesProvider.getService(SearchParamsService);
@@ -27,10 +27,6 @@ export class CopyListDialog extends LitElement {
 
     private _handleClose() {
         this._searchParamsService.patchParams({dialog: null});
-    }
-
-    firstUpdated() {
-        (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
     }
 
     render() {

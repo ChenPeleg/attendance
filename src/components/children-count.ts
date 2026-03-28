@@ -1,13 +1,13 @@
 import {html, LitElement} from 'lit'
 import {customElement, property} from 'lit/decorators.js'
-import {globalStyleSheet} from '../styles/global-style-sheet.ts';
 
 import '../ui/check-mark/check-mark.ts'
 import {Txt} from '../translations/translations.ts';
 import '../ui/check-mark-with-animation/check-mark-with-animation.ts';
+import {WithGlobalStylesheet} from '../mixins/GlobalStylesheetMixin.ts';
 
 @customElement('children-count')
-export class ChildrenCount extends LitElement {
+export class ChildrenCount extends WithGlobalStylesheet(LitElement) {
     @property({type: Number}) totalChildren: number = 0;
     @property({type: Number}) checkedInChildren: number = 0;
     @property({type: Function}) onClick: () => void = () => {
@@ -17,17 +17,13 @@ export class ChildrenCount extends LitElement {
     }
 
     renderAllChecked() {
-        return html`   
-            <div id="all-checked" data-testid="all-children-checked" class="contents overflow-hidden "> 
+        return html`
+            <div id="all-checked" data-testid="all-children-checked" class="contents overflow-hidden ">
                 <span id="check-mark-aligner" class="flex flex-col justify-center h-full pt-2">
-                   <check-mark-with-animation> </check-mark-with-animation> 
+                   <check-mark-with-animation> </check-mark-with-animation>
                  </span>
                 <span class="mr-3"> ${Txt.finishList} </span>
            </div>`
-    }
-
-    firstUpdated() {
-        (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
     }
 
     render() {
