@@ -1,10 +1,10 @@
 import {html, LitElement} from 'lit'
 import {customElement, property} from 'lit/decorators.js'
-import {WithGlobalStylesheet} from '../mixins/GlobalStylesheetMixin.ts';
+import {AppBaseComponent} from '../mixins/GlobalStylesheetMixin.ts';
 
 
 @customElement('past-counts')
-export class PastCounts extends WithGlobalStylesheet(LitElement) {
+export class PastCounts extends AppBaseComponent(LitElement) {
 
     @property({type: String}) lastAttendanceTimes: string[] = [];
 

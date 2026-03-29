@@ -8,7 +8,7 @@ import {Txt} from '../translations/translations.ts';
 import {AttendanceStore, DisplayType} from '../models/AttendanceStore.ts';
 import {globalStore} from '../store/Store.ts';
 import {ActionType} from '../models/AppAction.ts';
-import {WithGlobalStylesheet} from '../mixins/GlobalStylesheetMixin.ts';
+import {AppBaseComponent} from '../mixins/GlobalStylesheetMixin.ts';
 
 interface CockpitButton {
     label: string,
@@ -20,7 +20,7 @@ interface CockpitButton {
 const SHOW_SCHOOL_BUS = true;
 
 @customElement('app-cockpit')
-export class AppCockpit extends WithGlobalStylesheet(LitElement) {
+export class AppCockpit extends AppBaseComponent(LitElement) {
     buttons: CockpitButton[] = [{
         label: Txt.attendance,
         id: DisplayType.Attendance,

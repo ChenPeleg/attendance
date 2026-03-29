@@ -8,7 +8,7 @@ import {AttendanceStore} from '../models/AttendanceStore.ts';
 import {PresentToday} from '../models/presentToday.ts';
 import '../ui/check-mark-with-animation/check-mark-with-animation.ts';
 import retry from '../assets/svg/retry.svg';
-import {WithGlobalStylesheet} from '../mixins/GlobalStylesheetMixin.ts';
+import {AppBaseComponent} from '../mixins/GlobalStylesheetMixin.ts';
 import {shuffleWithSeed} from '../utils/RandomShuffler.ts';
 import {servicesProvider} from '../services/provider/ServicesProvider.ts';
 import {ChildrenListFormatterService, ChildrenListFormat} from '../services/ChildrenListFormatter.service.ts';
@@ -18,7 +18,7 @@ enum CopyFormat {
 }
 
 @customElement('copy-children-list')
-export class CopyChildrenList extends WithGlobalStylesheet(LitElement) {
+export class CopyChildrenList extends AppBaseComponent(LitElement) {
     @state() private randomSeed: number =  0;
     @state() private _presentChildren: ChildStatus[] = [];
     @state() private _showCheckMark: boolean = false;

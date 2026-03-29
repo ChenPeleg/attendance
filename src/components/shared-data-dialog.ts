@@ -9,10 +9,10 @@ import {PresentToday} from '../models/presentToday.ts';
 import {TimeAndDateService} from '../services/TimeAndDate.service.ts';
 import '../dialog/app-dialog.ts';
 import {ChildStatus} from '../models/ChildStatus.ts';
-import {WithGlobalStylesheet} from '../mixins/GlobalStylesheetMixin.ts';
+import {AppBaseComponent} from '../mixins/GlobalStylesheetMixin.ts';
 
 @customElement('shared-data-dialog')
-export class SharedDataDialog extends WithGlobalStylesheet(LitElement) {
+export class SharedDataDialog extends AppBaseComponent(LitElement) {
     @state() private _isDialogOpen = false;
     @state() private _sharedData: AttendanceStoreShare | null = null;
     

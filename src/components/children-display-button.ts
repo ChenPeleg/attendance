@@ -6,11 +6,11 @@ import {ChildrenDisplayType} from '../models/AttendanceStore.ts';
 import gridImage from '../assets/svg/grid.svg'
 import listImage from '../assets/svg/list.svg'
 import {ActionType} from '../models/AppAction.ts';
-import {WithGlobalStylesheet} from '../mixins/GlobalStylesheetMixin.ts';
+import {AppBaseComponent} from '../mixins/GlobalStylesheetMixin.ts';
 
 
 @customElement('children-display-button')
-export class ChildrenDisplayButton extends WithGlobalStylesheet(LitElement) {
+export class ChildrenDisplayButton extends AppBaseComponent(LitElement) {
     @state() private displayType: ChildrenDisplayType = globalStore.getState().childrenDisplayType;
 
 

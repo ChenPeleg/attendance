@@ -3,11 +3,11 @@ import {customElement} from 'lit/decorators.js'
 import {servicesProvider} from '../services/provider/ServicesProvider.ts';
 import {ConfigurationService} from '../services/Configuration.service.ts';
 import {SupersizeAnimationService} from '../services/SupersizeAnimation.service.ts';
-import {WithGlobalStylesheet} from '../mixins/GlobalStylesheetMixin.ts';
+import {AppBaseComponent} from '../mixins/GlobalStylesheetMixin.ts';
 
 
 @customElement('app-navbar')
-export class AppNavbar extends WithGlobalStylesheet(LitElement) {
+export class AppNavbar extends AppBaseComponent(LitElement) {
 
 
     render() {

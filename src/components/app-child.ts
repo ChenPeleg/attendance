@@ -8,11 +8,11 @@ import {Txt} from '../translations/translations.ts';
 import {PresentToday} from '../models/presentToday.ts';
 import {globalStore} from '../store/Store.ts';
 import {ActionType} from '../models/AppAction.ts';
-import {WithGlobalStylesheet} from '../mixins/GlobalStylesheetMixin.ts';
+import {AppBaseComponent} from '../mixins/GlobalStylesheetMixin.ts';
 
 
 @customElement('app-child')
-export class AppChild extends WithGlobalStylesheet(LitElement) {
+export class AppChild extends AppBaseComponent(LitElement) {
     @property({type: DisplayType}) displayType = DisplayType.Attendance;
     @property({type: Object}) child: ChildStatus | null = null;
     @property({type: Object}) childrenGridOrList: ChildrenDisplayType = ChildrenDisplayType.List;

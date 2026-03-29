@@ -4,10 +4,10 @@ import {customElement, property} from 'lit/decorators.js'
 import '../ui/check-mark/check-mark.ts'
 import {Txt} from '../translations/translations.ts';
 import '../ui/check-mark-with-animation/check-mark-with-animation.ts';
-import {WithGlobalStylesheet} from '../mixins/GlobalStylesheetMixin.ts';
+import {AppBaseComponent} from '../mixins/GlobalStylesheetMixin.ts';
 
 @customElement('children-count')
-export class ChildrenCount extends WithGlobalStylesheet(LitElement) {
+export class ChildrenCount extends AppBaseComponent(LitElement) {
     @property({type: Number}) totalChildren: number = 0;
     @property({type: Number}) checkedInChildren: number = 0;
     @property({type: Function}) onClick: () => void = () => {
