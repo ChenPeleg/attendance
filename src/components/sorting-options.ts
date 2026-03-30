@@ -50,16 +50,13 @@ export class SortingOptions extends AppBaseComponent(LitElement) {
   }
 
   buildSortOptionsButton() {
-    return Object.keys(sortOptions).map((option: any) => {
-      //@ts-ignore
+    return (Object.keys(sortOptions) as SortType[]).map((option: SortType) => {
       const isChosen = this.sortType === option;
 
-      //@ts-ignore
       const shownOption = sortOptions[option];
 
       const order = isChosen ? this.sortOrder : SortOrder.Ascending;
 
-      //@ts-ignore
       return html`
         <button
           @click="${() => this.clickOption(option)}"
