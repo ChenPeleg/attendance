@@ -14,7 +14,7 @@ import '../components/copy-children-list.ts'
 import {servicesProvider} from '../services/provider/ServicesProvider.ts';
 import {HistoryService} from '../services/History.service.ts';
 import {SortService} from '../services/SortService.service.ts';
-import {SchoolClass} from '../models/schoolClass.ts';
+import {ChildrenFilterService} from '../services/ChildrenFilter.service.ts';
 import {AppBaseComponent} from '../mixins/GlobalStylesheetMixin.ts';
 
 @customElement('app-main')
@@ -111,12 +111,9 @@ export class AppMain extends AppBaseComponent(LitElement) {
     }
 
     private getPresentChildren() {
-        const children = this.storeState?.attendance.filter(c => c.presentToday === PresentToday.Yes) || []
-        if (this.displayType === DisplayType.SchoolBus) {
-            const isOnSchoolBus = (c: ChildStatus) => c.manuallyAdded || c.schoolClass === SchoolClass.First || c.schoolClass === SchoolClass.Second || c.schoolClass === SchoolClass.Third || c.onlySchoolBus === true;
-            return children.filter(isOnSchoolBus)
-        }
-        return children.filter(c=> !(!c.manuallyAdded &&  c.onlySchoolBus === true))
+        const filterService = servicesProvider.getService(ChildrenFilterService);
+        const children = this.storeState?.attendance || [];
+        return filterService.applyFilters(children, this.displayType);
     }
 
     private getChildren() {

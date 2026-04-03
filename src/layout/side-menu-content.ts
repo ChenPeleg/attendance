@@ -10,13 +10,11 @@ import {globalStore} from '../store/Store.ts';
 import {ActionType} from '../models/AppAction.ts';
 import {servicesProvider} from '../services/provider/ServicesProvider.ts';
 import {SearchParamsService} from '../services/SearchParams.service.ts';
-import {LocalStorageService} from '../services/LocalStorage.service.ts';
+import {DevModeService} from '../services/DevMode.service.ts';
 
 @customElement('side-menu-content')
 export class SideMenuContent extends LitElement {
     static INSTALL_APP_BUTTON_ID = 'install-app-button';
-    static DEV_MODE_KEY = 'devMode';
-    private _appInfoClickTimes: number[] = [];
 
 
     firstUpdated() {
@@ -123,13 +121,10 @@ export class SideMenuContent extends LitElement {
     }
 
     private onAppInfoClick() {
-        const now = Date.now();
-        this._appInfoClickTimes = this._appInfoClickTimes.filter(t => now - t < 1000);
-        this._appInfoClickTimes.push(now);
-        if (this._appInfoClickTimes.length >= 3) {
-            this._appInfoClickTimes = [];
+        const devModeService = servicesProvider.getService(DevModeService);
+        const activated = devModeService.registerClick();
+        if (activated) {
             alert(Txt.devMode);
-            servicesProvider.getService(LocalStorageService).setItem(SideMenuContent.DEV_MODE_KEY, 'true');
         }
     }
 
