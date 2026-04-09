@@ -82,6 +82,7 @@ export class AppChild extends AppBaseComponent(LitElement) {
         return html`
             <div class="relative ">
                 <button @click="${this.deleteChild}"
+                        data-testid="remove-child_${this.child?.id}"
                         class="bg-primary absolute -left-12 -top-5 mt-0.5 text-secondary rounded-full h-10 w-10 flex flex-row justify-center items-center">
                     <img src="${deleteImage}" alt="delete" class="app-icon w-6 h-6"> </img>
                 </button>
