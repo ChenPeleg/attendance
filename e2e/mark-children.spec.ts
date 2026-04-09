@@ -3,7 +3,7 @@ import { describe } from "node:test";
 
 describe("Marking children", () => {
   test("clicking on a child marks it", async ({ page }) => {
-    await page.goto("http://localhost:4173/");
+    await page.goto("/");
     expect(
       await page
         .getByTestId("child_1_attend")
@@ -18,10 +18,51 @@ describe("Marking children", () => {
         .isVisible(),
     ).toBe(true);
   });
+
+  test("clicking a marked child unmarks it (check-out)", async ({ page }) => {
+    await page.goto("/");
+    // Mark the child
+    await page.getByTestId("child_1_attend").click();
+    expect(
+      await page
+        .getByTestId("child_1_attend")
+        .getByTestId("check-mark")
+        .isVisible(),
+    ).toBe(true);
+    // Unmark the child
+    await page.getByTestId("child_1_attend").click();
+    expect(
+      await page
+        .getByTestId("child_1_attend")
+        .getByTestId("check-mark")
+        .isVisible(),
+    ).toBe(false);
+  });
+
+  test("children-count shows correct fraction as children are marked", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    // Initially should show 0/6
+    const initialCount = await page.getByTestId("children-count").textContent();
+    expect(initialCount).toContain("0");
+    expect(initialCount).toContain("6");
+
+    // Mark 3 children
+    await page.getByTestId("child_1_attend").click();
+    await page.getByTestId("child_2_attend").click();
+    await page.getByTestId("child_3_attend").click();
+
+    // Should show 3/6
+    const partialCount = await page.getByTestId("children-count").textContent();
+    expect(partialCount).toContain("3");
+    expect(partialCount).toContain("6");
+  });
+
   test("marking all the children create a button with check sign", async ({
     page,
   }) => {
-    await page.goto("http://localhost:4173/");
+    await page.goto("/");
     await page.getByTestId("child_1_attend").click();
     await page.getByTestId("child_2_attend").click();
     await page.getByTestId("child_3_attend").click();
@@ -35,10 +76,11 @@ describe("Marking children", () => {
       true,
     );
   });
+
   test("clicking finish after marking all the children clears children", async ({
     page,
   }) => {
-    await page.goto("http://localhost:4173/");
+    await page.goto("/");
     await page.getByTestId("child_1_attend").click();
     await page.getByTestId("child_2_attend").click();
     await page.getByTestId("child_3_attend").click();
@@ -61,15 +103,58 @@ describe("Marking children", () => {
     expect(await page.getByTestId("all-children-checked").isVisible()).toBe(
       false,
     );
+    expect(
+      await page
+        .getByTestId("child_1_attend")
+        .getByTestId("check-mark")
+        .isVisible(),
+    ).toBe(false);
+  });
+
+  test("marking all then clicking finish removes all-children-checked and resets check-marks", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    // Mark all children
+    await page.getByTestId("child_1_attend").click();
+    await page.getByTestId("child_2_attend").click();
+    await page.getByTestId("child_3_attend").click();
+    await page.getByTestId("child_4_attend").click();
+    await page.getByTestId("child_5_attend").click();
+    await page.getByTestId("child_6_attend").click();
+
+    // Verify all-children-checked is visible
+    expect(await page.getByTestId("all-children-checked").isVisible()).toBe(
+      true,
+    );
+
+    // Click finish (children-count)
+    await page.getByTestId("children-count").click();
+
+    // Verify all-children-checked is no longer visible
     expect(await page.getByTestId("all-children-checked").isVisible()).toBe(
       false,
     );
+
+    // Verify all check-marks are reset
+    expect(
+      await page
+        .getByTestId("child_1_attend")
+        .getByTestId("check-mark")
+        .isVisible(),
+    ).toBe(false);
+    expect(
+      await page
+        .getByTestId("child_2_attend")
+        .getByTestId("check-mark")
+        .isVisible(),
+    ).toBe(false);
   });
 
   test("changing sort to name changes the order of children", async ({
     page,
   }) => {
-    await page.goto("http://localhost:4173/");
+    await page.goto("/");
 
     // Default sort is by Class (ascending): child_1 (class א) appears before child_4 (class ב)
     const child1YBefore = await page
