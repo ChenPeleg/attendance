@@ -91,7 +91,12 @@ export class AppChild extends AppBaseComponent(LitElement) {
     }
 
     private getTestId() {
-        const displayType = this.displayType === DisplayType.Attendance ? 'attend' : 'day-set';
+        let displayType = 'attend';
+        if (this.displayType === DisplayType.DaySettings) {
+            displayType = 'day-set';
+        } else if (this.displayType === DisplayType.SchoolBus || this.displayType === DisplayType.Attendance) {
+            displayType = 'attend';
+        }
         return `child_${this.child?.id}_${displayType}`
     }
 

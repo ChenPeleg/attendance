@@ -120,7 +120,12 @@ describe("Sorting Options", () => {
     // Close side menu
     await page.getByTestId("menu-toggle").click();
 
-    // Sorting options should be hidden
-    await expect(page.getByTestId("sort-Class")).not.toBeVisible();
+    // Wait for menu close animation to complete (300ms transition)
+    await page.waitForTimeout(400);
+
+    // Sorting options should not be in viewport (menu is off-screen)
+    // Check that the side menu is closed by verifying the menu container doesn't have 'open' class
+    const sideMenu = page.locator('.side-menu');
+    await expect(sideMenu).not.toHaveClass(/open/);
   });
 });

@@ -13,10 +13,13 @@ describe("Data Sharing - Copy List & URL Sharing", () => {
     await page.getByTestId("child_2_attend").click();
     await page.getByTestId("child_3_attend").click();
 
-    // Open side menu to access copy list button
+    // Open side menu to access advanced button
     await page.getByTestId("menu-toggle").click();
 
-    // Click copy list button
+    // Click advanced button to open the lists dialog
+    await page.getByTestId("advanced-button").click();
+
+    // Wait for dialog to open and click copy list button
     await page.getByTestId("copy-list-button").click();
 
     // Verify clipboard contains data (read from clipboard)
@@ -90,8 +93,9 @@ describe("Data Sharing - Copy List & URL Sharing", () => {
     // Mark children
     await page.getByTestId("child_1_attend").click();
 
-    // Open menu and click copy list
+    // Open menu and advanced dialog to access copy list
     await page.getByTestId("menu-toggle").click();
+    await page.getByTestId("advanced-button").click();
     await page.getByTestId("copy-list-button").click();
 
     // Look for any confirmation indicator (e.g., check-mark animation)
