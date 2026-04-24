@@ -2,7 +2,10 @@ import { expect, test } from "playwright/test";
 import { describe } from "node:test";
 
 describe("Data Sharing - Copy List & URL Sharing", () => {
-  test("clicking copy-list-button copies the children list to the clipboard", async ({ page, context }) => {
+  test("clicking copy-list-button copies the children list to the clipboard", async ({ page, context, browserName }) => {
+    // Clipboard read permissions only work reliably in Chromium
+    test.skip(browserName !== "chromium", "Clipboard read API not supported in this browser for testing");
+
     // Grant clipboard permissions
     await context.grantPermissions(["clipboard-read", "clipboard-write"]);
 
@@ -84,7 +87,10 @@ describe("Data Sharing - Copy List & URL Sharing", () => {
     await expect(checkMark).not.toBeVisible();
   });
 
-  test("copy list button shows confirmation after copying", async ({ page, context }) => {
+  test("copy list button shows confirmation after copying", async ({ page, context, browserName }) => {
+    // Clipboard read permissions only work reliably in Chromium
+    test.skip(browserName !== "chromium", "Clipboard read API not supported in this browser for testing");
+
     // Grant clipboard permissions
     await context.grantPermissions(["clipboard-read", "clipboard-write"]);
 

@@ -50,6 +50,7 @@ export class AppChild extends AppBaseComponent(LitElement) {
                     ${this.child?.name} ${this.getChildBusIcon()} 
                  </span>
                     <span id="is-here-today"
+                          data-testid="day-set-status"
                           class="   ${this.displayType !== DisplayType.DaySettings ? 'hidden' : 'justify-self-end  '}">
                       <span id="check-mark-container"
                       >

@@ -23,6 +23,9 @@ describe("Theme Switching", () => {
       return document.documentElement.getAttribute("data-theme");
     });
 
+    // Open side menu to access theme toggle
+    await page.getByTestId("menu-toggle").click();
+
     // Click theme toggle
     await page.getByTestId("theme-toggle").click();
 
@@ -44,7 +47,8 @@ describe("Theme Switching", () => {
       return document.documentElement.getAttribute("data-theme");
     });
 
-    // Toggle theme
+    // Open side menu and toggle theme
+    await page.getByTestId("menu-toggle").click();
     await page.getByTestId("theme-toggle").click();
 
     // Get changed theme
@@ -75,7 +79,8 @@ describe("Theme Switching", () => {
     });
     expect(hasThemeAttr).toBe(true);
 
-    // Toggle theme and verify attribute changes
+    // Open side menu and toggle theme, verify attribute changes
+    await page.getByTestId("menu-toggle").click();
     await page.getByTestId("theme-toggle").click();
 
     const themeAfterToggle = await page.evaluate(() => {

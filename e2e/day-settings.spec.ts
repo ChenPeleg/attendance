@@ -19,9 +19,9 @@ describe("DaySettings View", () => {
     // Click to mark child as absent
     await page.getByTestId("child_1_day-set").click();
 
-    // Verify some visual indicator (e.g., check-mark or style change)
-    const checkMark = page.getByTestId("child_1_day-set").getByTestId("check-mark");
-    await expect(checkMark).toBeVisible();
+    // Verify the status indicator shows absent
+    const statusLabel = page.getByTestId("child_1_day-set").getByTestId("day-set-status");
+    await expect(statusLabel).toContainText("נעדר");
   });
 
   test("an absent child no longer appears in Attendance view", async ({ page }) => {
@@ -48,13 +48,13 @@ describe("DaySettings View", () => {
 
     // Mark child as absent
     await page.getByTestId("child_1_day-set").click();
-    const checkMarkAfterFirst = page.getByTestId("child_1_day-set").getByTestId("check-mark");
-    await expect(checkMarkAfterFirst).toBeVisible();
+    const statusAfterFirst = page.getByTestId("child_1_day-set").getByTestId("day-set-status");
+    await expect(statusAfterFirst).toContainText("נעדר");
 
     // Click again to mark present
     await page.getByTestId("child_1_day-set").click();
-    const checkMarkAfterSecond = page.getByTestId("child_1_day-set").getByTestId("check-mark");
-    await expect(checkMarkAfterSecond).not.toBeVisible();
+    const statusAfterSecond = page.getByTestId("child_1_day-set").getByTestId("day-set-status");
+    await expect(statusAfterSecond).toContainText("נמצא");
   });
 
   test("marking a child absent, switching to Attendance, then back to DaySettings preserves the absent state", async ({ page }) => {
@@ -71,7 +71,7 @@ describe("DaySettings View", () => {
     await page.getByTestId("nav_DaySettings").click();
 
     // Child should still be marked as absent
-    const checkMark = page.getByTestId("child_1_day-set").getByTestId("check-mark");
-    await expect(checkMark).toBeVisible();
+    const statusLabel = page.getByTestId("child_1_day-set").getByTestId("day-set-status");
+    await expect(statusLabel).toContainText("נעדר");
   });
 });
