@@ -42,14 +42,15 @@ export class SideMenuContent extends LitElement {
         return html`
             <div class="flex flex-col gap-4 ">
                 <div class="h-14 w-full flex-row flex justify-between gap-5">
-                  
-               
+
+
                     <span>
                     ${Txt.addChild}
-                        
+
                     </span>
                     <span>
                              <button @click=${() => this.addChild()}
+                                     data-testid="add-child-button"
                                      class=" bg-secondary rounded-md  h-10 cursor-pointer flex flex-row px-3 justify-center items-center ">
                         <img src=${addChild} class="w-7 h-7 app-icon" alt="menu"/>
                     </button>
@@ -85,10 +86,11 @@ export class SideMenuContent extends LitElement {
                 <div class="h-14 w-full flex-row flex justify-between gap-5">
                     <span>
                     ${Txt.advanced}
-                        
+
                     </span>
                     <span>
                              <button @click=${() => this.openAdvanced()}
+                                     data-testid="advanced-button"
                                      class=" bg-secondary rounded-md  h-10 cursor-pointer flex flex-row px-3 justify-center items-center ">
                         <img src=${advanceDataIcon} class="w-7 h-7 app-icon" alt="menu"/>
                     </button>

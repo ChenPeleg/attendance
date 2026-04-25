@@ -49,6 +49,15 @@ export class SortingOptions extends AppBaseComponent(LitElement) {
     });
   }
 
+  toggleSortOrder(): void {
+    globalStore.dispatch({
+      type: ActionType.changeSort,
+      payload: {
+        sortOrder: this.sortOrder === SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending,
+      },
+    });
+  }
+
   buildSortOptionsButton() {
     return (Object.keys(sortOptions) as SortType[]).map((option: SortType) => {
       const isChosen = this.sortType === option;

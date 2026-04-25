@@ -37,10 +37,11 @@ export class ChildrenDisplayButton extends AppBaseComponent(LitElement) {
         return html`
             <div class="h-14 w-full flex-row flex justify-between gap-5">
                     <span>
-                    ${Txt.displayLayout} 
+                    ${Txt.displayLayout}
                     </span>
                 <span>
                              <button @click=${() => this.clickOption()}
+                                     data-testid="display-toggle"
                                      class=" bg-secondary rounded-md  h-10 cursor-pointer flex flex-row px-3 justify-center items-center ">
                         <img src="${this.displayType === ChildrenDisplayType.List ? listImage : gridImage}" class="w-7 h-7 app-icon"
                              alt="menu"/>

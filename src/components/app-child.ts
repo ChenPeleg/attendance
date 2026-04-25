@@ -50,6 +50,7 @@ export class AppChild extends AppBaseComponent(LitElement) {
                     ${this.child?.name} ${this.getChildBusIcon()} 
                  </span>
                     <span id="is-here-today"
+                          data-testid="day-set-status"
                           class="   ${this.displayType !== DisplayType.DaySettings ? 'hidden' : 'justify-self-end  '}">
                       <span id="check-mark-container"
                       >
@@ -82,6 +83,7 @@ export class AppChild extends AppBaseComponent(LitElement) {
         return html`
             <div class="relative ">
                 <button @click="${this.deleteChild}"
+                        data-testid="remove-child_${this.child?.id}"
                         class="bg-primary absolute -left-12 -top-5 mt-0.5 text-secondary rounded-full h-10 w-10 flex flex-row justify-center items-center">
                     <img src="${deleteImage}" alt="delete" class="app-icon w-6 h-6"> </img>
                 </button>
@@ -90,7 +92,12 @@ export class AppChild extends AppBaseComponent(LitElement) {
     }
 
     private getTestId() {
-        const displayType = this.displayType === DisplayType.Attendance ? 'attend' : 'day-set';
+        let displayType = 'attend';
+        if (this.displayType === DisplayType.DaySettings) {
+            displayType = 'day-set';
+        } else if (this.displayType === DisplayType.SchoolBus || this.displayType === DisplayType.Attendance) {
+            displayType = 'attend';
+        }
         return `child_${this.child?.id}_${displayType}`
     }
 

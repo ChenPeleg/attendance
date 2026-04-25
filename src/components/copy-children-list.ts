@@ -62,6 +62,7 @@ export class CopyChildrenList extends AppBaseComponent(LitElement) {
                 <div class="flex flex-col gap-2">
                     <div class="flex flex-row">
                         <button @click="${this.copyToClipboard}"
+                                data-testid="copy-list-button"
                                 class="flex flex-row items-center gap-2 py-2 px-4 bg-secondary rounded-lg app-shadow cursor-pointer"
                                 style="border: none">
                             <img src="${copyIcon}" class="w-6 h-6" alt="copy"/>
