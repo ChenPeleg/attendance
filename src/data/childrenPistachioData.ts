@@ -122,19 +122,18 @@ export const childrenBaseData: ChildModel [] = [{
     schoolClass: SchoolClass.Third,
     boyOrGirl: Gender.Girl,
 }, {
-    id: 20,
-    name: 'אורי',
-    school: SchoolType.Nitzanim,
-    schoolClass: SchoolClass.Other,
-    onlySchoolBus: true,
-    boyOrGirl: Gender.Boy,
-
-}, {
     id: 21,
     name: 'ליאור',
     school: SchoolType.Nitzanim,
     schoolClass: SchoolClass.Second,
     onlySchoolBus: false,
     boyOrGirl: Gender.Boy,
+
+}, {
+    id: 22,
+    name: 'יערה',
+    school: SchoolType.Nitzanim,
+    schoolClass: SchoolClass.Second,
+    boyOrGirl: Gender.Girl,
 
 }]
