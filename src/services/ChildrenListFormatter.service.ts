@@ -63,7 +63,7 @@ export class ChildrenListFormatterService extends AbstractBaseService {
 
     /**
      * Formats children grouped by their school class.
-     * Groups are ordered: First, Second, Third, Other.
+     * Groups are ordered: First, Second, Third, Fourth, Other.
      *
      * @param children Array of children to format
      * @returns Formatted string with class groups
@@ -88,7 +88,7 @@ export class ChildrenListFormatterService extends AbstractBaseService {
             groups[groupName].push(child.name);
         });
 
-        const order = [SchoolClass.First, SchoolClass.Second, SchoolClass.Third, SchoolClass.Other];
+        const order = [SchoolClass.First, SchoolClass.Second, SchoolClass.Third, SchoolClass.Fourth, SchoolClass.Other];
         const result: string[] = [];
 
         order.forEach(groupName => {
