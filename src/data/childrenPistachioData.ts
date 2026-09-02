@@ -8,7 +8,7 @@ export const childrenBaseData: ChildModel [] = [{
     name: 'רז',
     school: SchoolType.Nitzanim,
     schoolClass: SchoolClass.First,
-    boyOrGirl: Gender.Boy,
+    boyOrGirl: Gender.Girl,
 }, {
     id: 2,
     name: 'אלה',
@@ -38,7 +38,7 @@ export const childrenBaseData: ChildModel [] = [{
     name: 'יהל',
     school: SchoolType.Nitzanim,
     schoolClass: SchoolClass.First,
-    boyOrGirl: Gender.Girl,
+    boyOrGirl: Gender.Boy,
 }, {
     id: 7,
     name: 'דגן',
