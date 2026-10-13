@@ -145,7 +145,7 @@ export const childrenBaseData: ChildModel [] = [{
     boyOrGirl: Gender.Boy,
 }, {
     id: 24,
-    name: 'עפרי רוזן',
+    name: 'עפרי שוורץ',
     school: SchoolType.Nitzanim,
     schoolClass: SchoolClass.First,
     boyOrGirl: Gender.Girl,
@@ -174,5 +174,11 @@ export const childrenBaseData: ChildModel [] = [{
     name: 'יערה',
     school: SchoolType.Nitzanim,
     schoolClass: SchoolClass.Third,
+    boyOrGirl: Gender.Girl,
+}, {
+    id: 29,
+    name: 'עפרי רוזן',
+    school: SchoolType.Nitzanim,
+    schoolClass: SchoolClass.First,
     boyOrGirl: Gender.Girl,
 }]
