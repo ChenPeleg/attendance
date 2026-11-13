@@ -1,0 +1,207 @@
+<!doctype html>
+<!--
+  Static mockups for the "Playful" restyle. Not part of the app build.
+  Regenerate the PNGs with:  node plan/playful-style/mockups/render.cjs
+-->
+<html lang="he"><head><meta charset="utf-8"><title>Playful style mockups</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Rubik","Noto Sans Hebrew","DejaVu Sans",sans-serif;background:#d9d6cf;padding:24px;display:flex;flex-direction:column;gap:40px}
+.pair{display:flex;gap:28px;align-items:flex-start}
+.caption{font:600 15px/1.2 sans-serif;color:#333;margin-bottom:8px;text-align:center}
+
+/* ---------- Proposed design tokens (map 1:1 to theme-styles.css) ---------- */
+.light{
+  --primary-background-color:#FFF8E7;   /* page */
+  --secondary-background-color:#FFFFFF; /* cards, rows */
+  --accent-background-color:#FFF1C7;    /* soft highlight boxes */
+  --primary-text-color:#3B2F2F;
+  --secondary-text-color:#E4572E;       /* past-count times, links */
+  --accent-text-color:#E4572E;          /* active tab text */
+  --faded-text-color:#B8A99A;
+  --bg-success-color:#E8FBF0;
+  --success-strong-color:#4CAF63;
+  --header-background-color:#FFD23F;
+  --tab-active-background-color:#FFFFFF;
+  --card-shadow-color:#F3E3B5;
+  --check-ring-color:#E8C9A0;
+  --menu-icon-background-color:#FFF1C7;
+  --backdrop-color:rgba(59,47,47,.45);
+}
+.dark{
+  --primary-background-color:#1C1830;
+  --secondary-background-color:#2A2440;
+  --accent-background-color:#3A3157;
+  --primary-text-color:#F5EFFF;
+  --secondary-text-color:#FF9F80;
+  --accent-text-color:#2A2000;
+  --faded-text-color:#6E6488;
+  --bg-success-color:#173D2A;
+  --success-strong-color:#5BC46B;
+  --header-background-color:#2E2650;
+  --tab-active-background-color:#FFD23F;
+  --card-shadow-color:#120F20;
+  --check-ring-color:#544A73;
+  --menu-icon-background-color:#3A3157;
+  --backdrop-color:rgba(0,0,0,.6);
+}
+
+.phone{direction:rtl;width:360px;height:740px;border-radius:30px;overflow:hidden;position:relative;
+  background:var(--primary-background-color);color:var(--primary-text-color);font-weight:600;
+  box-shadow:0 10px 30px rgba(0,0,0,.25);display:flex;flex-direction:column}
+/* faint background photo kept from today's app, under a strong overlay */
+.phone::before{content:"";position:absolute;inset:0;opacity:.10;
+  background:radial-gradient(circle at 25% 30%,#7fb3d5 0,transparent 35%),radial-gradient(circle at 70% 75%,#5a8f4e 0,transparent 40%)}
+.phone>*{position:relative}
+
+/* navbar */
+.nav{height:64px;background:var(--header-background-color);border-radius:0 0 26px 26px;display:flex;align-items:center;gap:14px;padding:0 12px;box-shadow:0 4px 0 var(--card-shadow-color);z-index:2}
+.burger{width:40px;height:40px;border-radius:14px;background:var(--tab-active-background-color);display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--primary-text-color)}
+.dark .burger{background:var(--accent-background-color)}
+.tabs{display:flex;gap:6px}
+.tab{font-size:18px;padding:7px 13px;border-radius:20px}
+.tab.on{background:var(--tab-active-background-color);color:var(--accent-text-color)}
+.light .tab:not(.on){color:#5A4630}
+
+.main{padding:10px 16px 0;display:flex;flex-direction:column;gap:10px;flex:1;overflow:hidden}
+.past{display:flex;gap:10px;align-items:center;color:var(--secondary-text-color);font-size:17px;font-weight:700;padding-top:2px}
+.past i{width:7px;height:7px;border-radius:50%;background:var(--secondary-text-color);display:inline-block}
+
+/* counter */
+.count{align-self:flex-start;min-width:200px;background:var(--secondary-background-color);border-radius:22px;padding:10px 16px;box-shadow:0 4px 0 var(--card-shadow-color)}
+.count .t{display:flex;justify-content:space-between;gap:20px;font-size:19px;margin-bottom:8px}
+.bar{height:12px;background:var(--accent-background-color);border-radius:10px;overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(270deg,#4ECDC4,#6BCB77);border-radius:10px}
+.count.done{background:var(--bg-success-color);box-shadow:0 4px 0 #BDEBCF;display:flex;align-items:center;gap:14px;font-size:20px}
+.dark .count.done{box-shadow:0 4px 0 #0E2619}
+.count.done .big{width:34px;height:34px;border-radius:50%;background:var(--success-strong-color);color:#fff;display:flex;align-items:center;justify-content:center}
+
+/* child rows */
+.list{display:flex;flex-direction:column;gap:9px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.row{display:flex;align-items:center;gap:12px;height:56px;padding:0 10px;font-size:19px;
+  background:var(--secondary-background-color);border-radius:22px;box-shadow:0 4px 0 var(--card-shadow-color)}
+.grid .row{gap:8px;font-size:17px;padding:0 8px}
+.av{width:38px;height:38px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;font-weight:700}
+.grid .av{width:32px;height:32px;font-size:15px}
+.chk{margin-inline-start:auto;width:34px;height:34px;flex:none;border-radius:50%;border:3px dashed var(--check-ring-color);display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;font-weight:700}
+.grid .chk{width:28px;height:28px;font-size:15px}
+.row.on{background:var(--bg-success-color);box-shadow:0 4px 0 #BDEBCF}
+.dark .row.on{box-shadow:0 4px 0 #0E2619}
+.row.on .chk{border:none;background:var(--success-strong-color)}
+/* day settings */
+.tag{margin-inline-start:auto;font-size:14px;padding:4px 10px;border-radius:12px;background:var(--bg-success-color);color:#2E7D3E}
+.dark .tag{color:#8FE3A0}
+.row.absent{color:var(--faded-text-color);box-shadow:0 4px 0 transparent;background:color-mix(in srgb,var(--secondary-background-color) 55%,transparent)}
+.row.absent .av{filter:grayscale(1);opacity:.45}
+.row.absent .tag{background:var(--accent-background-color);color:var(--faded-text-color)}
+.bus{font-size:18px}
+.row.absent .bus{opacity:.3}
+.del{position:absolute;left:-8px;width:36px;height:36px;border-radius:50%;background:#FF6B6B;color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 3px 0 #C94A4A}
+.rowwrap{position:relative;display:flex;align-items:center}
+.rowwrap .row{flex:1;margin-left:34px}
+
+/* side menu */
+.backdrop{position:absolute;inset:0;background:var(--backdrop-color);z-index:5}
+.menu{position:absolute;top:0;right:0;bottom:0;width:300px;background:var(--primary-background-color);z-index:6;border-radius:28px 0 0 28px;display:flex;flex-direction:column;box-shadow:-6px 0 20px rgba(0,0,0,.2)}
+.menu-head{height:64px;background:var(--header-background-color);border-radius:0 0 0 26px;display:flex;align-items:center;gap:12px;padding:0 12px;font-size:20px}
+.menu-body{padding:14px 14px;display:flex;flex-direction:column;gap:9px;overflow:hidden}
+.mi{display:flex;align-items:center;gap:12px;height:50px;padding:0 10px;font-size:17px;background:var(--secondary-background-color);border-radius:18px;box-shadow:0 3px 0 var(--card-shadow-color)}
+.mi .ic{width:34px;height:34px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px}
+.mi .end{margin-inline-start:auto;font-size:14px;color:var(--faded-text-color)}
+.seg{margin-inline-start:auto;display:flex;background:var(--accent-background-color);border-radius:14px;padding:3px}
+.seg span{padding:4px 9px;border-radius:11px;font-size:15px}
+.seg span.on{background:var(--secondary-background-color);box-shadow:0 2px 0 var(--card-shadow-color)}
+.dark .seg span.on{background:#FFD23F;color:#2A2000}
+.sortlbl{font-size:15px;color:var(--faded-text-color);margin:4px 4px 0}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{padding:7px 12px;border-radius:16px;font-size:15px;background:var(--secondary-background-color);box-shadow:0 3px 0 var(--card-shadow-color)}
+.chip.on{background:#FFD23F;color:#2A2000;box-shadow:0 3px 0 #D9A900}
+.info{font-size:13px;color:var(--faded-text-color);font-weight:400;padding:2px 4px}
+
+/* dialog */
+.dlg{position:absolute;left:18px;right:18px;top:120px;z-index:6;background:var(--primary-background-color);border-radius:28px;padding:20px 18px 18px;box-shadow:0 8px 0 var(--card-shadow-color),0 20px 40px rgba(0,0,0,.25)}
+.dlg h2{font-size:21px;text-align:center;margin-bottom:12px}
+.dlg .emoji{text-align:center;font-size:38px;margin-bottom:4px}
+.btn{white-space:nowrap;border-radius:20px;padding:10px 22px;font-size:17px;display:inline-flex;align-items:center;gap:8px;background:var(--secondary-background-color);box-shadow:0 4px 0 var(--card-shadow-color)}
+.btn.yes{background:var(--success-strong-color);color:#fff;box-shadow:0 4px 0 #3A8C4B}
+.btn.pri{background:#FFD23F;color:#2A2000;box-shadow:0 4px 0 #D9A900}
+.btnrow{display:flex;gap:10px;justify-content:center;margin-top:16px}
+.select{background:var(--secondary-background-color);border-radius:16px;padding:9px 14px;font-size:16px;box-shadow:0 4px 0 var(--card-shadow-color);display:flex;justify-content:space-between;width:160px}
+.copytext{margin-top:14px;background:var(--secondary-background-color);border-radius:18px;padding:12px;font-size:17px;line-height:1.55;font-weight:400;white-space:pre-line;text-align:center;height:220px;overflow:hidden}
+.note{margin-top:12px;background:var(--accent-background-color);border-radius:16px;padding:10px;text-align:center;font-size:14px;font-weight:400}
+.note b{display:block;font-size:17px;margin:3px 0}
+</style></head>
+<body>
+<div id="out"></div>
+<script>
+/* ---------- the proposed hash → color function (same as plan) ---------- */
+const PALETTE=['#E5484D','#2F7DE1','#8E4EC6','#D9730D','#0F9488','#D6409F','#2E9E4F','#4C5FD5','#B7791F','#C2410C','#0284C7','#7C3AED'];
+function colorForName(name){
+  let h=5381; for(const ch of name.trim().normalize('NFC')) h=((h<<5)+h+ch.codePointAt(0))>>>0;
+  return PALETTE[h%PALETTE.length];
+}
+const initial=n=>[...n.trim()][0];
+
+const KIDS=['רז','אלה','טובי','עמיחי','נור פרידמן','יהל','דוריה','איתן','מאיה','גיל','שירה','אורי','נועה','בן'];
+const ON=new Set(['רז','טובי','נור פרידמן','מאיה','אורי']);
+
+const nav=(active)=>`<div class="nav"><div class="burger">☰</div><div class="tabs">
+ ${['נוכחות','נמצאים','הסעה'].map(t=>`<span class="tab ${t===active?'on':''}">${t}</span>`).join('')}</div></div>`;
+const past=`<div class="past"><span>08:12</span><i></i><span>10:30</span><i></i><span>12:45</span></div>`;
+const counter=(c,t)=>`<div class="count"><div class="t"><span>נוכחים 🎒</span><span>${t} / ${c}</span></div><div class="bar"><i style="width:${Math.round(c/t*100)}%"></i></div></div>`;
+const av=n=>`<span class="av" style="background:${colorForName(n)}">${initial(n)}</span>`;
+const row=(n,on)=>`<div class="row ${on?'on':''}">${av(n)}<span>${n}</span><span class="chk">${on?'✓':''}</span></div>`;
+
+const screens={
+ list:()=>`${nav('נוכחות')}<div class="main">${past}${counter(5,14)}<div class="list">${KIDS.slice(0,9).map(n=>row(n,ON.has(n))).join('')}</div></div>`,
+ grid:()=>`${nav('נוכחות')}<div class="main">${past}${counter(5,14)}<div class="grid">${KIDS.map(n=>row(n,ON.has(n))).join('')}</div></div>`,
+ done:()=>`${nav('נוכחות')}<div class="main">${past}<div class="count done"><span>14 / 14</span><span class="big">✓</span><span>סיום</span></div><div class="list">${KIDS.slice(0,9).map(n=>row(n,true)).join('')}</div></div>`,
+ day:()=>{const abs=new Set(['אלה','יהל']);const bus=new Set(['עמיחי','דוריה']);
+   const rows=KIDS.slice(0,8).map(n=>`<div class="row ${abs.has(n)?'absent':''}">${av(n)}<span>${n}</span>${bus.has(n)?'<span class="bus">🚌</span>':''}<span class="tag">${abs.has(n)?'נעדר/ת':'נמצא/ת'}</span></div>`).join('');
+   const manual=`<div class="rowwrap"><span class="del">🗑</span><div class="row">${av('ליאור')}<span>ליאור</span><span class="tag">נמצא/ת</span></div></div>`;
+   return `${nav('נמצאים')}<div class="main"><div style="height:6px"></div><div class="list">${rows}${manual}</div></div>`},
+ menu:()=>`${screens.list()}<div class="backdrop"></div><div class="menu">
+   <div class="menu-head"><div class="burger">✕</div><span>תפריט</span></div>
+   <div class="menu-body">
+    <div class="mi"><span class="ic" style="background:#FFE3E3">👧</span>הוספת ילדה/ילד<span class="end">＋</span></div>
+    <div class="mi"><span class="ic" style="background:#FFF1C7">🧹</span>איפוס נתונים</div>
+    <div class="mi"><span class="ic" style="background:#E6E0FF">🎨</span>עיצוב<span class="seg"><span class="LIGHTON">☀️</span><span class="DARKON">🌙</span></span></div>
+    <div class="mi"><span class="ic" style="background:#DDF3FF">▦</span>פריסת תצוגה<span class="seg"><span class="on">☰</span><span>▦</span></span></div>
+    <div class="mi"><span class="ic" style="background:#DFF7EC">🔗</span>שיתוף רשימה</div>
+    <div class="mi"><span class="ic" style="background:#FFE6D5">📋</span>רשימות</div>
+    <div class="sortlbl">מיון לפי</div>
+    <div class="chips"><span class="chip">כיתה (א-ג)</span><span class="chip on">שם (א-ת)</span><span class="chip">בנות בנים</span></div>
+    <div class="mi"><span class="ic" style="background:#FFE3F1">📲</span>התקנה</div>
+    <div class="info">🛈 המידע נשמר על מכשיר זה בלבד, ולא נשלח לשירותים חיצוניים</div>
+   </div></div>`,
+ copy:()=>`${screens.list()}<div class="backdrop"></div><div class="dlg" style="top:90px">
+   <div class="emoji">📋</div>
+   <div style="display:flex;gap:10px;align-items:center;justify-content:center">
+     <span class="btn pri">העתק רשימה</span><span class="select"><span>מספרים</span><span>▾</span></span><span class="btn" style="padding:10px 14px">🔀</span></div>
+   <div class="copytext">1. רז
+2. טובי
+3. נור פרידמן
+4. מאיה
+5. אורי
+6. עמיחי
+7. דוריה</div>
+   <div class="btnrow"><span class="btn">סגור</span></div></div>`,
+ shared:()=>`${screens.list()}<div class="backdrop"></div><div class="dlg" style="top:170px">
+   <div class="emoji">📬</div>
+   <h2>האם לטעון רשימה שנשלחה?</h2>
+   <div style="text-align:center;font-size:18px">נוכחות של 14 ילדים</div>
+   <div style="text-align:center;font-size:14px;color:var(--faded-text-color);font-weight:400">נשלח בשעה 10:30</div>
+   <div class="note">הרשימה כוללת את <b>ליאור, תמר</b> שנוספו ידנית</div>
+   <div class="btnrow"><span class="btn yes">כן</span><span class="btn">לא</span></div></div>`,
+};
+const titles={list:'Attendance – list layout',grid:'Attendance – grid layout (2 columns)',done:'All children checked (counter → "finish")',
+ day:'"Present today" tab (נמצאים) – absent, bus-only & manually-added child',menu:'Side menu',copy:'Lists dialog (copy list)',shared:'Shared-data dialog'};
+
+document.getElementById('out').innerHTML=Object.keys(screens).map(k=>`
+ <div class="screen" id="s-${k}"><div class="caption">${titles[k]} · light / dark</div><div class="pair">
+  <div class="phone light">${screens[k]().replace('LIGHTON','on').replace('DARKON','')}</div>
+  <div class="phone dark">${screens[k]().replace('LIGHTON','').replace('DARKON','on')}</div>
+ </div></div>`).join('');
+</script>
+</body></html>
