@@ -9,7 +9,12 @@ export class AppDialog extends LitElement {
 
     static styles = [globalStyleSheet, css`
         .backdrop {
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: var(--backdrop-color);
+        }
+
+        .dialog-panel {
+            border-radius: 28px;
+            box-shadow: 0 8px 0 var(--card-shadow-color), 0 20px 40px rgba(0, 0, 0, 0.25);
         }
     `];
 
@@ -19,11 +24,11 @@ export class AppDialog extends LitElement {
         }
         return html` 
             <div @click="${this._handleBackdropClick}" class="backdrop fixed top-0 left-0 w-full h-full z-50 flex items-center justify-center">
-                <div class="bg-primary text-primary rounded-lg shadow-xl p-6 w-full max-w-md mx-4 relative z-50">
+                <div class="dialog-panel bg-primary text-primary p-6 w-full max-w-md mx-4 relative z-50">
                     <slot></slot>
                     <div class="mt-4 flex justify-end">
                         <slot name="footer">
-                        <button @click="${this._closeDialog}" class="bg-secondary rounded-full text-primary px-6 py-2   app-shadow cursor-pointer">${Txt.close}</button>
+                        <button @click="${this._closeDialog}" class="playful-btn">${Txt.close}</button>
                         </slot>
                     </div>
                 </div>

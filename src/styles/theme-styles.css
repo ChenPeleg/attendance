@@ -42,6 +42,157 @@
             filter: invert(var(--invert-icon-color));
         }
 
+    /* ---------- Playful style utilities ---------- */
 
+    .text-success {
+        color: var(--success-text-color);
+    }
+
+    .bg-header {
+        background-color: var(--header-background-color);
+        color: var(--header-text-color);
+    }
+
+    .bg-tab-active {
+        background-color: var(--tab-active-background-color);
+    }
+
+    .bg-success-strong {
+        background-color: var(--success-strong-color);
+    }
+
+    /* Solid offset "chunky" shadow */
+    .playful-shadow {
+        box-shadow: 0 4px 0 var(--card-shadow-color);
+    }
+
+    .playful-shadow-sm {
+        box-shadow: 0 3px 0 var(--card-shadow-color);
+    }
+
+    .playful-shadow-success {
+        box-shadow: 0 4px 0 var(--success-shadow-color);
+    }
+
+    /* White rounded card */
+    .playful-card {
+        background-color: var(--secondary-background-color);
+        border-radius: 22px;
+        box-shadow: 0 4px 0 var(--card-shadow-color);
+    }
+
+    /* Pill buttons */
+    .playful-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        border: none;
+        border-radius: 20px;
+        padding: 0.5rem 1.4rem;
+        white-space: nowrap;
+        cursor: pointer;
+        color: var(--primary-text-color);
+        background-color: var(--secondary-background-color);
+        box-shadow: 0 4px 0 var(--card-shadow-color);
+        transition: transform 0.1s ease, box-shadow 0.1s ease;
+    }
+
+    .playful-btn:active {
+        transform: translateY(3px);
+        box-shadow: 0 1px 0 var(--card-shadow-color);
+    }
+
+    .playful-btn.btn-highlight {
+        background-color: var(--highlight-color);
+        color: var(--highlight-text-color);
+        box-shadow: 0 4px 0 var(--highlight-shadow-color);
+    }
+
+    .playful-btn.btn-success {
+        background-color: var(--success-strong-color);
+        color: #ffffff;
+        box-shadow: 0 4px 0 var(--success-shadow-color);
+    }
+
+    /* Highlighted (selected) state for menu options */
+    .playful-selected {
+        background-color: var(--highlight-color);
+        color: var(--highlight-text-color);
+        box-shadow: 0 3px 0 var(--highlight-shadow-color);
+    }
+
+    .playful-backdrop {
+        background-color: var(--backdrop-color);
+    }
+
+    /* ---------- Side menu items ---------- */
+    .menu-item {
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        min-height: 3.4rem;
+        padding: 0.35rem 0.75rem;
+        background-color: var(--secondary-background-color);
+        border-radius: 18px;
+        box-shadow: 0 3px 0 var(--card-shadow-color);
+    }
+
+    .menu-icon-btn {
+        border: none;
+        height: 2.5rem;
+        min-width: 2.75rem;
+        padding: 0 0.6rem;
+        border-radius: 14px;
+        background-color: var(--icon-bubble, var(--accent-background-color));
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .menu-segment {
+        border: none;
+        display: flex;
+        flex-direction: row;
+        gap: 2px;
+        padding: 3px;
+        border-radius: 14px;
+        background-color: var(--accent-background-color);
+        cursor: pointer;
+    }
+
+    .menu-segment > span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.25rem 0.5rem;
+        border-radius: 11px;
+        transition: background-color 0.2s ease-in-out;
+    }
+
+    .menu-segment > span.on {
+        background-color: var(--segment-on-color);
+        box-shadow: 0 2px 0 var(--card-shadow-color);
+    }
+
+    .menu-option {
+        box-sizing: border-box;
+        border: none;
+        border-radius: 16px;
+        background-color: var(--secondary-background-color);
+        color: var(--primary-text-color);
+        box-shadow: 0 3px 0 var(--card-shadow-color);
+    }
+
+    .menu-option.selected {
+        background-color: var(--highlight-color);
+        color: var(--highlight-text-color);
+        box-shadow: 0 3px 0 var(--highlight-shadow-color);
+    }
 
 }

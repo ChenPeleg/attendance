@@ -71,7 +71,7 @@ const variableMap = {
     '--check-width': '0.5em',
     '--check-left': '0.6em',
     '--check-thickness': '3px',
-    '--check-color': '#5cb85c',
+    '--check-color': 'var(--check-mark-color, #5cb85c)',
     '--loader-size': '1.2em',
 
 }

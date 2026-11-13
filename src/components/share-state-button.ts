@@ -31,14 +31,14 @@ export class ShareStateButton extends AppBaseComponent(LitElement) {
 
     render() {
         return html`
-            <div class="h-14 w-full flex-row flex justify-between gap-5">
+            <div class="menu-item w-full">
                     <span>
                     ${Txt.shareList}
                     </span>
                 <span>
                              <button @click=${() => this.clickOption()}
                                      data-testid="share-data-button"
-                                     class=" bg-secondary rounded-md  h-10 cursor-pointer flex flex-row px-3 justify-center items-center ">
+                                     class="menu-icon-btn" style="--icon-bubble: var(--bubble-green)">
                         <img src="${copyImage}" class="w-7 h-7 app-icon"
                              alt="menu"/>
                     </button>

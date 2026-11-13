@@ -70,13 +70,13 @@ export class SortingOptions extends AppBaseComponent(LitElement) {
         <button
           @click="${() => this.clickOption(option)}"
           data-testid="sort-${option}"
-          class="h-10 relative flex flex-row justify-center w-full bg-secondary text-primary rounded-md cursor-pointer"
+          class="menu-option ${isChosen ? "selected" : ""} h-11 relative flex flex-row justify-center items-center w-full cursor-pointer"
         >
           <span
             class="absolute right-0 px-3 w-8 h-9 flex-row flex justify-center items-center "
           >
             <img
-              class="app-icon w-8 h-8  ${isChosen ? " " : " hidden "}"
+              class="w-7 h-7  ${isChosen ? " " : " hidden "}"
               src="${checkMark}"
               alt="checked sort"
             />
@@ -98,9 +98,9 @@ export class SortingOptions extends AppBaseComponent(LitElement) {
 
   render() {
     return html`
-      <div class="w-full  flex-col flex gap-3 pt-2">
-        ${Txt.sortBy}
-        <div class="flex-col flex gap-1">${this.buildSortOptionsButton()}</div>
+      <div class="w-full  flex-col flex gap-2 pt-2">
+        <span class="text-faded px-1">${Txt.sortBy}</span>
+        <div class="flex-col flex gap-2">${this.buildSortOptionsButton()}</div>
       </div>
     `;
   }

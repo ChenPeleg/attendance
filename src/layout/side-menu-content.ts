@@ -40,8 +40,8 @@ export class SideMenuContent extends LitElement {
     render() {
 
         return html`
-            <div class="flex flex-col gap-4 ">
-                <div class="h-14 w-full flex-row flex justify-between gap-5">
+            <div class="flex flex-col gap-3 ">
+                <div class="menu-item w-full">
 
 
                     <span>
@@ -51,24 +51,24 @@ export class SideMenuContent extends LitElement {
                     <span>
                              <button @click=${() => this.addChild()}
                                      data-testid="add-child-button"
-                                     class=" bg-secondary rounded-md  h-10 cursor-pointer flex flex-row px-3 justify-center items-center ">
+                                     class="menu-icon-btn" style="--icon-bubble: var(--bubble-red)">
                         <img src=${addChild} class="w-7 h-7 app-icon" alt="menu"/>
                     </button>
                     </span>
                 </div>
-                <div class="h-14 w-full flex-row flex justify-between gap-5">
+                <div class="menu-item w-full">
                     <span>
                     ${Txt.resetData}
                         
                     </span>
                     <span>
                              <button @click=${() => this.onReset()}
-                                     class=" bg-secondary rounded-md  h-10 cursor-pointer flex flex-row px-3 justify-center items-center ">
+                                     class="menu-icon-btn" style="--icon-bubble: var(--bubble-yellow)">
                         <img src=${clearIcon} class="w-7 h-7 app-icon" alt="menu"/>
                     </button>
                     </span>
                 </div>
-                <div class="h-14 w-full flex-row flex justify-between gap-5">
+                <div class="menu-item w-full">
                     <span>
                     ${Txt.displayTheme}
                         
@@ -83,7 +83,7 @@ export class SideMenuContent extends LitElement {
                 <div class="  w-full  ">
                     <share-state-button></share-state-button>
                 </div>
-                <div class="h-14 w-full flex-row flex justify-between gap-5">
+                <div class="menu-item w-full">
                     <span>
                     ${Txt.advanced}
 
@@ -91,7 +91,7 @@ export class SideMenuContent extends LitElement {
                     <span>
                              <button @click=${() => this.openAdvanced()}
                                      data-testid="advanced-button"
-                                     class=" bg-secondary rounded-md  h-10 cursor-pointer flex flex-row px-3 justify-center items-center ">
+                                     class="menu-icon-btn" style="--icon-bubble: var(--bubble-orange)">
                         <img src=${advanceDataIcon} class="w-7 h-7 app-icon" alt="menu"/>
                     </button>
                     </span>
@@ -104,7 +104,7 @@ export class SideMenuContent extends LitElement {
                     <install-pwa-button></install-pwa-button>
                 </div>
                 <div class="  w-full  ">
-                    <p class="text-sm" @click=${() => this.onAppInfoClick()}>🛈 ${Txt.appInfo}</p>
+                    <p class="text-sm text-faded px-1" @click=${() => this.onAppInfoClick()}>🛈 ${Txt.appInfo}</p>
                 </div>
             </div>
         `;

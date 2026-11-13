@@ -4,8 +4,8 @@
   "description": "Attendance for pistachio",
   "scope": "/attendance/",
   "start_url": "/attendance/",
-  "background_color": "#9b6ee8",
-  "theme_color": "#9b6ee8",
+  "background_color": "#FFF8E7",
+  "theme_color": "#FFD23F",
   "display": "standalone",
 
   "icons": [

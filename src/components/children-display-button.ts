@@ -35,18 +35,22 @@ export class ChildrenDisplayButton extends AppBaseComponent(LitElement) {
 
     render() {
         return html`
-            <div class="h-14 w-full flex-row flex justify-between gap-5">
+            <div class="menu-item w-full">
                     <span>
                     ${Txt.displayLayout}
                     </span>
                 <span>
-                             <button @click=${() => this.clickOption()}
-                                     data-testid="display-toggle"
-                                     class=" bg-secondary rounded-md  h-10 cursor-pointer flex flex-row px-3 justify-center items-center ">
-                        <img src="${this.displayType === ChildrenDisplayType.List ? listImage : gridImage}" class="w-7 h-7 app-icon"
-                             alt="menu"/>
+                    <button @click=${() => this.clickOption()}
+                            data-testid="display-toggle"
+                            class="menu-segment">
+                        <span class="${this.displayType === ChildrenDisplayType.List ? 'on' : ''}">
+                            <img src="${listImage}" class="w-6 h-6 app-icon" alt="list"/>
+                        </span>
+                        <span class="${this.displayType === ChildrenDisplayType.Grid ? 'on' : ''}">
+                            <img src="${gridImage}" class="w-6 h-6 app-icon" alt="grid"/>
+                        </span>
                     </button>
-                    </span>
+                </span>
             </div>
 
         `

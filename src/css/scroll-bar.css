@@ -1,8 +1,8 @@
 
 :root {
-    --scroll-bar-track-color: rgba(249, 249, 249, 0.2);
+    --scroll-bar-track-color: transparent;
     --scroll-bar-track-shadow: none;
-    --scroll-bar-thumb-color: rgba(91, 91, 91, 0.6);
+    --scroll-bar-thumb-color: var(--check-ring-color, rgba(91, 91, 91, 0.6));
 }
 
 
