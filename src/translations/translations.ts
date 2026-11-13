@@ -33,6 +33,7 @@ const translations = {
     'no': 'לא',
     'manualChildrenIncluded': 'הרשימה כוללת את ',
     'addedManually': ' שנוספו ידנית',
+    menu: 'תפריט',
 };
 
 export const Txt: Record<keyof typeof translations, string> = translations;

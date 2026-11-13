@@ -5,7 +5,6 @@ import {ThemeService} from '../Theme.service.ts';
 import {StoreService} from '../Store.service.ts';
 import {HistoryService} from '../History.service.ts';
 import {SortService} from '../SortService.service.ts';
-import {BackgroundImageService} from '../BackgroundImage.service.ts';
 import {ConfigurationService} from '../Configuration.service.ts';
 import {PWAService} from '../PWA.service.ts';
 import {SupersizeAnimationService} from '../SupersizeAnimation.service.ts';
@@ -20,7 +19,7 @@ import {ChildrenFilterService} from '../ChildrenFilter.service.ts';
 import {DevModeService} from '../DevMode.service.ts';
 
 const ServicesProviderFactory = () => {
-    const provider = new ServicesResolver([PWAService, ConfigurationService, ChildStateEncoderService, TimestampEncoderService, StateDecoderEncoderService, BackgroundImageService, SortService, LocalStorageService, TimeAndDateService, ThemeService, StoreService, HistoryService,SupersizeAnimationService, SearchParamsService, DataShareService, ShareUrlService, ChildrenListFormatterService, ChildrenFilterService, DevModeService]);
+    const provider = new ServicesResolver([PWAService, ConfigurationService, ChildStateEncoderService, TimestampEncoderService, StateDecoderEncoderService, SortService, LocalStorageService, TimeAndDateService, ThemeService, StoreService, HistoryService,SupersizeAnimationService, SearchParamsService, DataShareService, ShareUrlService, ChildrenListFormatterService, ChildrenFilterService, DevModeService]);
     provider.initServices();
     return provider;
 }

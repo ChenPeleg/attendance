@@ -60,26 +60,27 @@ export class SharedDataDialog extends AppBaseComponent(LitElement) {
         return html` 
                 <app-dialog ?open="${this._isDialogOpen}" @close="${this._handleClose}">
                     <div class="text-center">
+                        <div class="mb-1" style="font-size: 2.4rem">📬</div>
                         <h2 class="text-xl font-bold mb-4">${Txt.loadDataFromUrl}</h2>
                         ${this._sharedData ? html`
                             <div class="mb-4">
                                 <div class="text-lg">נוכחות של ${presentCount} ילדים</div>
-                                ${time ? html`<div class="text-sm text-gray-500">נשלח בשעה ${time}</div>` : ''}
+                                ${time ? html`<div class="text-sm text-faded">נשלח בשעה ${time}</div>` : ''}
                             </div>
                             ${manualChildren.length > 0 ? html`
-                                <div class="mt-4 p-3 bg-yellow-50 rounded-lg border border-yellow-100">
-                                    <div class="text-sm font-medium text-gray-700 mb-1">${Txt.manualChildrenIncluded}</div>
+                                <div class="mt-4 p-3 bg-accent" style="border-radius: 16px">
+                                    <div class="text-sm font-medium text-primary mb-1">${Txt.manualChildrenIncluded}</div>
                                     <div class="text-base font-bold text-primary mb-1 break-words px-2">${manualChildren.join(', ')}</div>
-                                    <div class="text-sm font-medium text-gray-700">${Txt.addedManually}</div>
+                                    <div class="text-sm font-medium text-primary">${Txt.addedManually}</div>
                                 </div>
                             ` : ''}
                         ` : ''}
                     </div>
                     <div slot="footer" class="w-full flex justify-center gap-4 mt-6">
-                            <button @click="${this._handleLoadData}" class="bg-success text-primary rounded-full px-6 py-2 app-shadow cursor-pointer pointer-events-auto">
+                            <button @click="${this._handleLoadData}" class="playful-btn btn-success pointer-events-auto">
                                 ${Txt.yes}
                             </button>       
-                            <button @click="${this._handleClose}" class="bg-secondary text-primary rounded-full px-6 py-2 app-shadow cursor-pointer pointer-events-auto">
+                            <button @click="${this._handleClose}" class="playful-btn pointer-events-auto">
                                 ${Txt.no}
                             </button>
                     </div>

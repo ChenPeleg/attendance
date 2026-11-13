@@ -58,15 +58,15 @@ export class CopyChildrenList extends AppBaseComponent(LitElement) {
     render() {
         return html`
             <div class="flex flex-col gap-4 p-4 items-start  justify-center">
+                <div class="w-full text-center" style="font-size: 2.4rem">📋</div>
 
                 <div class="flex flex-col gap-2">
                     <div class="flex flex-row">
                         <button @click="${this.copyToClipboard}"
                                 data-testid="copy-list-button"
-                                class="flex flex-row items-center gap-2 py-2 px-4 bg-secondary rounded-lg app-shadow cursor-pointer"
-                                style="border: none">
+                                class="playful-btn btn-highlight">
                             <img src="${copyIcon}" class="w-6 h-6" alt="copy"/>
-                            <span class="text-primary">${Txt.copyContent}</span>
+                            <span>${Txt.copyContent}</span>
                         </button>
                         <div class="flex flex-row items-center gap-2 relative">
 
@@ -82,8 +82,8 @@ export class CopyChildrenList extends AppBaseComponent(LitElement) {
 
                         <div class="relative inline-flex flex-row w-max ">
                             <select
-                                    class=" px-4 py-3 w-44 bg-secondary rounded-lg app-shadow cursor-pointer outline-none text-primary font-bold text-sm"
-                                    style="border: none; appearance: none;  "
+                                    class=" px-4 py-3 w-44 bg-secondary playful-shadow cursor-pointer outline-none text-primary font-bold text-sm"
+                                    style="border: none; appearance: none; border-radius: 16px;"
                                     @change="${(e: Event) => this._selectedFormat = (e.target as HTMLSelectElement).value as CopyFormat}"
                             >
                                 <option value="${CopyFormat.Numbers}" ?selected="${this._selectedFormat === CopyFormat.Numbers}">מספרים
@@ -99,7 +99,7 @@ export class CopyChildrenList extends AppBaseComponent(LitElement) {
 
 
                             </select>
-                            <div class="pointer-events-none absolute inset-y-0 left-2.5 top-1/3 flex items-center pr-2 text-gray-700">
+                            <div class="pointer-events-none absolute inset-y-0 left-2.5 top-1/3 flex items-center pr-2 text-primary">
 
                                 <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd"
@@ -110,19 +110,18 @@ export class CopyChildrenList extends AppBaseComponent(LitElement) {
 
 
                         </div>
-                        <div class=" bg-black h-full">
+                        <div class="h-full">
 
                             <button @click="${()=>this.remixTheList()}"
-                                    class="flex flex-row h-full items-center gap-2 py-2 px-4 bg-secondary rounded-lg app-shadow cursor-pointer"
-                                    style="border: none">
-                                <img src=${retry} class="w-5 h-5   cursor-pointer" alt="retry">
+                                    class="playful-btn h-full" style="padding: 0.6rem 1rem">
+                                <img src=${retry} class="app-icon w-5 h-5   cursor-pointer" alt="retry">
                             </button>
                         </div>
                     </div>
 
                 </div>
 
-                <div class="w-full max-w-md    overflow-ellipsis " style="height: 30vh; max-height: 30vh; overflow-y: auto;">
+                <div class="w-full max-w-md bg-secondary p-3 overflow-ellipsis " style="box-sizing: border-box; border-radius: 18px; height: 30vh; max-height: 30vh; overflow-y: auto;">
                     <div class="text-primary text-center" id="children-list-to-copy" data-mixchildren="${this.randomSeed}" style="font-size: 22px; white-space: pre-wrap;">${this._updateFormatedText(this.randomSeed)}
                     </div> 
                 </div>

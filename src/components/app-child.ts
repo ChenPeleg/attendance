@@ -9,6 +9,7 @@ import {PresentToday} from '../models/presentToday.ts';
 import {globalStore} from '../store/Store.ts';
 import {ActionType} from '../models/AppAction.ts';
 import {AppBaseComponent} from '../mixins/GlobalStylesheetMixin.ts';
+import {colorForName, initialOf} from '../utils/childColor.ts';
 
 
 @customElement('app-child')
@@ -27,41 +28,132 @@ export class AppChild extends AppBaseComponent(LitElement) {
     }
 
     render() {
+        const isDaySettings = this.displayType === DisplayType.DaySettings;
+        const isPresentToday = this.child?.presentToday === PresentToday.Yes;
+        const name = this.child?.name ?? '';
         return html`
+            <style>${AppChild.componentCss}</style>
             <div class="flex flex-row items-center justify-center  ">
                 <button @click="${this.onClick}"
                         data-testid="${this.getTestId()}"
                         class=" ${this.getButtonStyle()} "
                         style="  border: none;  ">
+                    <span class="child-avatar" aria-hidden="true"
+                          style="background-color: ${colorForName(name)}">${initialOf(name)}</span>
+                    <span class="child-name flex flex-row items-center">
+                        ${name} ${this.getChildBusIcon()}
+                    </span>
                     <span id="check-mark-container"
-                          class=" w-8 h-8 relative  mt-1 mr-1 ${this.displayType === DisplayType.DaySettings ? 'hidden' : 'absolute'}">
-                          <span id="check-mark-container-box"
-                                class="absolute top-0 rounded-full  transition-all ease-in-out duration-200 h-7 w-7 right-0
-                               ${this.child?.checkedIn ? ' shadow-md ' : ' '}
-                               "
-                                style="border: 2px solid ${this.child?.checkedIn ? 'white' : 'black'}">
-                         </span>
-                      <span id="check-mark-container" class="absolute -top-4 -right-0.5   "
-                      >
-                        ${this.getCheckMark()} 
-                      </span>
-                  </span>
-                    <span class="flex flex-row justify-center items-center   ">
-                    ${this.child?.name} ${this.getChildBusIcon()} 
-                 </span>
+                          class="check-circle ${this.child?.checkedIn ? 'checked' : ''} ${isDaySettings ? 'hidden' : ''}">
+                        ${this.getCheckMark()}
+                    </span>
                     <span id="is-here-today"
                           data-testid="day-set-status"
-                          class="   ${this.displayType !== DisplayType.DaySettings ? 'hidden' : 'justify-self-end  '}">
-                      <span id="check-mark-container"
-                      >
-                        ${this.child?.presentToday === PresentToday.Yes ? Txt.present : Txt.absent} 
-                      </span>
-                 </span>
+                          class="day-tag ${isPresentToday ? 'present' : 'absent'} ${isDaySettings ? '' : 'hidden'}">
+                        ${isPresentToday ? Txt.present : Txt.absent}
+                    </span>
                 </button>
                 ${this.getDeleteButton()}
             </div>
         `
     }
+
+    private static componentCss = `
+        .child-row {
+            background-color: var(--secondary-background-color);
+            box-shadow: 0 4px 0 var(--card-shadow-color);
+            border-radius: 22px;
+            transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .child-row.checked {
+            background-color: var(--bg-success-color);
+            box-shadow: 0 4px 0 var(--success-shadow-color);
+        }
+        .child-row.absent-today {
+            background-color: color-mix(in srgb, var(--secondary-background-color) 55%, transparent);
+            box-shadow: 0 4px 0 transparent;
+        }
+        .child-avatar {
+            flex: none;
+            width: 2.6rem;
+            height: 2.6rem;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 1.25rem;
+            font-weight: 700;
+            transition: filter 0.2s, opacity 0.2s;
+        }
+        .grid-item .child-avatar {
+            width: 2.1rem;
+            height: 2.1rem;
+            font-size: 1.05rem;
+        }
+        .absent-today .child-avatar {
+            filter: grayscale(1);
+            opacity: 0.45;
+        }
+        .child-name {
+            text-align: start;
+            line-height: 1.15;
+        }
+        .check-circle {
+            flex: none;
+            margin-inline-start: auto;
+            width: 2.2rem;
+            height: 2.2rem;
+            border-radius: 9999px;
+            border: 3px dashed var(--check-ring-color);
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+            --check-mark-color: #ffffff;
+        }
+        .grid-item .check-circle {
+            width: 1.9rem;
+            height: 1.9rem;
+            font-size: 19px;
+        }
+        .check-circle.checked {
+            border: none;
+            background-color: var(--success-strong-color);
+        }
+        .check-circle.hidden, .day-tag.hidden {
+            display: none;
+        }
+        .check-circle check-mark {
+            transform: translate(-0.05em, -0.1em);
+        }
+        .day-tag {
+            flex: none;
+            margin-inline-start: auto;
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 0.2rem 0.7rem;
+            border-radius: 12px;
+        }
+        .day-tag.present {
+            background-color: var(--bg-success-color);
+            color: var(--success-text-color);
+        }
+        .day-tag.absent {
+            background-color: var(--accent-background-color);
+            color: var(--faded-text-color);
+        }
+        .delete-child-button {
+            border: none;
+            background-color: var(--danger-color);
+            box-shadow: 0 3px 0 var(--danger-shadow-color);
+        }
+        .delete-child-button img {
+            filter: brightness(0) invert(1);
+        }
+    `;
 
     private getChildBusIcon() {
         if (this.displayType !== DisplayType.DaySettings) {
@@ -84,7 +176,7 @@ export class AppChild extends AppBaseComponent(LitElement) {
             <div class="relative ">
                 <button @click="${this.deleteChild}"
                         data-testid="remove-child_${this.child?.id}"
-                        class="bg-primary absolute -left-12 -top-5 mt-0.5 text-secondary rounded-full h-10 w-10 flex flex-row justify-center items-center">
+                        class="delete-child-button cursor-pointer absolute -left-12 -top-5 mt-0.5 rounded-full h-10 w-10 flex flex-row justify-center items-center">
                     <img src="${deleteImage}" alt="delete" class="app-icon w-6 h-6"> </img>
                 </button>
             </div>
@@ -102,11 +194,13 @@ export class AppChild extends AppBaseComponent(LitElement) {
     }
 
     private getButtonStyle() {
-        return `bg-secondary text-primary flex flex-row  
-        ${this.childrenGridOrList === ChildrenDisplayType.Grid ? ' px-4 gap-5' : '  px-10 gap-8'}
-        items-center h-14 w-full  shadow  
-        relative  rounded-full 
-        ${this.child?.presentToday === PresentToday.No ? ' text-faded ' : ' '} ${this.displayType === DisplayType.Attendance ? ' justify-start ' : ' justify-between   '}`
+        const isDaySettings = this.displayType === DisplayType.DaySettings;
+        const isAbsentToday = this.child?.presentToday === PresentToday.No;
+        return `child-row text-primary flex flex-row cursor-pointer
+        ${this.childrenGridOrList === ChildrenDisplayType.Grid ? ' grid-item px-2 gap-2' : ' px-3 gap-4'}
+        items-center h-14 w-full relative
+        ${!isDaySettings && this.child?.checkedIn ? ' checked ' : ' '}
+        ${isAbsentToday ? ' text-faded ' : ' '} ${isDaySettings && isAbsentToday ? ' absent-today ' : ' '}`
     }
 
     private getCheckMark() {

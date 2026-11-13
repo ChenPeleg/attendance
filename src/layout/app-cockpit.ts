@@ -57,12 +57,13 @@ export class AppCockpit extends AppBaseComponent(LitElement) {
     renderButton(button: CockpitButton) {
         const isActive = this.displayType === button.id;
         return html`
-            <div class="  " style="border-bottom: 2px ${isActive ? ' solid' : '' } var(--accent-text-color)  ">
-            <button @click=${()=>this.cockPitClick(button.id)} data-testid="nav_${button.id}" class="h-12  cursor-pointer flex flex-row 
-              ${isActive ? ' text-accent ' : 'text-primary ' }
-             justify-center items-center   
-            transition-all ease-in-out duration-300 
-            rounded bg-secondary  " style="  border: none"> 
+            <div class="flex flex-row items-center">
+            <button @click=${()=>this.cockPitClick(button.id)} data-testid="nav_${button.id}" class="h-10 px-3 cursor-pointer flex flex-row
+              ${isActive ? ' bg-tab-active font-bold ' : ' ' }
+             justify-center items-center
+            transition-all ease-in-out duration-300
+            rounded-full"
+             style="border: none; white-space: nowrap; ${isActive ? 'color: var(--tab-active-text-color);' : 'background-color: transparent; color: var(--header-text-color);'}">
                 <span>${button.label}</span>
             </button>
             </div>
@@ -74,7 +75,7 @@ export class AppCockpit extends AppBaseComponent(LitElement) {
     render() {
         return html`
             <div class="flex flex-col items-start justify-center   ">
-                <div class="grid grid-cols-3 gap-3 flex-wrap">
+                <div class="grid grid-cols-3 gap-1 flex-wrap">
                     ${this.buttons.map(button => this.renderButton(button))}
                 </div>  
             </div>

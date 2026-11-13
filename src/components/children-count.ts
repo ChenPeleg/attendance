@@ -27,15 +27,43 @@ export class ChildrenCount extends AppBaseComponent(LitElement) {
     }
 
     render() {
-
+        const progress = this.totalChildren ? Math.round(this.checkedInChildren / this.totalChildren * 100) : 0;
         return html`
-            <div @click="${this.onClick}"  
+            <style>
+                .count-card {
+                    border-radius: 22px;
+                    background-color: var(--secondary-background-color);
+                    box-shadow: 0 4px 0 var(--card-shadow-color);
+                }
+                .count-card.all-checked {
+                    background-color: var(--bg-success-color);
+                    box-shadow: 0 4px 0 var(--success-shadow-color);
+                }
+                .progress-track {
+                    height: 10px;
+                    border-radius: 10px;
+                    overflow: hidden;
+                    background-color: var(--accent-background-color);
+                }
+                .progress-fill {
+                    height: 100%;
+                    border-radius: 10px;
+                    background: linear-gradient(270deg, #4ECDC4, #6BCB77);
+                    transition: width 0.3s ease-in-out;
+                }
+            </style>
+            <div @click="${this.onClick}"
                  data-testid="children-count"
-                 class="transition-colors ease-in-out duration-300 flex flex-row justify-center items-center  
-                  ${this.areAllChecked ? ' min-w-44 bg-success  app-shadow cursor-pointer ' : ' min-w-32 app-shadow bg-secondary'}  gap-4 rounded-full h-16  px-10">
-                <span> ${this.totalChildren} / ${this.checkedInChildren} </span>
-               <div class="transition-all ease-in-out duration-300 flex flex-row justify-center items-center w-0   overflow-hidden  
-                 ${this.areAllChecked ? ' w-44   gap-5 ' : ' gap-0   '}"> ${this.areAllChecked ? this.renderAllChecked() : ''}</div>
+                 class="count-card transition-colors ease-in-out duration-300 flex flex-col justify-center
+                  ${this.areAllChecked ? ' all-checked min-w-44 cursor-pointer ' : ' min-w-32 '} gap-1 h-16 px-6">
+                <div class="flex flex-row justify-center items-center">
+                    <span> ${this.totalChildren} / ${this.checkedInChildren} </span>
+                    <div class="transition-all ease-in-out duration-300 flex flex-row justify-center items-center w-0 overflow-hidden
+                     ${this.areAllChecked ? ' w-44 gap-5 ' : ' gap-0 '}"> ${this.areAllChecked ? this.renderAllChecked() : ''}</div>
+                </div>
+                <div class="progress-track ${this.areAllChecked ? 'hidden' : ''}">
+                    <div class="progress-fill" style="width: ${progress}%"></div>
+                </div>
             </div>
         `
     }

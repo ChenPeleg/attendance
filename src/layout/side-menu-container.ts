@@ -4,6 +4,7 @@ import { globalStyleSheet } from "../styles/global-style-sheet.ts";
 
 import menuButton from "../assets/svg/menu-button.svg";
 import cancelButton from "../assets/svg/cancel.svg";
+import { Txt } from "../translations/translations.ts";
 
 @customElement("side-menu-container")
 export class SideMenuContainer extends LitElement {
@@ -33,6 +34,30 @@ export class SideMenuContainer extends LitElement {
         transform: translateX(100%);
         transition: transform 0.3s ease;
         z-index: 20;
+        border-radius: 28px 0 0 28px;
+        overflow: hidden;
+        box-shadow: -6px 0 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .side-menu:not(.open) {
+        box-shadow: none;
+      }
+
+      .menu-header {
+        border-radius: 0 0 0 26px;
+        box-shadow: 0 4px 0 var(--card-shadow-color);
+        font-size: 22px;
+        font-weight: 700;
+        padding-inline-start: 4.5rem;
+      }
+
+      .menu-button {
+        border: none;
+        width: 2.6rem;
+        height: 2.6rem;
+        border-radius: 14px;
+        cursor: pointer;
+        background-color: var(--menu-button-color);
       }
 
       .side-menu.open {
@@ -49,11 +74,13 @@ export class SideMenuContainer extends LitElement {
         class="  w-12 h-full flex flex-col justify-center items-center  "
       >
         <div
-          class="backdrop bg-gray-900 opacity-70 ${this.isOpen ? "open" : ""}"
+          class="backdrop playful-backdrop ${this.isOpen ? "open" : ""}"
           @click=${this.closeMenu}
         ></div>
         <div class="side-menu bg-primary ${this.isOpen ? "open" : ""}">
-          <div class="h-14 w-10"></div>
+          <div class="menu-header bg-header h-16 flex flex-row items-center">
+            ${Txt.menu}
+          </div>
           <div class="max-h-screen overflow-x-hidden  ">
             <div class="p-4 min-h-screen">
               <slot></slot>
@@ -65,8 +92,7 @@ export class SideMenuContainer extends LitElement {
           <button
             @click=${this.toggleMenu}
             data-testid="menu-toggle"
-            class=" bg-yellow-200 h-full flex flex-col justify-center items-center bg-secondary z-50"
-            style="border: none"
+            class="menu-button flex flex-col justify-center items-center z-50"
           >
             <span class="relative flex-col justify-center items-center flex ">
               <img

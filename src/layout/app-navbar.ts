@@ -13,8 +13,8 @@ export class AppNavbar extends AppBaseComponent(LitElement) {
     render() {
         return html`
             <div id="nav-bar-container h-16 flex flex-col z-10">
-                <nav class="w-screen h-16 bg-gray-100 shadow  fixed text-primary bg-secondary top-0  z-10">
-                    <div class="h-full flex flex-row shadow  gap-3">
+                <nav class="w-screen h-16 fixed bg-header playful-shadow top-0 z-10" style="border-radius: 0 0 26px 26px;">
+                    <div class="h-full flex flex-row gap-3">
                         <div class="h-full flex flex-row">
                             <side-menu-container>
                                 <side-menu-content></side-menu-content>
@@ -42,7 +42,7 @@ export class AppNavbar extends AppBaseComponent(LitElement) {
            return ''
         }
         return html`
-            <button .onclick="${()=>this.devAction()}" class="bg-secondary text-primary rounded-full cursor-pointer h-11 w-11 flex flex-row justify-center items-center">
+            <button .onclick="${()=>this.devAction()}" class="bg-tab-active text-primary rounded-full cursor-pointer h-11 w-11 flex flex-row justify-center items-center">
                 <span class="app-icon w-9 h-9"> \<\> </span>
             </button>`
     }

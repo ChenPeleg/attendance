@@ -14,7 +14,7 @@ export class PastCounts extends AppBaseComponent(LitElement) {
 
             return html`<span class="flex-row flex gap-3">
                 <span class="flex flex-col justify-center items-center h-full">
-                <span class=" inline-block  rounded-full min-w-2 min-h-2  h-2 w-2 ${i === 0 ? 'hidden' : ''}">  </span>
+                <span class=" inline-block  rounded-full min-w-2 min-h-2  h-2 w-2 ${i === 0 ? 'hidden' : ''}" style="background-color: var(--secondary-text-color)">  </span>
                  </span>
                     <span  class="text-xl  font-bold text-secondary "> ${time}</span> 
             </span>`

@@ -1,6 +1,6 @@
 # Playful Style – Restyle Plan
 
-**Status**: Plan only (not implemented)
+**Status**: Implemented (see section 9 for the decisions taken)
 **Date**: 2026-11-13
 **Scope**: Visual restyle only. No change to behaviour, state, data, routing, or layouts (list / grid, tabs, dialogs, side menu).
 
@@ -208,3 +208,15 @@ Each step is independently shippable, so steps can be separate commits.
 - **Q1 – background photo**: keep the random photo faintly behind the cream (planned, ~88% overlay), or drop it for a flat cream/plum background? Dropping it would leave `BackgroundImageService` unused.
 - **Q2 – sort options**: keep them as full-width stacked buttons (closest to today), or use the wrapping chips shown in mockup 05?
 - **Q3 – menu title**: the mockup adds a "תפריט" title in the yellow menu header. Keep it, or leave the header empty as the spacer is today?
+
+---
+
+## 9. Decisions and implementation notes
+
+- **Q1**: flat background. The background photo, `bg-image`, `BackgroundImageService` and `public/images/` were removed.
+- **Q2**: sort options stay as full-width stacked buttons. The selected one is yellow and keeps its check icon.
+- **Q3**: the side-menu header shows "תפריט" (`Txt.menu`).
+- The colour tokens live in `src/css/theme.css`, which is the light-DOM sheet that defines the variables. Shared utility classes (`playful-*`, `menu-*`) live in `src/styles/theme-styles.css`.
+- Components that use `AppBaseComponent` have their `adoptedStyleSheets` replaced, so component-specific CSS (`app-child`, `children-count`) is placed in a `<style>` tag inside `render()`.
+- The counter keeps its current text (no "נוכחים 🎒" label) and adds the progress bar.
+- Menu items keep their current structure (label, then a control at the end). Each control is a pastel icon bubble or a two-segment toggle.
